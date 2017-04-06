@@ -1,0 +1,217 @@
+// --- GLOBAL ---
+
+html {
+	height: 100%;
+}
+
+body {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	height: 100%;
+	font-family: 'Roboto-Condensed-Light';
+	font-size: 1.8rem;
+}
+
+
+main {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1 0 auto;
+	flex: 1 0 auto;
+	width: 100%;
+	position: relative;
+	min-height: 500px;
+}
+
+
+footer, header {
+	-webkit-box-flex: 0;
+	-webkit-flex: none;
+	flex: none;
+}
+
+p {margin-bottom: 20px}
+
+hr {
+	border-width: 2px;
+	border-color: $app-gray-85;
+}
+
+input[type="checkbox"] {
+	margin-right: 5px;
+}
+
+h1 {
+	font-size: 2.8rem;
+}
+
+h2 {
+	font-size: 2.8rem;
+	font-family: 'PT Serif', serif;
+	margin-top: 0;
+	margin-bottom: 40px;
+}
+
+h3 {
+	font-size: 2.2rem;
+	font-family: 'PT Serif', serif;
+}
+
+h4 {
+	font-size: 2rem;
+	margin-bottom: 5px;
+}
+
+h5 {
+	font-size: 1.8rem;
+}
+
+h2 + button.app-btn-default {
+	margin-bottom: 40px;
+}
+
+h4 + hr {
+	margin-top: 5px;
+}
+
+//font size
+.app-font-s14 {
+	font-size: 1.4rem !important;
+}
+
+.app-font-s16 {
+	font-size: 1.6rem !important;
+}
+
+.app-font-s30 {
+	font-size: 3rem !important;
+}
+
+.app-font-s42 {
+	font-size: 4.2rem !important;
+}
+
+// font family
+.app-font-roboto-cl {
+	font-family: 'Roboto-Condensed-Light';
+}
+
+.app-font-roboto-cr {
+	font-family: 'Roboto-Condensed-Regular';
+}
+
+.app-font-roboto-cb {
+	font-family: 'Roboto-Condensed-Bold';
+}
+
+.app-font-pt-serif {
+	font-family: 'PT Serif', serif;
+}
+
+
+// cleaners
+.app-clean-mg {
+	margin: 0 !important;
+}
+
+.app-clean-pd {
+	padding: 0 !important;
+}
+
+.app-clean-border {
+	border: 0 !important;
+}
+
+.app-clean-radius {
+	border-radius: 0;
+}
+
+.app-clean-bg {
+	background-color: transparent!important;
+}
+
+
+// common
+.app-pipe {
+	padding: 0 10px;
+}
+
+.app-mg-bottom-40 {
+	margin-bottom: 40px;
+}
+
+
+// bootstrap rewrite
+.dropdown-menu {
+	font-size: 1.8rem;
+	@extend .app-clean-radius; 
+}
+
+.media-object {
+	&.app-height-140 {
+		height: 140px;	
+	}
+}
+
+
+// Z-levels
+.z-depth-0 {
+  box-shadow: none !important;
+}
+.z-depth-1 {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.1);
+}
+.z-depth-1-half {
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.1);
+}
+.z-depth-2 {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+.z-depth-3 {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.1);
+}
+.z-depth-4 {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.1);
+}
+.z-depth-5 {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+
+// forms
+.app-select {
+	@extend .app-font-roboto-cr;
+	> li {
+		display: inline-block;
+		&:first-child {
+			padding-right: 5px;
+		}
+	}
+	.dropdown {
+		background-color: $app-brand-l-6;
+		padding: 5px 10px;
+		border: 1px solid $app-brand-l-3;
+	}
+}
+
+
+// marked item
+.app-marked-item {
+	li {
+		a {
+			padding: 5px 10px;
+			display: block;
+			&:hover {
+				text-decoration: none;
+				background-color: $app-brand-l-6;
+				border: 1px solid $app-brand-l-3;
+			}
+		}
+	}
+}
+
+

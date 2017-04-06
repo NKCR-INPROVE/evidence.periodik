@@ -1,0 +1,22 @@
+// --- TYPEAHEAD ---
+
+.typeahead {
+	&.dropdown-menu {
+		left: 0 !important;
+		margin-top: 17px;
+		width: 100%;
+		@extend .app-font-pt-serif;
+		li {
+			&.active {
+				.dropdown-item {
+					background-color: $app-brand-d-1;
+				}
+			}
+			.dropdown-item {
+				&:hover {
+					background-color: $app-brand-d-1;
+				}	
+			}
+		}
+	}
+}

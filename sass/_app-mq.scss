@@ -1,0 +1,128 @@
+// --- MEDIA QUERIES ---
+
+/*==========  Mobile First Method  ==========*/
+
+/*** Custom, iPhone Retina ***/
+@media only screen and (min-width : 320px) {
+
+}
+
+/*** Extra Small Devices, Phones ***/
+@media only screen and (min-width : 480px) {
+
+}
+
+/*** Small Devices, Tablets ***/
+@media only screen and (min-width : 768px) {
+	// content
+	.app-page-home {
+		.app-content {
+			.row {
+				div[class*=col]:first-child {
+					img {
+						margin-top: -175px;
+					}
+				}
+			}
+		}
+	}
+	.app-page-archiv-reader {
+		.app-content {
+			padding-right: 0;
+		}
+	}
+	.app-content {
+		.app-col-left {
+			.app-section:first-child {
+				margin-bottom: 50px;
+			}
+		}
+		.app-col-right {
+			.app-thumb-doc {
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+		.app-sort-headline {
+			.row {
+				div[class*=col]:last-child {
+					text-align: right;
+				}
+			}
+		}
+	}
+	.app-page-search {
+		.tab-content {
+			.app-section:not(.app-section-search-form),
+			.app-section-search-form-full {
+				margin-right: $app-col-close-width;
+			}
+		}
+	}
+}
+
+/*** Medium Devices, Desktops ***/
+@media only screen and (min-width : 992px) {
+	// navbar
+	.navbar {
+		#navbar {
+			padding: 0;
+		}
+		.navbar-nav {
+			> li {
+				> a {
+					padding-top: 10px;
+					padding-bottom: 7px;
+					margin-top: 9px;
+				}
+			}
+			.dropdown-menu {
+				a {
+					color: $app-brand;
+					&:hover {
+						background-color: $app-brand-l-4;
+					}
+				}
+			}
+		}
+	}
+}
+
+/*** Large Devices, Wide Screens ***/
+@media only screen and (min-width : 1200px) {
+  
+}
+
+
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/*** Large Devices, Wide Screens ***/
+@media only screen and (max-width : 1200px) {
+
+}
+
+/*** Medium Devices, Desktops ***/
+@media only screen and (max-width : 992px) {
+
+}
+
+/*** Small Devices, Tablets ***/
+@media only screen and (max-width : 768px) {
+
+}
+
+/*** Extra Small Devices, Phones ***/
+@media only screen and (max-width : 480px) {
+
+}
+
+/*** Custom, iPhone Retina ***/
+@media only screen and (max-width : 320px) {
+
+}
+
+/*** Custom ***/
+@media only screen and (max-width : 767px) {
+
+}

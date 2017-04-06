@@ -1,0 +1,11 @@
+// --- FUNCTION ---
+
+// set color
+@function set-text-color($color) {
+	@if(lightness($color) > 50) {
+		@return darken($color, 40%);
+	}
+	@else {
+		@return lighten($color, 40%);
+	}
+}

@@ -38,6 +38,7 @@ $app-brand-d-2:					#b17686 !default;
 // app var
 $app-col-close-width:		40px; 
 $app-slider-base-color:	    $app-brand-l-3;
+$app-border-radius-base:    4px;
 
 
 
@@ -195,9 +196,9 @@ $btn-danger-border:              darken($btn-danger-bg, 5%) !default;
 $btn-link-disabled-color:        $gray-light !default;
 
 // Allows for customizing button radius independently from global border radius
-$btn-border-radius-base:         $border-radius-base !default;
-$btn-border-radius-large:        $border-radius-large !default;
-$btn-border-radius-small:        $border-radius-small !default;
+$btn-border-radius-base:         $app-border-radius-base !default; // _app $border-radius-base !default;
+$btn-border-radius-large:        $app-border-radius-base !default; // _app $border-radius-large !default;
+$btn-border-radius-small:        $app-border-radius-base !default; // _app $border-radius-small !default;
 
 
 //== Forms

@@ -1,0 +1,59 @@
+// --- APP SIDEBAR ---
+
+.app-sidebar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 80px;
+  height: 100%;
+  background-color: $app-brand;
+  border-bottom: 1px solid $app-brand-l-1;
+  .app-sidebar-wrapper {
+    position: relative;
+    height: 100%;
+    .app-sidebar-top,
+    .app-sidebar-bottom {
+      position: absolute;
+      text-align: center;
+      width: 100%;
+    }
+    .app-sidebar-top {
+      top: 30px;
+    }
+    .app-sidebar-bottom {
+      bottom: 30px;
+    }
+    .app-item {
+      margin-bottom: 2px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      .app-btn {
+        padding: 8px;
+      }
+    }
+    .app-item-share {
+      position: relative;
+      #app-share-btn {
+        border-radius: 0;
+        &.active {
+          background-color: $app-brand-l-4;
+          box-shadow: none;
+          svg {
+            fill: $app-brand;
+          }
+        }
+      }
+      #app-share {
+        position: absolute;
+        left: -112px;
+        bottom: 0;
+        height: 100%;
+        padding: 0 10px;
+        .app-btn {
+          padding: 8px 2px;
+        }
+      }
+    }
+  }
+}

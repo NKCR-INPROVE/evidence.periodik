@@ -1,46 +1,48 @@
 // --- NAVBAR ---
 
 .navbar {
-	@include gradient-vertical(#5b1629, $app-brand, 0%, 20%);
-	.navbar-header {
-		.navbar-toggle {
-			.icon-bar {
-				background-color: $app-brand-l-4;
-			}
-		}
-	}
-	.navbar-nav {
-		font-size: 1.8rem;
-		> li {
-			> a {
-				color: $body-bg;
-				line-height: inherit;
-				&:hover, &:focus {
-					color: $app-brand;
-					background-color: $app-brand-l-4 !important;
-					svg {
-						fill: $app-brand;
-					}
-				}
-			}
-			&.active, &.open  {
-				> a {
-					color: $app-brand;
-					background-color: $app-brand-l-4 !important;	
-				}
-				svg {
-					fill: $app-brand;
-				}
-			}
-		}
-		.dropdown-menu {
-			a {
-				color: $body-bg;
-				&:hover {
-					background-color: $app-brand-l-2;
-					color: $app-brand !important;
-				}
-			}
-		}
-	}
+  @include gradient-vertical(#5b1629, $app-brand, 0%, 20%);
+  .navbar-header {
+    .navbar-toggle {
+      .icon-bar {
+        background-color: $app-brand-l-4;
+      }
+    }
+  }
+  .navbar-nav {
+    font-size: 1.8rem;
+    >li {
+      >a {
+        color: $body-bg;
+        line-height: inherit;
+        &:hover,
+        &:focus {
+          color: $app-brand;
+          background-color: $app-brand-l-4 !important;
+          svg {
+            fill: $app-brand;
+          }
+        }
+      }
+      &.active,
+      &.open {
+        >a {
+          color: $app-brand;
+          background-color: $app-brand-l-4 !important;
+        }
+        svg {
+          fill: $app-brand;
+        }
+      }
+    }
+    .dropdown-menu {
+      a {
+        color: $body-bg;
+        &:hover {
+          background-color: $app-brand-l-2;
+          color: $app-brand !important;
+        }
+      }
+    }
+  }
 }

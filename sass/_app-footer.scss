@@ -1,14 +1,14 @@
 // --- FOOTER ---
 
 footer {
-	padding: 7px 0;
-	.row {
-		> div:first-child {
-			font-size: 1.8rem;
-		}
-		> div+div {
-			padding-top: 2px;
-			font-size: 1.4rem;
-		}
-	}
+  padding: 7px 0;
+  .row {
+    >div:first-child {
+      font-size: 1.8rem;
+    }
+    >div+div {
+      padding-top: 2px;
+      font-size: 1.4rem;
+    }
+  }
 }

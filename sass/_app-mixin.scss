@@ -2,40 +2,40 @@
 
 // set border
 @mixin set-border($position, $height, $style, $color) {
-	@if ($position == "top") {
-		border-width: $height 0 0 0; 
-		border-style: solid;
-		border-color: $color;
-	}
-	@else if ($position == "right") {
-		border-width: 0 $height 0 0; 
-		border-style: solid;
-		border-color: $color;
-	}
-	@else if ($position == "bottom") {
-		border-width: 0 0 $height 0; 
-		border-style: solid;
-		border-color: $color;
-	}
-	@else if ($position == "left") {
-	 	border-width: 0 0 0 $height; 
-		border-style: solid;
-		border-color: $color;	
-	}
-	@else if ($position == "right-left-bottom") {
-	 	border-width: 0 $height $height $height; 
-		border-style: solid;
-		border-color: $color;	
-	}
-	@else {
-		border-width: $height $height $height $height; 
-		border-style: solid;
-		border-color: $color;
-	}
+  @if ($position=="top") {
+    border-width: $height 0 0 0;
+    border-style: solid;
+    border-color: $color;
+  }
+  @else if ($position=="right") {
+    border-width: 0 $height 0 0;
+    border-style: solid;
+    border-color: $color;
+  }
+  @else if ($position=="bottom") {
+    border-width: 0 0 $height 0;
+    border-style: solid;
+    border-color: $color;
+  }
+  @else if ($position=="left") {
+    border-width: 0 0 0 $height;
+    border-style: solid;
+    border-color: $color;
+  }
+  @else if ($position=="right-left-bottom") {
+    border-width: 0 $height $height $height;
+    border-style: solid;
+    border-color: $color;
+  }
+  @else {
+    border-width: $height $height $height $height;
+    border-style: solid;
+    border-color: $color;
+  }
 }
 
 // set vertical align
 @mixin set-vertical-align($height) {
-	height: $height#{px};
-	line-height: $height#{px};
+  height: $height#{px};
+  line-height: $height#{px};
 }

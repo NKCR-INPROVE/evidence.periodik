@@ -2,14 +2,14 @@
 
 // btn basic
 .app-btn {
-	font-size: 16px;
-	padding: 0;
-	background-color: transparent;
-	svg {
-		height: 20px;
-		fill: $app-brand;
-		margin-right: 5px;
-	}
+  font-size: 16px;
+  padding: 0;
+  background-color: transparent;
+  svg {
+    height: 20px;
+    fill: $app-brand;
+    margin-right: 5px;
+  }
 }
 
 
@@ -33,189 +33,181 @@
 
 // two svg
 .app-ico-svg-two {
-	svg {
-		&:nth-child(even) {
-			display: none;
-		}
-	}
-	&:hover {
-		color: $app-brand;
-		svg {
-			&:nth-child(odd) {
-				display: none;
-			}
-			&:nth-child(even) {
-				display: inline-block;
-			}
-		}
-	}	
+  svg {
+    &:nth-child(even) {
+      display: none;
+    }
+  }
+  &:hover {
+    color: $app-brand;
+    svg {
+      &:nth-child(odd) {
+        display: none;
+      }
+      &:nth-child(even) {
+        display: inline-block;
+      }
+    }
+  }
 }
-
 
 // btn right
 .app-btn-right {
-	svg {
-		margin-right: 0;
-		margin-left: 5px;	
-	}
+  svg {
+    margin-right: 0;
+    margin-left: 5px;
+  }
 }
-
 
 // set hover ico color
 .app-ico-white {svg {fill: $body-bg;}}
 .app-ico-black {svg {fill: $gray-base;}}
 
 .app-ico-pink-hover {
-	&:hover {
-		svg {
-			fill: $app-brand-d-1;
-		}
-	}
+  &:hover {
+    svg {
+      fill: $app-brand-d-1;
+    }
+  }
 }
 
 .app-ico-brand-hover {
-	&:hover, &:focus {
-		svg {
-			fill: $app-brand;
-		}
-	}
+  &:hover,
+  &:focus {
+    svg {
+      fill: $app-brand;
+    }
+  }
 }
-
 
 // btn default
 .app-btn-default {
-	main & {
-		@extend .app-font-roboto-cb;	
-	}
-	padding: 3px 10px 1px 10px;
-	background-color: $app-brand-l-4;
-	color: $app-brand;
-	svg {
-		vertical-align: text-top;
-	}
-	&:hover {
-		background-color: $app-brand;
-		color: $body-bg;
-		svg {
-			fill: $body-bg;
-		}
-	}
-	// btn inverse
-	&.app-btn-inverse {
-		background-color: $app-brand;
-		color: $body-bg;
-		svg {
-			fill: $body-bg;
-		}
-	}
-	&.app-btn-inverse:hover {
-		background-color: $app-brand-l-4;
-		color: $app-brand;
-		svg {
-			fill: $app-brand;
-		}
-	}
+  main & {
+    @extend .app-font-roboto-cb;
+  }
+  padding: 3px 10px 1px 10px;
+  background-color: $app-brand-l-4;
+  color: $app-brand;
+  svg {
+    vertical-align: text-top;
+  }
+  &:hover {
+    background-color: $app-brand;
+    color: $body-bg;
+    svg {
+      fill: $body-bg;
+    }
+  }
+  // btn inverse
+  &.app-btn-inverse {
+    background-color: $app-brand;
+    color: $body-bg;
+    svg {
+      fill: $body-bg;
+    }
+  }
+  &.app-btn-inverse:hover {
+    background-color: $app-brand-l-4;
+    color: $app-brand;
+    svg {
+      fill: $app-brand;
+    }
+  }
 }
-
 
 // btn transparent
 .app-btn-transparent {
-	@extend .app-font-roboto-cl;
-	color: $app-brand;
-	svg {
-		vertical-align: middle;
-	}
-	&:hover:not(.app-ico-svg-two) {
-		color: $app-brand;
-		svg {
-			fill: $app-brand-d-1;
-		}
-	}
+  @extend .app-font-roboto-cl;
+  color: $app-brand;
+  svg {
+    vertical-align: middle;
+  }
+  &:hover:not(.app-ico-svg-two) {
+    color: $app-brand;
+    svg {
+      fill: $app-brand-d-1;
+    }
+  }
 }
-
 
 // btn square
 .app-btn-square {
-	width: 60px;
-	height: 60px;
-	background-color: $app-brand;
-	&:hover {
-		background-color: $app-brand-l-4;
-	}
+  width: 60px;
+  height: 60px;
+  background-color: $app-brand;
+  &:hover {
+    background-color: $app-brand-l-4;
+  }
 }
-
 
 // btn ico
 .app-btn-ico {
-	line-height: 0 !important;
-	svg {
-		margin: 0 !important;	
-	}
+  line-height: 0 !important;
+  svg {
+    margin: 0 !important;
+  }
 }
-
 
 // btn arrow
 .app-btn-arrow {
-	position: relative;
-	border-radius: 0;
-	border: 0;
+  position: relative;
+  border-radius: 0;
+  border: 0;
 }
 
 .app-btn-arrow:before,
 .app-btn-arrow:after {
-	content: '';
-	width: 0;
-	height: 0;
-	position: absolute;
-	top: 0;
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
 }
-
 
 // btn arrow left
 .app-btn-arrow-left {
-	@include set-vertical-align(34);
-	@extend .app-font-roboto-cl;
-	padding: 0 12px;
-	margin-left: 11px;
-	font-size: 20px;
+  @include set-vertical-align(34);
+  @extend .app-font-roboto-cl;
+  padding: 0 12px;
+  margin-left: 11px;
+  font-size: 20px;
 }
 
 .app-btn-arrow-left:before {
-	border-width: 17px 11px 17px 0;
-	border-style: solid;
-	border-color: transparent $app-brand-l-4 transparent transparent;
-	left: -11px;
+  border-width: 17px 11px 17px 0;
+  border-style: solid;
+  border-color: transparent $app-brand-l-4 transparent transparent;
+  left: -11px;
 }
-
 
 // btn arrow right
 .app-btn-arrow-right {
-	@extend .app-font-roboto-cl;
-	text-align: left;
-	min-height: 74px;
-	padding: 10px 12px;
-	margin-right: 25px;
-	background-color: transparent;
-	&.app-btn-active {
-		background-color: $app-brand-l-4;
-		&:after {
-			border-width: 37px 0 37px 25px;
-			border-style: solid;
-			border-color: transparent transparent transparent $app-brand-l-4;
-			right: -25px;	
-		}
-	}
-	.media {
-		.media-left {
-			.media-object {
-				height: 50px;
-			}
-		}
-		.media-body {
-			h4 {
-				margin-bottom: 0;
-			}
-			width: inherit;
-		}
-	}
+  @extend .app-font-roboto-cl;
+  text-align: left;
+  min-height: 74px;
+  padding: 10px 12px;
+  margin-right: 25px;
+  background-color: transparent;
+  &.app-btn-active {
+    background-color: $app-brand-l-4;
+    &:after {
+      border-width: 37px 0 37px 25px;
+      border-style: solid;
+      border-color: transparent transparent transparent $app-brand-l-4;
+      right: -25px;
+    }
+  }
+  .media {
+    .media-left {
+      .media-object {
+        height: 50px;
+      }
+    }
+    .media-body {
+      h4 {
+        margin-bottom: 0;
+      }
+      width: inherit;
+    }
+  }
 }

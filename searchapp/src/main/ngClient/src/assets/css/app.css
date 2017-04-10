@@ -6191,6 +6191,7 @@ h4 + hr {
 .app-btn {
   font-size: 16px;
   padding: 0;
+  cursor: pointer;
   background-color: transparent; }
   .app-btn svg {
     height: 20px;

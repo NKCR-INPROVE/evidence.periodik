@@ -1,0 +1,2750 @@
+{
+  "response": {
+    "start": 0,
+    "docs": [
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1912",
+        "PID": "uuid:028ad880-8a65-11e2-a920-005056827e51",
+        "modified_date": "2014-02-17T10:26:36.486Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:028ad880-8a65-11e2-a920-005056827e51"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 1912,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:028ad880-8a65-11e2-a920-005056827e51",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Neruda, Jan",
+          "Rožek, Karel",
+          "Neruda, Jan",
+          "Rožek, Karel"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2013-08-04T10:12:17.156Z",
+        "dc.creator": [
+          "Neruda, Jan",
+          "Rožek, Karel"
+        ],
+        "_version_": 1479948975340519424,
+        "status": "Active",
+        "dc.identifier": [
+          "urnnbn:urn:nbn:cz:nk-000civ",
+          "uuid:028ad880-8a65-11e2-a920-005056827e51",
+          "oclc:20142043",
+          "barCode:1002356723",
+          "ccnb:cnb000632313",
+          "urn:nbn:cz:nk-000civ",
+          "1002356723",
+          "028ad880-8a65-11e2-a920-005056827e51",
+          "cnb000632313",
+          "20142043"
+        ],
+        "title_sort": "PRAHA",
+        "datum_begin": 1912,
+        "root_title": "Praha",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:028ad880-8a65-11e2-a920-005056827e51"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 1912,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1950",
+        "PID": "uuid:fcdcda05-6159-4ce5-b339-6e63db02d2d0",
+        "modified_date": "2014-01-16T12:08:36.404Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:fcdcda05-6159-4ce5-b339-6e63db02d2d0"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 1950,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "map"
+        ],
+        "fedora.model": "map",
+        "root_pid": "uuid:fcdcda05-6159-4ce5-b339-6e63db02d2d0",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Státní zeměměřický a kartografický ústav",
+          "Státní zeměměřický a kartografický ústav"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2013-09-10T14:35:22.996Z",
+        "dc.creator": [
+          "Státní zeměměřický a kartografický ústav"
+        ],
+        "_version_": 1503869380792942592,
+        "status": "Active",
+        "dc.identifier": [
+          "uuid:fcdcda05-6159-4ce5-b339-6e63db02d2d0",
+          "signature:Mpa-0287.293",
+          "sysno:001276464",
+          "001276464",
+          "uuid:fcdcda05-6159-4ce5-b339-6e63db02d2d0"
+        ],
+        "title_sort": "PRAHA",
+        "datum_begin": 1950,
+        "root_title": "Praha",
+        "mdt": "(437.319)",
+        "parent_pid": [
+          "uuid:fcdcda05-6159-4ce5-b339-6e63db02d2d0"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 1950,
+        "model_path": [
+          "map"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "[mezi 1922 a 1930]",
+        "PID": "uuid:d3708121-c23f-4e5f-9d7e-345cc7d27d6f",
+        "modified_date": "2014-06-18T13:13:43.709Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:d3708121-c23f-4e5f-9d7e-345cc7d27d6f"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "map"
+        ],
+        "fedora.model": "map",
+        "root_pid": "uuid:d3708121-c23f-4e5f-9d7e-345cc7d27d6f",
+        "level": 0,
+        "dc.title": "[Praha]",
+        "ddt": "",
+        "facet_autor": [
+          "F. Bernášek a spol. (firma)",
+          "F. Bernášek a spol. (firma)"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2014-06-18T13:13:43.709Z",
+        "dc.creator": [
+          "F. Bernášek a spol. (firma)"
+        ],
+        "_version_": 1507515250421792768,
+        "status": "Active",
+        "dc.identifier": [
+          "uuid:d3708121-c23f-4e5f-9d7e-345cc7d27d6f",
+          "signature:Mpa-1269.064",
+          "sysno:001167660",
+          "001167660",
+          "uuid:d3708121-c23f-4e5f-9d7e-345cc7d27d6f"
+        ],
+        "title_sort": "PRAHA",
+        "datum_begin": 0,
+        "root_title": "[Praha]",
+        "mdt": "(437.311)",
+        "parent_pid": [
+          "uuid:d3708121-c23f-4e5f-9d7e-345cc7d27d6f"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 0,
+        "model_path": [
+          "map"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1975",
+        "PID": "uuid:df4c62f0-ed62-11e3-b72e-005056827e52",
+        "modified_date": "2014-10-21T13:58:13.691Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:df4c62f0-ed62-11e3-b72e-005056827e52"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 1975,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:df4c62f0-ed62-11e3-b72e-005056827e52",
+        "level": 0,
+        "dc.title": "Směr Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Broft, Miroslav",
+          "Svatoň, Jaroslav",
+          "Vildt, Jaroslav",
+          "Tesařová, Z.",
+          "Houdek, Přemysl",
+          "Naše vojsko (nakladatelství)",
+          "Vojenský kartografický ústav (Harmanec, Slovensko)",
+          "Broft, Miroslav",
+          "Svatoň, Jaroslav",
+          "Vildt, Jaroslav",
+          "Tesařová, Z.",
+          "Houdek, Přemysl",
+          "Naše vojsko (nakladatelství)",
+          "Vojenský kartografický ústav (Harmanec, Slovensko)"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2014-10-21T13:58:13.691Z",
+        "dc.creator": [
+          "Broft, Miroslav",
+          "Svatoň, Jaroslav",
+          "Vildt, Jaroslav",
+          "Tesařová, Z.",
+          "Houdek, Přemysl",
+          "Naše vojsko (nakladatelství)",
+          "Vojenský kartografický ústav (Harmanec, Slovensko)"
+        ],
+        "_version_": 1512952739757293568,
+        "keywords": [
+          "druhá světová válka, 1939-1945"
+        ],
+        "status": "Active",
+        "dc.identifier": [
+          "urnnbn:urn:nbn:cz:mzk-003ase",
+          "uuid:df4c62f0-ed62-11e3-b72e-005056827e52",
+          "barCode:2619200060",
+          "urn:nbn:cz:mzk-003ase",
+          "2619200060",
+          "df4c62f0-ed62-11e3-b72e-005056827e52"
+        ],
+        "title_sort": "SMER PRAHA",
+        "datum_begin": 1975,
+        "root_title": "Směr Praha",
+        "mdt": "94(100)\"1939/1945\"",
+        "parent_pid": [
+          "uuid:df4c62f0-ed62-11e3-b72e-005056827e52"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 1975,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "BOA001/312864",
+        "issn": "1801-2493",
+        "datum_str": "1884 - 1929",
+        "PID": "uuid:ae79f31f-435d-11dd-b505-00145e5790ea",
+        "modified_date": "2013-04-09T10:33:01.147Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:ae79f31f-435d-11dd-b505-00145e5790ea"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:9d2195b1-5403-4b3d-ab7c-680ac442bb73",
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091",
+          "vc:cd324f70-c034-46f1-9674-e0df4f93de86"
+        ],
+        "datum_end": 1929,
+        "datum": "1970-01-01T01:00:00Z",
+        "fedora.model": "periodical",
+        "document_type": [
+          "periodical"
+        ],
+        "root_pid": "uuid:ae79f31f-435d-11dd-b505-00145e5790ea",
+        "level": 0,
+        "dc.title": "Zlatá Praha",
+        "ddt": "",
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2011-05-02T09:20:04.933Z",
+        "_version_": 1556276846944845824,
+        "status": "Active",
+        "title_sort": "ZLATA PRAHA",
+        "datum_begin": 1884,
+        "root_title": "Zlatá Praha",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:ae79f31f-435d-11dd-b505-00145e5790ea"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 0,
+        "model_path": [
+          "periodical"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1985",
+        "PID": "uuid:68664150-8260-11e3-a6e0-005056827e52",
+        "modified_date": "2014-02-12T01:35:48.754Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:68664150-8260-11e3-a6e0-005056827e52"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 1985,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:68664150-8260-11e3-a6e0-005056827e52",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Ehm, Josef",
+          "Ehm, Josef"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2014-02-12T01:35:48.754Z",
+        "dc.creator": [
+          "Ehm, Josef"
+        ],
+        "_version_": 1479779208610709504,
+        "status": "Active",
+        "dc.identifier": [
+          "urnnbn:urn:nbn:cz:mzk-001wnp",
+          "uuid:68664150-8260-11e3-a6e0-005056827e52",
+          "oclc:15167976",
+          "barCode:2619253990",
+          "ccnb:cnb000011652",
+          "urn:nbn:cz:mzk-001wnp",
+          "2619253990",
+          "68664150-8260-11e3-a6e0-005056827e52",
+          "cnb000011652",
+          "15167976"
+        ],
+        "title_sort": "PRAHA",
+        "datum_begin": 1985,
+        "root_title": "Praha",
+        "mdt": "77\"19\"",
+        "parent_pid": [
+          "uuid:68664150-8260-11e3-a6e0-005056827e52"
+        ],
+        "language": [
+          "cze",
+          "mul"
+        ],
+        "rok": 1985,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "80-7202-829-4",
+        "datum_str": "2001",
+        "PID": "uuid:d9d8e630-4053-11e2-9b88-005056827e51",
+        "modified_date": "2013-01-23T16:04:13.203Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:d9d8e630-4053-11e2-9b88-005056827e51"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 2001,
+        "datum": "1970-01-01T01:00:00Z",
+        "fedora.model": "monograph",
+        "document_type": [
+          "monograph"
+        ],
+        "root_pid": "uuid:d9d8e630-4053-11e2-9b88-005056827e51",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2013-01-23T16:04:13.203Z",
+        "_version_": 1457338193552605184,
+        "keywords": [
+          "umělecké památky",
+          "Guidebooks",
+          "Antiquities",
+          "Guidebooks"
+        ],
+        "status": "Active",
+        "title_sort": "PRAHA",
+        "datum_begin": 2001,
+        "root_title": "Praha",
+        "mdt": "72/76:904",
+        "parent_pid": [
+          "uuid:d9d8e630-4053-11e2-9b88-005056827e51"
+        ],
+        "language": [
+          "cze",
+          "eng"
+        ],
+        "rok": 2001,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "5.10.1921",
+        "PID": "uuid:ff1bc45b-a055-43d8-8c98-cc5f9a9e939d",
+        "modified_date": "2011-08-02T11:57:29.298Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:269bf680-61e6-11dc-b537-000d606f5dc6/uuid:7cec0310-8985-11dc-ba06-000d606f5dc6/uuid:ff1bc45b-a055-43d8-8c98-cc5f9a9e939d",
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:269bf680-61e6-11dc-b537-000d606f5dc6/uuid:db3acc50-871c-11dc-b54f-000d606f5dc6/uuid:ff1bc45b-a055-43d8-8c98-cc5f9a9e939d",
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:269bf680-61e6-11dc-b537-000d606f5dc6/uuid:af3ee570-8986-11dc-86dc-000d606f5dc6/uuid:ff1bc45b-a055-43d8-8c98-cc5f9a9e939d",
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:269bf680-61e6-11dc-b537-000d606f5dc6/uuid:426c8690-8734-11dc-baf4-000d606f5dc6/uuid:ff1bc45b-a055-43d8-8c98-cc5f9a9e939d",
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:269bf680-61e6-11dc-b537-000d606f5dc6/uuid:af2a0ba0-898b-11dc-8e78-000d606f5dc6/uuid:ff1bc45b-a055-43d8-8c98-cc5f9a9e939d",
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:269bf680-61e6-11dc-b537-000d606f5dc6/uuid:fa1dca90-871d-11dc-b36e-000d606f5dc6/uuid:ff1bc45b-a055-43d8-8c98-cc5f9a9e939d",
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:269bf680-61e6-11dc-b537-000d606f5dc6/uuid:41334dd0-8735-11dc-8fd4-000d606f5dc6/uuid:ff1bc45b-a055-43d8-8c98-cc5f9a9e939d"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1921-10-05T12:00:00Z",
+        "document_type": [
+          "article"
+        ],
+        "fedora.model": "article",
+        "root_pid": "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6",
+        "level": 3,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Duhamel,Georges",
+          "Duhamel,Georges"
+        ],
+        "created_date": "2011-08-02T11:57:29.298Z",
+        "dc.creator": [
+          "Duhamel,Georges"
+        ],
+        "_version_": 1449745215697977344,
+        "keywords": [
+          "Kultura"
+        ],
+        "status": "Active",
+        "title_sort": "PRAHA",
+        "datum_begin": 0,
+        "root_title": "Lidové noviny",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:7cec0310-8985-11dc-ba06-000d606f5dc6",
+          "uuid:db3acc50-871c-11dc-b54f-000d606f5dc6",
+          "uuid:af3ee570-8986-11dc-86dc-000d606f5dc6",
+          "uuid:426c8690-8734-11dc-baf4-000d606f5dc6",
+          "uuid:af2a0ba0-898b-11dc-8e78-000d606f5dc6",
+          "uuid:fa1dca90-871d-11dc-b36e-000d606f5dc6",
+          "uuid:41334dd0-8735-11dc-8fd4-000d606f5dc6"
+        ],
+        "language": [
+          "cze",
+          "ces",
+          "cs-CZ"
+        ],
+        "rok": 1921,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem/article",
+          "periodical/periodicalvolume/periodicalitem/article",
+          "periodical/periodicalvolume/periodicalitem/article",
+          "periodical/periodicalvolume/periodicalitem/article",
+          "periodical/periodicalvolume/periodicalitem/article",
+          "periodical/periodicalvolume/periodicalitem/article",
+          "periodical/periodicalvolume/periodicalitem/article"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "5.5.1922",
+        "PID": "uuid:f4b64b86-4979-455c-86d8-1a7b956f20ac",
+        "modified_date": "2011-08-02T14:13:13.495Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:5116bfb0-7e49-11dc-8610-000d606f5dc6/uuid:dc76aa30-80e6-11dc-8be2-000d606f5dc6/uuid:f4b64b86-4979-455c-86d8-1a7b956f20ac"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1922-05-05T12:00:00Z",
+        "document_type": [
+          "article"
+        ],
+        "fedora.model": "article",
+        "root_pid": "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6",
+        "level": 3,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "F. W. [=František Weyr]",
+          "F. W. [=František Weyr]"
+        ],
+        "created_date": "2011-08-02T14:13:13.495Z",
+        "dc.creator": [
+          "F. W. [=František Weyr]"
+        ],
+        "_version_": 1449746422512484352,
+        "keywords": [
+          "Školství"
+        ],
+        "status": "Active",
+        "title_sort": "PRAHA",
+        "datum_begin": 0,
+        "root_title": "Lidové noviny",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:dc76aa30-80e6-11dc-8be2-000d606f5dc6"
+        ],
+        "language": [
+          "cze",
+          "ces",
+          "cs-CZ"
+        ],
+        "rok": 1922,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem/article"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1983",
+        "PID": "uuid:055e6640-5cdc-11e3-ae59-005056827e52",
+        "modified_date": "2013-12-20T13:14:33.612Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:055e6640-5cdc-11e3-ae59-005056827e52"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 1983,
+        "datum": "1970-01-01T01:00:00Z",
+        "fedora.model": "monograph",
+        "document_type": [
+          "monograph"
+        ],
+        "root_pid": "uuid:055e6640-5cdc-11e3-ae59-005056827e52",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2013-12-20T13:14:33.612Z",
+        "_version_": 1477330466430255104,
+        "status": "Active",
+        "title_sort": "PRAHA",
+        "datum_begin": 1983,
+        "root_title": "Praha",
+        "mdt": "084(437.10)",
+        "parent_pid": [
+          "uuid:055e6640-5cdc-11e3-ae59-005056827e52"
+        ],
+        "language": [
+          "cze",
+          "mul"
+        ],
+        "rok": 1983,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "80-86366-04-9",
+        "datum_str": "2000",
+        "PID": "uuid:dcd72f00-8323-11e2-b238-005056827e52",
+        "modified_date": "2013-07-19T07:26:41.179Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:dcd72f00-8323-11e2-b238-005056827e52"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 2000,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:dcd72f00-8323-11e2-b238-005056827e52",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Král, Petr",
+          "Král, Petr"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2013-07-19T07:26:41.179Z",
+        "dc.creator": [
+          "Král, Petr"
+        ],
+        "_version_": 1466070262861529088,
+        "keywords": [
+          "Fiction"
+        ],
+        "status": "Active",
+        "title_sort": "PRAHA",
+        "datum_begin": 2000,
+        "root_title": "Praha",
+        "mdt": "908(437.3)",
+        "parent_pid": [
+          "uuid:dcd72f00-8323-11e2-b238-005056827e52"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 2000,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1966",
+        "PID": "uuid:e2281800-50e8-11e3-ae59-005056827e52",
+        "modified_date": "2013-12-10T13:25:27.336Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:e2281800-50e8-11e3-ae59-005056827e52"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 1966,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:e2281800-50e8-11e3-ae59-005056827e52",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Kýhos, Karel",
+          "Kýhos, Karel"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2013-12-10T13:25:27.336Z",
+        "dc.creator": [
+          "Kýhos, Karel"
+        ],
+        "_version_": 1476905567132844032,
+        "status": "Active",
+        "title_sort": "PRAHA",
+        "datum_begin": 1966,
+        "root_title": "Praha",
+        "mdt": "908.437.11:779",
+        "parent_pid": [
+          "uuid:e2281800-50e8-11e3-ae59-005056827e52"
+        ],
+        "language": [
+          "mul",
+          "cze"
+        ],
+        "rok": 1966,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1942",
+        "PID": "uuid:a0659ff0-fab7-11e2-9923-005056827e52",
+        "modified_date": "2013-10-25T16:00:27.529Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:a0659ff0-fab7-11e2-9923-005056827e52"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 1942,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:a0659ff0-fab7-11e2-9923-005056827e52",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Neruda, Jan",
+          "Neruda, Jan"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2013-10-25T16:00:27.529Z",
+        "dc.creator": [
+          "Neruda, Jan"
+        ],
+        "_version_": 1472430515054182400,
+        "status": "Active",
+        "title_sort": "PRAHA",
+        "datum_begin": 1942,
+        "root_title": "Praha",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:a0659ff0-fab7-11e2-9923-005056827e52"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 1942,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1969",
+        "PID": "uuid:3016db90-c3b8-11e3-b110-005056827e51",
+        "modified_date": "2014-05-06T01:38:26.763Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:3016db90-c3b8-11e3-b110-005056827e51"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 1969,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:3016db90-c3b8-11e3-b110-005056827e51",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Neubert, Karel",
+          "Poche, Emanuel",
+          "Srch, Antonín",
+          "Neubert, Karel",
+          "Poche, Emanuel",
+          "Srch, Antonín"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2014-05-06T01:38:26.763Z",
+        "dc.creator": [
+          "Neubert, Karel",
+          "Poche, Emanuel",
+          "Srch, Antonín"
+        ],
+        "_version_": 1499412587668832256,
+        "status": "Active",
+        "dc.identifier": [
+          "urnnbn:urn:nbn:cz:nk-0010zt",
+          "uuid:3016db90-c3b8-11e3-b110-005056827e51",
+          "oclc:42123214",
+          "barCode:1002629792",
+          "ccnb:cnb000450125",
+          "urn:nbn:cz:nk-0010zt",
+          "1002629792",
+          "3016db90-c3b8-11e3-b110-005056827e51",
+          "cnb000450125",
+          "42123214"
+        ],
+        "title_sort": "PRAHA",
+        "datum_begin": 1969,
+        "root_title": "Praha",
+        "mdt": "779:908.437.11",
+        "parent_pid": [
+          "uuid:3016db90-c3b8-11e3-b110-005056827e51"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 1969,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "978-80-87101-05-6",
+        "datum_str": "2008",
+        "PID": "uuid:5a7c2440-97ca-11e3-a744-005056827e52",
+        "modified_date": "2014-05-17T02:10:20.301Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:5a7c2440-97ca-11e3-a744-005056827e52"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 2008,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:5a7c2440-97ca-11e3-a744-005056827e52",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Kocourková, Pavla",
+          "Kocourek, Ondřej",
+          "Klíma, Ivan",
+          "Kocourková, Pavla",
+          "Kocourek, Ondřej",
+          "Klíma, Ivan"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2014-05-17T02:10:20.301Z",
+        "dc.creator": [
+          "Kocourková, Pavla",
+          "Kocourek, Ondřej",
+          "Klíma, Ivan"
+        ],
+        "_version_": 1499922799165177856,
+        "keywords": [
+          "dokumentární fotografie",
+          "každodenní život",
+          "documentary photography",
+          "everyday life"
+        ],
+        "status": "Active",
+        "dc.identifier": [
+          "urnnbn:urn:nbn:cz:mzk-002btt",
+          "URN:ISBN:978-80-87101-05-6",
+          "uuid:5a7c2440-97ca-11e3-a744-005056827e52",
+          "oclc:276818839",
+          "barCode:2610358888",
+          "ccnb:cnb001825624",
+          "urn:nbn:cz:mzk-002btt",
+          "2610358888",
+          "5a7c2440-97ca-11e3-a744-005056827e52",
+          "cnb001825624",
+          "978-80-87101-05-6",
+          "978-808710105-6",
+          "276818839"
+        ],
+        "title_sort": "PRAHA",
+        "datum_begin": 2008,
+        "root_title": "Praha",
+        "mdt": "77.03",
+        "parent_pid": [
+          "uuid:5a7c2440-97ca-11e3-a744-005056827e52"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 2008,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "[1948?]",
+        "PID": "uuid:710eff19-496f-49a5-a135-117c0f374c42",
+        "modified_date": "2015-02-26T13:43:41.138Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:710eff19-496f-49a5-a135-117c0f374c42"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "map"
+        ],
+        "fedora.model": "map",
+        "root_pid": "uuid:710eff19-496f-49a5-a135-117c0f374c42",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Grgurič, Václav",
+          "Čedok",
+          "Planografia (firma : Plzeň)",
+          "Grgurič, Václav",
+          "Čedok",
+          "Planografia (firma : Plzeň)"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2013-03-19T15:21:27.08Z",
+        "dc.creator": [
+          "Grgurič, Václav",
+          "Čedok",
+          "Planografia (firma : Plzeň)"
+        ],
+        "_version_": 1508794760216707072,
+        "status": "Active",
+        "dc.identifier": [
+          "uuid:710eff19-496f-49a5-a135-117c0f374c42",
+          "signature:Mpa-0238.205",
+          "sysno:001245430",
+          "001245430",
+          "uuid:710eff19-496f-49a5-a135-117c0f374c42"
+        ],
+        "title_sort": "PRAHA",
+        "datum_begin": 0,
+        "root_title": "Praha",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:710eff19-496f-49a5-a135-117c0f374c42"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 0,
+        "model_path": [
+          "map"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "80-7106-320-7",
+        "datum_str": "2000",
+        "PID": "uuid:d4525c50-034d-11e4-9789-005056827e52",
+        "modified_date": "2014-09-03T10:01:11.71Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:d4525c50-034d-11e4-9789-005056827e52"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 2000,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:d4525c50-034d-11e4-9789-005056827e52",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Ledvinka, Václav",
+          "Pešek, Jiří",
+          "Ledvinka, Václav",
+          "Pešek, Jiří"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2014-09-03T10:01:11.71Z",
+        "dc.creator": [
+          "Ledvinka, Václav",
+          "Pešek, Jiří"
+        ],
+        "_version_": 1509532362883465216,
+        "keywords": [
+          "dějiny",
+          "History"
+        ],
+        "status": "Active",
+        "dc.identifier": [
+          "urnnbn:urn:nbn:cz:nk-001bz7",
+          "URN:ISBN:80-7106-320-7",
+          "uuid:d4525c50-034d-11e4-9789-005056827e52",
+          "oclc:46964650",
+          "barCode:1000566942",
+          "ccnb:cnb000983504",
+          "urn:nbn:cz:nk-001bz7",
+          "1000566942",
+          "d4525c50-034d-11e4-9789-005056827e52",
+          "cnb000983504",
+          "80-7106-320-7",
+          "46964650"
+        ],
+        "title_sort": "PRAHA",
+        "datum_begin": 2000,
+        "root_title": "Praha",
+        "mdt": "94(437.1/.3)",
+        "parent_pid": [
+          "uuid:d4525c50-034d-11e4-9789-005056827e52"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 2000,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "80-86064-69-7",
+        "datum_str": "2005",
+        "PID": "uuid:06e8d830-38d5-11e4-8e0d-005056827e51",
+        "modified_date": "2014-09-28T11:16:50.663Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:06e8d830-38d5-11e4-8e0d-005056827e51"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 2005,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:06e8d830-38d5-11e4-8e0d-005056827e51",
+        "level": 0,
+        "dc.title": "Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Kubíková, Jarmila",
+          "Ložek, Vojen",
+          "Špryňar, Pavel",
+          "Kubíková, Jarmila",
+          "Ložek, Vojen",
+          "Špryňar, Pavel"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2014-09-28T11:16:50.663Z",
+        "dc.creator": [
+          "Kubíková, Jarmila",
+          "Ložek, Vojen",
+          "Špryňar, Pavel"
+        ],
+        "_version_": 1511587688879226880,
+        "keywords": [
+          "chráněná území",
+          "flóra",
+          "fauna",
+          "přírodní poměry"
+        ],
+        "status": "Active",
+        "dc.identifier": [
+          "urnnbn:urn:nbn:cz:mzk-0035y8",
+          "URN:ISBN:80-86064-69-7",
+          "uuid:06e8d830-38d5-11e4-8e0d-005056827e51",
+          "barCode:2610261285",
+          "urn:nbn:cz:mzk-0035y8",
+          "2610261285",
+          "06e8d830-38d5-11e4-8e0d-005056827e51",
+          "80-86064-69-7",
+          "80-86305-00-7"
+        ],
+        "title_sort": "PRAHA",
+        "datum_begin": 2005,
+        "root_title": "Praha",
+        "mdt": "502.21(1-751)",
+        "parent_pid": [
+          "uuid:06e8d830-38d5-11e4-8e0d-005056827e51"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 2005,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1892",
+        "PID": "uuid:69816a30-c382-11e2-8b8b-0800200c9a66",
+        "modified_date": "2013-11-21T09:52:05.401Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:69816a30-c382-11e2-8b8b-0800200c9a66"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:f750b424-bda4-4113-849a-5e9dbbfb5846"
+        ],
+        "datum_end": 1892,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "map"
+        ],
+        "fedora.model": "map",
+        "root_pid": "uuid:69816a30-c382-11e2-8b8b-0800200c9a66",
+        "level": 0,
+        "dc.title": "Praha roku 1200. Praha roku 1348. Praha roku 1419",
+        "ddt": "",
+        "facet_autor": [
+          "Litografický umělecký ústav Farský v Praze",
+          "Litografický umělecký ústav Farský v Praze"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2013-07-10T12:32:20.248Z",
+        "dc.creator": [
+          "Litografický umělecký ústav Farský v Praze"
+        ],
+        "_version_": 1452608675063529472,
+        "status": "Active",
+        "dc.identifier": [
+          "uuid:69816a30-c382-11e2-8b8b-0800200c9a66",
+          "contract:HF000",
+          "69816a30-c382-11e2-8b8b-0800200c9a66",
+          ""
+        ],
+        "title_sort": "PRAHA ROKU 1200  PRAHA ROKU 1348  PRAHA ROKU 1419",
+        "datum_begin": 1892,
+        "root_title": "Praha roku 1200. Praha roku 1348. Praha roku 1419",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:69816a30-c382-11e2-8b8b-0800200c9a66"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 1892,
+        "model_path": [
+          "map"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1943",
+        "PID": "uuid:add03a67-eb7f-4463-8556-58401442d53a",
+        "modified_date": "2013-06-12T08:18:09.389Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:add03a67-eb7f-4463-8556-58401442d53a"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 1943,
+        "datum": "1970-01-01T01:00:00Z",
+        "document_type": [
+          "map"
+        ],
+        "fedora.model": "map",
+        "root_pid": "uuid:add03a67-eb7f-4463-8556-58401442d53a",
+        "level": 0,
+        "dc.title": "Prag und Umgebung (Praha a okolí) [kartografický dokument]",
+        "ddt": "",
+        "facet_autor": [
+          "Protektorát Čechy a Morava.Landesvermessungsamt Böhmen und Mähren",
+          "Protektorát Čechy a Morava.Landesvermessungsamt Böhmen und Mähren"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2013-06-12T08:18:09.389Z",
+        "dc.creator": [
+          "Protektorát Čechy a Morava.Landesvermessungsamt Böhmen und Mähren"
+        ],
+        "_version_": 1450840784388489216,
+        "status": "Active",
+        "title_sort": "PRAG UND UMGEBUNG  PRAHA A OKOLI  KARTOGRAFICKY DOKUMENT",
+        "datum_begin": 1943,
+        "root_title": "Prag und Umgebung (Praha a okolí) [kartografický dokument]",
+        "mdt": "(437.311)",
+        "parent_pid": [
+          "uuid:add03a67-eb7f-4463-8556-58401442d53a"
+        ],
+        "language": [
+          "ger"
+        ],
+        "rok": 1943,
+        "model_path": [
+          "map"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "1912",
+        "PID": "uuid:2da7e3c0-adde-11e4-ab27-0800200c9a66",
+        "modified_date": "2016-05-06T09:00:54.19Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:2da7e3c0-adde-11e4-ab27-0800200c9a66"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:28f02d07-663f-4dee-843b-cbe74978b1e8",
+          "vc:f750b424-bda4-4113-849a-5e9dbbfb5846"
+        ],
+        "datum_end": 1912,
+        "document_type": [
+          "monograph"
+        ],
+        "fedora.model": "monograph",
+        "root_pid": "uuid:2da7e3c0-adde-11e4-ab27-0800200c9a66",
+        "level": 0,
+        "dc.title": "Studijní nadání v království Českém",
+        "ddt": "",
+        "facet_autor": [
+          "Místodržitelství pro Čechy (Praha)",
+          "Místodržitelství pro Čechy (Praha)"
+        ],
+        "rels_ext_index": [
+          0
+        ],
+        "created_date": "2015-02-06T10:38:20.96Z",
+        "dc.creator": [
+          "Místodržitelství pro Čechy (Praha)"
+        ],
+        "_version_": 1533598721259864064,
+        "status": "Active",
+        "dc.identifier": [
+          "uuid:2da7e3c0-adde-11e4-ab27-0800200c9a66",
+          "contract:NTK14",
+          "2da7e3c0-adde-11e4-ab27-0800200c9a66",
+          ""
+        ],
+        "title_sort": "STUDIJNI NADANI V KRALOVSTVI C|ESKEM",
+        "datum_begin": 1912,
+        "root_title": "Studijní nadání v království Českém",
+        "mdt": "37",
+        "parent_pid": [
+          "uuid:2da7e3c0-adde-11e4-ab27-0800200c9a66"
+        ],
+        "rok": 1912,
+        "model_path": [
+          "monograph"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "0862-6545",
+        "datum_str": "14.2.1990",
+        "PID": "uuid:7d964460-3e4d-11e2-8227-5ef3fc9bb22f",
+        "modified_date": "2012-12-05T05:55:25.081Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:36d7c010-21c1-11e2-89b1-005056827e52/uuid:057485e0-24d6-11e2-8579-005056827e52/uuid:7d964460-3e4d-11e2-8227-5ef3fc9bb22f"
+        ],
+        "dostupnost": "private",
+        "collection": [
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea"
+        ],
+        "datum_end": 0,
+        "datum": "1990-02-14T12:00:00Z",
+        "document_type": [
+          "periodicalitem"
+        ],
+        "fedora.model": "periodicalitem",
+        "root_pid": "uuid:36d7c010-21c1-11e2-89b1-005056827e52",
+        "level": 2,
+        "dc.title": "Respekt: (Praha)",
+        "details": [
+          "######1"
+        ],
+        "ddt": "",
+        "rels_ext_index": [
+          6
+        ],
+        "created_date": "2012-12-05T05:55:25.081Z",
+        "_version_": 1456904510360256512,
+        "keywords": [
+          "politika"
+        ],
+        "status": "Active",
+        "title_sort": "RESPEKT   PRAHA ",
+        "datum_begin": 0,
+        "root_title": "Respekt",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:057485e0-24d6-11e2-8579-005056827e52"
+        ],
+        "language": [
+          "cze"
+        ],
+        "rok": 1990,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "9.6.1910",
+        "PID": "uuid:878dfb11-c499-4cf4-9bef-d1e176e75c9a",
+        "modified_date": "2011-08-05T17:04:10.581Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:b23a56ad-435d-11dd-b505-00145e5790ea/uuid:c0308e62-435d-11dd-b505-00145e5790ea/uuid:878dfb11-c499-4cf4-9bef-d1e176e75c9a"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1910-06-09T12:00:00Z",
+        "document_type": [
+          "article"
+        ],
+        "fedora.model": "article",
+        "root_pid": "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6",
+        "level": 3,
+        "dc.title": "Stará Praha",
+        "ddt": "",
+        "facet_autor": [
+          "BORGIS [=Arnošt Heinrich]",
+          "BORGIS [=Arnošt Heinrich]"
+        ],
+        "created_date": "2011-08-05T17:04:10.581Z",
+        "dc.creator": [
+          "BORGIS [=Arnošt Heinrich]"
+        ],
+        "_version_": 1449754178444328960,
+        "keywords": [
+          "I.1.5.9",
+          "Kultura",
+          "Československo",
+          "Kulturní organizace a instituce",
+          "Spolky. Společnosti"
+        ],
+        "status": "Active",
+        "title_sort": "STARA PRAHA",
+        "datum_begin": 0,
+        "root_title": "Lidové noviny",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:c0308e62-435d-11dd-b505-00145e5790ea"
+        ],
+        "language": [
+          "cze",
+          "ces",
+          "cs-CZ"
+        ],
+        "rok": 1910,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem/article"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "30.11.1940",
+        "PID": "uuid:b0e0d964-b0d1-43a8-896b-aa9c684c6927",
+        "modified_date": "2011-08-10T09:03:37.339Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:e62aac60-5323-11dd-9471-000d606f5dc6/uuid:7bbb9250-79d8-11dd-91d8-000d606f5dc6/uuid:b0e0d964-b0d1-43a8-896b-aa9c684c6927"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1940-11-30T12:00:00Z",
+        "document_type": [
+          "article"
+        ],
+        "fedora.model": "article",
+        "root_pid": "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6",
+        "level": 3,
+        "dc.title": "Praha zahájila",
+        "ddt": "",
+        "facet_autor": [
+          "ma",
+          "ma"
+        ],
+        "created_date": "2011-08-10T09:03:37.339Z",
+        "dc.creator": [
+          "ma"
+        ],
+        "_version_": 1449759072426393600,
+        "keywords": [
+          "IV.2.3.2.2",
+          "Umění",
+          "Československo",
+          "Sochařství. Malířství. Grafika",
+          "Výstavy",
+          "Výstavy uměleckých skupin a spolků"
+        ],
+        "status": "Active",
+        "title_sort": "PRAHA ZAHAJILA",
+        "datum_begin": 0,
+        "root_title": "Lidové noviny",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:7bbb9250-79d8-11dd-91d8-000d606f5dc6"
+        ],
+        "language": [
+          "cze",
+          "ces",
+          "cs-CZ"
+        ],
+        "rok": 1940,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem/article"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "9.6.1910",
+        "PID": "uuid:c3b538cd-118f-45d0-96a3-6dc890befe9e",
+        "modified_date": "2011-08-05T17:08:26.338Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:b23a56ad-435d-11dd-b505-00145e5790ea/uuid:c0308e62-435d-11dd-b505-00145e5790ea/uuid:c3b538cd-118f-45d0-96a3-6dc890befe9e"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1910-06-09T12:00:00Z",
+        "document_type": [
+          "article"
+        ],
+        "fedora.model": "article",
+        "root_pid": "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6",
+        "level": 3,
+        "dc.title": "Stará Praha",
+        "ddt": "",
+        "facet_autor": [
+          "BORGIS [=Arnošt Heinrich]",
+          "BORGIS [=Arnošt Heinrich]"
+        ],
+        "created_date": "2011-08-05T17:08:26.338Z",
+        "dc.creator": [
+          "BORGIS [=Arnošt Heinrich]"
+        ],
+        "_version_": 1449754297222823936,
+        "keywords": [
+          "I.1.5.9",
+          "Kultura",
+          "Československo",
+          "Kulturní organizace a instituce",
+          "Spolky. Společnosti"
+        ],
+        "status": "Active",
+        "title_sort": "STARA PRAHA",
+        "datum_begin": 0,
+        "root_title": "Lidové noviny",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:c0308e62-435d-11dd-b505-00145e5790ea"
+        ],
+        "language": [
+          "cze",
+          "ces",
+          "cs-CZ"
+        ],
+        "rok": 1910,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem/article"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "24.4.1906",
+        "PID": "uuid:5c2e2cc4-4e44-4c27-9043-51aeeab619e5",
+        "modified_date": "2011-08-10T09:56:08.232Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:b2354d90-435d-11dd-b505-00145e5790ea/uuid:b7712d28-435d-11dd-b505-00145e5790ea/uuid:5c2e2cc4-4e44-4c27-9043-51aeeab619e5",
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:b2354d90-435d-11dd-b505-00145e5790ea/uuid:b771543a-435d-11dd-b505-00145e5790ea/uuid:5c2e2cc4-4e44-4c27-9043-51aeeab619e5"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1906-04-24T12:00:00Z",
+        "fedora.model": "article",
+        "document_type": [
+          "article"
+        ],
+        "root_pid": "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6",
+        "level": 3,
+        "dc.title": "Praha umělecká",
+        "ddt": "",
+        "created_date": "2011-08-10T09:56:08.232Z",
+        "_version_": 1449760695108239360,
+        "keywords": [
+          "IV.1",
+          "Umění",
+          "Všeobecné otázky"
+        ],
+        "status": "Active",
+        "title_sort": "PRAHA UMELECKA",
+        "datum_begin": 0,
+        "root_title": "Lidové noviny",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:b7712d28-435d-11dd-b505-00145e5790ea",
+          "uuid:b771543a-435d-11dd-b505-00145e5790ea"
+        ],
+        "language": [
+          "cze",
+          "ces",
+          "cs-CZ"
+        ],
+        "rok": 1906,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem/article",
+          "periodical/periodicalvolume/periodicalitem/article"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "11.12.1939",
+        "PID": "uuid:60b9f95f-3bc4-48b9-9dad-4dd6a4c5b415",
+        "modified_date": "2011-08-10T13:11:42.112Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:23e87270-4ebb-11dd-a91e-000d606f5dc6/uuid:80ca1bb0-53e8-11dd-9c09-000d606f5dc6/uuid:60b9f95f-3bc4-48b9-9dad-4dd6a4c5b415"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1939-12-11T12:00:00Z",
+        "fedora.model": "article",
+        "document_type": [
+          "article"
+        ],
+        "root_pid": "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6",
+        "level": 3,
+        "dc.title": "Praha výtvarníkům",
+        "ddt": "",
+        "created_date": "2011-08-10T13:11:42.112Z",
+        "_version_": 1449762537041035264,
+        "keywords": [
+          "IV.2.3.2.2",
+          "Umění",
+          "Československo",
+          "Sochařství. Malířství. Grafika",
+          "Výstavy",
+          "Výstavy uměleckých skupin a spolků"
+        ],
+        "status": "Active",
+        "title_sort": "PRAHA VYTVARNIKUM",
+        "datum_begin": 0,
+        "root_title": "Lidové noviny",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:80ca1bb0-53e8-11dd-9c09-000d606f5dc6"
+        ],
+        "language": [
+          "cze",
+          "ces",
+          "cs-CZ"
+        ],
+        "rok": 1939,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem/article"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "17.8.1924",
+        "PID": "uuid:08a99911-4c15-455a-918b-b7cd1ce400c2",
+        "modified_date": "2011-08-02T15:27:42.929Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:b5c32f80-824e-11dc-b798-000d606f5dc6/uuid:940ca280-86b9-11dc-b613-000d606f5dc6/uuid:08a99911-4c15-455a-918b-b7cd1ce400c2"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1924-08-17T12:00:00Z",
+        "document_type": [
+          "article"
+        ],
+        "fedora.model": "article",
+        "root_pid": "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6",
+        "level": 3,
+        "dc.title": "Italská Praha",
+        "ddt": "",
+        "facet_autor": [
+          "F. E.",
+          "F. E."
+        ],
+        "created_date": "2011-08-02T15:27:42.929Z",
+        "dc.creator": [
+          "F. E."
+        ],
+        "_version_": 1449749570415230976,
+        "keywords": [
+          "Literatura"
+        ],
+        "status": "Active",
+        "title_sort": "ITALSKA PRAHA",
+        "datum_begin": 0,
+        "root_title": "Lidové noviny",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:940ca280-86b9-11dc-b613-000d606f5dc6"
+        ],
+        "language": [
+          "cze",
+          "ces",
+          "cs-CZ"
+        ],
+        "rok": 1924,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem/article"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "8.7.1924",
+        "PID": "uuid:1216914d-62f7-47cf-890a-1101d1b02451",
+        "modified_date": "2011-08-02T15:23:50.471Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:b5c32f80-824e-11dc-b798-000d606f5dc6/uuid:9e8ebe70-8621-11dc-a042-000d606f5dc6/uuid:1216914d-62f7-47cf-890a-1101d1b02451"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1924-07-08T12:00:00Z",
+        "document_type": [
+          "article"
+        ],
+        "fedora.model": "article",
+        "root_pid": "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6",
+        "level": 3,
+        "dc.title": "Praha - Prague",
+        "ddt": "",
+        "facet_autor": [
+          "čch [=Čeněk Chyský]",
+          "čch [=Čeněk Chyský]"
+        ],
+        "created_date": "2011-08-02T15:23:50.471Z",
+        "dc.creator": [
+          "čch [=Čeněk Chyský]"
+        ],
+        "_version_": 1449749433911607296,
+        "keywords": [
+          "Kultura"
+        ],
+        "status": "Active",
+        "title_sort": "PRAHA   PRAGUE",
+        "datum_begin": 0,
+        "root_title": "Lidové noviny",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:9e8ebe70-8621-11dc-a042-000d606f5dc6"
+        ],
+        "language": [
+          "cze",
+          "ces",
+          "cs-CZ"
+        ],
+        "rok": 1924,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem/article"
+        ]
+      },
+      {
+        "virtual": false,
+        "handle": "",
+        "issn": "",
+        "datum_str": "19.7.1922",
+        "PID": "uuid:d02097d6-3a00-4e50-80ae-3e3d175822fd",
+        "modified_date": "2011-08-02T14:18:44.433Z",
+        "pages_count": 0,
+        "pid_path": [
+          "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6/uuid:5116bfb0-7e49-11dc-8610-000d606f5dc6/uuid:4c00c0f0-8337-11dc-bae9-000d606f5dc6/uuid:d02097d6-3a00-4e50-80ae-3e3d175822fd"
+        ],
+        "dostupnost": "public",
+        "collection": [
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091"
+        ],
+        "datum_end": 0,
+        "datum": "1922-07-19T12:00:00Z",
+        "document_type": [
+          "article"
+        ],
+        "fedora.model": "article",
+        "root_pid": "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6",
+        "level": 3,
+        "dc.title": "Nová Praha",
+        "ddt": "",
+        "facet_autor": [
+          "Sordello [=Arne Novák]",
+          "Sordello [=Arne Novák]"
+        ],
+        "created_date": "2011-08-02T14:18:44.433Z",
+        "dc.creator": [
+          "Sordello [=Arne Novák]"
+        ],
+        "_version_": 1449746699537874944,
+        "keywords": [
+          "Literatura"
+        ],
+        "status": "Active",
+        "title_sort": "NOVA PRAHA",
+        "datum_begin": 0,
+        "root_title": "Lidové noviny",
+        "mdt": "",
+        "parent_pid": [
+          "uuid:4c00c0f0-8337-11dc-bae9-000d606f5dc6"
+        ],
+        "language": [
+          "cze",
+          "ces",
+          "cs-CZ"
+        ],
+        "rok": 1922,
+        "model_path": [
+          "periodical/periodicalvolume/periodicalitem/article"
+        ]
+      }
+    ],
+    "numFound": 2259116
+  },
+  "responseHeader": {
+    "status": 0,
+    "QTime": 189,
+    "params": {
+      "facet": "true",
+      "sort": "score desc",
+      "group.ngroups": "true",
+      "hl.mergeContiguous": "true",
+      "qf": "text dc.title^4.0 dc.creator^1.5",
+      "hl.fl": "text_ocr",
+      "json.nl": "arrmap",
+      "group.type": "normal",
+      "wt": [
+        "json",
+        "json"
+      ],
+      "hl": "false",
+      "group.facet": "false",
+      "defType": "edismax",
+      "rows": "30",
+      "group.threshold": "1",
+      "pf": "text^10",
+      "bq": "(level:0)^4.5 dostupnost:\"public\"^1.2",
+      "hl.snippets": "2",
+      "start": "0",
+      "q": "praha",
+      "group.truncate": "true",
+      "group.field": "root_pid",
+      "facet.field": [
+        "model_path",
+        "keywords",
+        "collection",
+        "dostupnost"
+      ],
+      "group": "false"
+    }
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_ranges": {},
+    "facet_dates": {},
+    "facet_fields": {
+      "keywords": [
+        {
+          "politika": 94
+        },
+        {
+          "dějiny": 56
+        },
+        {
+          "Literatura": 30
+        },
+        {
+          "Československo": 27
+        },
+        {
+          "Kultura": 25
+        },
+        {
+          "české výtvarné umění": 24
+        },
+        {
+          "history": 23
+        },
+        {
+          "geologie": 22
+        },
+        {
+          "Umění": 21
+        },
+        {
+          "konference": 20
+        },
+        {
+          "kultura a společnost": 20
+        },
+        {
+          "moderní umění": 19
+        },
+        {
+          "umělecké sbírky": 18
+        },
+        {
+          "History": 16
+        },
+        {
+          "architektonické památky": 14
+        },
+        {
+          "Czech art": 13
+        },
+        {
+          "sborníky": 13
+        },
+        {
+          "české malířství": 13
+        },
+        {
+          "culture and society": 12
+        },
+        {
+          "modern art": 12
+        },
+        {
+          "památková péče": 12
+        },
+        {
+          "art collections": 11
+        },
+        {
+          "umělecké náměty": 11
+        },
+        {
+          "společnost a politika": 9
+        },
+        {
+          "vlastivěda": 9
+        },
+        {
+          "Praha (Česko)": 8
+        },
+        {
+          "druhá světová válka (1939-1945)": 8
+        },
+        {
+          "geologické poměry": 8
+        },
+        {
+          "history and geography": 8
+        },
+        {
+          "moderní architektura": 8
+        },
+        {
+          "česká literatura": 8
+        },
+        {
+          "Sochařství. Malířství. Grafika": 7
+        },
+        {
+          "architektura": 7
+        },
+        {
+          "autobusová doprava": 7
+        },
+        {
+          "osobní železniční doprava": 7
+        },
+        {
+          "silur": 7
+        },
+        {
+          "society and politics": 7
+        },
+        {
+          "European Union Council presidency": 6
+        },
+        {
+          "Exhibitions": 6
+        },
+        {
+          "Pražské jaro, 1968": 6
+        },
+        {
+          "archeologické výzkumy": 6
+        },
+        {
+          "fosilní živočichové": 6
+        },
+        {
+          "kulturní vztahy": 6
+        },
+        {
+          "pragensia": 6
+        },
+        {
+          "předsednictví v Radě Evropské unie": 6
+        },
+        {
+          "reálie": 6
+        },
+        {
+          "studium a výuka": 6
+        },
+        {
+          "zahraniční vztahy": 6
+        },
+        {
+          "zemědělství": 6
+        },
+        {
+          "Češi": 6
+        },
+        {
+          "česká architektura": 6
+        },
+        {
+          "čeští spisovatelé": 6
+        },
+        {
+          "Congresses": 5
+        },
+        {
+          "Czech painting": 5
+        },
+        {
+          "Kulturní organizace a instituce": 5
+        },
+        {
+          "Sources": 5
+        },
+        {
+          "Srpen, 1968": 5
+        },
+        {
+          "Teorie a dějiny literatury. Literární kritika": 5
+        },
+        {
+          "World War, 1939-1945": 5
+        },
+        {
+          "architectural monuments": 5
+        },
+        {
+          "architekti": 5
+        },
+        {
+          "doprava": 5
+        },
+        {
+          "druhá světová válka, 1939-1945": 5
+        },
+        {
+          "emigrace a imigrace": 5
+        },
+        {
+          "evropská integrace": 5
+        },
+        {
+          "evropské výtvarné umění": 5
+        },
+        {
+          "filozofové": 5
+        },
+        {
+          "financial crises": 5
+        },
+        {
+          "finanční krize": 5
+        },
+        {
+          "foreign relations": 5
+        },
+        {
+          "instituce a organizace": 5
+        },
+        {
+          "institutions and organizations": 5
+        },
+        {
+          "international congresses": 5
+        },
+        {
+          "každodenní život": 5
+        },
+        {
+          "lidé": 5
+        },
+        {
+          "literárněvědné rozbory": 5
+        },
+        {
+          "mezinárodní kongresy": 5
+        },
+        {
+          "středověk": 5
+        },
+        {
+          "umělecké památky": 5
+        },
+        {
+          "vědecké ústavy": 5
+        },
+        {
+          "Česko": 5
+        },
+        {
+          "Česká a slovenská literatura": 5
+        },
+        {
+          "šlechta": 5
+        },
+        {
+          "Art, Czech": 4
+        },
+        {
+          "European art": 4
+        },
+        {
+          "Hudba": 4
+        },
+        {
+          "Nobility": 4
+        },
+        {
+          "Ukrajinci": 4
+        },
+        {
+          "Výstavy": 4
+        },
+        {
+          "Všeobecné otázky": 4
+        },
+        {
+          "Všeobecné otázky. Životopisy": 4
+        },
+        {
+          "archeologické nálezy": 4
+        },
+        {
+          "artistic themes": 4
+        },
+        {
+          "automatizace": 4
+        },
+        {
+          "diplomaté": 4
+        },
+        {
+          "emigrace": 4
+        },
+        {
+          "everyday life": 4
+        },
+        {
+          "fotografie": 4
+        },
+        {
+          "francouzské výtvarné umění": 4
+        },
+        {
+          "geotechnika": 4
+        }
+      ],
+      "dostupnost": [
+        {
+          "private": 1870472
+        },
+        {
+          "public": 388644
+        },
+        {
+          "": 0
+        },
+        {
+          ":private\"": 0
+        },
+        {
+          ":public\"": 0
+        },
+        {
+          "cy:private\\\"\"": 0
+        }
+      ],
+      "collection": [
+        {
+          "vc:44679769-b5bb-4ac7-ad27-a0c44698c2ea": 1233106
+        },
+        {
+          "vc:700a6cc7-1e5c-4487-b111-c425cbc51091": 501228
+        },
+        {
+          "vc:d34ba74b-026a-4c60-aee7-9250a307952c": 344839
+        },
+        {
+          "vc:c4bb27af-3a51-4ac2-95c7-fd393b489e26": 275943
+        },
+        {
+          "vc:cd324f70-c034-46f1-9674-e0df4f93de86": 115508
+        },
+        {
+          "vc:122ee9a6-161e-4fa5-9194-dae040ab50c7": 33782
+        },
+        {
+          "vc:9d2195b1-5403-4b3d-ab7c-680ac442bb73": 20265
+        },
+        {
+          "vc:3c06120c-ffc0-4b96-b8df-80bc12e030d9": 18704
+        },
+        {
+          "vc:cf087fd0-ef39-43a4-b3bb-4dc71a171659": 15925
+        },
+        {
+          "vc:f750b424-bda4-4113-849a-5e9dbbfb5846": 15777
+        },
+        {
+          "vc:7252befa-0e8c-4875-af64-882b6ed328ef": 12798
+        },
+        {
+          "vc:76cc95fb-647e-49fa-a724-03885807313a": 12234
+        },
+        {
+          "vc:de968df1-cd9b-48f9-88e4-14bf9e83be79": 11606
+        },
+        {
+          "vc:175f7bc8-e51b-4fb3-b737-cfd7f3f2a43b": 9622
+        },
+        {
+          "vc:c4e22eaa-ad1a-4447-ab6d-b2a42f2a5e12": 9313
+        },
+        {
+          "vc:58e97a92-bfa9-4c6f-9636-0d5f1a36bd2b": 8856
+        },
+        {
+          "vc:f2e2dd68-4b1b-46eb-a36b-6052fc965823": 7967
+        },
+        {
+          "vc:2c19dcca-c3ad-4f68-ac30-3fb19baa1397": 7677
+        },
+        {
+          "vc:26e7764d-a52f-42f4-b881-f4550de3fafa": 7529
+        },
+        {
+          "vc:1359d571-c0a4-4180-bf0a-0d9335f6f2ac": 7486
+        },
+        {
+          "vc:1c6028cd-4da7-4bdc-9893-947191049a51": 6742
+        },
+        {
+          "vc:78d2af96-97ab-4e88-a7cf-dd48719add7d": 6407
+        },
+        {
+          "vc:f0be430c-5c88-40ea-b02f-01dfc8feb203": 6206
+        },
+        {
+          "vc:8b3d665e-374a-40c0-abad-7759146c0ebd": 6072
+        },
+        {
+          "vc:756500c4-5f16-4b23-878f-2ce378a18b64": 5707
+        },
+        {
+          "vc:9784fefa-4ba8-4d6d-a4fc-85174d12aa23": 5626
+        },
+        {
+          "vc:527a4eb4-8433-49e4-882b-36f94dd742f7": 5484
+        },
+        {
+          "vc:229dbecf-5fc4-4e82-be26-ce9fd91372e2": 5090
+        },
+        {
+          "vc:b85f4013-f1a8-4a6c-80cf-6758e34779a9": 4878
+        },
+        {
+          "vc:c8dad047-349e-4628-97bd-c2b85a6a9aef": 4615
+        },
+        {
+          "vc:afd00eb7-3c9d-4ce2-b44c-73a2520a954b": 4275
+        },
+        {
+          "vc:54940333-8f1d-4d24-ba3b-ac042a38a949": 4259
+        },
+        {
+          "vc:a09e2ba2-a241-4918-8eb6-f811d7b5ee2d": 4041
+        },
+        {
+          "vc:9afa3c33-4f79-4488-85a9-3540acafa80e": 4024
+        },
+        {
+          "vc:9061dcab-ae82-406d-99e7-5f860bd52ae1": 3889
+        },
+        {
+          "vc:a3097067-7f4f-4772-af44-d03cb37aa964": 3704
+        },
+        {
+          "vc:9155dacf-d59e-4b85-b7be-3ef2e84f02ff": 3671
+        },
+        {
+          "vc:6a2c138e-0978-4a4c-b942-b95cb8c11845": 2998
+        },
+        {
+          "vc:40995932-98ff-41ca-a74f-c0637fa99f2f": 2777
+        },
+        {
+          "vc:2ed6a42a-f5ff-4c9f-9658-d995f0491385": 2359
+        },
+        {
+          "vc:87a3f499-ab0e-4433-9681-36d06b0a3fce": 2136
+        },
+        {
+          "vc:6355350b-cd77-4015-8cbb-0b155285329e": 2129
+        },
+        {
+          "vc:17527f27-2f76-41fa-b988-bc7e6aaf548a": 2108
+        },
+        {
+          "vc:30d8c0e8-4e26-4453-83c7-d38a4e178805": 2088
+        },
+        {
+          "vc:0f9eb2b9-af84-4850-889c-d32e4f21ba74": 1908
+        },
+        {
+          "vc:af600083-1509-4fd5-9a87-1638417d4aae": 1896
+        },
+        {
+          "vc:10549b12-9ab1-4bec-80da-c691f622e785": 1792
+        },
+        {
+          "vc:95ded08d-cec6-45e7-90bc-9465bf91748d": 1626
+        },
+        {
+          "vc:2947a0ac-143b-4ede-adb4-f4a496685ebf": 1521
+        },
+        {
+          "vc:4b282a9d-b43f-43d4-bc28-d1e33ece8cfd": 1495
+        },
+        {
+          "vc:24b0246f-31c7-41da-b5f3-798f79453b80": 1473
+        },
+        {
+          "vc:ee09ad54-57af-48cc-8924-268ce0d190a9": 1335
+        },
+        {
+          "vc:08fcab0a-de0d-4190-88f0-8745207bec19": 1177
+        },
+        {
+          "vc:bea5cfe5-e0f5-4b94-a66b-e77ba218c1ac": 1095
+        },
+        {
+          "vc:82d154ad-f5de-4592-b257-91d753ab0f8c": 1080
+        },
+        {
+          "vc:2845e417-c689-4e32-8620-a623e9023dbc": 912
+        },
+        {
+          "vc:014d745e-53a7-4914-a463-2d27a8a9d7fe": 834
+        },
+        {
+          "vc:0c782839-e182-4136-bd02-330081a5ad3f": 741
+        },
+        {
+          "vc:3ebba789-eec4-4055-91c8-262c8d3da7a8": 716
+        },
+        {
+          "vc:d80a7cf0-fa2e-4414-967a-2fccc943a00b": 687
+        },
+        {
+          "vc:809d92e6-abd0-4642-ba73-f1f259275d96": 653
+        },
+        {
+          "vc:f7e5e7d9-2cfb-4254-b07f-2d9784076529": 473
+        },
+        {
+          "vc:ee921c09-798e-4796-ad4c-ac78eb1d0827": 349
+        },
+        {
+          "vc:19100de5-a1b2-4b02-9f50-246e1c2f1517": 307
+        },
+        {
+          "vc:ef1769f6-c97c-4c24-a547-b4b2055148e4": 296
+        },
+        {
+          "vc:c11ab346-5e00-4909-8d40-710ec8931d81": 268
+        },
+        {
+          "vc:fac67a92-58d8-4f5d-8cce-435a52af9a5d": 268
+        },
+        {
+          "vc:50ad8d2a-3ae8-42a3-b36a-ff1655887016": 207
+        },
+        {
+          "vc:ccce32ea-b64b-4b74-b377-4ad52e4f1ae8": 195
+        },
+        {
+          "vc:1161ea73-6b7e-4d57-a943-338eef284b77": 174
+        },
+        {
+          "vc:2fb0fcd1-e175-4bfd-b754-6871784d05a4": 172
+        },
+        {
+          "vc:650e4d81-b7ab-49d3-ab83-d5bc53406875": 168
+        },
+        {
+          "vc:2bb8664e-a51d-4420-a8c0-2604d99d34eb": 126
+        },
+        {
+          "vc:8f9c8894-cb42-43b5-a584-0871a2f24d62": 100
+        },
+        {
+          "vc:28f02d07-663f-4dee-843b-cbe74978b1e8": 87
+        },
+        {
+          "vc:9b3e8e07-24fd-4551-b2f4-d49f482bbd91": 87
+        },
+        {
+          "vc:38b7c1c3-7744-4106-8225-7959a307fa6d": 74
+        },
+        {
+          "vc:09b6905c-30c7-4de6-9839-cc83d39d5db3": 69
+        },
+        {
+          "vc:1d7ed04a-17f9-400a-81af-b85f13030fe5": 56
+        },
+        {
+          "vc:06621f8d-ea2e-42f4-a383-28af7fce5f1f": 50
+        },
+        {
+          "vc:063d0f62-df34-4197-b713-fc81f5ad78f0": 43
+        },
+        {
+          "vc:1637dfa4-549c-4216-900e-284bcd518587": 37
+        },
+        {
+          "vc:bbc9ad82-76fd-425a-b22a-8837558cb42d": 28
+        },
+        {
+          "vc:8777ba74-9cef-49b2-a1ed-0f5ebf9f109f": 22
+        },
+        {
+          "vc:0721b29c-f3ad-4287-8bd2-909959043eb4": 18
+        },
+        {
+          "vc:0b71e330-6801-4d67-8879-3b9e6b7ca51c": 2
+        },
+        {
+          "vc:452d77e3-22e7-49de-8dbe-7e431af6cb91": 2
+        },
+        {
+          "": 0
+        },
+        {
+          "ntkm:1": 0
+        },
+        {
+          "vc:05354eba-631d-43d8-bc65-99cef837cf25": 0
+        },
+        {
+          "vc:05fe1cb5-1055-41da-9c82-1c60507e403b": 0
+        },
+        {
+          "vc:09634936-ea35-4f39-9bbb-bb92453948ac": 0
+        },
+        {
+          "vc:0fb4be77-d43c-47b9-a55b-eb4cf31888dd": 0
+        },
+        {
+          "vc:1d03a81c-bd49-43a0-a02d-a17e181c38a7": 0
+        },
+        {
+          "vc:49330998-bef0-41b0-aa74-d39c91ad82df": 0
+        },
+        {
+          "vc:4c96b19f-6822-498e-80cb-753960a3e2a7": 0
+        },
+        {
+          "vc:52e9443b-2510-4ebc-a7a4-8104378e4bae": 0
+        },
+        {
+          "vc:534b8b98-82d8-49c7-a751-33e88aaeeea9": 0
+        },
+        {
+          "vc:57787b51-5824-4a53-b211-0f9bbd4d4ccd": 0
+        },
+        {
+          "vc:7e97b1c9-3dfa-4f0a-9f03-7244356e6da9": 0
+        }
+      ],
+      "model_path": [
+        {
+          "periodical/periodicalvolume/periodicalitem/page": 1362062
+        },
+        {
+          "monograph/page": 815075
+        },
+        {
+          "monograph/monographunit/page": 53810
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/article/page": 23175
+        },
+        {
+          "periodical/periodicalvolume/supplement/page": 12241
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/supplement/page": 5667
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem": 2928
+        },
+        {
+          "periodical/periodicalvolume/page": 2227
+        },
+        {
+          "monograph/monograph/page": 1839
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/internalpart/page": 1212
+        },
+        {
+          "monograph": 992
+        },
+        {
+          "periodicalitem/page": 779
+        },
+        {
+          "periodicalvolume/periodicalitem/page": 670
+        },
+        {
+          "monograph/internalpart/page": 359
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/article": 329
+        },
+        {
+          "map": 236
+        },
+        {
+          "article/page": 147
+        },
+        {
+          "periodical/periodicalvolume/periodicalvolume/periodicalitem/page": 99
+        },
+        {
+          "periodical/periodicalvolume/supplement/supplement/page": 41
+        },
+        {
+          "periodical": 36
+        },
+        {
+          "monograph/monographunit/internalpart/page": 35
+        },
+        {
+          "monograph/monographunit": 27
+        },
+        {
+          "page": 25
+        },
+        {
+          "periodical/periodicalvolume/supplement/article/page": 21
+        },
+        {
+          "supplement/page": 9
+        },
+        {
+          "monograph/supplement/page": 4
+        },
+        {
+          "internalpart/page": 3
+        },
+        {
+          "periodical/periodicalvolume/article": 3
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/internalpart": 3
+        },
+        {
+          "soundrecording": 3
+        },
+        {
+          "soundrecording/soundunit/track": 3
+        },
+        {
+          "monograph/internalpart": 2
+        },
+        {
+          "periodical/periodicalvolume/supplement": 2
+        },
+        {
+          "soundrecording/soundunit": 2
+        },
+        {
+          "periodical/periodicalvolume": 1
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/page/page": 1
+        },
+        {
+          "archive": 0
+        },
+        {
+          "archive/page": 0
+        },
+        {
+          "article": 0
+        },
+        {
+          "graphic": 0
+        },
+        {
+          "graphic/page": 0
+        },
+        {
+          "manuscript": 0
+        },
+        {
+          "manuscript/internalpart": 0
+        },
+        {
+          "manuscript/internalpart/page": 0
+        },
+        {
+          "manuscript/page": 0
+        },
+        {
+          "map/monographunit": 0
+        },
+        {
+          "map/monographunit/page": 0
+        },
+        {
+          "map/page": 0
+        },
+        {
+          "monograph/article": 0
+        },
+        {
+          "monograph/article/page": 0
+        },
+        {
+          "monograph/monograph": 0
+        },
+        {
+          "monograph/monographunit/internalpart": 0
+        },
+        {
+          "monograph/monographunit/supplement": 0
+        },
+        {
+          "monograph/monographunit/supplement/page": 0
+        },
+        {
+          "monograph/picture": 0
+        },
+        {
+          "monograph/supplement": 0
+        },
+        {
+          "monographunit": 0
+        },
+        {
+          "periodical/page": 0
+        },
+        {
+          "periodical/periodicalvolume/article/page": 0
+        },
+        {
+          "periodical/periodicalvolume/internalpart": 0
+        },
+        {
+          "periodical/periodicalvolume/internalpart/page": 0
+        },
+        {
+          "periodical/periodicalvolume/page/page": 0
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/page/periodicalvolume": 0
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/page/periodicalvolume/page": 0
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/periodical": 0
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/periodical/periodicalvolume": 0
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/periodical/periodicalvolume/page": 0
+        },
+        {
+          "periodical/periodicalvolume/periodicalitem/supplement": 0
+        },
+        {
+          "periodical/periodicalvolume/periodicalvolume": 0
+        },
+        {
+          "periodical/periodicalvolume/periodicalvolume/periodicalitem": 0
+        },
+        {
+          "periodical/periodicalvolume/supplement/article": 0
+        },
+        {
+          "periodical/periodicalvolume/supplement/supplement": 0
+        },
+        {
+          "periodical/supplement": 0
+        },
+        {
+          "periodical/supplement/page": 0
+        },
+        {
+          "periodicalitem": 0
+        },
+        {
+          "periodicalvolume": 0
+        },
+        {
+          "periodicalvolume/page": 0
+        },
+        {
+          "periodicalvolume/periodical": 0
+        },
+        {
+          "periodicalvolume/periodical/periodicalvolume": 0
+        },
+        {
+          "periodicalvolume/periodicalitem": 0
+        },
+        {
+          "periodicalvolume/supplement": 0
+        },
+        {
+          "periodicalvolume/supplement/page": 0
+        },
+        {
+          "sheetmusic": 0
+        },
+        {
+          "sheetmusic/page": 0
+        },
+        {
+          "soundrecording/page": 0
+        },
+        {
+          "soundrecording/track": 0
+        },
+        {
+          "supplement": 0
+        }
+      ]
+    }
+  }
+}

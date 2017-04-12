@@ -1,0 +1,31 @@
+{
+  "/api/**": {
+    "target": "http://kramerius.lib.cas.cz/search/api/v5.0",
+    "ignorePath": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  },
+  "/img": {
+    "target": "https://kramerius.lib.cas.cz/search/img",
+    "target1": "http://cdk.lib.cas.cz/search/api/v5.0",
+    "target2": "http://kramerius.lib.cas.cz/search/api/v5.0",
+    "pathRewrite": {
+      "^/img":""
+    },
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "secure": false
+  },
+  "/texts": {
+    "target": "http://localhost:8084/searchapp/texts",
+    "pathRewrite": {
+      "^/texts":""
+    },
+    "changeOrigin": true,
+    "secure": false
+  }
+}

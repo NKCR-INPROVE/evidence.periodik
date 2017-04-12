@@ -1,10 +1,30 @@
 {
   "q.placeholder": "Search digital library ...",
-  "Aktuální číslo": "Actal number",
+  "Aktuální číslo": "Actual number",
   "O časopisu": "About journal",
-  "Pokyny pro autory": "Rules for authors",
+  "Pro autory": "For authors",
   "Archiv": "Archive",
   "Kontakt": "Contact",
   "Eshop": "Eshop",
+  "menu":{
+    "o-casopisu":{
+      "redakce": "Editor",
+      "open-access": "Open Access",
+      "zapojeni": "Join database",
+      "historie": "History",
+      "distribuce": "Distribution",
+      "fotogslerie": "Foto galery",
+      "oznameni-sefredaktora": "Main editor's notes",
+      "pripravujeme": "We are preparing..."
+    },
+    "pro-autory":{
+      "recenzni-rizeni":"Review procedure",
+      "citacni-pravidla":"Citation rules",
+      "publikacni-etika":"Publication ethics",
+      "recenzenti":"Reviewers",
+      "odkazy":"Links",
+      "caste-dotazy":"FAQ"
+    }
+  },
   "dummy": ""
 }

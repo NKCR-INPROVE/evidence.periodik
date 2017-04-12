@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./o-casopisu.component.scss']
 })
 export class OCasopisuComponent implements OnInit {
+  
+  public text: string;
 
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }
+

@@ -1,0 +1,5 @@
+{
+	"k5.host": "http://localhost/search",
+	"api.point": "http://localhost/search/api/v5.0/",
+	"handlers" : ["select", "full"]
+}

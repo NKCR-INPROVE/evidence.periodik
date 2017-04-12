@@ -1,12 +1,22 @@
  <!-- Main -->
-  <main class="app-page-home">
     <!-- Jumbotron -->
     <section class="app-jumbotron">
       <div class="jumbotron app-clean-pd app-brand lighten-4">
         <div class="container">
           <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3">
-              <h2>Rok 2016, ročník 4, číslo 1</h2>
+              <h2 *ngIf="details">
+                <span *ngIf="details.year">{{'Rok' | translate}} {{details.year}}</span>
+                <span *ngIf="details.volumeNumber">, {{'ročník' | translate}} {{details.volumeNumber}}</span>
+                <span *ngIf="details.issueNumber">, {{'číslo' | translate}} {{details.issueNumber}}</span>
+                
+                
+                <span *ngIf="details.date">{{'Datum' | translate}} {{details.date}}</span>
+                <span *ngIf="details.issueNumber">, {{'číslo' | translate}} {{details.issueNumber}}</span>
+                <span *ngIf="details.partNumber">, {{'číslo' | translate}} {{details.partNumber}}</span>
+                
+                
+              </h2>
               <button class="btn app-btn app-btn-default app-btn-inverse app-ico-21-17">
                 <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.09 16.87" class="app-ico">
                     <title>prohlizet</title>
@@ -28,7 +38,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-4 col-md-3 app-col-left">
             <p>
-              <img src="assets/img/thumb.png" alt="" />
+              <img [src]="img" alt="" />
             </p>
             <h4 class="app-font-roboto-cb">Starší čísla:</h4>
             <p class="app-font-roboto-cr">
@@ -91,6 +101,5 @@
           </div><!--/.col -->
         </div><!--./row -->
       </div><!--/.container -->
-    </section><!--/.section -->
-  </main><!--/.main -->
+    </section><!--/.section --><!--/.main -->
   

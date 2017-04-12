@@ -4,10 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { RouterModule }   from '@angular/router';
 
+import {Store, StoreModule} from "@ngrx/store";
+import {SearchReducer} from "./reducers/search.reducer";
+
 import { BsDropdownModule } from 'ng2-bootstrap';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppState } from './app.state';
 import { AppService } from './services/app.service';
@@ -21,6 +24,11 @@ import { PokynyComponent } from './components/pokyny/pokyny.component';
 import { ArchivComponent } from './components/archiv/archiv.component';
 import { SearchComponent } from './components/search/search.component';
 import { HomeComponent } from './components/home/home.component';
+import { FreeTextComponent } from './components/free-text/free-text.component';
+
+
+
+//const storeManager = StoreModule.provideStore({ currentSearch: SearchReducer });
 
 export function HttpLoaderFactory(http: Http) {
     return new TranslateHttpLoader(http);
@@ -36,18 +44,32 @@ export function HttpLoaderFactory(http: Http) {
     PokynyComponent,
     ArchivComponent,
     SearchComponent,
-    HomeComponent
+    HomeComponent,
+    FreeTextComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     JsonpModule,
+    //StoreModule, storeManager,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'archiv', component: ArchivComponent },
-      { path: 'pokyny-pro-autory', component: PokynyComponent },
-      { path: 'o-casopisu', component: OCasopisuComponent },
+      { path: 'pro-autory', component: PokynyComponent ,
+      children:[
+        { path: '', component: FreeTextComponent},
+        { path: '**', component: FreeTextComponent}
+        
+      ]},
+      { path: 'o-casopisu', component: OCasopisuComponent,
+      children:[
+        { path: '', component: FreeTextComponent},
+        { path: '**', component: FreeTextComponent}
+        
+      ]},
+      { path: 'kontakt', component: FreeTextComponent },
+      { path: 'e-shop', component: FreeTextComponent },
       { path: 'search', component: SearchComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]),
@@ -65,3 +87,4 @@ export function HttpLoaderFactory(http: Http) {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

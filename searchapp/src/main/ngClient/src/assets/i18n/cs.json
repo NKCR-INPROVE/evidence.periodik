@@ -2,9 +2,30 @@
   "q.placeholder": "Hledej v digitální knihovně ...",
   "Aktuální číslo": "Aktuální číslo",
   "O časopisu": "O časopisu",
-  "Pokyny pro autory": "Pokyny pro autory",
+  "Pro autory": "Pro autory",
   "Archiv": "Archiv",
   "Kontakt": "Kontakt",
   "Eshop": "Eshop",
+  "menu":{
+    "o-casopisu":{
+      "redakce": "Redakce",
+      "open-access": "Open Access",
+      "zapojeni": "Zapojení do databází",
+      "historie": "Historie",
+      "distribuce": "Distribuce",
+      "fotogslerie": "Fotogalerie",
+      "oznameni-sefredaktora": "Oznámení šéfredaktora",
+      "pripravujeme": "Připravujeme"
+    },
+
+    "pro-autory":{
+      "recenzni-rizeni":"Recenzní řízení",
+      "citacni-pravidla":"Citační pravidla",
+      "publikacni-etika":"Publikační etika",
+      "recenzenti":"Recenzenti",
+      "odkazy":"Odkazy",
+      "caste-dotazy":"Časté dotazy"
+    }
+  },
   "dummy": ""
 }

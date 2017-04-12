@@ -1,11 +1,10 @@
 <!-- Header -->
-  <header>
     <div class="app-title">
       <div class="container">
         <div class="row">
           <div class="col-xs-9 col-sm-10">
-            <h1 class="app-clean-mg hidden-xs"><a href="./" title="Časopis knihy a dějiny">ČASOPIS <span class="app-font-roboto-cb">KNIHY A DĚJINY</span></a></h1>
-            <a href="./" title="Časopis knihy a dějiny" class="visible-xs"><img src="assets/img/logo-brand.png" alt="Časopis knihy a dějiny" class="img-responsive" /></a>
+            <h1 class="app-clean-mg hidden-xs"><a routerLink="home" title="Časopis knihy a dějiny">ČASOPIS <span class="app-font-roboto-cb">KNIHY A DĚJINY</span></a></h1>
+            <a routerLink="home" title="Časopis knihy a dějiny" class="visible-xs"><img src="assets/img/logo-brand.png" alt="Časopis knihy a dějiny" class="img-responsive" /></a>
           </div>
           <div class="col-xs-3 col-sm-2 text-right">
             <a *ngIf="currentLang==='cs'" (click)="changeLang('en')" title="English" class="app-btn">English</a>
@@ -29,17 +28,23 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li routerLink="home" routerLinkActive="active"><a routerLink="home" title="Aktuální číslo">{{'Aktuální číslo' | translate}}</a></li>
-            <li routerLink="o-casopisu" routerLinkActive="active"><a routerLink="o-casopisu" title="O časopisu">{{'O časopisu' | translate}}</a></li>
-            <li routerLink="pokyny-pro-autory" routerLinkActive="active"><a routerLink="pokyny-pro-autory" title="Pokyny pro autory">{{'Pokyny pro autory' | translate}}</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <li routerLinkActive="active" class="dropdown">
+              <a href="#" title="O časopisu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span routerLink="o-casopisu">{{'O časopisu' | translate}}</span> <span class="caret"></span></a>
               <ul class="dropdown-menu app-clean-border">
-                <li><a href="#">První položka submenu</a></li>
-                <li><a href="#">Název druhé položky submenu</a></li>
-                <li><a href="#">Tady je třetí položka</a></li>
-                <li><a href="#">Čtvrté položka</a></li>
+                <li *ngFor="let m of menu['o-casopisu']" ><a *ngIf="m.visible" [routerLink]="['o-casopisu', m.route]">{{'menu.o-casopisu.'+m.route | translate}}</a></li>
+
               </ul>
             </li>
+            <li routerLinkActive="active" class="dropdown">
+              <a href="#" title="Pro autory" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span routerLink="pro-autory">{{'Pro autory' | translate}}</span> <span class="caret"></span></a>
+              <ul class="dropdown-menu app-clean-border">
+                <li *ngFor="let m of menu['pro-autory']" ><a *ngIf="m.visible" [routerLink]="['pro-autory', m.route]">{{'menu.pro-autory.'+m.route | translate}}</a></li>
+
+              </ul>
+            </li>
+            
             <li routerLink="archiv" routerLinkActive="active"><a routerLink="archiv" title="Archiv">{{'Archiv' | translate}}</a></li>
             <li routerLink="kontakt" routerLinkActive="active"><a routerLink="kontakt" title="">{{'Kontakt' | translate}}</a></li>
             <li routerLink="e-shop" routerLinkActive="active"><a routerLink="e-shop" title="">{{'Eshop' | translate}}</a></li>
@@ -69,4 +74,4 @@
         </ol><!--/.breadcrumb -->
       </div><!--/.container -->
     </div><!--/.app breadcumb -->
-  </header><!--/.header -->
+    <!--/.header -->

@@ -21,6 +21,12 @@ export class AppComponent implements OnInit {
   pathObserver: Subscription;
   paramsObserver: Subscription;
   
+  classes = {
+    'home': 'app-page-home',
+    'o-casopisu': 'app-page-ocasopisu',
+    'pro-autory': 'app-page-pokyny-pro-autory',
+  };
+  mainClass: string = this.classes['home'];
   
   constructor(
     private state: AppState,
@@ -50,7 +56,7 @@ export class AppComponent implements OnInit {
     return this.http.get("assets/config.json").map(res => {
       let cfg = res.json();
       
-      this.state.config = cfg;
+      this.state.setConfig(cfg);
       this.state.rows = cfg['searchParams']['rows'];
       this.state.sorts = cfg['sorts'];
       this.state.currentSort = cfg[0];
@@ -60,13 +66,20 @@ export class AppComponent implements OnInit {
         userLang = cfg['defaultLang'];
       }
       this.appservice.changeLang(userLang);
+      
+      this.appservice.actualNumber.subscribe((a) => {
+        if (a.pid){
+          this.state.setActual(a);
+        }
+      });
+      this.appservice.getActual();
         
       //this._configSubject.next(cfg);
       //this.processUrl();
+      this.state.stateChanged();
       return this.state.config;
     });
   }
-
   
   
   startProgress() {
@@ -81,23 +94,30 @@ export class AppComponent implements OnInit {
   
   
   processUrl() {
-    console.log('processUrl');
+    //this.searchService.getActual();
+    this.setMainClass(this.router.url);
     this.pathObserver = this.router.events.subscribe(val => {
       console.log('pathObserver', val);
       if (val instanceof NavigationEnd) {
         this.state.paramsChanged();
+        this.setMainClass(val.url);
       } else if (val instanceof NavigationStart ){
         this.state.clear();
       }
     });
+    
     this.paramsObserver = this.route.queryParams.subscribe(searchParams => {
+      
       this.processUrlParams(searchParams);
     });
     
     this.state.paramsChanged();
   }
   
-  
+  setMainClass(url: string){
+    let p = url.split('/');
+    this.mainClass = this.classes[p[1]];
+  }
 
   processUrlParams(searchParams) {
     for (let p in searchParams) {
@@ -105,8 +125,6 @@ export class AppComponent implements OnInit {
     }
   }
 
-  
-  
   //Called when changing state
   stateChanged(route: string) {
     this.setUrl(route);

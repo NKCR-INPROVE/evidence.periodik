@@ -25,6 +25,8 @@ import { ArchivComponent } from './components/archiv/archiv.component';
 import { SearchComponent } from './components/search/search.component';
 import { HomeComponent } from './components/home/home.component';
 import { FreeTextComponent } from './components/free-text/free-text.component';
+import { JournalDetailsComponent } from './components/journal-details/journal-details.component';
+import { ArticleResultComponent } from './components/article-result/article-result.component';
 
 
 
@@ -45,7 +47,9 @@ export function HttpLoaderFactory(http: Http) {
     ArchivComponent,
     SearchComponent,
     HomeComponent,
-    FreeTextComponent
+    FreeTextComponent,
+    JournalDetailsComponent,
+    ArticleResultComponent
   ],
   imports: [
     BrowserModule,

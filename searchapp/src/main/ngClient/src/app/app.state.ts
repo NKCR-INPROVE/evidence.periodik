@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import {ActualNumber} from './models/actual-number.model';
+import {Journal} from './models/journal.model';
   
 @Injectable()
 export class AppState {
@@ -34,7 +34,7 @@ export class AppState {
   public docs;
   
   //Aktualni cislo
-  public actualNumber : ActualNumber;
+  public actualNumber : Journal;
   public imgSrc: string;
   
   setConfig(cfg){
@@ -57,7 +57,7 @@ export class AppState {
     this.docs = [];
   }
   
-  setActual(a: ActualNumber){
+  setActual(a: Journal){
     this.actualNumber = a;
     this.imgSrc = '/img?uuid=' + this.actualNumber.pid + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
     this.stateChanged();

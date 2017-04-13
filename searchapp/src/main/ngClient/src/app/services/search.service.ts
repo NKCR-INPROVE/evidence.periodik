@@ -10,7 +10,7 @@ import { AppState } from '../app.state';
 
 import {SearchResult} from '../models/search-result.model';
 import {CurrentSearch} from '../models/current-search.model';
-import {ActualNumber} from '../models/actual-number.model';
+import {Journal} from '../models/journal.model';
 
 
 @Injectable()
@@ -18,8 +18,8 @@ export class SearchService {
 
 
   searchResults: BehaviorSubject<SearchResult[]> = new BehaviorSubject<SearchResult[]>([]);
-  actualNumber: BehaviorSubject<ActualNumber> = new BehaviorSubject<ActualNumber>({
-    pid: null, title:null, root_pid:null, root_title:null, model:null, details:null
+  actualNumber: BehaviorSubject<Journal> = new BehaviorSubject<Journal>({
+    pid: null, title:null, root_pid:null, root_title:null, model:null, details:null, siblings: null, mods: null
     });
     
   constructor(

@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable } from "rxjs";
-import { Store } from "@ngrx/store";
-
 import { AppService } from '../../services/app.service';
-import { SearchService } from '../../services/search.service';
+
+import { Journal } from '../../models/journal.model';
+
 import { AppState } from '../../app.state';
-import { ActualNumber } from '../../models/actual-number.model';
 
 @Component({
   selector: 'app-home',
@@ -14,22 +12,17 @@ import { ActualNumber } from '../../models/actual-number.model';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  //private state: ActualNumber;
-  //actualNumber: Observable<ActualNumber>;
-  
   
   img: string = '';
-  details;
+  actual: Journal;
+  articles: any[] = [];
 
   constructor(
-    //private store: Store<ActualNumber>,
-    private state: AppState,
-    private appService: AppService,
-    private searchService: SearchService
+    private service: AppService,
+    private state: AppState
   ) {
 
-    //this.actualNumber = this.store.select<ActualNumber>('actual');
+    //this.actualNumber = this.store.select<Journal>('actual');
   }
 
   ngOnInit() {
@@ -40,18 +33,15 @@ export class HomeComponent implements OnInit {
         this.setData();
       }
     );
-    //this.searchService.actualNumber.subscribe((a: ActualNumber) => this.actualNumber = a);
-    
-    //    this.actualNumber.subscribe((state: ActualNumber) => {
-    //      this.state = state;
-    //      this.searchService.getActual();
-    //    });
   }
 
   setData() {
     if (this.state.actualNumber) {
-      this.details = this.state.actualNumber.details;
+      this.actual = this.state.actualNumber;
       this.img = this.state.imgSrc;
+      this.service.getArticles(this.actual.pid).subscribe(res => {
+        this.articles = res;
+      });
       //this.img = 'img/item/' + this.state.actualNumber.pid + '/thumb';
     }
   }

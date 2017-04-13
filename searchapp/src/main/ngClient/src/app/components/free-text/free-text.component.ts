@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AppState } from '../../app.state';
@@ -42,7 +42,9 @@ export class FreeTextComponent implements OnInit, OnDestroy {
     this.routeObserver = this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
         this.id = val.url.substring(1);
-        this.appService.getText(this.id).subscribe(t => this.text = t);
+        if (this.state.currentLang){
+          this.appService.getText(this.id).subscribe(t => this.text = t);
+        }
       }
     });
 
@@ -50,8 +52,8 @@ export class FreeTextComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(){
     this.langObserver.unsubscribe();
-  this.stateObserver.unsubscribe();
-  this.routeObserver.unsubscribe();
+    this.stateObserver.unsubscribe();
+    this.routeObserver.unsubscribe();
   }
 
   setImg() {

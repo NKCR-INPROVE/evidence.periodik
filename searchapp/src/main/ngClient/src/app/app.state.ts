@@ -37,6 +37,8 @@ export class AppState {
   public actualNumber : Journal;
   public imgSrc: string;
   
+  breadcrumbs = [];
+  
   setConfig(cfg){
     this.config = cfg;
   }
@@ -61,5 +63,9 @@ export class AppState {
     this.actualNumber = a;
     this.imgSrc = '/img?uuid=' + this.actualNumber.pid + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
     this.stateChanged();
+  }
+  
+  setBreadcrumbs(){
+    
   }
 }

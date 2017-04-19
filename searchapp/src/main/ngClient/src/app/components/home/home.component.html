@@ -16,7 +16,7 @@
                     <path d="M342.3,398.7h-0.57v9.91a2,2,0,0,1-2,2,8.77,8.77,0,0,0-6,2,19,19,0,0,1,8.37.16,0.79,0.79,0,0,0,1-.77V399.49a0.79,0.79,0,0,0-.79-0.79h0Z" transform="translate(-321 -395.97)"/>
                     <path d="M322.36,408.61V398.7h-0.57a0.79,0.79,0,0,0-.79.79v12.56a0.79,0.79,0,0,0,1,.77,19,19,0,0,1,8.37-.16,8.77,8.77,0,0,0-6-2,2,2,0,0,1-2-2h0Z" transform="translate(-321 -395.97)"/>
                 </svg>
-                PROHLÍŽET CELÉ ČÍSLO
+                {{'PROHLÍŽET CELÉ ČÍSLO' | translate }}
               </button>
             </div><!--/.col -->
           </div><!--/.row -->
@@ -44,37 +44,16 @@
                     <path d="M342.73,411.25l-4.91-13.5-0.27-.75-0.75.27-3,1.09-0.75.27,0.27,0.75,4.91,13.5,0.27,0.75,0.75-.27,3-1.09L343,412Zm-5.87-4.45-2.39-6.56,3-1.09,2.39,6.56Zm3.07,3.77a1,1,0,1,1,.6-1.28,1,1,0,0,1-.6,1.28h0Z" transform="translate(-322 -397)"/>
                     <path d="M326,397.67h-4v16h4.79v-16H326Zm-1.6,13.57a1,1,0,1,1,1-1,1,1,0,0,1-1,1h0Zm1.6-4.59H322.8v-7H326v7Z" transform="translate(-322 -397)"/>
                     <path d="M332.18,397.67h-4v16H333v-16h-0.8Zm-1.6,13.57a1,1,0,1,1,1-1,1,1,0,0,1-1,1h0Zm1.6-4.59H329v-7h3.19v7Z" transform="translate(-322 -397)"/>
-                </svg> ARCHIV STARŠÍCH ROČNÍKŮ
+                </svg> {{'ARCHIV STARŠÍCH ROČNÍKŮ' | translate }}
               </button>
             </p>
           </div><!--/.col -->
           <div class="col-xs-12 col-sm-8 col-md-9 app-col-right">
-            <div class="app-section">
-              <h4 class="app-clean-mg">Hlavní články</h4>
+            <div class="app-section" *ngFor="let genre of genres">
+              <h4 class="app-clean-mg">{{'genre.' + genre | translate}}</h4>
               <hr />
-              <div *ngFor="let art of articles">
+              <div *ngFor="let art of genresObject[genre].articles">
                 <app-article-result [article]="art"></app-article-result>
-              </div>
-            </div><!--/.app section -->
-            <div class="app-section">
-              <h4 class="app-clean-mg">Zprávy</h4>
-              <hr />
-              <div>
-                <h3 class="app-brand-text">
-                  Povodně v českých zemích v 16.–18. století ve světle starých tisků.
-                </h3>
-                <div>
-                  Jan Munzar – Stanislav Ondráček – Lubor Kysučan<span class="app-pipe">|</span><!--
-              --><button class="btn app-btn app-btn-ico app-ico-24-25 app-ico-black">
-                    <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.1 11.2">
-                        <title>bryle</title>
-                        <path d="M396,371.22a0.87,0.87,0,0,0-.76-0.84l-0.34,0-4.33-3.19a3.41,3.41,0,0,0-2.92-.55,0.68,0.68,0,0,0,.35,1.32,2.06,2.06,0,0,1,1.76.33l2.6,1.92a13.46,13.46,0,0,0-1.61.12,17.12,17.12,0,0,0-2.4.51l-0.41.08a12.76,12.76,0,0,1-4.85,0l-0.46-.09a17.43,17.43,0,0,0-2.43-.51,13.42,13.42,0,0,0-1.61-.12l2.6-1.92a2.06,2.06,0,0,1,1.76-.33,0.68,0.68,0,0,0,.35-1.32,3.41,3.41,0,0,0-2.92.55l-4.33,3.19-0.33,0a0.87,0.87,0,0,0-.76.84l0,0.76a0.84,0.84,0,0,0,.5.81,0.38,0.38,0,0,1,.22.3l0.1,1.43a3.45,3.45,0,0,0,3.34,3.11l1.6,0a3.43,3.43,0,0,0,2.93-1.64l1.29-2.26a0.68,0.68,0,0,1,.53-0.17h0.1a0.72,0.72,0,0,1,.51.16l1.31,2.3a3.43,3.43,0,0,0,2.92,1.62l1.6,0a3.46,3.46,0,0,0,3.34-3.12l0.1-1.42a0.37,0.37,0,0,1,.18-0.28,0.85,0.85,0,0,0,.54-0.83Zm-4.09.47a4.82,4.82,0,0,1,.63,0,1.26,1.26,0,0,1,1.19,1.13l0.06,1.47a1.88,1.88,0,0,1-1.8,2l-1.32,0a3.2,3.2,0,0,1-3-2.37A1.59,1.59,0,0,1,389,372a18.33,18.33,0,0,1,2.93-.32h0Zm-11.63,4.63-1.33,0a1.88,1.88,0,0,1-1.8-2l0.06-1.47a1.26,1.26,0,0,1,1.19-1.13A13.5,13.5,0,0,1,382,372a1.59,1.59,0,0,1,1.27,1.94,3.2,3.2,0,0,1-3,2.37h0Zm0,0" transform="translate(-374.96 -366.47)"/>
-                    </svg>
-                  </button> 234
-                </div>
-                <div>
-                  <em>strana 5 – 56</em>
-                </div>
               </div>
             </div><!--/.app section -->
           </div><!--/.col -->

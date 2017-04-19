@@ -8,7 +8,7 @@
           </div>
           <div class="col-xs-3 col-sm-2 text-right">
             <a *ngIf="currentLang==='cs'" (click)="changeLang('en')" title="English" class="app-btn">English</a>
-            <a *ngIf="currentLang==='en'" (click)="changeLang('cs')" title="Český" class="app-btn">Český</a>
+            <a *ngIf="currentLang==='en'" (click)="changeLang('cs')" title="Český" class="app-btn">Česky</a>
           </div>
         </div><!--/.row -->
       </div><!--/.container -->
@@ -30,24 +30,24 @@
             <li routerLink="home" routerLinkActive="active"><a routerLink="home" title="Aktuální číslo">{{'Aktuální číslo' | translate}}</a></li>
             <li routerLinkActive="active" class="dropdown">
               <a href="#" title="O časopisu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span routerLink="o-casopisu">{{'O časopisu' | translate}}</span> <span class="caret"></span></a>
+                <span routerLink="o-casopisu">{{'menu.o-casopisu_' | translate}}</span> <span class="caret"></span></a>
               <ul class="dropdown-menu app-clean-border">
-                <li *ngFor="let m of menu['o-casopisu']" ><a *ngIf="m.visible" [routerLink]="['o-casopisu', m.route]">{{'menu.o-casopisu.'+m.route | translate}}</a></li>
+                <li *ngFor="let m of menu['o-casopisu']" ><a *ngIf="m.visible" [routerLink]="['o-casopisu', m.route]">{{'menu.o-casopisu.'+m.route+'_' | translate}}</a></li>
 
               </ul>
             </li>
             <li routerLinkActive="active" class="dropdown">
               <a href="#" title="Pro autory" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span routerLink="pro-autory">{{'Pro autory' | translate}}</span> <span class="caret"></span></a>
+                <span routerLink="pro-autory">{{'menu.pro-autory_' | translate}}</span> <span class="caret"></span></a>
               <ul class="dropdown-menu app-clean-border">
-                <li *ngFor="let m of menu['pro-autory']" ><a *ngIf="m.visible" [routerLink]="['pro-autory', m.route]">{{'menu.pro-autory.'+m.route | translate}}</a></li>
+                <li *ngFor="let m of menu['pro-autory']" ><a *ngIf="m.visible" [routerLink]="['pro-autory', m.route]">{{'menu.pro-autory.'+m.route+'_' | translate}}</a></li>
 
               </ul>
             </li>
             
-            <li routerLink="archiv" routerLinkActive="active"><a routerLink="archiv" title="Archiv">{{'Archiv' | translate}}</a></li>
-            <li routerLink="kontakt" routerLinkActive="active"><a routerLink="kontakt" title="">{{'Kontakt' | translate}}</a></li>
-            <li routerLink="e-shop" routerLinkActive="active"><a routerLink="e-shop" title="">{{'Eshop' | translate}}</a></li>
+            <li routerLink="archiv" routerLinkActive="active"><a routerLink="archiv" title="Archiv">{{'menu.archiv_' | translate}}</a></li>
+            <li routerLink="kontakt" routerLinkActive="active"><a routerLink="kontakt" title="">{{'menu.kontakt_' | translate}}</a></li>
+            <li routerLink="e-shop" routerLinkActive="active"><a routerLink="e-shop" title="">{{'menu.e-shop_' | translate}}</a></li>
             <li routerLink="search" routerLinkActive="active">
               <a routerLink="search" title="Hledani">
                 <button class="btn app-btn app-btn-ico app-ico-20-20 app-ico-white">
@@ -65,13 +65,6 @@
       </div><!--/.container -->
     </nav><!--/.navbar -->
     <!-- Breadcrumb -->
-    <div class="app-breadcrumb app-brand lighten-4">
-      <div class="container">
-        <ol class="breadcrumb app-clean-mg app-font-roboto-cl app-font-s16">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Library</a></li>
-          <li class="active">Data</li>
-        </ol><!--/.breadcrumb -->
-      </div><!--/.container -->
-    </div><!--/.app breadcumb -->
+    <app-breadcrumbs></app-breadcrumbs>
+      <!--/.app breadcumb -->
     <!--/.header -->

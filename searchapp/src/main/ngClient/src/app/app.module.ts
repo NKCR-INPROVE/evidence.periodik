@@ -27,6 +27,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FreeTextComponent } from './components/free-text/free-text.component';
 import { JournalDetailsComponent } from './components/journal-details/journal-details.component';
 import { ArticleResultComponent } from './components/article-result/article-result.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 
 
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(http: Http) {
     HomeComponent,
     FreeTextComponent,
     JournalDetailsComponent,
-    ArticleResultComponent
+    ArticleResultComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,

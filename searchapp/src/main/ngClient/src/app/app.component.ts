@@ -107,7 +107,6 @@ export class AppComponent implements OnInit {
     });
     
     this.paramsObserver = this.route.queryParams.subscribe(searchParams => {
-      
       this.processUrlParams(searchParams);
     });
     

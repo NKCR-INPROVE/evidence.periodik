@@ -52,6 +52,7 @@ export class AppService {
         //console.log(response);
         let childs: any[] = response.json();
         let last = childs[childs.length - 1];
+        //console.log(childs, last['model']);
         if (last['model'] === this.state.config['model']) {
           let ret = 
            {
@@ -110,6 +111,32 @@ export class AppService {
     return this.http.get(url).map((response: Response) => {
       return response.text();
     }).catch(error => { return Observable.of('error gettting content: ' + error); });
+  }
+  
+  /**
+   * Utility for get json value from path 
+   * Test if json object has that value first
+   * If not returns null
+   */
+  getJsonValue(json, path: string){
+    let parts = path.split('/');
+    let l = parts.length;
+    let i: number = 0;
+    let ret = json;
+    let exists: boolean = true;
+    while(i<l && exists){
+      if(ret.hasOwnProperty(parts[i])){
+        ret = ret[parts[i]];
+      } else {
+        exists = false;
+      }
+      i++;
+    }
+    if (exists){
+      return ret;
+    } else {
+      return null;
+    }
   }
 
 }

@@ -62,6 +62,8 @@ export class AppState {
   setActual(a: Journal){
     this.actualNumber = a;
     this.imgSrc = '/img?uuid=' + this.actualNumber.pid + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
+    
+    
     this.stateChanged();
   }
   

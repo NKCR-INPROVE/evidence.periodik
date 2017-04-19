@@ -8,4 +8,7 @@ export interface Journal {
     details: any;
     siblings: any[];
     mods: any;
+    genres : string[];
+    genresObject: any;
+  
 }

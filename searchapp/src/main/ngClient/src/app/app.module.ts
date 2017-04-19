@@ -12,6 +12,8 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { PdfViewerComponent } from 'ng2-pdf-viewer';
+
 import { AppState } from './app.state';
 import { AppService } from './services/app.service';
 import { SearchService } from './services/search.service';
@@ -28,6 +30,7 @@ import { FreeTextComponent } from './components/free-text/free-text.component';
 import { JournalDetailsComponent } from './components/journal-details/journal-details.component';
 import { ArticleResultComponent } from './components/article-result/article-result.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { ArticleViewerComponent } from './components/article-viewer/article-viewer.component';
 
 
 
@@ -51,13 +54,24 @@ export function HttpLoaderFactory(http: Http) {
     FreeTextComponent,
     JournalDetailsComponent,
     ArticleResultComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    ArticleViewerComponent,
+    PdfViewerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     JsonpModule,
+    SlimLoadingBarModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [Http]
+            }
+        }),
     //StoreModule, storeManager,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
@@ -77,17 +91,9 @@ export function HttpLoaderFactory(http: Http) {
       { path: 'kontakt', component: FreeTextComponent },
       { path: 'e-shop', component: FreeTextComponent },
       { path: 'search', component: SearchComponent },
+      { path: 'article/:pid', component: ArticleViewerComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
-    ]),
-    SlimLoadingBarModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [Http]
-            }
-        })
+    ])
   ],
   providers: [AppState, AppService, SearchService],
   bootstrap: [AppComponent]

@@ -21,7 +21,9 @@ export class AppService {
 
 
   actualNumber: BehaviorSubject<Journal> = new BehaviorSubject<Journal>({
-    pid: null, title: null, root_pid: null, root_title: null, model: null, details: null, siblings:null, mods: null
+    pid: null, title: null, root_pid: null, root_title: null, model: null, 
+    details: null, siblings:null, mods: null, genres  : [],
+            genresObject : {}
   });
 
 
@@ -63,8 +65,42 @@ export class AppService {
             model: last['model'],
             details: last['details'],
             siblings: childs,
-            mods: null
+            mods: null,
+            genres  : [],
+            genresObject : {}
           };
+          
+          
+          this.getArticles(last['pid']).subscribe(res => {
+            for(let i in res){
+              let art = res[i];
+              this.getMods(art['pid']).subscribe(bmods => {
+                art['mods'] = bmods;
+                let mods = bmods["mods:modsCollection"]["mods:mods"];
+                let genre = this.getJsonValue(mods, "mods:genre");
+                if(genre.hasOwnProperty('@type')){
+                  art['genre'] = genre['@type'];
+                } else if(genre.hasOwnProperty('length')){
+                  for(let i in genre){
+                    art['genre'] = genre[i]['@type'];
+                  }
+                }
+                if(this.isGenreVisible(art['genre'])){
+                  if (ret.genresObject.hasOwnProperty(art['genre'])){
+                    ret.genresObject[art['genre']]['articles'].push(art);
+                  } else  {
+                    ret.genres.push(art['genre']);
+                    ret.genresObject[art['genre']] = {};
+                    ret.genresObject[art['genre']]['articles'] = [];
+                    ret.genresObject[art['genre']]['articles'].push(art);
+                  }
+                }
+    //            if (this.service.getJsonValue(mods, "mods:genre") !== null){
+    //            }
+              });
+            }
+          });
+      
           this.getMods(last['pid']).subscribe(mods => ret.mods = mods);
           return ret;
         } else {
@@ -74,6 +110,20 @@ export class AppService {
       .subscribe((result: Journal) => this.actualNumber.next(result));
 
     return this.actualNumber;
+  }
+  
+  isGenreVisible(genre: string): boolean{
+    return genre !== 'cover' &&
+      genre !== 'advertisement' &&
+      genre !== 'colophon';
+  }
+  
+  getItemByPid(pid: string): Observable<any> {
+    var url = this.state.config['api_point'] + '/item/' + pid;
+
+    return this.http.get(url).map((res: Response) => {
+      return res.json();
+    });
   }
   
   getArticles(pid: string): Observable<any[]>{

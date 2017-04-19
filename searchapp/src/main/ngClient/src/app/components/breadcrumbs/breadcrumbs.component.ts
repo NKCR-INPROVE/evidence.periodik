@@ -47,6 +47,8 @@ export class BreadcrumbsComponent implements OnInit {
     this.crumbs.push({link: 'home', label: 'home'});
     if(this.page === 'home'){
       
+    } else if(this.page.indexOf('article') === 0){
+      
     } else if(this.page !== 'search'){
       let parts = this.page.split('/');
       for (let s = 0; s < parts.length; s++){

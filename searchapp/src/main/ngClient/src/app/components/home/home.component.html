@@ -48,11 +48,11 @@
               </button>
             </p>
           </div><!--/.col -->
-          <div class="col-xs-12 col-sm-8 col-md-9 app-col-right">
-            <div class="app-section" *ngFor="let genre of genres">
+          <div *ngIf="actual" class="col-xs-12 col-sm-8 col-md-9 app-col-right">
+            <div class="app-section" *ngFor="let genre of actual.genres">
               <h4 class="app-clean-mg">{{'genre.' + genre | translate}}</h4>
               <hr />
-              <div *ngFor="let art of genresObject[genre].articles">
+              <div *ngFor="let art of actual.genresObject[genre].articles">
                 <app-article-result [article]="art"></app-article-result>
               </div>
             </div><!--/.app section -->

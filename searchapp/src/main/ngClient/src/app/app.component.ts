@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
     'home': 'app-page-home',
     'o-casopisu': 'app-page-ocasopisu',
     'pro-autory': 'app-page-pokyny-pro-autory',
+    'article': 'app-page-archiv-reader'
   };
   mainClass: string = this.classes['home'];
   

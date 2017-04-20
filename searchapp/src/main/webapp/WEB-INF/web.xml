@@ -30,11 +30,14 @@
     <servlet-mapping>
         <servlet-name>StaticServlet</servlet-name>
         <url-pattern>/home</url-pattern>
-        <url-pattern>/dist/home</url-pattern>
-        <url-pattern>/results/*</url-pattern>
-        <url-pattern>/id/*</url-pattern>
-        <url-pattern>/export/*</url-pattern>
-        <url-pattern>/dist/results/*</url-pattern>
+        <url-pattern>/archiv/*</url-pattern>
+        <url-pattern>/pro-autory/*</url-pattern>
+        <url-pattern>/archiv/*</url-pattern>
+        <url-pattern>/o-casopisu/*</url-pattern>
+        <url-pattern>/kontakt/*</url-pattern>
+        <url-pattern>/e-shop/*</url-pattern>
+        <url-pattern>/hledat/*</url-pattern>
+        <url-pattern>/article/*</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
@@ -43,6 +46,14 @@
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ForwardServlet</servlet-name>
+        <servlet-class>cz.incad.k5journals.searchapp.ForwardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ForwardServlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>ConfigServlet</servlet-name>

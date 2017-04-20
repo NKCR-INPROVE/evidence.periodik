@@ -45,7 +45,7 @@ public class Options {
     String path = InitServlet.CONFIG_DIR + File.separator + "config.json";
     
     //Get server options
-    File fserver = FileUtils.toFile(Options.class.getResource("/cz/incad/kramerius/ng2client/server_config.json"));
+    File fserver = FileUtils.toFile(Options.class.getResource("/cz/incad/k5journals/searchapp/server_config.json"));
     String sjson = FileUtils.readFileToString(fserver, "UTF-8");
     server_conf = new JSONObject(sjson);
     

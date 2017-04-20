@@ -40,6 +40,10 @@ export function HttpLoaderFactory(http: Http) {
     return new TranslateHttpLoader(http);
 }
 
+export function createTranslateLoader(http: Http) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 
 @NgModule({
   declarations: [
@@ -68,7 +72,7 @@ export function HttpLoaderFactory(http: Http) {
     TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
+                useFactory: createTranslateLoader,
                 deps: [Http]
             }
         }),
@@ -90,7 +94,7 @@ export function HttpLoaderFactory(http: Http) {
       ]},
       { path: 'kontakt', component: FreeTextComponent },
       { path: 'e-shop', component: FreeTextComponent },
-      { path: 'search', component: SearchComponent },
+      { path: 'hledat', component: SearchComponent },
       { path: 'article/:pid', component: ArticleViewerComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ])

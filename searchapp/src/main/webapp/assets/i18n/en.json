@@ -1,0 +1,53 @@
+{
+  "q.placeholder": "Search digital library ...",
+  "menu":{
+    "home_": "Actual number",
+    "o-casopisu_": "About journal",
+    "o-casopisu":{
+      "redakce_": "Editor",
+      "open-access_": "Open Access",
+      "zapojeni_": "Join database",
+      "historie_": "History",
+      "distribuce_": "Distribution",
+      "fotogslerie_": "Foto galery",
+      "oznameni-sefredaktora_": "Main editor's notes",
+      "pripravujeme_": "We are preparing..."
+    },
+    "pro-autory_":"For authors",
+    "pro-autory":{
+      "recenzni-rizeni_":"Review procedure",
+      "citacni-pravidla_":"Citation rules",
+      "publikacni-etika_":"Publication ethics",
+      "recenzenti_":"Reviewers",
+      "odkazy_":"Links",
+      "caste-dotazy_":"FAQ"
+    },
+    "archiv_": "Archive",
+    "kontakt_": "Contact",
+    "e-shop_": "Eshop"
+  },
+  "ARCHIV STARŠÍCH ROČNÍKŮ": "OLD NUMBERS ARCHIVE",
+  "PROHLÍŽET CELÉ ČÍSLO": "VIEW WHOLE NUMBER", 
+  "genre": {
+    "news": "News",
+    "table of content": "Table of content",
+    "advertisement": "X",
+    "abstract": "Abstract",
+    "introduction": "Introduction",
+    "review": "Review",
+    "dedication": "Dedication",
+    "bibliography": "Bibliography",
+    "editorial": "Editorial",
+    "preface": "Preface",
+    "main article": "Main articles",
+    "index": "Index",
+    "cover": "Cover",
+    "obituary": "Obituary",
+    "biographical portrait": "Biographical portrait",
+    "colophon": "Colophon",
+    "interview": "Interview",
+    "annotations": "Annotations",
+    "unspecified": "Unspecified"
+  },
+  "dummy": ""
+}

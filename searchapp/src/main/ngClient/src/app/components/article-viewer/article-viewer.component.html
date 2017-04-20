@@ -32,17 +32,18 @@
             <!--/.app section -->
           </div><!--/.col -->
           <div class="col-xs-12 col-sm-7 app-col-right">
-            
+            <div *ngIf="loading" class="img-responsive app-thumb-doc" >loading...</div>
             <div *ngIf="isPdf" class="img-responsive app-thumb-doc" style="max-height: 600px; overflow: auto;">
             <pdf-viewer [src]="fullSrc" 
                         [original-size]="true" 
                         [render-text]="true"
                         [show-all]="true"
                         [zoom]="zoom"
+                        (after-load-complete)="afterLoad($event)"
                         style="display: block;"
             ></pdf-viewer>
             </div>
-            <img *ngIf="!isPdf" [src]="fullSrc" alt="" class="img-responsive app-thumb-doc" />
+            <img *ngIf="!isPdf && !loading" [src]="fullSrc" alt="" class="img-responsive app-thumb-doc" />
           </div><!--/.col -->
         </div><!--./row -->
       </div><!--/.container -->

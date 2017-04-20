@@ -17,13 +17,17 @@ export class ArticleViewerComponent implements OnInit {
   
   fullSrc: string;
   isPdf: boolean = false;
+  loading: boolean = true;
   
   zoom: number = 1.0;
 
   constructor(
   private service: AppService,
-  private state: AppState,
-  private route: ActivatedRoute) { }
+  public state: AppState,
+  private route: ActivatedRoute) {
+  
+    this.afterLoad = this.afterLoad.bind(this);
+  }
 
   ngOnInit() {
     
@@ -44,17 +48,24 @@ export class ArticleViewerComponent implements OnInit {
   }
   
   setData(){
+    this.fullSrc = null;
+    this.loading = true;
     this.service.getItemByPid(this.pid).subscribe(res => {
       this.article = res;
       
       if (this.article.hasOwnProperty("pdf")){
         this.isPdf = true;
-        this.fullSrc = '/img?uuid=' + this.pid + '&stream=IMG_FULL&action=GETRAW';
+        this.fullSrc = this.state.config['context'] + 'img?uuid=' + this.pid + '&stream=IMG_FULL&action=GETRAW';
       } else {
-        this.isPdf = true;
-        this.fullSrc = '/img?uuid=' + this.pid + '&stream=IMG_FULL&action=GETRAW';
+        this.isPdf = false;
+        this.fullSrc = this.state.config['context'] + 'img?uuid=' + this.pid + '&stream=IMG_FULL&action=GETRAW';
+        this.loading = false;
       }
     });
+  }
+  
+  afterLoad(pdf: any) {
+    this.loading = false;
   }
   
   zoomIn(){

@@ -1,0 +1,11 @@
+// --- JUMBOTRON ---
+
+.app-jumbotron {
+  .jumbotron {
+    margin-bottom: 40px;
+  }
+  &+.app-content {
+    margin-top: 0;
+  }
+}
+

@@ -17,6 +17,7 @@ public class RESTHelper {
         URLConnection uc = openConnection(urlString);
         HttpURLConnection hcon = (HttpURLConnection) uc;
         hcon.setInstanceFollowRedirects(true);
+        HttpURLConnection.setFollowRedirects(true);
         return uc.getInputStream();
     }
 
@@ -25,6 +26,7 @@ public class RESTHelper {
         URLConnection uc = url.openConnection();
         HttpURLConnection hcon = (HttpURLConnection) uc;
         hcon.setInstanceFollowRedirects(true);
+        HttpURLConnection.setFollowRedirects(true);
         uc.setReadTimeout(Integer.parseInt("100000"));
         uc.setConnectTimeout(Integer.parseInt("10000"));
         return uc;
@@ -36,6 +38,7 @@ public class RESTHelper {
         URLConnection uc = openConnection(urlString, reqProps);
         HttpURLConnection hcon = (HttpURLConnection) uc;
         hcon.setInstanceFollowRedirects(true);
+        HttpURLConnection.setFollowRedirects(true);
         return uc.getInputStream();
     }
 
@@ -44,6 +47,7 @@ public class RESTHelper {
         URLConnection uc = url.openConnection();
         HttpURLConnection hcon = (HttpURLConnection) uc;
         hcon.setInstanceFollowRedirects(true);
+        HttpURLConnection.setFollowRedirects(true);
         uc.setReadTimeout(Integer.parseInt("100000"));
         uc.setConnectTimeout(Integer.parseInt("10000"));
         for (Map.Entry<String, String> entry : reqProps.entrySet()) {

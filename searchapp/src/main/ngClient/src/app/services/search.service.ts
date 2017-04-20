@@ -18,9 +18,7 @@ export class SearchService {
 
 
   searchResults: BehaviorSubject<SearchResult[]> = new BehaviorSubject<SearchResult[]>([]);
-  actualNumber: BehaviorSubject<Journal> = new BehaviorSubject<Journal>({
-    pid: null, title:null, root_pid:null, root_title:null, model:null, details:null, siblings: null, mods: null
-    });
+  actualNumber: BehaviorSubject<Journal> = new BehaviorSubject<Journal>(new Journal());
     
   constructor(
     private state: AppState,

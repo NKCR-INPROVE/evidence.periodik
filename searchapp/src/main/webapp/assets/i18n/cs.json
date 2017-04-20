@@ -1,0 +1,54 @@
+{
+  "q.placeholder": "Hledej v digitální knihovně ...",
+  "menu": {
+    "home_": "Aktuální číslo",
+    "o-casopisu_": "O časopisu",
+    "o-casopisu": {
+      "": "O časopisu",
+      "redakce_": "Redakce",
+      "open-access_": "Open Access",
+      "zapojeni_": "Zapojení do databází",
+      "historie_": "Historie",
+      "distribuce_": "Distribuce",
+      "fotogslerie_": "Fotogalerie",
+      "oznameni-sefredaktora_": "Oznámení šéfredaktora",
+      "pripravujeme_": "Připravujeme"
+    },
+    "pro-autory_": "Pro autory",
+    "pro-autory": {
+      "recenzni-rizeni_": "Recenzní řízení",
+      "citacni-pravidla_": "Citační pravidla",
+      "publikacni-etika_": "Publikační etika",
+      "recenzenti_": "Recenzenti",
+      "odkazy_": "Odkazy",
+      "caste-dotazy_": "Časté dotazy"
+    },
+    "archiv_": "Archiv",
+    "kontakt_": "Kontakt",
+    "e-shop_": "Eshop"
+  },
+  "ARCHIV STARŠÍCH ROČNÍKŮ": "ARCHIV STARŠÍCH ROČNÍKŮ",
+  "PROHLÍŽET CELÉ ČÍSLO": "PROHLÍŽET CELÉ ČÍSLO",
+  "genre": {
+    "news": "Zprávy",
+    "table of content": "Obsah",
+    "advertisement": "X",
+    "abstract": "Abstrakty",
+    "introduction": "Úvod",
+    "review": "Recenze",
+    "dedication": "Věnování",
+    "bibliography": "Bibliografie",
+    "editorial": "Editorial",
+    "preface": "Předmluva",
+    "main article": "Hlavní články",
+    "index": "Rejstřík",
+    "cover": "X",
+    "obituary": "Nekrology",
+    "biographical portrait": "Medailonky",
+    "colophon": "X",
+    "interview": "Rozhovory",
+    "annotations": "Anotace",
+    "unspecified": "Nespecifikované"
+  },
+  "dummy": ""
+}

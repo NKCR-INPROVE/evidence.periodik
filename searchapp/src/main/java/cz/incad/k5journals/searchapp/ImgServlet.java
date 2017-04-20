@@ -54,7 +54,7 @@ public class ImgServlet extends HttpServlet {
     try {
 
       response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-      response.setContentType("application/json;charset=UTF-8");
+      //response.setContentType("application/json;charset=UTF-8");
       //PrintWriter out = response.getWriter();
       response.addHeader("Access-Control-Allow-Methods", "GET, POST");
       response.addHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
@@ -65,8 +65,8 @@ public class ImgServlet extends HttpServlet {
       Options opts = Options.getInstance();
       
       
-        String solrhost = opts.getString("api.point", "http://localhost:8080/search/api/v5.0")
-                + request.getPathInfo();
+        String solrhost = opts.getString("img.point", "http://localhost:8080/search/img");
+        //        + request.getPathInfo();
         if(request.getQueryString() != null && !request.getQueryString().equals("")){
           solrhost += "?" + request.getQueryString();
         }

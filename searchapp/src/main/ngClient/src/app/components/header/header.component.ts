@@ -37,5 +37,9 @@ export class HeaderComponent implements OnInit {
   changeLang(lang: string){
     this.appservice.changeLang(lang);
   }
+  
+  logActual(){
+    console.log(this.appState.actualNumber);
+  }
 
 }

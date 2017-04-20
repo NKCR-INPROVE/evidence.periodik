@@ -26,6 +26,8 @@ export class AppService {
             genresObject : {}
   });
 
+  articles: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+
 
   constructor(
     private state: AppState,
@@ -54,7 +56,6 @@ export class AppService {
         //console.log(response);
         let childs: any[] = response.json();
         let last = childs[childs.length - 1];
-        //console.log(childs, last['model']);
         if (last['model'] === this.state.config['model']) {
           let ret = 
            {
@@ -72,8 +73,10 @@ export class AppService {
           
           
           this.getArticles(last['pid']).subscribe(res => {
+            console.log(res);
             for(let i in res){
               let art = res[i];
+              if(art && art['pid']){
               this.getMods(art['pid']).subscribe(bmods => {
                 art['mods'] = bmods;
                 let mods = bmods["mods:modsCollection"]["mods:mods"];
@@ -99,6 +102,9 @@ export class AppService {
     //            }
               });
             }
+            }
+          console.log('mamgenres');
+          this.state.stateChanged();
           });
       
           this.getMods(last['pid']).subscribe(mods => ret.mods = mods);
@@ -131,7 +137,7 @@ export class AppService {
 //    let url = this.state.config['api_point'] + '/search';
 //    url += '?q=parent_pid:' + pid.replace(':', '\\:') + '' + '&fq=fedora.model:article';
 
-    return this.http.get(url).map((response: Response) => {
+    this.http.get(url).map((response: Response) => {
       //return response.json()['response']['docs'];
         let articles = [];
         let childs: any[] = response.json();
@@ -142,8 +148,19 @@ export class AppService {
           } 
         }
         
-        return articles;
-      });
+        if (articles.length > 0){
+          console.log('mamarticles', articles);
+          
+          this.state.stateChanged();
+          return articles;
+        }else{
+          return this.getArticles(childs[0]['pid']);
+        }
+        
+        
+      })
+      .subscribe((result: any[]) => this.articles.next(result));
+    return this.articles;
   }
 
   

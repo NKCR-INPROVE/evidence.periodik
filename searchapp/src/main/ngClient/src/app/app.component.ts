@@ -25,7 +25,9 @@ export class AppComponent implements OnInit {
     'home': 'app-page-home',
     'o-casopisu': 'app-page-ocasopisu',
     'pro-autory': 'app-page-pokyny-pro-autory',
-    'article': 'app-page-archiv-reader'
+    'archiv': 'app-page-archiv',
+    'article': 'app-page-archiv-reader',
+    'hledat': 'app-page-search'
   };
   mainClass: string = this.classes['home'];
   
@@ -68,8 +70,8 @@ export class AppComponent implements OnInit {
       }
       this.appservice.changeLang(userLang);
       
-      this.appservice.actualNumber.subscribe((a) => {
-        if (a.pid){
+      this.appservice.journal.subscribe((a) => {
+        if (a.pid && !this.state.actualNumber){
           this.state.setActual(a);
         }
       });

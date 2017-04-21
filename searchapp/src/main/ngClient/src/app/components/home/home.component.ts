@@ -30,9 +30,6 @@ export class HomeComponent implements OnInit {
 
     this.state.stateChangedSubject.subscribe(
       () => {
-        console.log('aa');
-        console.log(this.state.actualNumber);
-        
         this.setData();
       }
     );
@@ -40,7 +37,6 @@ export class HomeComponent implements OnInit {
 
   setData() {
     if (this.state.actualNumber) {
-        console.log(this.state.actualNumber.genres);
       this.actual = this.state.actualNumber;
       this.img = this.state.imgSrc;
       //this.img = 'img/item/' + this.state.actualNumber.pid + '/thumb';

@@ -31,6 +31,7 @@ import { JournalDetailsComponent } from './components/journal-details/journal-de
 import { ArticleResultComponent } from './components/article-result/article-result.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { ArticleViewerComponent } from './components/article-viewer/article-viewer.component';
+import { ArchivItemComponent } from './components/archiv-item/archiv-item.component';
 
 
 
@@ -60,7 +61,8 @@ export function createTranslateLoader(http: Http) {
     ArticleResultComponent,
     BreadcrumbsComponent,
     ArticleViewerComponent,
-    PdfViewerComponent
+    PdfViewerComponent,
+    ArchivItemComponent
   ],
   imports: [
     BrowserModule,

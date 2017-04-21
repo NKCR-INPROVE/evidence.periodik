@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 import { AppService } from '../../services/app.service';
 import { AppState } from '../../app.state';
+import { Journal } from '../../models/journal.model';
 
 @Component({
   selector: 'app-article-viewer',
@@ -20,6 +21,8 @@ export class ArticleViewerComponent implements OnInit {
   loading: boolean = true;
   
   zoom: number = 1.0;
+  
+  journal: Journal;
 
   constructor(
   private service: AppService,
@@ -33,24 +36,34 @@ export class ArticleViewerComponent implements OnInit {
     
     this.route.params
       .switchMap((params: Params) => Observable.of(params['pid'])).subscribe(pid => {
+        console.log('params');
         this.pid = pid;
-        if (this.state.actualNumber){
+        
+        if (this.state.config){
           this.setData();
         }
         
     });
     
-    this.state.stateChangedSubject.subscribe(
+    this.state.paramsSubject.subscribe(
       () => {
         this.setData();
       }
     );
+    
+    this.service.journal.subscribe((a) => {
+      console.log('subs', a.pid);
+        if (a.pid){
+          this.journal = a;
+        }
+        //subs.unsubscribe();
+    });
   }
   
   setData(){
     this.fullSrc = null;
     this.loading = true;
-    this.service.getItemByPid(this.pid).subscribe(res => {
+    this.service.getItem(this.pid).subscribe(res => {
       this.article = res;
       
       if (this.article.hasOwnProperty("pdf")){
@@ -61,6 +74,10 @@ export class ArticleViewerComponent implements OnInit {
         this.fullSrc = this.state.config['context'] + 'img?uuid=' + this.pid + '&stream=IMG_FULL&action=GETRAW';
         this.loading = false;
       }
+      let ctx = res['context'][0];
+      let parent = ctx[ctx.length - 2]['pid'];
+      console.log(parent);
+      this.service.getJournalByPid(parent);
     });
   }
   

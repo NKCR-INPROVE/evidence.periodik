@@ -1,7 +1,7 @@
   <!-- Main -->
 
     <section class="app-content">
-      <div *ngIf="state.actualNumber" class="container">
+      <div *ngIf="journal" class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-5 app-col-left">
             <h2>Rok 2016, ročník 4, číslo 1</h2>
@@ -22,10 +22,10 @@
               </button>
             </div><!--/.app section -->
             
-            <div class="app-section" *ngFor="let genre of state.actualNumber.genres">
+            <div class="app-section" *ngFor="let genre of journal.genres">
               <h4 class="app-clean-mg">{{'genre.' + genre | translate}}</h4>
               <hr />
-              <div *ngFor="let art of state.actualNumber.genresObject[genre].articles" class="app-item" [class.active]="art.pid === pid">
+              <div *ngFor="let art of journal.genresObject[genre].articles" class="app-item" [class.active]="art.pid === pid">
                 <app-article-result [article]="art"></app-article-result>
               </div>
             </div>

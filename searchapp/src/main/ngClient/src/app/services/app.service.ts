@@ -20,11 +20,7 @@ export class AppService {
   public langSubject: Observable<any> = this._langSubject.asObservable();
 
 
-  actualNumber: BehaviorSubject<Journal> = new BehaviorSubject<Journal>({
-    pid: null, title: null, root_pid: null, root_title: null, model: null, 
-    details: null, siblings:null, mods: null, genres  : [],
-            genresObject : {}
-  });
+  journal: BehaviorSubject<Journal> = new BehaviorSubject<Journal>(new Journal());
 
   articles: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
@@ -43,12 +39,30 @@ export class AppService {
     this.translate.use(lang);
     this._langSubject.next(lang);
   }
+  
+  getItem(pid: string): Observable<any> {
+    var url = this.state.config['api_point'] + '/item/' + pid;
 
-  getActual(): Observable<Journal> {
-    return this.getActualByPid(this.state.config['journal']);
+    return this.http.get(url)
+      .map((response: Response) => {
+        return response.json();
+      });
   }
   
-  getActualByPid(pid: string): Observable<Journal> {
+  getChildren(pid: string): Observable<any> {
+    var url = this.state.config['api_point'] + '/item/' + pid + '/children';
+
+    return this.http.get(url)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  getActual(): Observable<Journal> {
+    return this.getJournalByPid(this.state.config['journal']);
+  }
+  
+  getJournalByPid(pid: string): Observable<Journal> {
     var url = this.state.config['api_point'] + '/item/' + pid + '/children';
 
     this.http.get(url)
@@ -56,6 +70,10 @@ export class AppService {
         //console.log(response);
         let childs: any[] = response.json();
         let last = childs[childs.length - 1];
+        console.log(childs);
+        if (childs.length === 0){
+          return new Journal();
+        }
         if (last['model'] === this.state.config['model']) {
           let ret = 
            {
@@ -71,9 +89,7 @@ export class AppService {
             genresObject : {}
           };
           
-          
           this.getArticles(last['pid']).subscribe(res => {
-            console.log(res);
             for(let i in res){
               let art = res[i];
               if(art && art['pid']){
@@ -103,33 +119,24 @@ export class AppService {
               });
             }
             }
-          console.log('mamgenres');
           this.state.stateChanged();
           });
       
           this.getMods(last['pid']).subscribe(mods => ret.mods = mods);
           return ret;
         } else {
-          return this.getActualByPid(last['pid']);
+          return this.getJournalByPid(last['pid']);
         }
       })
-      .subscribe((result: Journal) => this.actualNumber.next(result));
+      .subscribe((result: Journal) => this.journal.next(result));
 
-    return this.actualNumber;
+    return this.journal;
   }
   
   isGenreVisible(genre: string): boolean{
     return genre !== 'cover' &&
       genre !== 'advertisement' &&
       genre !== 'colophon';
-  }
-  
-  getItemByPid(pid: string): Observable<any> {
-    var url = this.state.config['api_point'] + '/item/' + pid;
-
-    return this.http.get(url).map((res: Response) => {
-      return res.json();
-    });
   }
   
   getArticles(pid: string): Observable<any[]>{
@@ -149,8 +156,6 @@ export class AppService {
         }
         
         if (articles.length > 0){
-          console.log('mamarticles', articles);
-          
           this.state.stateChanged();
           return articles;
         }else{

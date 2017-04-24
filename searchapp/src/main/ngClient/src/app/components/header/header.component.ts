@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   menu: any = {};
 
   constructor(
-  private appState: AppState,
+  public appState: AppState,
   private appservice: AppService) { }
 
   ngOnInit() {

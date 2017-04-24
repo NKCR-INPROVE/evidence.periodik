@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AppService } from '../../services/app.service';
 
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private service: AppService,
-    private state: AppState
+    private state: AppState,
+    private router: Router
   ) {
 
     //this.actualNumber = this.store.select<Journal>('actual');
@@ -41,6 +43,10 @@ export class HomeComponent implements OnInit {
       this.img = this.state.imgSrc;
       //this.img = 'img/item/' + this.state.actualNumber.pid + '/thumb';
     }
+  }
+  
+  gotoArchiv(pid: string){
+    this.router.navigate(['archiv/', pid])
   }
   
 

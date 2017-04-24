@@ -17,10 +17,10 @@ import { AppState } from './app.state';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
+
   pathObserver: Subscription;
   paramsObserver: Subscription;
-  
+
   classes = {
     'home': 'app-page-home',
     'o-casopisu': 'app-page-ocasopisu',
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     'hledat': 'app-page-search'
   };
   mainClass: string = this.classes['home'];
-  
+
   constructor(
     private state: AppState,
     private searchService: SearchService,
@@ -38,53 +38,57 @@ export class AppComponent implements OnInit {
     private http: Http,
     private route: ActivatedRoute,
     private router: Router,
-    private slimLoader: SlimLoadingBarService){
-    
+    private slimLoader: SlimLoadingBarService) {
+
   }
-  
+
 
   ngOnInit() {
 
     this.getConfig().subscribe(
       cfg => {
-        
-        this.state.stateChangedSubject.subscribe(route => { this.stateChanged(route)})
+
+        this.state.stateChangedSubject.subscribe(route => { this.stateChanged(route) })
 
         this.processUrl();
       }
     );
   }
-  
+
   getConfig() {
     return this.http.get("assets/config.json").map(res => {
       let cfg = res.json();
-      
+
       this.state.setConfig(cfg);
       this.state.rows = cfg['searchParams']['rows'];
       this.state.sorts = cfg['sorts'];
       this.state.currentSort = cfg[0];
       var userLang = navigator.language.split('-')[0]; // use navigator lang if available
       userLang = /(cs|en)/gi.test(userLang) ? userLang : 'cs';
-      if(cfg.hasOwnProperty('defaultLang')){
+      if (cfg.hasOwnProperty('defaultLang')) {
         userLang = cfg['defaultLang'];
       }
       this.appservice.changeLang(userLang);
-      
-      this.appservice.journal.subscribe((a) => {
-        if (a.pid && !this.state.actualNumber){
+
+      this.appservice.getActual().subscribe((a) => {
+        if (a.pid && !this.state.actualNumber) {
           this.state.setActual(a);
+          this.appservice.getArticles(this.state.actualNumber['pid']).subscribe(res => {
+            this.appservice.setArticles(this.state.actualNumber, res);
+            this.state.stateChanged();
+          });
+          this.appservice.getMods(this.state.actualNumber['pid']).subscribe(mods => this.state.actualNumber.mods = mods);
         }
       });
-      this.appservice.getActual();
-        
+
       //this._configSubject.next(cfg);
       //this.processUrl();
       this.state.stateChanged();
       return this.state.config;
     });
   }
-  
-  
+
+
   startProgress() {
     this.slimLoader.start(() => {
       console.log('Loading complete');
@@ -94,8 +98,8 @@ export class AppComponent implements OnInit {
   completeProgress() {
     this.slimLoader.complete();
   }
-  
-  
+
+
   processUrl() {
     //this.searchService.getActual();
     this.setMainClass(this.router.url);
@@ -104,26 +108,26 @@ export class AppComponent implements OnInit {
       if (val instanceof NavigationEnd) {
         this.state.paramsChanged();
         this.setMainClass(val.url);
-      } else if (val instanceof NavigationStart ){
+      } else if (val instanceof NavigationStart) {
         this.state.clear();
       }
     });
-    
+
     this.paramsObserver = this.route.queryParams.subscribe(searchParams => {
       this.processUrlParams(searchParams);
     });
-    
+
     this.state.paramsChanged();
   }
-  
-  setMainClass(url: string){
+
+  setMainClass(url: string) {
     let p = url.split('/');
     this.mainClass = this.classes[p[1]];
   }
 
   processUrlParams(searchParams) {
     for (let p in searchParams) {
-      
+
     }
   }
 
@@ -131,9 +135,9 @@ export class AppComponent implements OnInit {
   stateChanged(route: string) {
     this.setUrl(route);
   }
-  
-  setUrl(route: string){
-    
+
+  setUrl(route: string) {
+
   }
 
 }

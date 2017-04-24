@@ -13,6 +13,9 @@ export class AppState {
   public _paramsSubject = new Subject();
   public paramsSubject: Observable<any> = this._paramsSubject.asObservable();
   
+  public _configSubject = new Subject();
+  public configSubject: Observable<any> = this._configSubject.asObservable();
+  
   //Holds client configuration
   config: any;
   
@@ -41,6 +44,7 @@ export class AppState {
   
   setConfig(cfg){
     this.config = cfg;
+    this._configSubject.next(cfg);
   }
   
   //params

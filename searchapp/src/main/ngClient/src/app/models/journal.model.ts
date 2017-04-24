@@ -1,21 +1,18 @@
 
-
-export class Journal implements Journal{
-    pid: string;
-    title: string;
-    root_pid: string;
-    root_title: string;
-    model: string;
-    details: any;
-    siblings: any[];
-    mods: any;
-    genres : string[];
-    genresObject: any;
+export class Journal{
+    pid: string =null;
+    title: string = null;
+    root_pid: string = null;
+    root_title: string = null;
+    model: string = null;
+    details: any = null;
+    siblings: any[] = [];
+    mods: any = null;
+    genres : string[] = [];
+    genresObject: any = {};
   constructor(){
-    return {
-    pid: null, title:null, root_pid:null, root_title:null, model:null, 
-      details:null, siblings: null, mods: null, genres  : [],
-      genresObject : {}
-    }
+    
   }
+  
+  
 }

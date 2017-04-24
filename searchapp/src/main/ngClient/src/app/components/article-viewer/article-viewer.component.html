@@ -4,16 +4,16 @@
       <div *ngIf="journal" class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-5 app-col-left">
-            <h2>Rok 2016, ročník 4, číslo 1</h2>
+            <h2><app-journal-details [journal]="journal"></app-journal-details></h2>
             <div class="app-section">
-              <button class="btn app-btn app-btn-transparent app-ico-25-25 app-btn-font-14">
+              <button class="btn app-btn app-btn-transparent app-ico-25-25 app-btn-font-14" (click)="prev()" *ngIf="hasPrev()">
                 <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.13 25.13">
                   <title>predchozi</title>
                   <path d="M332.57,392a12.57,12.57,0,1,0,12.57,12.57A12.58,12.58,0,0,0,332.57,392ZM338,406h-8.2l1.61,1.45a1,1,0,0,1,.33.72,1,1,0,0,1-.33.76,1.1,1.1,0,0,1-.8.31,1.13,1.13,0,0,1-.8-0.34l-3.53-3.54a1.13,1.13,0,0,1,0-1.6l3.53-3.53a1.16,1.16,0,0,1,1.6,0,0.88,0.88,0,0,1,0,1.37L329.83,403H338A1.56,1.56,0,0,1,338,406Z" transform="translate(-320 -392)"/>
                 </svg>
                 předchozí číslo
               </button> |
-              <button class="btn app-btn app-btn-transparent app-ico-25-25 app-btn-font-14 app-btn-right">
+              <button class="btn app-btn app-btn-transparent app-ico-25-25 app-btn-font-14 app-btn-right"(click)="next()" *ngIf="hasNext()">
                 následující číslo
                 <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.13 25.13">
                   <title>dalsi</title>

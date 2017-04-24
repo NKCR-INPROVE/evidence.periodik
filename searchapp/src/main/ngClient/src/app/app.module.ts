@@ -82,6 +82,7 @@ export function createTranslateLoader(http: Http) {
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'archiv', component: ArchivComponent },
+      { path: 'archiv/:pid', component: ArchivComponent },
       { path: 'pro-autory', component: PokynyComponent ,
       children:[
         { path: '', component: FreeTextComponent},

@@ -34,7 +34,7 @@
             <h4 class="app-font-roboto-cb">{{'Starší čísla' | translate }}:</h4>
             <div *ngIf="actual" class="app-font-roboto-cr">
               <div *ngFor="let c of actual.siblings.reverse()">
-                <app-journal-details *ngIf="c.pid !== actual.pid" [journal]="c"></app-journal-details>
+                <app-journal-details *ngIf="c.pid !== actual.pid" [journal]="c" (click)="gotoArchiv(c.pid)"></app-journal-details>
               </div>
             </div>
             <p>

@@ -3,13 +3,13 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-9 col-sm-10">
-            <h1 class="app-clean-mg hidden-xs"><a routerLink="home" title="Časopis knihy a dějiny">ČASOPIS <span class="app-font-roboto-cb">KNIHY A DĚJINY</span></a></h1>
+            <h1 class="app-clean-mg hidden-xs"><a routerLink="home" title="Časopis ">ČASOPIS 
+                <span  *ngIf="appState.actualNumber" class="app-font-roboto-cb">{{appState.actualNumber['root_title']}}</span></a></h1>
             <a routerLink="home" title="Časopis knihy a dějiny" class="visible-xs"><img src="assets/img/logo-brand.png" alt="Časopis knihy a dějiny" class="img-responsive" /></a>
           </div>
           <div class="col-xs-3 col-sm-2 text-right">
             <a *ngIf="currentLang==='cs'" (click)="changeLang('en')" title="English" class="app-btn">English</a>
             <a *ngIf="currentLang==='en'" (click)="changeLang('cs')" title="Český" class="app-btn">Česky</a>
-          <a (click)="logActual()">log</a>
           </div>
         </div><!--/.row -->
       </div><!--/.container -->

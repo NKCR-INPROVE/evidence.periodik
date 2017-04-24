@@ -19,10 +19,10 @@ export class AppService {
   public _langSubject = new Subject();
   public langSubject: Observable<any> = this._langSubject.asObservable();
 
-
-  journal: BehaviorSubject<Journal> = new BehaviorSubject<Journal>(new Journal());
-
-  articles: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+//
+//  journal: BehaviorSubject<Journal> = new BehaviorSubject<Journal>(new Journal());
+//
+//  articles: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
 
   constructor(
@@ -39,7 +39,7 @@ export class AppService {
     this.translate.use(lang);
     this._langSubject.next(lang);
   }
-  
+
   getItem(pid: string): Observable<any> {
     var url = this.state.config['api_point'] + '/item/' + pid;
 
@@ -48,7 +48,7 @@ export class AppService {
         return response.json();
       });
   }
-  
+
   getChildren(pid: string): Observable<any> {
     var url = this.state.config['api_point'] + '/item/' + pid + '/children';
 
@@ -59,24 +59,48 @@ export class AppService {
   }
 
   getActual(): Observable<Journal> {
-    return this.getJournalByPid(this.state.config['journal']);
+    return this.getJournalByPid(this.state.config['journal'], this.state.config['model']);
   }
-  
-  getJournalByPid(pid: string): Observable<Journal> {
+
+  getJournal(pid: string): Observable<Journal> {
+
+    var url = this.state.config['api_point'] + '/item/' + pid;
+
+
+    return this.http.get(url).map((response: Response) => {
+      //console.log(response);
+      let j = response.json();
+
+      let ret =
+        {
+          pid: j['pid'],
+          title: j['title'],
+          root_title: j['root_title'],
+          root_pid: j['root_pid'],
+          model: j['model'],
+          details: j['details'],
+          siblings: null,
+          mods: null,
+          genres: [],
+          genresObject: {}
+        };
+      return ret;
+    });
+  }
+
+  getJournalByPid(pid: string, model: string): Observable<Journal> {
     var url = this.state.config['api_point'] + '/item/' + pid + '/children';
 
-    this.http.get(url)
-      .map((response: Response) => {
-        //console.log(response);
-        let childs: any[] = response.json();
-        let last = childs[childs.length - 1];
-        console.log(childs);
-        if (childs.length === 0){
-          return new Journal();
-        }
-        if (last['model'] === this.state.config['model']) {
-          let ret = 
-           {
+    return this.http.get(url).map((response: Response) => {
+      //console.log(response);
+      let childs: any[] = response.json();
+      let last = childs[childs.length - 1];
+      if (childs.length === 0) {
+        return new Journal();
+      }
+      if (last['model'] === model) {
+        let ret =
+          {
             pid: last['pid'],
             title: last['title'],
             root_title: last['root_title'],
@@ -85,95 +109,100 @@ export class AppService {
             details: last['details'],
             siblings: childs,
             mods: null,
-            genres  : [],
-            genresObject : {}
+            genres: [],
+            genresObject: {}
           };
-          
-          this.getArticles(last['pid']).subscribe(res => {
-            for(let i in res){
-              let art = res[i];
-              if(art && art['pid']){
-              this.getMods(art['pid']).subscribe(bmods => {
-                art['mods'] = bmods;
-                let mods = bmods["mods:modsCollection"]["mods:mods"];
-                let genre = this.getJsonValue(mods, "mods:genre");
-                if(genre.hasOwnProperty('@type')){
-                  art['genre'] = genre['@type'];
-                } else if(genre.hasOwnProperty('length')){
-                  for(let i in genre){
-                    art['genre'] = genre[i]['@type'];
-                  }
-                }
-                if(this.isGenreVisible(art['genre'])){
-                  if (ret.genresObject.hasOwnProperty(art['genre'])){
-                    ret.genresObject[art['genre']]['articles'].push(art);
-                  } else  {
-                    ret.genres.push(art['genre']);
-                    ret.genresObject[art['genre']] = {};
-                    ret.genresObject[art['genre']]['articles'] = [];
-                    ret.genresObject[art['genre']]['articles'].push(art);
-                  }
-                }
-    //            if (this.service.getJsonValue(mods, "mods:genre") !== null){
-    //            }
-              });
-            }
-            }
-          this.state.stateChanged();
-          });
-      
-          this.getMods(last['pid']).subscribe(mods => ret.mods = mods);
-          return ret;
-        } else {
-          return this.getJournalByPid(last['pid']);
-        }
-      })
-      .subscribe((result: Journal) => this.journal.next(result));
 
-    return this.journal;
+        return ret;
+      } else {
+        return this.getJournalByPid(last['pid'], model);
+      }
+    });
   }
-  
-  isGenreVisible(genre: string): boolean{
+
+  setArticles(ret: Journal, res) {
+
+    for (let i in res) {
+      let art = res[i];
+      if (art && art['pid']) {
+        this.getMods(art['pid']).subscribe(bmods => {
+          art['mods'] = bmods;
+          let mods = bmods["mods:modsCollection"]["mods:mods"];
+          let genre = this.getJsonValue(mods, "mods:genre");
+          if (genre.hasOwnProperty('@type')) {
+            art['genre'] = genre['@type'];
+          } else if (genre.hasOwnProperty('length')) {
+            for (let i in genre) {
+              art['genre'] = genre[i]['@type'];
+            }
+          }
+          if (this.isGenreVisible(art['genre'])) {
+            if (ret.genresObject.hasOwnProperty(art['genre'])) {
+              ret.genresObject[art['genre']]['articles'].push(art);
+            } else {
+              ret.genres.push(art['genre']);
+              ret.genresObject[art['genre']] = {};
+              ret.genresObject[art['genre']]['articles'] = [];
+              ret.genresObject[art['genre']]['articles'].push(art);
+            }
+          }
+          //            if (this.service.getJsonValue(mods, "mods:genre") !== null){
+          //            }
+        });
+      }
+    }
+  }
+
+  isGenreVisible(genre: string): boolean {
     return genre !== 'cover' &&
       genre !== 'advertisement' &&
       genre !== 'colophon';
   }
-  
-  getArticles(pid: string): Observable<any[]>{
-    let url = this.state.config['api_point'] + '/item/' + pid + '/children';
-//    let url = this.state.config['api_point'] + '/search';
-//    url += '?q=parent_pid:' + pid.replace(':', '\\:') + '' + '&fq=fedora.model:article';
 
-    this.http.get(url).map((response: Response) => {
+  getArticles(pid: string): Observable<any[]> {
+    let url = this.state.config['api_point'] + '/item/' + pid + '/children';
+    //    let url = this.state.config['api_point'] + '/search';
+    //    url += '?q=parent_pid:' + pid.replace(':', '\\:') + '' + '&fq=fedora.model:article';
+
+    return this.http.get(url).map((response: Response) => {
       //return response.json()['response']['docs'];
-        let articles = [];
-        let childs: any[] = response.json();
-        
-        for(let ch in childs){
-          if (childs[ch]['model'] === 'article') {
-            articles.push(childs[ch]);
-          } 
+      let articles = [];
+      let childs: any[] = response.json();
+
+      for (let ch in childs) {
+        if (childs[ch]['model'] === 'article') {
+          articles.push(childs[ch]);
         }
-        
-        if (articles.length > 0){
-          this.state.stateChanged();
-          return articles;
-        }else{
+      }
+
+      if (articles.length > 0) {
+        return articles;
+      } else {
+        if (childs.length > 0) {
           return this.getArticles(childs[0]['pid']);
+        } else {
+          return Observable.of([]);
         }
-        
-        
-      })
-      .subscribe((result: any[]) => this.articles.next(result));
-    return this.articles;
+      }
+
+
+    });
   }
 
-  
-  getMods(pid: string): Observable<any>{
+
+  getMods(pid: string): Observable<any> {
     let url = this.state.config['api_point'] + '/item/' + pid + '/streams/BIBLIO_MODS';
     return this.http.get(url).map((res: Response) => {
-      
-      return JSON.parse(xml2json(res.text(),''));
+
+      return JSON.parse(xml2json(res.text(), ''));
+    });
+  }
+
+  getSiblings(pid: string): Observable<any> {
+    let url = this.state.config['api_point'] + '/item/' + pid + '/siblings';
+    return this.http.get(url).map((res: Response) => {
+
+      return res.json()[0]['siblings'];
     });
   }
 
@@ -184,27 +213,27 @@ export class AppService {
       return response.text();
     }).catch(error => { return Observable.of('error gettting content: ' + error); });
   }
-  
+
   /**
    * Utility for get json value from path 
    * Test if json object has that value first
    * If not returns null
    */
-  getJsonValue(json, path: string){
+  getJsonValue(json, path: string) {
     let parts = path.split('/');
     let l = parts.length;
     let i: number = 0;
     let ret = json;
     let exists: boolean = true;
-    while(i<l && exists){
-      if(ret.hasOwnProperty(parts[i])){
+    while (i < l && exists) {
+      if (ret.hasOwnProperty(parts[i])) {
         ret = ret[parts[i]];
       } else {
         exists = false;
       }
       i++;
     }
-    if (exists){
+    if (exists) {
       return ret;
     } else {
       return null;

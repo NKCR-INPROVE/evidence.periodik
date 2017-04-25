@@ -61,18 +61,17 @@ public class ForwardServlet extends HttpServlet {
 //      String handler = request.getRequestURI().substring(handlerIdx);
       Options opts = Options.getInstance();
       String raw = request.getRequestURI();
-      raw = raw.substring(raw.indexOf("api")+3);
-        String solrhost = opts.getString("api.point", "http://localhost:8080/search/api/v5.0")
-                + raw;
-        LOGGER.log(Level.INFO, "requesting url {0}", solrhost);
-        Map<String, String> reqProps = new HashMap<>();
-        reqProps.put("Content-Type", "application/json");
-        reqProps.put("Accept", "application/json");
-        InputStream inputStream = RESTHelper.inputStream(solrhost, reqProps);
-        org.apache.commons.io.IOUtils.copy(inputStream, response.getOutputStream());
-        //out.print(org.apache.commons.io.IOUtils.toString(inputStream, "UTF8"));
-      
-        
+      raw = raw.substring(raw.indexOf("api") + 3);
+      String solrhost = opts.getString("api.point", "http://localhost:8080/search/api/v5.0")
+              + raw;
+      LOGGER.log(Level.INFO, "requesting url {0}", solrhost);
+      Map<String, String> reqProps = new HashMap<>();
+      reqProps.put("Content-Type", "application/json");
+      reqProps.put("Accept", "application/json");
+      InputStream inputStream = RESTHelper.inputStream(solrhost, reqProps);
+      org.apache.commons.io.IOUtils.copy(inputStream, response.getOutputStream());
+      //out.print(org.apache.commons.io.IOUtils.toString(inputStream, "UTF8"));
+
     } catch (IOException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     } catch (JSONException ex) {

@@ -24,16 +24,14 @@ export class SearchService {
     private state: AppState,
     private http: Http) { }
 
-  getAktualni() {
+  search(q: string) {
 
     var url = this.state.config['api_point'] + "/search";
 
     var params = new URLSearchParams();
 
-    params.set('q', 'root_pid:"' + this.state.config['journal'] + '"');
-    params.set('fq', 'fedora.model:"' + this.state.config['model'] + '"');
-    params.set('sort', this.state.config['sort_field'] + '+desc');
-    params.set('rows', '1');
+    params.set('q', q);
+    params.set('fq', 'root_pid:"' + this.state.config['journal'] + '"');
     return this.http.get(url, { search: params }).map(res => {
       return res.json();
     });

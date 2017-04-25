@@ -6,21 +6,11 @@
           <div *ngIf="!isRoot()" class="col-xs-12 col-sm-5 col-md-4 col-lg-3 app-col-left">
             <div class="app-section">
               <button type="button" class="btn app-btn-arrow app-btn-arrow-left app-brand lighten-4 app-brand-text"
-                      (click)="goToRoot()">Zpět na ročníky</button>
+                      (click)="goToRoot()">{{'Zpět na ročníky' | translate}}</button>
             </div><!--/.app item -->
             <div class="app-item" *ngFor="let item of parentItems" (click)="setItems(item.pid, currentParent)">
               <button class="app-btn-arrow app-btn-arrow-right" [class.app-btn-active]="item.pid === currentPid">
-                <div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                      <img class="media-object" [src]="img(item.pid)" alt="" />
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="media-heading app-font-pt-serif">2016, ročník 5	</h4>
-                    <span class="shades black-text app-font-s14">ISBN: 978-5698-2965-9</span>
-                  </div>
-                </div>
+                <app-archiv-item-left [item]="item" ></app-archiv-item-left>
               </button>
             </div><!--/.app item -->
           </div><!--/.col -->

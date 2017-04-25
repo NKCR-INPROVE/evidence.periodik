@@ -1,6 +1,6 @@
 {
   "/api/**": {
-    "target": "http://kramerius.lib.cas.cz/search/api/v5.0",
+    "target": "https://kramerius.lib.cas.cz/search/api/v5.0",
     "ignorePath": false,
     "logLevel": "debug",
     "pathRewrite": {
@@ -25,7 +25,17 @@
     "pathRewrite": {
       "^/texts":""
     },
-    "changeOrigin": true,
+    "changeOrigin": false,
+    "secure": false
+  },
+  "/search": {
+    "target": "https://kramerius.lib.cas.cz/search/api/v5.0/search",
+    "ignorePath": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/search":""
+    },
+    "changeOrigin": false,
     "secure": false
   }
 }

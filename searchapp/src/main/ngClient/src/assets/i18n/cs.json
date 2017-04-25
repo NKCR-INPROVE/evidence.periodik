@@ -1,5 +1,6 @@
 {
   "q.placeholder": "Hledej v digitální knihovně ...",
+  "Zpět na ročníky":"Zpět na ročníky",
   "menu": {
     "home_": "Aktuální číslo",
     "o-casopisu_": "O časopisu",
@@ -24,6 +25,7 @@
       "caste-dotazy_": "Časté dotazy"
     },
     "archiv_": "Archiv",
+    "hledat_": "Hledat",
     "kontakt_": "Kontakt",
     "e-shop_": "Eshop"
   },

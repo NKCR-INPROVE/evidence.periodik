@@ -1,5 +1,8 @@
 {
   "q.placeholder": "Search digital library ...",
+  "Zpět na ročníky":"Back to volumes",
+  "ARCHIV STARŠÍCH ROČNÍKŮ": "OLD NUMBERS ARCHIVE",
+  "PROHLÍŽET CELÉ ČÍSLO": "VIEW WHOLE NUMBER", 
   "menu":{
     "home_": "Actual number",
     "o-casopisu_": "About journal",
@@ -23,11 +26,10 @@
       "caste-dotazy_":"FAQ"
     },
     "archiv_": "Archive",
+    "hledat_": "Search",
     "kontakt_": "Contact",
     "e-shop_": "Eshop"
   },
-  "ARCHIV STARŠÍCH ROČNÍKŮ": "OLD NUMBERS ARCHIVE",
-  "PROHLÍŽET CELÉ ČÍSLO": "VIEW WHOLE NUMBER", 
   "genre": {
     "news": "News",
     "table of content": "Table of content",

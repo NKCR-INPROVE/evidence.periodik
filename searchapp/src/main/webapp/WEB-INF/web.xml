@@ -23,6 +23,7 @@
         <servlet-name>InitServlet</servlet-name>
         <url-pattern>/InitServlet</url-pattern>
     </servlet-mapping>
+    
     <servlet>
         <servlet-name>StaticServlet</servlet-name>
         <jsp-file>/index.jsp</jsp-file>
@@ -32,13 +33,13 @@
         <url-pattern>/home</url-pattern>
         <url-pattern>/archiv/*</url-pattern>
         <url-pattern>/pro-autory/*</url-pattern>
-        <url-pattern>/archiv/*</url-pattern>
         <url-pattern>/o-casopisu/*</url-pattern>
         <url-pattern>/kontakt/*</url-pattern>
         <url-pattern>/e-shop/*</url-pattern>
         <url-pattern>/hledat/*</url-pattern>
         <url-pattern>/article/*</url-pattern>
     </servlet-mapping>
+    
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.SearchServlet</servlet-class>
@@ -47,6 +48,7 @@
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search/*</url-pattern>
     </servlet-mapping>
+    
     <servlet>
         <servlet-name>ForwardServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.ForwardServlet</servlet-class>
@@ -75,12 +77,10 @@
         <url-pattern>/app/assets/i18n/*</url-pattern>
         <url-pattern>/i18n/*</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ImageServlet</servlet-name>
         <url-pattern>/img</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.LoginServlet</servlet-class>
@@ -97,8 +97,6 @@
         <servlet-name>PdfServlet</servlet-name>
         <url-pattern>/pdf</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet>
         <servlet-name>FavoritesServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.FavoritesServlet</servlet-class>
@@ -108,7 +106,14 @@
         <url-pattern>/fav</url-pattern>
     </servlet-mapping>
     
-    
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>cz.incad.k5journals.searchapp.IndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

@@ -73,8 +73,29 @@ public class Indexer {
       idoc.addField("pid", pid);
       mods = getModsToJson(pid).getJSONObject("mods:modsCollection").getJSONObject("mods:mods");
       idoc.addField("mods", mods.toString());
+      JSONObject item = getItem(pid);
+      idoc.addField("datanode", item.optBoolean("datanode"));
+      idoc.addField("model", item.optBoolean("model"));
+      idoc.addField("root_title", item.optString("root_title"));
+      
+      JSONArray ctx = item.getJSONArray("context");
+      for(int i = 0; i<ctx.length(); i++){
+        String model_path = "";
+        JSONArray ja = ctx.getJSONArray(i);
+        idoc.addField("parents", ja.getJSONObject(ja.length() - 1).getString("pid"));
+        for(int j = 0; j<ja.length(); j++){
+          model_path += ja.getJSONObject(j).getString("model") + "/";
+        }
+        idoc.addField("model_paths", model_path);
+      }
+      
+      
+      if(item.has("pdf")){
+        idoc.addField("url_pdf", item.getJSONObject("pdf").getString("url"));
+      }
+      
       setTitleInfo(idoc, mods);
-      LOGGER.log(Level.INFO, "idoc: {0}", idoc);
+      //LOGGER.log(Level.INFO, "idoc: {0}", idoc);
       client.add(idoc);
       client.commit();
     } catch (SolrServerException | IOException ex) {
@@ -91,6 +112,11 @@ public class Indexer {
    * @param pid
    */
   private void indexPidAndChildren(String pid) {
+    indexPid(pid);
+    JSONArray children = getChildren(pid);
+    for(int i = 0; i<children.length(); i++){
+      indexPid(children.getJSONObject(i).getString("pid"));
+    }
 
   }
 
@@ -116,9 +142,56 @@ public class Indexer {
       return null;
     }
   }
+  
+  private JSONObject getItem(String pid) {
+    try {
+
+      String k5host = opts.getString("api.point", "http://localhost:8080/search/api/v5.0")
+              + "/item/" + pid;
+      Map<String, String> reqProps = new HashMap<>();
+      reqProps.put("Content-Type", "application/json");
+      reqProps.put("Accept", "application/json");
+      InputStream inputStream = RESTHelper.inputStream(k5host, reqProps);
+      return new JSONObject(org.apache.commons.io.IOUtils.toString(inputStream, Charset.forName("UTF-8")));
+    } catch (JSONException | IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      return null;
+    }
+  }
+  
+  private JSONArray getStreams(String pid) {
+    try {
+
+      String k5host = opts.getString("api.point", "http://localhost:8080/search/api/v5.0")
+              + "/item/" + pid + "/streams";
+      Map<String, String> reqProps = new HashMap<>();
+      reqProps.put("Content-Type", "application/json");
+      reqProps.put("Accept", "application/json");
+      InputStream inputStream = RESTHelper.inputStream(k5host, reqProps);
+      return new JSONArray(org.apache.commons.io.IOUtils.toString(inputStream, Charset.forName("UTF-8")));
+    } catch (JSONException | IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      return null;
+    }
+  }
+  
+  private JSONArray getChildren(String pid) {
+    try {
+
+      String k5host = opts.getString("api.point", "http://localhost:8080/search/api/v5.0")
+              + "/item/" + pid + "/children";
+      Map<String, String> reqProps = new HashMap<>();
+      reqProps.put("Content-Type", "application/json");
+      reqProps.put("Accept", "application/json");
+      InputStream inputStream = RESTHelper.inputStream(k5host, reqProps);
+      return new JSONArray(org.apache.commons.io.IOUtils.toString(inputStream, Charset.forName("UTF-8")));
+    } catch (JSONException | IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      return null;
+    }
+  }
 
   private void setTitleInfo(SolrInputDocument idoc, JSONObject mods) {
-    String title = "";
 
     Object o = mods.get("mods:titleInfo");
     if (o instanceof JSONObject) {
@@ -129,6 +202,7 @@ public class Indexer {
 
     } else if (o instanceof JSONArray) {
       JSONArray ja = (JSONArray) o;
+      boolean hasDefault = false;
       for (int i = 0; i < ja.length(); i++) {
         JSONObject jo = ja.getJSONObject(i);
         if(jo.has("lang")){
@@ -140,7 +214,14 @@ public class Indexer {
           idoc.addField("title", jo.optString("mods:title"));
           idoc.addField("subtitle", jo.optString("mods:subTitle"));
           idoc.addField("non_sort_title", jo.optString("mods:nonSort"));
+          hasDefault = true;
         }
+      }
+      if(!hasDefault){
+          JSONObject jo = ja.getJSONObject(0);
+          idoc.addField("title", jo.optString("mods:title"));
+          idoc.addField("subtitle", jo.optString("mods:subTitle"));
+          idoc.addField("non_sort_title", jo.optString("mods:nonSort"));
       }
     }
 

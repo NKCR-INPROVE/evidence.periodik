@@ -1,65 +1,60 @@
-
-    <section class="app-content">
-      <div class="container">
-        <div class="row">
-          
-          <div *ngIf="!isRoot()" class="col-xs-12 col-sm-5 col-md-4 col-lg-3 app-col-left">
-            <div class="app-section">
-              <button type="button" class="btn app-btn-arrow app-btn-arrow-left app-brand lighten-4 app-brand-text"
-                      (click)="goToRoot()">Zpět na ročníky</button>
-            </div><!--/.app item -->
-            <div class="app-item" *ngFor="let item of parentItems" (click)="setItems(item.pid, currentParent)">
-              <button class="app-btn-arrow app-btn-arrow-right" [class.app-btn-active]="item.pid === currentPid">
-                <div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                      <img class="media-object" [src]="img(item.pid)" alt="" />
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="media-heading app-font-pt-serif">2016, ročník 5	</h4>
-                    <span class="shades black-text app-font-s14">ISBN: 978-5698-2965-9</span>
-                  </div>
-                </div>
-              </button>
-            </div><!--/.app item -->
-          </div><!--/.col -->
-          
-          <div [class]="isRoot() ? 'col-xs-12 col-sm-12 col-md-9 col-md-offset-3 app-col-right' : 
-            'col-xs-12 col-sm-7 col-md-8 col-lg-9 app-col-right'">
-            <div class="app-sort-headline">
-              <div class="row">
-                <div class="col-xs-12 col-sm-6" *ngIf="currentItem">
-                  <h2 class="app-font-s42 app-clean-mg" [ngSwitch]="currentItem['model']">
-                    <span *ngSwitchCase="'periodical'">
-                    {{'Ročníky' || translate}}
-                    </span>
-                    <span *ngSwitchCase="'periodicalvolume'">
-                    {{currentItem['details']['year']}}, {{'ročník' | translate}} {{currentItem['details']['volumeNumber']}}
-                    </span>
-                  </h2>
-                </div><!--/.col -->
-                <div *ngIf="isRoot()" class="col-xs-12 col-sm-6">
-                  <ul class="list-unstyled app-select">
-                    <li>Výsledky řadit:</li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">od nejnovějších <span class="caret"></span></a>
-                      <ul class="dropdown-menu app-clean-border">
-                        <li><a href="#">od nejstarších</a></li>
-                        <li><a href="#">dle relevance</a></li>
-                      </ul>
-                    </li>
+<section class="app-content">
+  <div class="container">
+    <div class="row">
+      <div *ngIf="!isRoot()" class="col-xs-12 col-sm-5 col-md-4 col-lg-3 app-col-left">
+        <div class="app-section">
+          <button type="button" class="btn app-btn-arrow app-btn-arrow-left app-brand lighten-4 app-brand-text" (click)="goToRoot()">Zpět na ročníky</button>
+        </div><!--/.app-section -->
+        <div class="app-item" *ngFor="let item of parentItems" (click)="setItems(item.pid, currentParent)">
+          <button class="app-btn-arrow app-btn-arrow-right" [class.app-btn-active]="item.pid === currentPid">
+            <div class="media">
+              <div class="media-left">
+                <a href="#">
+                  <img class="media-object" [src]="img(item.pid)" alt="" />
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading app-font-pt-serif">2016, ročník 5	</h4>
+                <span class="shades black-text app-font-s14">ISBN: 978-5698-2965-9</span>
+              </div>
+            </div>
+          </button>
+        </div><!--/.app-item -->
+      </div><!--/.col -->
+      <div [class]="isRoot() ? 'col-xs-12 col-sm-12 col-md-9 col-md-offset-3 app-col-right' : 'col-xs-12 col-sm-7 col-md-8 col-lg-9 app-col-right'">
+        <div class="app-sort-headline">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6" *ngIf="currentItem">
+              <h2 class="app-font-s42 app-clean-mg" [ngSwitch]="currentItem['model']">
+                <span *ngSwitchCase="'periodical'">
+                {{'Ročníky' || translate}}
+                </span>
+                <span *ngSwitchCase="'periodicalvolume'">
+                {{currentItem['details']['year']}}, {{'ročník' | translate}} {{currentItem['details']['volumeNumber']}}
+                </span>
+              </h2>
+            </div><!--/.col -->
+            <div *ngIf="isRoot()" class="col-xs-12 col-sm-6">
+              <ul class="list-unstyled app-select">
+                <li>Výsledky řadit:</li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">od nejnovějších <span class="caret"></span></a>
+                  <ul class="dropdown-menu app-clean-border">
+                    <li><a href="#">od nejstarších</a></li>
+                    <li><a href="#">dle relevance</a></li>
                   </ul>
-                </div><!--/.col -->
-              </div><!--/.row -->
-            </div><!--/.app section -->
-            <div *ngFor="let item of items" class="media">
-              <app-archiv-item [item]="item" (drillDown)="drillDown($event)"></app-archiv-item>
-            </div><!--/.media -->
-            <p>
-              Starší ročníky najdete v <a href="#" title="Digitální knihovně AV ČR">Digitální knihovně AV ČR</a>
-            </p><!--/.app item -->
-          </div><!--/.col -->
-        </div><!--./row -->
-      </div><!--/.container -->
-    </section><!--/.section -->
+                </li>
+              </ul>
+            </div><!--/.col -->
+          </div><!--/.row -->
+        </div><!--/.app-sort-headline -->
+        <div *ngFor="let item of items" class="media">
+          <app-archiv-item [item]="item" (drillDown)="drillDown($event)"></app-archiv-item>
+        </div><!--/.media -->
+        <p>
+          Starší ročníky najdete v <a href="#" title="Digitální knihovně AV ČR">Digitální knihovně AV ČR</a>
+        </p><!--/.app item -->
+      </div><!--/.col -->
+    </div><!--./row -->
+  </div><!--/.container -->
+</section><!--/.app-content -->

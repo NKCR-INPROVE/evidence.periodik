@@ -40,18 +40,16 @@
                       </ul>
                     </li>
                   </ul>
-                </li>
-              </ul>
-            </div><!--/.col -->
-          </div><!--/.row -->
-        </div><!--/.app-sort-headline -->
-        <div *ngFor="let item of items" class="media">
-          <app-archiv-item [item]="item" (drillDown)="drillDown($event)"></app-archiv-item>
-        </div><!--/.media -->
-        <p>
-          Starší ročníky najdete v <a href="#" title="Digitální knihovně AV ČR">Digitální knihovně AV ČR</a>
-        </p><!--/.app item -->
-      </div><!--/.col -->
-    </div><!--./row -->
-  </div><!--/.container -->
-</section><!--/.app-content -->
+                </div><!--/.col -->
+              </div><!--/.row -->
+            </div><!--/.app section -->
+            <div *ngFor="let item of items" class="media">
+              <app-archiv-item [item]="item" (drillDown)="drillDown($event)"></app-archiv-item>
+            </div><!--/.media -->
+            <p>
+              Starší ročníky najdete v <a href="#" title="Digitální knihovně AV ČR">Digitální knihovně AV ČR</a>
+            </p><!--/.app item -->
+          </div><!--/.col -->
+        </div><!--./row -->
+      </div><!--/.container -->
+    </section><!--/.section -->

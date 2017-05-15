@@ -1,8 +1,7 @@
 <h3 class="app-brand-text">
-    <a  [routerLink]="['/article', article.pid]">{{nonSort}} {{title}}</a>
+  <a  [routerLink]="['/article', article.pid]">{{nonSort}} {{title}}</a>
 </h3>
 <div>{{subTitle}}</div>
-
 <div>
   <span *ngFor="let author of authors; let last = last">{{author}}<span *ngIf="!last"> - </span></span>
 <span class="app-pipe">|</span><!--

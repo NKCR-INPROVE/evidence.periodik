@@ -4,7 +4,8 @@ html {
   height: 100%;
 }
 
-body {
+body, 
+app-root {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -35,6 +36,10 @@ header {
 
 p {
   margin-bottom: 20px
+}
+
+a {
+  cursor: pointer;
 }
 
 hr {

@@ -1,4 +1,14 @@
 {
+  "/search/**": {
+    "target": "http://localhost:8983/solr/",
+    "ignorePath": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/search":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  },
   "/api/**": {
     "target": "https://kramerius.lib.cas.cz/search/api/v5.0",
     "ignorePath": false,

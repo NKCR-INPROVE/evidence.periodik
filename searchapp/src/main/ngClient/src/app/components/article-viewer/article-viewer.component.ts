@@ -86,7 +86,7 @@ export class ArticleViewerComponent implements OnInit {
               this.service.getMods(a['pid']).subscribe(mods => this.journal.mods = mods);
               this.service.getSiblings(a['pid']).subscribe(siblings => {
                 this.journal.siblings = siblings;
-                console.log(siblings);
+                //console.log(siblings);
                 for (let i = 0; i < this.journal.siblings.length; i++) {
                   if (this.journal.siblings[i]['pid'] === this.journal.pid) {
                     this.siblingIndex = i;

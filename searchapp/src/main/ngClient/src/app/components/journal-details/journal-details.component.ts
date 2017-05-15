@@ -27,7 +27,7 @@ export class JournalDetailsComponent implements OnInit {
 
   details() {
     if (this.journal.mods) {
-      let mods = this.journal.mods["mods:modsCollection"]["mods:mods"];
+      let mods = this.journal.mods;
       if (this.journal.model === 'periodicalvolume') {
         
         if(mods['mods:originInfo']){

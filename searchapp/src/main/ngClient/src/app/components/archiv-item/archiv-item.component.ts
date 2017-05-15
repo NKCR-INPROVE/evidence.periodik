@@ -23,10 +23,12 @@ export class ArchivItemComponent implements OnInit {
   constructor(
     private service: AppService,
     private state: AppState) { }
-
+  
   ngOnInit() {
-    this.service.getMods(this.item['pid']).subscribe(res => {
-      let mods = res["mods:modsCollection"]["mods:mods"];
+    //this.service.getMods(this.item['pid']).subscribe(res => {
+    
+      //let mods = res["mods:modsCollection"]["mods:mods"];
+      let mods = JSON.parse(this.item['mods']);
       if (this.item['model'] === 'periodicalvolume') {
 
         if (mods['mods:originInfo']) {
@@ -96,7 +98,7 @@ export class ArchivItemComponent implements OnInit {
           }
         }
       }
-    });
+    //});
   }
 
   onDrillDown() {

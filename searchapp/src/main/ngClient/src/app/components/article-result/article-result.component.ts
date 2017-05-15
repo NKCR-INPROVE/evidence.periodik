@@ -42,7 +42,9 @@ export class ArticleResultComponent implements OnInit {
       }
     );
 
-    let mods = this.article['mods']["mods:modsCollection"]["mods:mods"];
+    //let mods = this.article['mods']["mods:modsCollection"]["mods:mods"];
+
+    let mods = this.article['mods'];
     if (mods["mods:relatedItem"] && mods["mods:relatedItem"]["mods:part"] && mods["mods:relatedItem"]["mods:part"]["mods:extent"]) {
       this.rozsah = mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:start"] +
         ' - ' + mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:end"];

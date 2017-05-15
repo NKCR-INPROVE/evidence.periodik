@@ -49,12 +49,28 @@ export class AppService {
       });
   }
 
-  getChildren(pid: string): Observable<any> {
+  getChildrenApi(pid: string): Observable<any> {
     var url = this.state.config['api_point'] + '/item/' + pid + '/children';
 
     return this.http.get(url)
       .map((response: Response) => {
         return response.json();
+      });
+  }
+
+  getChildren(pid: string): Observable<any> {
+    var url = '/search/journal/select';
+    let params = new URLSearchParams();
+
+    params.set('q', '*:*');
+    params.set('fq', 'parents:"' + pid + '"');
+    params.set('wt', 'json');
+    params.set('sort', 'idx asc');
+    params.set('rows', '500');
+
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        return response.json()['response']['docs'];
       });
   }
 
@@ -125,9 +141,9 @@ export class AppService {
     for (let i in res) {
       let art = res[i];
       if (art && art['pid']) {
-        this.getMods(art['pid']).subscribe(bmods => {
-          art['mods'] = bmods;
-          let mods = bmods["mods:modsCollection"]["mods:mods"];
+        this.getMods(art['pid']).subscribe(mods => {
+          art['mods'] = mods;
+          //let mods = bmods["mods:modsCollection"]["mods:mods"];
           let genre = this.getJsonValue(mods, "mods:genre");
           if (genre.hasOwnProperty('@type')) {
             art['genre'] = genre['@type'];
@@ -191,14 +207,45 @@ export class AppService {
 
 
   getMods(pid: string): Observable<any> {
+    let url = '/search/journal/select';
+    let params = new URLSearchParams();
+
+    params.set('q', '*:*');
+    params.set('fq', 'pid:"' + pid + '"');
+    params.set('wt', 'json');
+    params.set('fl', 'mods');
+
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        return JSON.parse(response.json()['response']['docs'][0]['mods']);
+      });
+  }
+
+
+  getModsK5(pid: string): Observable<any> {
     let url = this.state.config['api_point'] + '/item/' + pid + '/streams/BIBLIO_MODS';
     return this.http.get(url).map((res: Response) => {
 
-      return JSON.parse(xml2json(res.text(), ''));
+      return JSON.parse(xml2json(res.text(), ''))["mods:modsCollection"]["mods:mods"];
     });
   }
 
   getSiblings(pid: string): Observable<any> {
+    let url = '/search/journal/select';
+    let params = new URLSearchParams();
+
+    params.set('q', 'pid:"' + pid + '"');
+    params.set('wt', 'json');
+    params.set('fl', 'parents');
+
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        let parent = response.json()['response']['docs'][0]['parents'][0];
+        return this.getChildren(parent).subscribe();
+      });
+  }
+
+  getSiblingsk5(pid: string): Observable<any> {
     let url = this.state.config['api_point'] + '/item/' + pid + '/siblings';
     return this.http.get(url).map((res: Response) => {
 

@@ -11,12 +11,10 @@
           </ul>
         </li>
       </ul>
-    </div>
-    <!--/.col -->
+    </div><!--/.col -->
     <div class="app-col-middle">
       <input type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." [(ngModel)]="criterium.value" />
-    </div>
-    <!--/.col -->
+    </div><!--/.col -->
     <div class="app-col-right text-right">
       <ul *ngIf="!last" class="list-unstyled app-clean-mg app-select">
         <li class="dropdown">
@@ -26,7 +24,6 @@
           </ul>
         </li>
       </ul>
-
       <button *ngIf="last" class="btn app-btn app-btn-square app-ico-white app-ico-brand-hover app-ico-36-36 app-clean-radius" (click)="search()">
         <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.1 24.1">
           <title>lupa</title>

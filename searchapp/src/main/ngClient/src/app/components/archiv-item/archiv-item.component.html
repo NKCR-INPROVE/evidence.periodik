@@ -1,13 +1,13 @@
 <div class="media-left">
-    <img class="media-object app-height-140" [src]="img()" alt="" />
+    <img class="media-object app-height-140 app-cursor-pointer" [src]="img()" (click)="onDrillDown()" alt="" />
 </div><!--/.media-left -->
 <div class="media-body">
-  <h3 class="media-heading app-brand-text" (click)="onDrillDown()">
+  <h3 class="media-heading app-brand-text app-cursor-pointer" (click)="onDrillDown()">
     <span *ngIf="year">{{'Rok' | translate}} {{year}}</span>
     <span *ngIf="volumeNumber">, {{'ročník' | translate}} {{volumeNumber}}</span>
     <span *ngIf="issueNumber"> {{'číslo' | translate}} {{issueNumber}}</span>
     <span *ngIf="partName">, {{partName}}</span>
-  </h3>
+  </h3><!--/.media-hading -->
   <span *ngIf="isbn">ISBN: {{isbn}}</span>
 </div><!--/.media-body -->
 

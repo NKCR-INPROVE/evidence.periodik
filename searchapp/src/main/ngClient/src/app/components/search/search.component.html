@@ -1,384 +1,393 @@
-
-    <section class="app-content">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2">
-            <!-- Tab panes -->
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="cokoliv">
-                
-                    <app-search-criteria (onSearch)="search($event)"></app-search-criteria>
-                
-                
-                <div class="app-section app-section-slider app-brand lighten-6">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <input type="checkbox" />
-                      <label>pouze v recenzovaných článcích</label>
-                    </div><!--/.col -->
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
-                      <form class="form-inline">
-                        <div class="form-group">
-                          <label>Datum publikování:</label> od roku <input type="text" class="form-control"> do roku <input type="text" class="form-control">
-                        </div>
-                      </form>
-                    </div><!--/.col -->
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
-                      <div id="slider"></div>
-                    </div><!--/.col -->
-                  </div><!--/.row -->
-                </div><!--/.app-section -->
-                <div class="app-section app-sort-headline">
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-6">
-                      <h2 class="app-font-s42 app-clean-mg">Výsledky vyhledávání</h2>
-                    </div><!--/.col -->
-                    <div class="col-xs-12 col-sm-6">
-                      <ul class="list-unstyled app-select">
-                        <li>Výsledky řadit:</li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">od nejnovějších <span class="caret"></span></a>
-                          <ul class="dropdown-menu app-clean-border">
-                            <li><a href="#">od nejstarších</a></li>
-                            <li><a href="#">dle relevance</a></li>
-                          </ul>
-                        </li>
+<section class="app-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="cokoliv">
+            <app-search-criteria (onSearch)="search($event)"></app-search-criteria>
+            <div class="app-section app-section-slider app-brand lighten-6">
+              <div class="row">
+                <div class="col-xs-12">
+                  <input type="checkbox" />
+                  <label>pouze v recenzovaných článcích</label>
+                </div><!--/.col -->
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+                  <form class="form-inline">
+                    <div class="form-group">
+                      <label>Datum publikování:</label> od roku <input type="text" class="form-control"> do roku <input type="text" class="form-control">
+                    </div>
+                  </form>
+                </div><!--/.col -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
+                  <div id="slider"></div>
+                </div><!--/.col -->
+              </div><!--/.row -->
+            </div><!--/.app-section -->
+            
+            <div class="app-section app-sort-headline">
+              <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  <h2 class="app-font-s42 app-clean-mg">Výsledky vyhledávání</h2>
+                </div><!--/.col -->
+                <div class="col-xs-12 col-sm-6">
+                  <ul class="list-unstyled app-select">
+                    <li>Výsledky řadit:</li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">od nejnovějších <span class="caret"></span></a>
+                      <ul class="dropdown-menu app-clean-border">
+                        <li><a href="#">od nejstarších</a></li>
+                        <li><a href="#">dle relevance</a></li>
                       </ul>
-                    </div><!--/.col -->
-                  </div><!--/.row -->
-                  <hr />
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-6">
-                      Zobrazeny výsledky: <span class="app-font-roboto-cb">11 – 20</span> z celkového počtu <span class="app-font-roboto-cb">{{numFound}}</span>
-                    </div><!--/.col -->
-                    <div class="col-xs-12 col-sm-6">
-                      Počet výsledků na stránku:
-                      <nav class="app-nav-items">
-                        <ul class="list-unstyled app-brand-text app-font-roboto-cb">
-                          <li class="active"><a href="">10</a></li>
-                          <li><a href="">20</a></li>
-                          <li><a href="">30</a></li>
-                        </ul>
-                      </nav>
-                    </div><!--/.col -->
-                  </div><!--/.row -->
-                </div><!--/.app-section -->
-                <div class="app-section app-section-results">
-                  <div class="app-item">
-                    2014, ročník 7, číslo 1, s. 68-99
-                    <h3 class="app-brand-text app-font-pt-serif">Curabitur scelerisque enim in tellus vulputate</h3>
-                      Jan Munzar
-                  </div><!--/.app-item -->
-                  <div class="app-item">
-                    2014, ročník 7, číslo 1, s. 68-99
-                    <h3 class="app-brand-text app-font-pt-serif">Curabitur scelerisque enim in tellus vulputate</h3>
-                      Jan Munzar
-                  </div><!--/.app-item -->
-                  <div class="app-item">
-                    2014, ročník 7, číslo 1, s. 68-99
-                    <h3 class="app-brand-text app-font-pt-serif">Curabitur scelerisque enim in tellus vulputate</h3>
-                      Jan Munzar
-                  </div><!--/.app-item -->
-                  <hr />
-                </div><!--/.app-section -->
-                <!-- App pagination -->
-                <nav class="app-pagination text-center">
-                  <ul class="pagination">
-                    <li>
-                      <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">Předchozí</span>
-                      </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                      <a href="#" aria-label="Next">
-                        <span aria-hidden="true">Další</span>
-                      </a>
                     </li>
                   </ul>
-                </nav><!--/.app-pagination -->
-              </div><!--/.tab-pane -->
-              <div role="tabpanel" class="tab-pane" id="rejstrik-autoru">
-                <div class="app-section app-section-search-form app-section-search-form-full">
-                  <div class="app-item">
-                    <div class="app-col-left">
-                      <input id="app-search-authors" type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." data-provide="typeahead" autocomplete="off">
-                    </div>
-                    <!--/.col -->
-                    <div class="app-col-right">
-                      <button class="btn app-btn app-btn-square app-ico-white app-ico-brand-hover app-ico-36-36 app-clean-radius">
-                        <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.1 24.1">
-                          <title>lupa</title>
-                          <path d="M523.44,392.24l-5.53-5.53a10.64,10.64,0,0,1-3.2,3.2l5.53,5.53a2.26,2.26,0,0,0,3.2-3.2h0Z" transform="translate(-500 -372)"/>
-                          <path d="M518.08,381a9,9,0,1,0-9,9,9,9,0,0,0,9-9h0Zm-9,6.78a6.78,6.78,0,1,1,6.78-6.78,6.79,6.79,0,0,1-6.78,6.78h0Z" transform="translate(-500 -372)"/>
-                          <path d="M503.77,381h1.51a3.77,3.77,0,0,1,3.77-3.77v-1.51a5.28,5.28,0,0,0-5.27,5.27h0Z" transform="translate(-500 -372)"/>
-                        </svg>
-                      </button>
-                    </div><!--/.col -->
-                  </div><!--/.app-item -->
-                </div><!--/.app-section -->
-                <div class="app-section">
+                </div><!--/.col -->
+              </div><!--/.row -->
+              <hr />
+              <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  Zobrazeny výsledky: <span class="app-font-roboto-cb">11 – 20</span> z celkového počtu <span class="app-font-roboto-cb">{{numFound}}</span>
+                </div><!--/.col -->
+                <div class="col-xs-12 col-sm-6">
+                  Počet výsledků na stránku:
                   <nav class="app-nav-items">
-                    <ul class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
-                      <li class="active"><a href="#" class="active" title="">A</a></li>
-                      <li><a href="#" title="">B</a></li>
-                      <li><a href="#" title="">C</a></li>
-                      <li><a href="#" title="">D</a></li>
-                      <li><a href="#" title="">E</a></li>
-                      <li><a href="#" title="">F</a></li>
-                      <li><span class="app-brand-text text-lighten-2">G</span></li>
-                      <li><a href="#" title="">H</a></li>
-                      <li><a href="#" title="">I</a></li>
-                      <li><a href="#" title="">J</a></li>
-                      <li><a href="#" title="">K</a></li>
-                      <li><a href="#" title="">L</a></li>
-                      <li><a href="#" title="">M</a></li>
-                      <li><a href="#" title="">N</a></li>
-                      <li><a href="#" title="">O</a></li>
-                      <li><a href="#" title="">P</a></li>
-                      <li><span class="app-brand-text text-lighten-2">Q</span></li>
-                      <li><a href="#" title="">R</a></li>
-                      <li><a href="#" title="">S</a></li>
-                      <li><a href="#" title="">T</a></li>
-                      <li><a href="#" title="">U</a></li>
-                      <li><a href="#" title="">V</a></li>
-                      <li><a href="#" title="">W</a></li>
-                      <li><span class="app-brand-text text-lighten-2">X</span></li>
-                      <li><span class="app-brand-text text-lighten-2">Y</span></li>
-                      <li><a href="#" title="">Z</a></li>
+                    <ul class="list-unstyled app-brand-text app-font-roboto-cb">
+                      <li class="active"><a href="">10</a></li>
+                      <li><a href="">20</a></li>
+                      <li><a href="">30</a></li>
                     </ul>
-                  </nav>
-                </div><!--/.app-section -->
-                <div class="app-section app-font-pt-serif app-brand-text">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <ul class="list-unstyled">
-                        <li><a href="#" title="">Abdigal Jiří</a></li>
-                        <li><a href="#" title="">Albrech Jan</a></li>
-                        <li><a href="#" title="">Amaroun Václav</a></li>
-                        <li><a href="#" title="">Antalová Jiřina</a></li>
-                        <li><a href="#" title="">Abdigal Jiří</a></li>
-                        <li><a href="#" title="">Albrech Jan</a></li>
-                        <li><a href="#" title="">Amaroun Václav</a></li>
-                        <li><a href="#" title="">Antalová Jiřina</a></li>
-                        <li><a href="#" title="">Abdigal Jiří</a></li>
-                        <li><a href="#" title="">Albrech Jan</a></li>
-                        <li><a href="#" title="">Amaroun Václav</a></li>
-                        <li><a href="#" title="">Antalová Jiřina</a></li>
-                        <li><a href="#" title="">Abdigal Jiří</a></li>
-                        <li><a href="#" title="">Albrech Jan</a></li>
-                        <li><a href="#" title="">Amaroun Václav</a></li>
-                        <li><a href="#" title="">Antalová Jiřina</a></li>
-                        <li><a href="#" title="">Abdigal Jiří</a></li>
-                      </ul>
-                    </div><!--/.col -->
-                    <div class="col-xs-6">
-                      <ul class="list-unstyled">
-                        <li><a href="#" title="">Abdigal Jiří</a></li>
-                        <li><a href="#" title="">Albrech Jan</a></li>
-                        <li><a href="#" title="">Amaroun Václav</a></li>
-                        <li><a href="#" title="">Antalová Jiřina</a></li>
-                        <li><a href="#" title="">Abdigal Jiří</a></li>
-                        <li><a href="#" title="">Albrech Jan</a></li>
-                        <li><a href="#" title="">Amaroun Václav</a></li>
-                        <li><a href="#" title="">Antalová Jiřina</a></li>
-                        <li><a href="#" title="">Abdigal Jiří</a></li>
-                        <li><a href="#" title="">Albrech Jan</a></li>
-                        <li><a href="#" title="">Amaroun Václav</a></li>
-                        <li><a href="#" title="">Antalová Jiřina</a></li>
-                        <li><a href="#" title="">Abdigal Jiří</a></li>
-                        <li><a href="#" title="">Albrech Jan</a></li>
-                        <li><a href="#" title="">Amaroun Václav</a></li>
-                        <li><a href="#" title="">Antalová Jiřina</a></li>
-                        <li><a href="#" title="">Abdigal Jiří</a></li>
-                      </ul>
-                    </div><!--/.col -->
-                  </div><!--/.row -->
-                </div><!--/.app-section -->
-                <!-- App pagination -->
-                <nav class="app-pagination text-center">
-                  <ul class="pagination">
-                    <li>
-                      <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">Předchozí</span>
-                      </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                      <a href="#" aria-label="Next">
-                        <span aria-hidden="true">Další</span>
-                      </a>
-                    </li>
+                  </nav><!--/.app-nav-items -->
+                </div><!--/.col -->
+              </div><!--/.row -->
+            </div><!--/.app-section -->
+            
+            <div class="app-section app-section-results">
+              <div class="app-item">
+                2014, ročník 7, číslo 1, s. 68-99
+                <h3 class="app-brand-text app-font-pt-serif">Curabitur scelerisque enim in tellus vulputate</h3>
+                  Jan Munzar
+              </div><!--/.app-item -->
+              <div class="app-item">
+                2014, ročník 7, číslo 1, s. 68-99
+                <h3 class="app-brand-text app-font-pt-serif">Curabitur scelerisque enim in tellus vulputate</h3>
+                  Jan Munzar
+              </div><!--/.app-item -->
+              <div class="app-item">
+                2014, ročník 7, číslo 1, s. 68-99
+                <h3 class="app-brand-text app-font-pt-serif">Curabitur scelerisque enim in tellus vulputate</h3>
+                  Jan Munzar
+              </div><!--/.app-item -->
+              <hr />
+            </div><!--/.app-section -->
+            
+            <!-- App pagination -->
+            <nav class="app-pagination text-center">
+              <ul class="pagination">
+                <li>
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">Předchozí</span>
+                  </a>
+                </li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">Další</span>
+                  </a>
+                </li>
+              </ul>
+            </nav><!--/.app-pagination -->
+          </div><!--/.tab-pane -->
+          
+          <div role="tabpanel" class="tab-pane" id="rejstrik-autoru">
+            <div class="app-section app-section-search-form app-section-search-form-full">
+              <div class="app-item">
+                <div class="app-col-left">
+                  <input id="app-search-authors" type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." data-provide="typeahead" autocomplete="off">
+                </div>
+                <!--/.col -->
+                <div class="app-col-right">
+                  <button class="btn app-btn app-btn-square app-ico-white app-ico-brand-hover app-ico-36-36 app-clean-radius">
+                    <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.1 24.1">
+                      <title>lupa</title>
+                      <path d="M523.44,392.24l-5.53-5.53a10.64,10.64,0,0,1-3.2,3.2l5.53,5.53a2.26,2.26,0,0,0,3.2-3.2h0Z" transform="translate(-500 -372)"/>
+                      <path d="M518.08,381a9,9,0,1,0-9,9,9,9,0,0,0,9-9h0Zm-9,6.78a6.78,6.78,0,1,1,6.78-6.78,6.79,6.79,0,0,1-6.78,6.78h0Z" transform="translate(-500 -372)"/>
+                      <path d="M503.77,381h1.51a3.77,3.77,0,0,1,3.77-3.77v-1.51a5.28,5.28,0,0,0-5.27,5.27h0Z" transform="translate(-500 -372)"/>
+                    </svg>
+                  </button>
+                </div><!--/.col -->
+              </div><!--/.app-item -->
+            </div><!--/.app-section -->
+            
+            <div class="app-section">
+              <nav class="app-nav-items">
+                <ul class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
+                  <li class="active"><a href="#" class="active" title="">A</a></li>
+                  <li><a href="#" title="">B</a></li>
+                  <li><a href="#" title="">C</a></li>
+                  <li><a href="#" title="">D</a></li>
+                  <li><a href="#" title="">E</a></li>
+                  <li><a href="#" title="">F</a></li>
+                  <li><span class="app-brand-text text-lighten-2">G</span></li>
+                  <li><a href="#" title="">H</a></li>
+                  <li><a href="#" title="">I</a></li>
+                  <li><a href="#" title="">J</a></li>
+                  <li><a href="#" title="">K</a></li>
+                  <li><a href="#" title="">L</a></li>
+                  <li><a href="#" title="">M</a></li>
+                  <li><a href="#" title="">N</a></li>
+                  <li><a href="#" title="">O</a></li>
+                  <li><a href="#" title="">P</a></li>
+                  <li><span class="app-brand-text text-lighten-2">Q</span></li>
+                  <li><a href="#" title="">R</a></li>
+                  <li><a href="#" title="">S</a></li>
+                  <li><a href="#" title="">T</a></li>
+                  <li><a href="#" title="">U</a></li>
+                  <li><a href="#" title="">V</a></li>
+                  <li><a href="#" title="">W</a></li>
+                  <li><span class="app-brand-text text-lighten-2">X</span></li>
+                  <li><span class="app-brand-text text-lighten-2">Y</span></li>
+                  <li><a href="#" title="">Z</a></li>
+                </ul>
+              </nav>
+            </div><!--/.app-section -->
+            
+            <div class="app-section app-font-pt-serif app-brand-text">
+              <div class="row">
+                <div class="col-xs-6">
+                  <ul class="list-unstyled">
+                    <li><a href="#" title="">Abdigal Jiří</a></li>
+                    <li><a href="#" title="">Albrech Jan</a></li>
+                    <li><a href="#" title="">Amaroun Václav</a></li>
+                    <li><a href="#" title="">Antalová Jiřina</a></li>
+                    <li><a href="#" title="">Abdigal Jiří</a></li>
+                    <li><a href="#" title="">Albrech Jan</a></li>
+                    <li><a href="#" title="">Amaroun Václav</a></li>
+                    <li><a href="#" title="">Antalová Jiřina</a></li>
+                    <li><a href="#" title="">Abdigal Jiří</a></li>
+                    <li><a href="#" title="">Albrech Jan</a></li>
+                    <li><a href="#" title="">Amaroun Václav</a></li>
+                    <li><a href="#" title="">Antalová Jiřina</a></li>
+                    <li><a href="#" title="">Abdigal Jiří</a></li>
+                    <li><a href="#" title="">Albrech Jan</a></li>
+                    <li><a href="#" title="">Amaroun Václav</a></li>
+                    <li><a href="#" title="">Antalová Jiřina</a></li>
+                    <li><a href="#" title="">Abdigal Jiří</a></li>
                   </ul>
-                </nav><!--/.app-pagination -->
-              </div><!--/.tab-pane -->
-              <div role="tabpanel" class="tab-pane" id="rubriky">
-                <div class="app-section app-section-search-form app-section-search-form-full">
-                  <div class="app-item">
-                    <div class="app-col-left">
-                      <input id="app-search-sections" type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." data-provide="typeahead" autocomplete="off">
-                    </div>
-                    <!--/.col -->
-                    <div class="app-col-right">
-                      <button class="btn app-btn app-btn-square app-ico-white app-ico-brand-hover app-ico-36-36 app-clean-radius">
-                        <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.1 24.1">
-                          <title>lupa</title>
-                          <path d="M523.44,392.24l-5.53-5.53a10.64,10.64,0,0,1-3.2,3.2l5.53,5.53a2.26,2.26,0,0,0,3.2-3.2h0Z" transform="translate(-500 -372)"/>
-                          <path d="M518.08,381a9,9,0,1,0-9,9,9,9,0,0,0,9-9h0Zm-9,6.78a6.78,6.78,0,1,1,6.78-6.78,6.79,6.79,0,0,1-6.78,6.78h0Z" transform="translate(-500 -372)"/>
-                          <path d="M503.77,381h1.51a3.77,3.77,0,0,1,3.77-3.77v-1.51a5.28,5.28,0,0,0-5.27,5.27h0Z" transform="translate(-500 -372)"/>
-                        </svg>
-                      </button>
-                    </div><!--/.col -->
-                  </div><!--/.app-item -->
-                </div><!--/.app-section -->
-                <div class="app-section app-font-pt-serif app-brand-text">
-                  <div class="row">
-                    <div class="col-xs-6 col-xs-offset-3">
-                      <ul class="list-unstyled app-marked-item">
-                        <li><a href="#" title="">Články</a></li>
-                        <li><a href="#" title="">Editorialy</a></li>
-                        <li><a href="#" title="">Studie</a></li>
-                        <li><a href="#" title="">Diskuze</a></li>
-                        <li><a href="#" title="">Recenze</a></li>
-                        <li><a href="#" title="">Varia</a></li>
-                        <li><a href="#" title="">Zprávy</a></li>
-                        <li><a href="#" title="">Zprávy o projektech, materiály</a></li>
-                        <li><a href="#" title="">Týden vědy a techniky v KNAV</a></li>
-                        <li><a href="#" title="">Výběr studií z časopisů, ročenek a sborníků</a></li>
-                        <li><a href="#" title="">Adresář</a></li>
-                      </ul>
-                    </div><!--/.col -->
-                  </div><!--/.row -->
-                </div><!--/.app-section -->
-              </div><!--/.tab-pane -->
-              <div role="tabpanel" class="tab-pane" id="rejstrik-klicovych-slov">
-                <div class="app-section app-section-search-form app-section-search-form-full">
-                  <div class="app-item">
-                    <div class="app-col-left">
-                      <input id="app-search-key-words" type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." data-provide="typeahead" autocomplete="off">
-                    </div>
-                    <!--/.col -->
-                    <div class="app-col-right">
-                      <button class="btn app-btn app-btn-square app-ico-white app-ico-brand-hover app-ico-36-36 app-clean-radius">
-                        <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.1 24.1">
-                          <title>lupa</title>
-                          <path d="M523.44,392.24l-5.53-5.53a10.64,10.64,0,0,1-3.2,3.2l5.53,5.53a2.26,2.26,0,0,0,3.2-3.2h0Z" transform="translate(-500 -372)"/>
-                          <path d="M518.08,381a9,9,0,1,0-9,9,9,9,0,0,0,9-9h0Zm-9,6.78a6.78,6.78,0,1,1,6.78-6.78,6.79,6.79,0,0,1-6.78,6.78h0Z" transform="translate(-500 -372)"/>
-                          <path d="M503.77,381h1.51a3.77,3.77,0,0,1,3.77-3.77v-1.51a5.28,5.28,0,0,0-5.27,5.27h0Z" transform="translate(-500 -372)"/>
-                        </svg>
-                      </button>
-                    </div><!--/.col -->
-                  </div><!--/.app-item -->
-                </div><!--/.app-section -->
-                <div class="app-section">
-                  <nav class="app-nav-items">
-                    <ul class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
-                      <li><a href="#" class="active" title="">A</a></li>
-                      <li><a href="#" title="">B</a></li>
-                      <li><a href="#" title="">C</a></li>
-                      <li><a href="#" title="">D</a></li>
-                      <li><a href="#" title="">E</a></li>
-                      <li><a href="#" title="">F</a></li>
-                      <li><span class="app-brand-text text-lighten-2">G</span></li>
-                      <li class="active"><a href="#" title="">H</a></li>
-                      <li><a href="#" title="">I</a></li>
-                      <li><a href="#" title="">J</a></li>
-                      <li><a href="#" title="">K</a></li>
-                      <li><a href="#" title="">L</a></li>
-                      <li><a href="#" title="">M</a></li>
-                      <li><a href="#" title="">N</a></li>
-                      <li><a href="#" title="">O</a></li>
-                      <li><a href="#" title="">P</a></li>
-                      <li><span class="app-brand-text text-lighten-2">Q</span></li>
-                      <li><a href="#" title="">R</a></li>
-                      <li><a href="#" title="">S</a></li>
-                      <li><a href="#" title="">T</a></li>
-                      <li><a href="#" title="">U</a></li>
-                      <li><a href="#" title="">V</a></li>
-                      <li><a href="#" title="">W</a></li>
-                      <li><span class="app-brand-text text-lighten-2">X</span></li>
-                      <li><span class="app-brand-text text-lighten-2">Y</span></li>
-                      <li><a href="#" title="">Z</a></li>
-                    </ul>
-                  </nav>
-                </div><!--/.app-section -->
-                <div class="app-section app-font-pt-serif app-brand-text">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <ul class="list-unstyled">
-                        <li><a href="#" title="">hackingly</a></li>
-                        <li><a href="#" title="">haggish</a></li>
-                        <li><a href="#" title="">hagiocracy</a></li>
-                        <li><a href="#" title="">hamiltonian</a></li>
-                        <li><a href="#" title="">hamiticized</a></li>
-                        <li><a href="#" title="">harbourside</a></li>
-                        <li><a href="#" title="">hardball</a></li>
-                        <li><a href="#" title="">having</a></li>
-                        <li><a href="#" title="">headily</a></li>
-                        <li><a href="#" title="">headreach</a></li>
-                        <li><a href="#" title="">heartfelt</a></li>
-                        <li><a href="#" title="">hekate</a></li>
-                        <li><a href="#" title="">heliast</a></li>
-                        <li><a href="#" title="">hellenistically</a></li>
-                        <li><a href="#" title="">heracliteanism</a></li>
-                        <li><a href="#" title="">hexadic</a></li>
-                        <li><a href="#" title="">hiker</a></li>
-                      </ul>
-                    </div><!--/.col -->
-                    <div class="col-xs-6">
-                      <ul class="list-unstyled">
-                        <li><a href="#" title="">hiss</a></li>
-                        <li><a href="#" title="">histomorphologically</a></li>
-                        <li><a href="#" title="">hob</a></li>
-                        <li><a href="#" title="">hocussing</a></li>
-                        <li><a href="#" title="">holohedral</a></li>
-                        <li><a href="#" title="">horeb</a></li>
-                        <li><a href="#" title="">hornlike</a></li>
-                        <li><a href="#" title="">hosannaing</a></li>
-                        <li><a href="#" title="">hotelman</a></li>
-                        <li><a href="#" title="">housekeeperlike</a></li>
-                        <li><a href="#" title="">humidor</a></li>
-                        <li><a href="#" title="">humulone</a></li>
-                        <li><a href="#" title="">hurst</a></li>
-                        <li><a href="#" title="">huzzah</a></li>
-                        <li><a href="#" title="">hydrastinine</a></li>
-                        <li><a href="#" title="">hydriodic</a></li>
-                        <li><a href="#" title="">hyperbolizing</a></li>
-                      </ul>
-                    </div><!--/.col -->
-                  </div><!--/.row -->
-                </div><!--/.app-section -->
-                <!-- App pagination -->
-                <nav class="app-pagination text-center">
-                  <ul class="pagination">
-                    <li>
-                      <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">Předchozí</span>
-                      </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                      <a href="#" aria-label="Next">
-                        <span aria-hidden="true">Další</span>
-                      </a>
-                    </li>
+                </div><!--/.col -->
+                <div class="col-xs-6">
+                  <ul class="list-unstyled">
+                    <li><a href="#" title="">Abdigal Jiří</a></li>
+                    <li><a href="#" title="">Albrech Jan</a></li>
+                    <li><a href="#" title="">Amaroun Václav</a></li>
+                    <li><a href="#" title="">Antalová Jiřina</a></li>
+                    <li><a href="#" title="">Abdigal Jiří</a></li>
+                    <li><a href="#" title="">Albrech Jan</a></li>
+                    <li><a href="#" title="">Amaroun Václav</a></li>
+                    <li><a href="#" title="">Antalová Jiřina</a></li>
+                    <li><a href="#" title="">Abdigal Jiří</a></li>
+                    <li><a href="#" title="">Albrech Jan</a></li>
+                    <li><a href="#" title="">Amaroun Václav</a></li>
+                    <li><a href="#" title="">Antalová Jiřina</a></li>
+                    <li><a href="#" title="">Abdigal Jiří</a></li>
+                    <li><a href="#" title="">Albrech Jan</a></li>
+                    <li><a href="#" title="">Amaroun Václav</a></li>
+                    <li><a href="#" title="">Antalová Jiřina</a></li>
+                    <li><a href="#" title="">Abdigal Jiří</a></li>
                   </ul>
-                </nav><!--/.app-pagination -->
-              </div><!--/.tab-pane -->
-            </div><!--/.tab-content -->
-          </div><!--/.col -->
-        </div><!--/.row -->
-      </div><!--/.container -->
-    </section><!--/.section -->
+                </div><!--/.col -->
+              </div><!--/.row -->
+            </div><!--/.app-section -->
+            
+            <!-- App pagination -->
+            <nav class="app-pagination text-center">
+              <ul class="pagination">
+                <li>
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">Předchozí</span>
+                  </a>
+                </li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">Další</span>
+                  </a>
+                </li>
+              </ul>
+            </nav><!--/.app-pagination -->
+          </div><!--/.tab-pane -->
+          
+          <div role="tabpanel" class="tab-pane" id="rubriky">
+            <div class="app-section app-section-search-form app-section-search-form-full">
+              <div class="app-item">
+                <div class="app-col-left">
+                  <input id="app-search-sections" type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." data-provide="typeahead" autocomplete="off">
+                </div>
+                <!--/.col -->
+                <div class="app-col-right">
+                  <button class="btn app-btn app-btn-square app-ico-white app-ico-brand-hover app-ico-36-36 app-clean-radius">
+                    <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.1 24.1">
+                      <title>lupa</title>
+                      <path d="M523.44,392.24l-5.53-5.53a10.64,10.64,0,0,1-3.2,3.2l5.53,5.53a2.26,2.26,0,0,0,3.2-3.2h0Z" transform="translate(-500 -372)"/>
+                      <path d="M518.08,381a9,9,0,1,0-9,9,9,9,0,0,0,9-9h0Zm-9,6.78a6.78,6.78,0,1,1,6.78-6.78,6.79,6.79,0,0,1-6.78,6.78h0Z" transform="translate(-500 -372)"/>
+                      <path d="M503.77,381h1.51a3.77,3.77,0,0,1,3.77-3.77v-1.51a5.28,5.28,0,0,0-5.27,5.27h0Z" transform="translate(-500 -372)"/>
+                    </svg>
+                  </button>
+                </div><!--/.col -->
+              </div><!--/.app-item -->
+            </div><!--/.app-section -->
+            
+            <div class="app-section app-font-pt-serif app-brand-text">
+              <div class="row">
+                <div class="col-xs-6 col-xs-offset-3">
+                  <ul class="list-unstyled app-marked-item">
+                    <li><a href="#" title="">Články</a></li>
+                    <li><a href="#" title="">Editorialy</a></li>
+                    <li><a href="#" title="">Studie</a></li>
+                    <li><a href="#" title="">Diskuze</a></li>
+                    <li><a href="#" title="">Recenze</a></li>
+                    <li><a href="#" title="">Varia</a></li>
+                    <li><a href="#" title="">Zprávy</a></li>
+                    <li><a href="#" title="">Zprávy o projektech, materiály</a></li>
+                    <li><a href="#" title="">Týden vědy a techniky v KNAV</a></li>
+                    <li><a href="#" title="">Výběr studií z časopisů, ročenek a sborníků</a></li>
+                    <li><a href="#" title="">Adresář</a></li>
+                  </ul>
+                </div><!--/.col -->
+              </div><!--/.row -->
+            </div><!--/.app-section -->
+          </div><!--/.tab-pane -->
+          
+          <div role="tabpanel" class="tab-pane" id="rejstrik-klicovych-slov">
+            <div class="app-section app-section-search-form app-section-search-form-full">
+              <div class="app-item">
+                <div class="app-col-left">
+                  <input id="app-search-key-words" type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." data-provide="typeahead" autocomplete="off">
+                </div>
+                <!--/.col -->
+                <div class="app-col-right">
+                  <button class="btn app-btn app-btn-square app-ico-white app-ico-brand-hover app-ico-36-36 app-clean-radius">
+                    <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.1 24.1">
+                      <title>lupa</title>
+                      <path d="M523.44,392.24l-5.53-5.53a10.64,10.64,0,0,1-3.2,3.2l5.53,5.53a2.26,2.26,0,0,0,3.2-3.2h0Z" transform="translate(-500 -372)"/>
+                      <path d="M518.08,381a9,9,0,1,0-9,9,9,9,0,0,0,9-9h0Zm-9,6.78a6.78,6.78,0,1,1,6.78-6.78,6.79,6.79,0,0,1-6.78,6.78h0Z" transform="translate(-500 -372)"/>
+                      <path d="M503.77,381h1.51a3.77,3.77,0,0,1,3.77-3.77v-1.51a5.28,5.28,0,0,0-5.27,5.27h0Z" transform="translate(-500 -372)"/>
+                    </svg>
+                  </button>
+                </div><!--/.col -->
+              </div><!--/.app-item -->
+            </div><!--/.app-section -->
+            
+            <div class="app-section">
+              <nav class="app-nav-items">
+                <ul class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
+                  <li><a href="#" class="active" title="">A</a></li>
+                  <li><a href="#" title="">B</a></li>
+                  <li><a href="#" title="">C</a></li>
+                  <li><a href="#" title="">D</a></li>
+                  <li><a href="#" title="">E</a></li>
+                  <li><a href="#" title="">F</a></li>
+                  <li><span class="app-brand-text text-lighten-2">G</span></li>
+                  <li class="active"><a href="#" title="">H</a></li>
+                  <li><a href="#" title="">I</a></li>
+                  <li><a href="#" title="">J</a></li>
+                  <li><a href="#" title="">K</a></li>
+                  <li><a href="#" title="">L</a></li>
+                  <li><a href="#" title="">M</a></li>
+                  <li><a href="#" title="">N</a></li>
+                  <li><a href="#" title="">O</a></li>
+                  <li><a href="#" title="">P</a></li>
+                  <li><span class="app-brand-text text-lighten-2">Q</span></li>
+                  <li><a href="#" title="">R</a></li>
+                  <li><a href="#" title="">S</a></li>
+                  <li><a href="#" title="">T</a></li>
+                  <li><a href="#" title="">U</a></li>
+                  <li><a href="#" title="">V</a></li>
+                  <li><a href="#" title="">W</a></li>
+                  <li><span class="app-brand-text text-lighten-2">X</span></li>
+                  <li><span class="app-brand-text text-lighten-2">Y</span></li>
+                  <li><a href="#" title="">Z</a></li>
+                </ul>
+              </nav>
+            </div><!--/.app-section -->
+            
+            <div class="app-section app-font-pt-serif app-brand-text">
+              <div class="row">
+                <div class="col-xs-6">
+                  <ul class="list-unstyled">
+                    <li><a href="#" title="">hackingly</a></li>
+                    <li><a href="#" title="">haggish</a></li>
+                    <li><a href="#" title="">hagiocracy</a></li>
+                    <li><a href="#" title="">hamiltonian</a></li>
+                    <li><a href="#" title="">hamiticized</a></li>
+                    <li><a href="#" title="">harbourside</a></li>
+                    <li><a href="#" title="">hardball</a></li>
+                    <li><a href="#" title="">having</a></li>
+                    <li><a href="#" title="">headily</a></li>
+                    <li><a href="#" title="">headreach</a></li>
+                    <li><a href="#" title="">heartfelt</a></li>
+                    <li><a href="#" title="">hekate</a></li>
+                    <li><a href="#" title="">heliast</a></li>
+                    <li><a href="#" title="">hellenistically</a></li>
+                    <li><a href="#" title="">heracliteanism</a></li>
+                    <li><a href="#" title="">hexadic</a></li>
+                    <li><a href="#" title="">hiker</a></li>
+                  </ul>
+                </div><!--/.col -->
+                <div class="col-xs-6">
+                  <ul class="list-unstyled">
+                    <li><a href="#" title="">hiss</a></li>
+                    <li><a href="#" title="">histomorphologically</a></li>
+                    <li><a href="#" title="">hob</a></li>
+                    <li><a href="#" title="">hocussing</a></li>
+                    <li><a href="#" title="">holohedral</a></li>
+                    <li><a href="#" title="">horeb</a></li>
+                    <li><a href="#" title="">hornlike</a></li>
+                    <li><a href="#" title="">hosannaing</a></li>
+                    <li><a href="#" title="">hotelman</a></li>
+                    <li><a href="#" title="">housekeeperlike</a></li>
+                    <li><a href="#" title="">humidor</a></li>
+                    <li><a href="#" title="">humulone</a></li>
+                    <li><a href="#" title="">hurst</a></li>
+                    <li><a href="#" title="">huzzah</a></li>
+                    <li><a href="#" title="">hydrastinine</a></li>
+                    <li><a href="#" title="">hydriodic</a></li>
+                    <li><a href="#" title="">hyperbolizing</a></li>
+                  </ul>
+                </div><!--/.col -->
+              </div><!--/.row -->
+            </div><!--/.app-section -->
+            
+            <!-- App pagination -->
+            <nav class="app-pagination text-center">
+              <ul class="pagination">
+                <li>
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">Předchozí</span>
+                  </a>
+                </li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">Další</span>
+                  </a>
+                </li>
+              </ul>
+            </nav><!--/.app-pagination -->
+          </div><!--/.tab-pane -->
+        </div><!--/.tab-content -->
+      </div><!--/.col -->
+    </div><!--/.row -->
+  </div><!--/.container -->
+</section><!--/.app-content -->

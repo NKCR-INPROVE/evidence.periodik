@@ -68,7 +68,7 @@ public class IndexServlet extends HttpServlet {
   }
 
   enum Actions {
-    INDEX_PID {
+    INDEX_DEEP {
       @Override
       void doPerform(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
@@ -79,7 +79,29 @@ public class IndexServlet extends HttpServlet {
         try {
 
           Indexer indexer = new Indexer();
-          indexer.indexPid(req.getParameter("pid"));
+          int idx = 0;
+          for(String pid : req.getParameterValues("pid")){
+            indexer.indexPidAndChildren(pid,idx++);
+          }
+          //indexer.indexPidAndChildren(req.getParameter("pid"));
+
+        } catch (Exception ex) {
+          json.put("error", ex.toString());
+        }
+        out.println(json.toString(2));
+      }
+    },
+    INDEX_PID {
+      @Override
+      void doPerform(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+
+        resp.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = resp.getWriter();
+        JSONObject json = new JSONObject();
+        try {
+
+          Indexer indexer = new Indexer();
+          indexer.indexPid(req.getParameter("pid"), 0);
           //out.println(indexer.getModsToJson(request.getParameter("pid")).toString(2));
 
         } catch (Exception ex) {

@@ -1,5 +1,4 @@
 ## Help K5Journals
-
 Serve the application with specific IP address  
 ng serve --host 10.10.70.153
 

@@ -6068,7 +6068,7 @@ header {
 p {
   margin-bottom: 20px; }
 
-a {
+a, .app-cursor-pointer {
   cursor: pointer; }
 
 hr {

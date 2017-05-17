@@ -126,6 +126,7 @@
     <field name="model" type="string" indexed="true" stored="true" multiValued="false"/>
     <field name="parents" type="string" indexed="true" stored="true" multiValued="true"/>
     <field name="model_paths" type="string" indexed="true" stored="true" multiValued="true"/>
+    <field name="pid_paths" type="string" indexed="true" stored="true" multiValued="true"/>
     
     <field name="policy" type="string" indexed="true" stored="true" multiValued="false" />
     
@@ -139,7 +140,7 @@
     <field name="index_2" type="tint" indexed="true" stored="true" multiValued="false"/>
     <field name="index_3" type="tint" indexed="true" stored="true" multiValued="false"/>
     
-    <field name="genre" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="genre" type="string" indexed="true" stored="true" multiValued="true"/>
     
     <field name="title" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     <field name="subtitle" type="text_cz" indexed="true" stored="true" multiValued="false"/>

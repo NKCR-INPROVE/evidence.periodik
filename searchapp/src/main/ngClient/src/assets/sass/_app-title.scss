@@ -12,6 +12,9 @@
         color: $app-brand;
       }
     }
+    span {
+      text-transform: uppercase;
+    }
   }
   img {
     display: inline-block;

@@ -79,9 +79,8 @@ public class IndexServlet extends HttpServlet {
         try {
 
           Indexer indexer = new Indexer();
-          int idx = 0;
           for(String pid : req.getParameterValues("pid")){
-            indexer.indexPidAndChildren(pid,idx++);
+            json.put(pid, indexer.indexDeep(pid));
           }
           //indexer.indexPidAndChildren(req.getParameter("pid"));
 

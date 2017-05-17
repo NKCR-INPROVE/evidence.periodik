@@ -1,10 +1,12 @@
 package cz.incad.k5journals.searchapp;
 
+import cz.incad.FormatUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -32,6 +34,7 @@ public class Indexer {
 
   SolrClient client;
   int total;
+  JSONObject response;
 
   public Indexer() {
     try {
@@ -49,27 +52,14 @@ public class Indexer {
     SolrClient client = new HttpSolrClient.Builder(String.format("%s/%s",
             opts.getString("solr.host", "http://localhost:8983"),
             core)).build();
-    //server.setMaxRetries(1); // defaults to 0.  > 1 not recommended.
-//        client.setConnectionTimeout(5000); // 5 seconds to establish TCP
-//
-//        // The following settings are provided here for completeness.
-//        // They will not normally be required, and should only be used 
-//        // after consulting javadocs to know whether they are truly required.
-//        client.setSoTimeout(30000);  // socket read timeout
-//        client.setDefaultMaxConnectionsPerHost(100);
-//        client.setMaxTotalConnections(100);
-//        client.setFollowRedirects(false);  // defaults to false
-//
-//        // allowCompression defaults to false.
-//        // Server side must support gzip or deflate for this to have any effect.
-//        client.setAllowCompression(true);
     return client;
   }
 
   /**
    * Index doc only
    *
-   * @param pid
+   * @param pid document identifier 
+   * @param index doc index in parent children
    */
   public void indexPid(String pid, int index) {
     SolrInputDocument idoc = new SolrInputDocument();
@@ -81,21 +71,25 @@ public class Indexer {
       JSONObject item = getItem(pid);
       idoc.addField("datanode", item.optBoolean("datanode"));
       idoc.addField("model", item.optString("model"));
+      response.increment(item.optString("model"));
       idoc.addField("root_title", item.optString("root_title"));
       idoc.addField("idx", index);
-      
 
+      
       JSONArray ctx = item.getJSONArray("context");
       for (int i = 0; i < ctx.length(); i++) {
         String model_path = "";
+        String pid_path = "";
         JSONArray ja = ctx.getJSONArray(i);
-        if(ja.length() > 1){
+        if (ja.length() > 1) {
           idoc.addField("parents", ja.getJSONObject(ja.length() - 2).getString("pid"));
         }
         for (int j = 0; j < ja.length(); j++) {
           model_path += ja.getJSONObject(j).getString("model") + "/";
+          pid_path += ja.getJSONObject(j).getString("pid") + "/";
         }
         idoc.addField("model_paths", model_path);
+        idoc.addField("pid_paths", pid_path);
       }
 
       if (item.has("pdf")) {
@@ -104,10 +98,11 @@ public class Indexer {
       }
 
       setTitleInfo(idoc, mods);
+      setGenre(idoc, mods);
       LOGGER.log(Level.INFO, "indexed: {0}", total++);
       client.add(idoc);
       client.commit();
-    } catch (SolrServerException | IOException ex) {
+    } catch (SolrServerException | IOException | JSONException ex) {
       LOGGER.log(Level.SEVERE, "mods: {0}", mods);
       LOGGER.log(Level.SEVERE, "idoc: {0}", idoc);
       LOGGER.log(Level.SEVERE, null, ex);
@@ -116,18 +111,62 @@ public class Indexer {
   }
 
   /**
+   * Index doc and his children recursively. First find idx from parent
+   *
+   * @param pid
+   * @return JSONObject with index info
+   */
+  public JSONObject indexDeep(String pid) {
+    response = new JSONObject();
+    Date tstart = new Date();
+    int idx = getIdx(pid);
+    LOGGER.log(Level.INFO, "idx: {0}", idx);
+    indexPidAndChildren(pid, idx);
+    LOGGER.log(Level.INFO, "index finished. Indexed: {0}", total);
+
+    response.put("total indexed", total);
+    Date tend = new Date();
+    response.put("ellapsed time", FormatUtils.formatInterval(tend.getTime() - tstart.getTime()));
+    return response;
+  }
+
+  private int getIdx(String pid) {
+    JSONObject item = getItem(pid);
+    JSONArray ctx = item.getJSONArray("context");
+    if (ctx.length() > 0) {
+      JSONArray ja = ctx.getJSONArray(ctx.length() - 1);
+      if (ja.length() > 1) {
+        String ppid = ja.getJSONObject(ja.length() - 2).getString("pid");
+        JSONArray children = getChildren(ppid);
+        for (int i = 0; i < children.length(); i++) {
+          if (pid.equals(children.getJSONObject(i).getString("pid"))) {
+            return i;
+          }
+        }
+        return 0;
+      } else {
+        return 0;
+      }
+
+    } else {
+      return 0;
+    }
+  }
+
+  /**
    * Index doc and his children recursively
    *
    * @param pid
    */
-  public void indexPidAndChildren(String pid, int idx) {
-    indexPid(pid,idx);
+  private void indexPidAndChildren(String pid, int idx) {
+
+    indexPid(pid, idx);
     JSONArray children = getChildren(pid);
     for (int i = 0; i < children.length(); i++) {
-      if (!children.getJSONObject(i).optBoolean("datanode")){
-        indexPidAndChildren(children.getJSONObject(i).getString("pid"),i);
+      if (!children.getJSONObject(i).optBoolean("datanode")) {
+        indexPidAndChildren(children.getJSONObject(i).getString("pid"), i);
       } else {
-        
+
         indexPid(children.getJSONObject(i).getString("pid"), i);
       }
     }
@@ -175,14 +214,13 @@ public class Indexer {
 
       try (PDDocument pdfDocument = PDDocument.load(is)) {
         PDFTextStripper stripper = new PDFTextStripper();
-        
 
         StringWriter writer = new StringWriter();
         stripper.writeText(pdfDocument, writer);
 
         String contents = writer.getBuffer().toString();
         //StringReader reader = new StringReader(contents);
-        
+
         idoc.addField("ocr", contents);
       } catch (Exception e) {
         LOGGER.log(Level.SEVERE, null, e);
@@ -244,7 +282,7 @@ public class Indexer {
 
     String prefix = "mods:";
     Object o = mods.opt("mods:titleInfo");
-    if(o == null){
+    if (o == null) {
       prefix = "";
       o = mods.opt("titleInfo");
     }
@@ -253,7 +291,7 @@ public class Indexer {
       idoc.addField("title", jo.optString(prefix + "title"));
       idoc.addField("subtitle", jo.optString(prefix + "subTitle"));
       idoc.addField("non_sort_title", jo.optString(prefix + "nonSort"));
-      
+
     } else if (o instanceof JSONArray) {
       JSONArray ja = (JSONArray) o;
       boolean hasDefault = false;
@@ -266,10 +304,10 @@ public class Indexer {
           idoc.addField("non_sort_title_" + lang, jo.optString(prefix + "nonSort"));
         } else {
           if (!hasDefault) {
-          idoc.addField("title", jo.optString(prefix + "title"));
-          idoc.addField("subtitle", jo.optString(prefix + "subTitle"));
-          idoc.addField("non_sort_title", jo.optString(prefix + "nonSort"));
-          hasDefault = true;
+            idoc.addField("title", jo.optString(prefix + "title"));
+            idoc.addField("subtitle", jo.optString(prefix + "subTitle"));
+            idoc.addField("non_sort_title", jo.optString(prefix + "nonSort"));
+            hasDefault = true;
           }
         }
       }
@@ -281,5 +319,28 @@ public class Indexer {
       }
     }
 
+  }
+
+  private void setGenre(SolrInputDocument idoc, JSONObject mods) {
+
+    String prefix = "mods:";
+    Object o = mods.opt("mods:genre");
+    if (o != null) {
+      if (o instanceof JSONArray) {
+        JSONArray ja = (JSONArray) o;
+        for (int i = 0; i < ja.length(); i++) {
+          String g = ja.getJSONObject(i).optString("type");
+          if (g != null) {
+            idoc.addField("genre", g);
+          }
+        }
+
+      } else if (o instanceof JSONObject) {
+        String g = ((JSONObject) o).optString("type");
+        if (g != null) {
+          idoc.addField("genre", g);
+        }
+      }
+    }
   }
 }

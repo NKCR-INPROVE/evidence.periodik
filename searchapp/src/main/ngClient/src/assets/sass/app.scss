@@ -1,4 +1,4 @@
-$roboto-font-path: '../fonts' !default;
+//$roboto-font-path: '../fonts' !default;
 $pt-serif-path: '../fonts/pt-serif' !default;
 
 @import "app-variables";
@@ -8,8 +8,7 @@ $pt-serif-path: '../fonts/pt-serif' !default;
 @import "app-function";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-compass";
-//@import "../bower_components/roboto-fontface/css/roboto/sass/roboto-fontface";
-@import "../bower_components/roboto-fontface/css/roboto-condensed/sass/roboto-condensed-fontface";
+@import "roboto-fontface/roboto-condensed/roboto-condensed-fontface";
 @import "../bower_components/pt-serif/scss/pt-serif";
 @import "../bower_components/nouislider/distribute/nouislider.css";
 @import "app-global";

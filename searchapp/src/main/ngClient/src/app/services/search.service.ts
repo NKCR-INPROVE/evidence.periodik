@@ -26,12 +26,12 @@ export class SearchService {
 
   search(q: string) {
 
-    var url = this.state.config['api_point'] + "/search";
+    var url = "/search/journal/select";
 
     var params = new URLSearchParams();
-
     params.set('q', q);
-    params.set('fq', 'root_pid:"' + this.state.config['journal'] + '"');
+    params.set('fq', 'model:article');
+    
     return this.http.get(url, { search: params }).map(res => {
       return res.json();
     });

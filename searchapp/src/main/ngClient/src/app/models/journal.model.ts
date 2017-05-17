@@ -23,27 +23,25 @@ export class Journal{
     for (let i in res) {
       let art = res[i];
       if (art && art['pid']) {
-        art['mods'] = JSON.parse(art['mods']);
+        art['mods'] = art['mods'];
           //let mods = bmods["mods:modsCollection"]["mods:mods"];
-        if (art['mods'].hasOwnProperty("mods:genre")) {
-          let genre = art['mods']['mods:genre'];
-          if (genre.hasOwnProperty('type')) {
-            art['genre'] = genre['type'];
-          } else if (genre.hasOwnProperty('length')) {
-            for (let i in genre) {
-              art['genre'] = genre[i]['type'];
+        if (art.hasOwnProperty("genre")) {
+            for (let i in art['genre']) {
+              let genre = art['genre'][i];
+              if (this.isGenreVisible(genre)) {
+                if (this.genresObject.hasOwnProperty(genre)) {
+                  this.genresObject[genre]['articles'].push(art);
+                } else {
+                  this.genres.push(genre);
+                  this.genresObject[genre] = {};
+                  this.genresObject[genre]['articles'] = [];
+                  this.genresObject[genre]['articles'].push(art);
+                }
+              }
+
+          
             }
-          }
-          if (this.isGenreVisible(art['genre'])) {
-            if (this.genresObject.hasOwnProperty(art['genre'])) {
-              this.genresObject[art['genre']]['articles'].push(art);
-            } else {
-              this.genres.push(art['genre']);
-              this.genresObject[art['genre']] = {};
-              this.genresObject[art['genre']]['articles'] = [];
-              this.genresObject[art['genre']]['articles'].push(art);
-            }
-          }
+          
         }
       }
     }
@@ -52,7 +50,8 @@ export class Journal{
 
   isGenreVisible(genre: string): boolean {
     return genre !== 'cover' &&
-      genre !== 'advertisement' &&
+      genre !== 'advertisement' && 
+      genre !== 'peer-reviewed' && 
       genre !== 'colophon';
   }
   

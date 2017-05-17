@@ -62,21 +62,17 @@
             </div><!--/.app-section -->
             
             <div class="app-section app-section-results">
-              <div class="app-item">
+              <!--
+              <div class="app-item" *ngFor="let doc of docs">
                 2014, ročník 7, číslo 1, s. 68-99
-                <h3 class="app-brand-text app-font-pt-serif">Curabitur scelerisque enim in tellus vulputate</h3>
+                <h3 class="app-brand-text app-font-pt-serif">{{doc.title}}</h3>
                   Jan Munzar
-              </div><!--/.app-item -->
-              <div class="app-item">
-                2014, ročník 7, číslo 1, s. 68-99
-                <h3 class="app-brand-text app-font-pt-serif">Curabitur scelerisque enim in tellus vulputate</h3>
-                  Jan Munzar
-              </div><!--/.app-item -->
-              <div class="app-item">
-                2014, ročník 7, číslo 1, s. 68-99
-                <h3 class="app-brand-text app-font-pt-serif">Curabitur scelerisque enim in tellus vulputate</h3>
-                  Jan Munzar
-              </div><!--/.app-item -->
+              </div>
+              -->
+              <div class="app-item" *ngFor="let doc of docs">
+                <app-article-result [article]="doc"></app-article-result>
+              </div>
+              
               <hr />
             </div><!--/.app-section -->
             

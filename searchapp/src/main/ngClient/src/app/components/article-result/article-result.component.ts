@@ -46,7 +46,7 @@ export class ArticleResultComponent implements OnInit {
 
     //let mods = this.article['mods']["mods:modsCollection"]["mods:mods"];
 
-    let mods = this.article['mods'];
+    let mods = JSON.parse(this.article['mods']);
     if (mods["mods:relatedItem"] && mods["mods:relatedItem"]["mods:part"] && mods["mods:relatedItem"]["mods:part"]["mods:extent"]) {
       this.rozsah = mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:start"] +
         ' - ' + mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:end"];
@@ -54,13 +54,12 @@ export class ArticleResultComponent implements OnInit {
     
     this.service.getViewed(this.article['pid']).subscribe(res => this.viewed = res);
     
-
     this.titleInfo = mods["mods:titleInfo"];
-    
     
     this.setTitleInfo();
     this.setNames(mods);
-    
+        console.log(this.title);
+        console.log(this.authors);
     
     //console.log(mods);
   }
@@ -73,7 +72,7 @@ export class ArticleResultComponent implements OnInit {
     if (this.titleInfo.hasOwnProperty('length')) {
       this.title = this.titleInfo[0]["mods:title"];
       for(let i in this.titleInfo){
-        if (this.titleInfo[i]["@lang"] === modsLang){
+        if (this.titleInfo[i]["lang"] === modsLang){
            this.title = this.titleInfo[i]["mods:title"];
            this.subTitle = this.titleInfo[i]["mods:subTitle"];
           this.nonSort = this.titleInfo[i]["mods:nonSort"];
@@ -94,14 +93,14 @@ export class ArticleResultComponent implements OnInit {
       if (name.hasOwnProperty('length')) {
         for(let i in name){
           let namePart = name[i]["mods:namePart"];
-          if(name[i]["@type"] === 'personal' && namePart){
-            this.authors.push(namePart[0]['#text'] + ' ' + namePart[1]['#text']);
+          if(name[i]["type"] === 'personal' && namePart){
+            this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
           }
         }
       } else {
         let namePart = name["mods:namePart"];
-        if(name["@type"] === 'personal' && namePart){
-          this.authors.push(namePart[0]['#text'] + ' ' + namePart[1]['#text']);
+        if(name["type"] === 'personal' && name.hasOwnProperty("mods:namePart")){
+          this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
         }
       }
       

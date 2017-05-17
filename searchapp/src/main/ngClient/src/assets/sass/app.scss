@@ -1,5 +1,5 @@
-$roboto-font-path: '/assets/fonts' !default;
-$pt-serif-path: '/assets/fonts/pt-serif' !default;
+$roboto-font-path: '../fonts' !default;
+$pt-serif-path: '../fonts/pt-serif' !default;
 
 @import "app-variables";
 @import "app-palette";

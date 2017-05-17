@@ -21,6 +21,8 @@ export class ArticleResultComponent implements OnInit {
   subTitle: string;
   nonSort: string;
   
+  viewed: number = 0;
+  
   lang: string;
   
   langsMap = {
@@ -49,6 +51,8 @@ export class ArticleResultComponent implements OnInit {
       this.rozsah = mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:start"] +
         ' - ' + mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:end"];
     }
+    
+    this.service.getViewed(this.article['pid']).subscribe(res => this.viewed = res);
     
 
     this.titleInfo = mods["mods:titleInfo"];

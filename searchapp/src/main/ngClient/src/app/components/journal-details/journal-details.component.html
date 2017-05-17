@@ -8,7 +8,7 @@
 <span *ngIf="journal.details.partNumber">, {{'číslo' | translate}} {{journal.details.partNumber}}</span>
 -->
 
-<span *ngIf="year">{{'Rok' | translate}} {{year}}</span>
-<span *ngIf="volumeNumber">, {{'ročník' | translate}} {{volumeNumber}}</span>
-<span *ngIf="issueNumber">, {{'číslo' | translate}} {{issueNumber}}</span>
+<span *ngIf="year">{{'Rok' | translate}} {{year}}, </span>
+<span *ngIf="volumeNumber">{{'ročník' | translate}} {{volumeNumber}} </span>
+<span *ngIf="issueNumber">{{'číslo' | translate}} {{issueNumber}} </span>
 <span *ngIf="partName">, {{partName}}</span>

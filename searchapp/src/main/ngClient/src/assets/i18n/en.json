@@ -3,6 +3,9 @@
   "Zpět na ročníky":"Back to volumes",
   "ARCHIV STARŠÍCH ROČNÍKŮ": "OLD NUMBERS ARCHIVE",
   "PROHLÍŽET CELÉ ČÍSLO": "VIEW WHOLE NUMBER", 
+  "předchozí číslo": "previous number",
+  "následující číslo": "next number",
+  "Počet zobrazení": "number of views",
   "menu":{
     "home_": "Actual number",
     "o-casopisu_": "About journal",

@@ -2,11 +2,11 @@
   <div class="jumbotron app-clean-pd app-brand lighten-4">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3">
-          <h2 *ngIf="actual">
+        <div *ngIf="actual" class="col-xs-12 col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3">
+          <h2>
             <app-journal-details [journal]="actual"></app-journal-details>
           </h2>
-          <button class="btn app-btn app-btn-default app-btn-inverse app-ico-21-17">
+          <button class="btn app-btn app-btn-default app-btn-inverse app-ico-21-17" [routerLink]="['/article',actual.pid]">
             <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.09 16.87" class="app-ico">
                 <title>prohlizet</title>
                 <path d="M324.38,396h0a0.78,0.78,0,0,0-.55.23,0.79,0.79,0,0,0-.23.56v11.85a0.79,0.79,0,0,0,.79.79,9.78,9.78,0,0,1,7,2.61v-12.4a0.75,0.75,0,0,0-.11-0.4c-1.75-2.81-5.1-3.24-6.94-3.24h0Z" transform="translate(-321 -395.97)"/>

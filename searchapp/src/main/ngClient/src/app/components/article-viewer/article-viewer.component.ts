@@ -59,6 +59,9 @@ export class ArticleViewerComponent implements OnInit {
     }
     this.fullSrc = null;
     this.loading = true;
+    this.service.setViewed(this.pid).subscribe(res => {
+      //console.log('viewed!');
+    });
     this.service.getItem(this.pid).subscribe(res => {
       if (res['datanode']) {
         this.article = res;
@@ -80,11 +83,12 @@ export class ArticleViewerComponent implements OnInit {
               this.journal = a;
 
               this.service.getArticles(a['pid']).subscribe(res => {
-                this.service.setArticles(this.journal, res);
-
+                //this.service.setArticles(this.journal, res);
+                this.journal.setArticles(res);
               });
               this.service.getMods(a['pid']).subscribe(mods => this.journal.mods = mods);
-              this.service.getSiblings(a['pid']).subscribe(siblings => {
+              //this.service.getSiblings(a['pid']).subscribe(siblings => {
+              this.service.getChildren(a['parent']).subscribe(siblings => {
                 this.journal.siblings = siblings;
                 //console.log(siblings);
                 for (let i = 0; i < this.journal.siblings.length; i++) {

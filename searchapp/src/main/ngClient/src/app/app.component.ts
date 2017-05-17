@@ -74,7 +74,9 @@ export class AppComponent implements OnInit {
         if (a.pid && !this.state.actualNumber) {
           this.state.setActual(a);
           this.appservice.getArticles(this.state.actualNumber['pid']).subscribe(res => {
-            this.appservice.setArticles(this.state.actualNumber, res);
+            //this.appservice.setArticles(this.state.actualNumber, res);
+            this.state.actualNumber.setArticles(res);
+            console.log(this.state.actualNumber);
             this.state.stateChanged();
           });
           this.appservice.getMods(this.state.actualNumber['pid']).subscribe(mods => this.state.actualNumber.mods = mods);
@@ -104,7 +106,7 @@ export class AppComponent implements OnInit {
     //this.searchService.getActual();
     this.setMainClass(this.router.url);
     this.pathObserver = this.router.events.subscribe(val => {
-      console.log('pathObserver', val);
+      //console.log('pathObserver', val);
       if (val instanceof NavigationEnd) {
         this.state.paramsChanged();
         this.setMainClass(val.url);

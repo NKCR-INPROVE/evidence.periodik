@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Http, Response, URLSearchParams } from '@angular/http';
+import { Http, Response, URLSearchParams, Headers, RequestOptions } from '@angular/http';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 import { Journal } from '../models/journal.model';
@@ -18,12 +18,6 @@ export class AppService {
   //Observe language
   public _langSubject = new Subject();
   public langSubject: Observable<any> = this._langSubject.asObservable();
-
-//
-//  journal: BehaviorSubject<Journal> = new BehaviorSubject<Journal>(new Journal());
-//
-//  articles: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-
 
   constructor(
     private state: AppState,
@@ -80,6 +74,37 @@ export class AppService {
 
   getJournal(pid: string): Observable<Journal> {
 
+    var url = '/search/journal/select';
+      let params = new URLSearchParams();
+
+      params.set('q', 'pid:"' + pid + '"');
+      params.set('wt', 'json');
+      params.set('rows', '1');
+
+
+    return this.http.get(url, {search: params}).map((response: Response) => {
+      console.log(response);
+      let j = response.json()['response']['docs'][0];
+
+      let ret = new Journal();
+      ret.pid = j['pid'];
+      ret.parent = j['parents'][0];
+      ret.title = j['title'];
+      ret.root_title = j['root_title'];
+      ret.root_pid = j['root_pid'];
+      ret.model = j['model'];
+      ret.details = j['details'];
+      ret.siblings = null;
+      ret.mods = null;
+      ret.genres = [];
+      ret.genresObject = {};
+
+      return ret;
+    });
+  }
+
+  getJournalK5(pid: string): Observable<Journal> {
+
     var url = this.state.config['api_point'] + '/item/' + pid;
 
 
@@ -87,19 +112,18 @@ export class AppService {
       //console.log(response);
       let j = response.json();
 
-      let ret =
-        {
-          pid: j['pid'],
-          title: j['title'],
-          root_title: j['root_title'],
-          root_pid: j['root_pid'],
-          model: j['model'],
-          details: j['details'],
-          siblings: null,
-          mods: null,
-          genres: [],
-          genresObject: {}
-        };
+      let ret = new Journal();
+      ret.pid = j['pid'];
+      ret.title = j['title'];
+      ret.root_title = j['root_title'];
+      ret.root_pid = j['root_pid'];
+      ret.model = j['model'];
+      ret.details = j['details'];
+      ret.siblings = null;
+      ret.mods = null;
+      ret.genres = [];
+      ret.genresObject = {};
+
       return ret;
     });
   }
@@ -115,19 +139,17 @@ export class AppService {
         return new Journal();
       }
       if (last['model'] === model) {
-        let ret =
-          {
-            pid: last['pid'],
-            title: last['title'],
-            root_title: last['root_title'],
-            root_pid: last['root_pid'],
-            model: last['model'],
-            details: last['details'],
-            siblings: childs,
-            mods: null,
-            genres: [],
-            genresObject: {}
-          };
+        let ret = new Journal();
+        ret.pid = last['pid'];
+        ret.title = last['title'];
+        ret.root_title = last['root_title'];
+        ret.root_pid = last['root_pid'];
+        ret.model = last['model'];
+        ret.details = last['details'];
+        ret.siblings = childs;
+        ret.mods = null;
+        ret.genres = [];
+        ret.genresObject = {};
 
         return ret;
       } else {
@@ -136,8 +158,8 @@ export class AppService {
     });
   }
 
-  setArticles(ret: Journal, res) {
-
+  setArticles1(ret: Journal, res1) {
+    let res = res1['response']['docs'];
     for (let i in res) {
       let art = res[i];
       if (art && art['pid']) {
@@ -145,11 +167,11 @@ export class AppService {
           art['mods'] = mods;
           //let mods = bmods["mods:modsCollection"]["mods:mods"];
           let genre = this.getJsonValue(mods, "mods:genre");
-          if (genre.hasOwnProperty('@type')) {
-            art['genre'] = genre['@type'];
+          if (genre.hasOwnProperty('type')) {
+            art['genre'] = genre['type'];
           } else if (genre.hasOwnProperty('length')) {
             for (let i in genre) {
-              art['genre'] = genre[i]['@type'];
+              art['genre'] = genre[i]['type'];
             }
           }
           if (this.isGenreVisible(art['genre'])) {
@@ -176,6 +198,107 @@ export class AppService {
   }
 
   getArticles(pid: string): Observable<any[]> {
+    const getRange = (pid: string): Observable<any> => {
+
+      var url = '/search/journal/select';
+      let params = new URLSearchParams();
+
+      params.set('q', '*:*');
+      params.set('fq', 'parents:"' + pid + '"');
+      //params.set('fq', 'model:"article"');
+      params.set('wt', 'json');
+      params.set('sort', 'idx asc');
+      params.set('rows', '500');
+
+      return this.http.get(url, { search: params });
+    };
+
+    return getRange(pid).expand((res) => {
+
+      //    if (res.status ===       206) {
+      //      const nextRange = res.headers.get('Next-R      ang      e');
+      //
+      //      return getRange(next      Range);
+      //    }       else {
+      //      return Observable.e      mpty();
+      //    }
+
+
+      let articles = [];
+      let childs: any[];
+      if (res.json) {
+        childs = res.json()['response']['docs'];
+      } else {
+        childs = res;
+      }
+      for (let ch in childs) {
+        if (childs[ch]['model'] === 'article') {
+          articles.push(childs[ch]);
+        }
+      }
+
+      if (articles.length > 0) {
+        //return Observable.of(articles);
+        //return articles;
+        return Observable.empty();
+      } else {
+        if (childs.length > 0) {
+          return getRange(childs[0]['pid']);
+        } else {
+          return Observable.empty();
+        }
+      }
+
+    }).map((res) => {
+        return res.json();
+    });
+  }
+
+
+  getArticles2(pid: string): Observable<any[]> {
+    console.log('getArticles', pid);
+    var url = '/search/journal/select';
+    let params = new URLSearchParams();
+
+    params.set('q', '*:*');
+    params.set('fq', 'parents:"' + pid + '"');
+    //params.set('fq', 'model:"article"');
+    params.set('wt', 'json');
+    params.set('sort', 'idx asc');
+    params.set('rows', '500');
+
+    return this.http.get(url, { search: params }).map((response: Response) => {
+      //return response.json()['response']['docs'];
+      let articles = [];
+      let childs: any[] = response.json()['response']['docs'];
+
+      for (let ch in childs) {
+        if (childs[ch]['model'] === 'article') {
+          articles.push(childs[ch]);
+        }
+      }
+
+      if (articles.length > 0) {
+        console.log("articles", articles);
+        return articles;
+      } else {
+        if (childs.length > 0) {
+          return Observable.forkJoin([
+            Observable.of([]),
+            this.getArticles(childs[0]['pid']).map(res => res)
+          ]);
+          //return this.getArticles(childs[0]['pid']).subscribe();
+        } else {
+          return Observable.of([]);
+        }
+      }
+
+
+    });
+  }
+
+
+  getArticlesApi(pid: string): Observable<any[]> {
     let url = this.state.config['api_point'] + '/item/' + pid + '/children';
     //    let url = this.state.config['api_point'] + '/search';
     //    url += '?q=parent_pid:' + pid.replace(':', '\\:') + '' + '&fq=fedora.model:article';
@@ -218,6 +341,42 @@ export class AppService {
     return this.http.get(url, { search: params })
       .map((response: Response) => {
         return JSON.parse(response.json()['response']['docs'][0]['mods']);
+      });
+  }
+
+  setViewed(pid: string): Observable<any> {
+    let url = '/search/views/update';
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    let add = {add: {doc:{}, commitWithin:10}};
+    let body = add['add']['doc'];
+    body['pid'] = pid;
+    body['views'] = {'inc': 1};
+    
+    return this.http.post(url, JSON.stringify(add), options)
+      .map((response: Response) => {
+        return response.json();
+
+      });
+  }
+
+  getViewed(pid: string): Observable<number> {
+    let url = '/search/views/select';
+    let params = new URLSearchParams();
+
+    params.set('q', '*:*');
+    params.set('fq', 'pid:"' + pid + '"');
+    params.set('wt', 'json');
+    params.set('fl', 'views');
+
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        if (response.json()['response']['numFound'] > 0) {
+          return response.json()['response']['docs'][0]['views'];
+        } else {
+          return 0;
+        }
+
       });
   }
 

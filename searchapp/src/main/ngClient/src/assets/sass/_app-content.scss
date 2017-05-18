@@ -46,6 +46,10 @@
     h2 {
       margin-bottom: 20px;
     }
+    .app-item-wrapper {
+      height: 600px;
+      overflow-y: auto;
+    }
     .app-item {
       &.active {
         background-color: $app-brand-l-4;
@@ -70,6 +74,7 @@
       .media-heading {
         @extend .app-font-s30;
         margin-top: 10px;
+        text-transform: capitalize;
       }
     }
     .app-thumb-doc {

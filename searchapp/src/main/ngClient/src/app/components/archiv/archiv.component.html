@@ -7,15 +7,18 @@
             {{'Zpět na ročníky' | translate}}
           </button>
         </div><!--/.app item -->
-        <div class="app-item" *ngFor="let item of parentItems" (click)="setItems(item.pid, currentParent)">
-          <button class="app-btn-arrow app-btn-arrow-right" [class.app-btn-active]="item.pid === currentPid">
-            <app-archiv-item-left [item]="item" ></app-archiv-item-left>
-          </button>
-        </div><!--/.app item -->
+        <div class="app-item-wrapper">
+          <div class="app-item" *ngFor="let item of parentItems" (click)="setItems(item.pid, currentParent)">
+            <button class="app-btn-arrow app-btn-arrow-right" [class.app-btn-active]="item.pid === currentPid">
+              <app-archiv-item-left [item]="item" ></app-archiv-item-left>
+            </button>
+          </div><!--/.app item -->
+        </div>
       </div><!--/.col -->
 
       <div [class]="isRoot() ? 'col-xs-12 col-sm-12 col-md-9 col-md-offset-3 app-col-right' : 'col-xs-12 col-sm-7 col-md-8 col-lg-9 app-col-right'">
-        <div class="app-sort-headline">
+        <!-- First level -->
+        <div *ngIf="isRoot()" class="app-sort-headline">
           <div class="row">
             <div class="col-xs-12 col-sm-6" *ngIf="currentItem">
               <h2 class="app-font-s42 app-clean-mg" [ngSwitch]="currentItem['model']">
@@ -40,9 +43,24 @@
               </ul>
             </div><!--/.col -->
           </div><!--/.row -->
-        </div><!--/.app section -->
+        </div><!--/.first level -->
+        
+        <!-- Second level -->
+        <span *ngIf="!isRoot()">
+          <span *ngIf="currentItem">
+            <h2 class="app-font-s42" [ngSwitch]="currentItem['model']">
+              <span *ngSwitchCase="'periodical'">
+                {{'Ročníky' || translate}}
+              </span>
+              <span *ngSwitchCase="'periodicalvolume'">
+                {{currentItem['details']['year']}}, {{'ročník' | translate}} {{currentItem['details']['volumeNumber']}}
+              </span>
+            </h2>
+          </span>
+        </span><!--/.second level -->
+        
         <div *ngFor="let item of items" class="media">
-          <app-archiv-item [item]="item" (drillDown)="drillDown($event)"></app-archiv-item>
+          <app-archiv-item [item]="item" (drillDown)="drillDown($event)" class="show"></app-archiv-item>
         </div><!--/.media -->
         <p>
           Starší ročníky najdete v <a href="#" title="Digitální knihovně AV ČR">Digitální knihovně AV ČR</a>

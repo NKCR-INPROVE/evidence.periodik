@@ -50,7 +50,8 @@ $roboto-font-path: '../fonts' !default;
   @font-face {
     font-family: '#{$name}-#{$variant}';
     src: url('#{$font-full-path}-#{$type}.eot');
-    src: local('#{$name} #{$variant} #{$type}'),
+    src: local('#{$name} #{$variant}'),
+         local('#{$name} #{$variant} #{$type}'),
          local('#{$name}-#{$variant} #{$type}'),
          local('#{$name}-#{$variant}-#{$type}'),
          url('#{$font-full-path}-#{$type}.eot?#iefix') format('embedded-opentype'),

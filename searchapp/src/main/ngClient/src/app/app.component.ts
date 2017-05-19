@@ -123,7 +123,7 @@ export class AppComponent implements OnInit {
 
   setMainClass(url: string) {
     let p = url.split('/');
-    this.mainClass = this.classes[p[1]];
+    this.state.mainClass = this.classes[p[1]];
   }
 
   processUrlParams(searchParams) {

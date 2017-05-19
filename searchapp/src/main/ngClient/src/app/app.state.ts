@@ -40,6 +40,8 @@ export class AppState {
   public actualNumber : Journal;
   public imgSrc: string;
   
+  public mainClass: string;
+  
   breadcrumbs = [];
   
   setConfig(cfg){

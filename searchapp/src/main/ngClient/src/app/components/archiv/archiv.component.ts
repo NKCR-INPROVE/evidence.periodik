@@ -30,7 +30,7 @@ export class ArchivComponent implements OnInit {
     //this.initData();
     this.route.params
       .switchMap((params: Params) => Observable.of(params['pid'])).subscribe(pid => {
-        if(pid){
+        if (pid) {
           this.currentPid = pid;
           if (this.state.config) {
             this.setItems(pid);
@@ -38,6 +38,10 @@ export class ArchivComponent implements OnInit {
         } else {
           this.initData();
         }
+
+        let sufix = this.isRoot() ? '-level-1' : '-level-2';
+        this.state.mainClass = 'app-page-archiv' + sufix;
+
       });
 
     this.state.configSubject.subscribe(
@@ -67,12 +71,12 @@ export class ArchivComponent implements OnInit {
     this.service.getItem(this.currentPid).subscribe(res => {
       this.currentItem = res;
       let ctx = res['context'][0];
-      if(ctx.length > 1){
+      if (ctx.length > 1) {
         this.currentParent = ctx[ctx.length - 2]['pid'];
       } else {
         this.currentParent = null;
       }
-      
+
       if (!this.cache.hasOwnProperty(this.currentPid)) {
         this.service.getChildren(this.currentPid).subscribe(res => {
           if (res[0]['datanode']) {
@@ -80,10 +84,10 @@ export class ArchivComponent implements OnInit {
           } else {
             this.cache[this.currentPid] = { items: res, parent: this.currentParent };
             this.items = res;
-            
+
             if (this.currentParent === null) {
               this.parentItems = [];
-            }else if (this.cache.hasOwnProperty(this.currentParent)) {
+            } else if (this.cache.hasOwnProperty(this.currentParent)) {
               this.parentItems = this.cache[this.currentParent]['items'];
               //this.currentParent = parent;
             } else {
@@ -92,7 +96,7 @@ export class ArchivComponent implements OnInit {
               this.service.getChildren(this.currentParent).subscribe(res => {
                 this.parentItems = res;
                 //this.cache[this.currentParent] = {};
-                this.cache[this.currentParent] = { items: res};
+                this.cache[this.currentParent] = { items: res };
               });
             }
           }

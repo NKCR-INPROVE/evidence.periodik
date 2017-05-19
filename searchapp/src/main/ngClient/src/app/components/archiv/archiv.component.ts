@@ -39,8 +39,6 @@ export class ArchivComponent implements OnInit {
           this.initData();
         }
 
-        let sufix = this.isRoot() ? '-level-1' : '-level-2';
-        this.state.mainClass = 'app-page-archiv' + sufix;
 
       });
 
@@ -49,6 +47,13 @@ export class ArchivComponent implements OnInit {
         this.initData();
       }
     );
+  }
+  
+  setMainClass(){
+    
+        let sufix = this.isRoot() ? '-level-1' : '-level-2';
+        this.state.mainClass = 'app-page-archiv' + sufix;
+        this.state.classChanged();
   }
 
   isRoot() {
@@ -68,6 +73,7 @@ export class ArchivComponent implements OnInit {
   setItems(pid: string) {
     //let parent = this.currentPid;
     this.currentPid = pid;
+          this.setMainClass();
     this.service.getItem(this.currentPid).subscribe(res => {
       this.currentItem = res;
       let ctx = res['context'][0];

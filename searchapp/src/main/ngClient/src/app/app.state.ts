@@ -9,6 +9,9 @@ export class AppState {
 
   private _stateSubject = new Subject();
   public stateChangedSubject: Observable<any> = this._stateSubject.asObservable();
+
+  private _classSubject = new Subject();
+  public classChangedSubject: Observable<any> = this._classSubject.asObservable();
   
   public _paramsSubject = new Subject();
   public paramsSubject: Observable<any> = this._paramsSubject.asObservable();
@@ -59,6 +62,12 @@ export class AppState {
     this._stateSubject.next(this);
   }
   
+  //params
+  classChanged(){    
+    console.log(this.mainClass);
+    this._classSubject.next(this);
+  }
+  
   
   //Clear state vars
   clear() {
@@ -68,8 +77,6 @@ export class AppState {
   setActual(a: Journal){
     this.actualNumber = a;
     this.imgSrc = this.config['context'] + 'img?uuid=' + this.actualNumber.pid + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
-    
-    
     this.stateChanged();
   }
   

@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     'home': 'app-page-home',
     'o-casopisu': 'app-page-ocasopisu',
     'pro-autory': 'app-page-pokyny-pro-autory',
-    'archiv': 'app-page-archiv',
+    'archiv': 'app-page-archiv-level-1',
     'article': 'app-page-archiv-reader',
     'hledat': 'app-page-search'
   };
@@ -48,7 +48,13 @@ export class AppComponent implements OnInit {
     this.getConfig().subscribe(
       cfg => {
 
-        this.state.stateChangedSubject.subscribe(route => { this.stateChanged(route) })
+        this.state.stateChangedSubject.subscribe(route => { 
+          this.stateChanged(route) ;
+          });
+          
+        this.state.classChangedSubject.subscribe(() => { 
+          this.classChanged() ;
+          });
 
         this.processUrl();
       }
@@ -124,6 +130,7 @@ export class AppComponent implements OnInit {
   setMainClass(url: string) {
     let p = url.split('/');
     this.state.mainClass = this.classes[p[1]];
+    this.mainClass = this.classes[p[1]];
   }
 
   processUrlParams(searchParams) {
@@ -135,6 +142,12 @@ export class AppComponent implements OnInit {
   //Called when changing state
   stateChanged(route: string) {
     this.setUrl(route);
+  }
+  
+  classChanged(){
+    
+    this.mainClass = this.state.mainClass;
+    console.log(this.mainClass);
   }
 
   setUrl(route: string) {

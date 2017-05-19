@@ -47,8 +47,8 @@
       margin-bottom: 20px;
     }
     .app-item-wrapper {
-      height: 600px;
-      overflow-y: auto;
+      /*height: 600px;
+      overflow-y: auto;*/
     }
     .app-item {
       &.active {
@@ -88,8 +88,38 @@
 
 // reader
 .app-page-archiv-reader {
+  //background-color: red;
+  display: flex;
+  height: 0px;
+  app-article-viewer {
+    //background-color: green;
+    display: flex;
+    flex: 1;
+  }
   .app-content {
     padding-right: 95px;
+    //background-color: yellow;
+    display: flex;
+    flex: 1;
+    .container {
+      //background-color: blue;
+      display: flex;
+      .row {
+        //background-color: aquamarine;
+        display: flex;
+        flex: 1;
+        .app-col-left {
+          //background-color: antiquewhite;
+          flex: 1;
+          overflow: auto;
+        }
+        .app-col-right {
+          //background-color: blueviolet;
+          flex: 1;
+          overflow: auto;
+        }
+      }
+    }
   }
 }
 

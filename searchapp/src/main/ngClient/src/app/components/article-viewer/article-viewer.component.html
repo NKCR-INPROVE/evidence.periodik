@@ -32,8 +32,9 @@
       </div><!--/.col -->
       
       <div class="col-xs-12 col-sm-7 app-col-right">
-        <div *ngIf="loading" class="img-responsive app-thumb-doc" >loading...</div>
-        <div *ngIf="isPdf" class="img-responsive app-thumb-doc" style="max-height: 600px; overflow: auto;">
+        <!--<div *ngIf="loading" class="img-responsive app-thumb-doc" >loading...</div>-->
+        <div *ngIf="loading">loading...</div>
+        <div *ngIf="isPdf">
           <pdf-viewer [src]="fullSrc" 
                       [original-size]="true" 
                       [render-text]="true"

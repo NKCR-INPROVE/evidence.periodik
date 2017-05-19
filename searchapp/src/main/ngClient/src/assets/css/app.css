@@ -6480,8 +6480,8 @@ h4 + hr {
   .app-content .app-col-left h2 {
     margin-bottom: 20px; }
   .app-content .app-col-left .app-item-wrapper {
-    height: 600px;
-    overflow-y: auto; }
+    /*height: 600px;
+    overflow-y: auto;*/ }
   .app-content .app-col-left .app-item.active {
     background-color: #f2e8eb;
     padding: 10px 15px; }
@@ -6501,8 +6501,27 @@ h4 + hr {
   .app-content .dropdown-menu {
     border: 1px solid #d9d9d9 !important; }
 
-.app-page-archiv-reader .app-content {
-  padding-right: 95px; }
+.app-page-archiv-reader {
+  display: flex;
+  height: 0px; }
+  .app-page-archiv-reader app-article-viewer {
+    display: flex;
+    flex: 1; }
+  .app-page-archiv-reader .app-content {
+    padding-right: 95px;
+    display: flex;
+    flex: 1; }
+    .app-page-archiv-reader .app-content .container {
+      display: flex; }
+      .app-page-archiv-reader .app-content .container .row {
+        display: flex;
+        flex: 1; }
+        .app-page-archiv-reader .app-content .container .row .app-col-left {
+          flex: 1;
+          overflow: auto; }
+        .app-page-archiv-reader .app-content .container .row .app-col-right {
+          flex: 1;
+          overflow: auto; }
 
 .app-page-search .tab-content {
     /*.app-section:not(.app-section-search-form) {

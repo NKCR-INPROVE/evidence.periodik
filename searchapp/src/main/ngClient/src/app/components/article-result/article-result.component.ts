@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AppService } from '../../services/app.service';
@@ -11,6 +11,7 @@ import { AppState } from '../../app.state';
 })
 export class ArticleResultComponent implements OnInit {
   @Input('article') article;
+  @Input('active') active: boolean;
   langObserver: Subscription;
 
   rozsah: string;
@@ -31,6 +32,7 @@ export class ArticleResultComponent implements OnInit {
   };
 
   constructor(
+  private elementRef: ElementRef,
     private service: AppService,
     private state: AppState) { }
 
@@ -58,10 +60,13 @@ export class ArticleResultComponent implements OnInit {
     
     this.setTitleInfo();
     this.setNames(mods);
-        console.log(this.title);
-        console.log(this.authors);
-    
     //console.log(mods);
+    if(this.active){
+      setTimeout(() => {
+        this.elementRef.nativeElement.scrollIntoView();
+      }, 100);
+      
+    }
   }
 
 

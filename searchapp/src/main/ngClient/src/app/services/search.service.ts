@@ -24,13 +24,10 @@ export class SearchService {
     private state: AppState,
     private http: Http) { }
 
-  search(q: string) {
+  search(params : URLSearchParams) {
 
     var url = "/search/journal/select";
 
-    var params = new URLSearchParams();
-    params.set('q', q);
-    params.set('fq', 'model:article');
     
     return this.http.get(url, { search: params }).map(res => {
       return res.json();

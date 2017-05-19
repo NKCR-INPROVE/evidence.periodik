@@ -26,7 +26,7 @@
           <h4 class="app-clean-mg">{{'genre.' + genre | translate}}</h4>
           <hr />
           <div *ngFor="let art of journal.genresObject[genre].articles" class="app-item" [class.active]="art.pid === pid">
-            <app-article-result [article]="art"></app-article-result>
+            <app-article-result [article]="art" [active]="art.pid === pid"></app-article-result>
           </div>
         </div><!--/.app section -->
       </div><!--/.col -->

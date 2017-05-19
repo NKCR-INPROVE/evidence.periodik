@@ -13,6 +13,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
+import { NouisliderModule } from 'ng2-nouislider';
 
 import { AppState } from './app.state';
 import { AppService } from './services/app.service';
@@ -74,6 +75,7 @@ export function createTranslateLoader(http: Http) {
     HttpModule,
     JsonpModule,
     SlimLoadingBarModule.forRoot(),
+    NouisliderModule,
     BsDropdownModule.forRoot(),
     TranslateModule.forRoot({
             loader: {
@@ -102,6 +104,7 @@ export function createTranslateLoader(http: Http) {
       { path: 'kontakt', component: FreeTextComponent },
       { path: 'e-shop', component: FreeTextComponent },
       { path: 'hledat', component: SearchComponent },
+      { path: 'hledat/:criteria', component: SearchComponent },
       { path: 'article/:pid', component: ArticleViewerComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ])

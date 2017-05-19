@@ -21,6 +21,7 @@
                 </div><!--/.col -->
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
                   <div id="slider"></div>
+                  <nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="dateRange" [tooltips]="[ true, true ]" ></nouislider>
                 </div><!--/.col -->
               </div><!--/.row -->
             </div><!--/.app-section -->
@@ -52,16 +53,14 @@
                   Počet výsledků na stránku:
                   <nav class="app-nav-items">
                     <ul class="list-unstyled app-brand-text app-font-roboto-cb">
-                      <li class="active"><a href="">10</a></li>
-                      <li><a href="">20</a></li>
-                      <li><a href="">30</a></li>
+                      <li *ngFor="let r of rowsSelect" [class.active]="this.rows === r"><a (click)="setRows(r)">{{r}}</a></li>
                     </ul>
                   </nav><!--/.app-nav-items -->
                 </div><!--/.col -->
               </div><!--/.row -->
             </div><!--/.app-section -->
             
-            <div class="app-section app-section-results">
+            <div class="app-section app-section-results" #results>
               <!--
               <div class="app-item" *ngFor="let doc of docs">
                 2014, ročník 7, číslo 1, s. 68-99
@@ -90,7 +89,7 @@
                 <li><a href="#">4</a></li>
                 <li><a href="#">5</a></li>
                 <li>
-                  <a href="#" aria-label="Next">
+                  <a aria-label="Next" (click)="nextPage()">
                     <span aria-hidden="true">Další</span>
                   </a>
                 </li>

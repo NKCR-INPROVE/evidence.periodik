@@ -3,17 +3,15 @@
     <div class="app-col-left">
       <ul class="list-unstyled app-clean-mg app-select">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">kdekoliv <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{getLabel(criterium)}} <span class="caret"></span></a>
           <ul class="dropdown-menu app-clean-border">
-            <li *ngFor="let f of fields"><a href="#">v autorech</a></li>
-            <li><a href="#">v článcích</a></li>
-            <li><a href="#">v rubrice</a></li>
+            <li *ngFor="let f of fields"><a (click)="setField(criterium, f.field)">{{f.label}}</a></li>
           </ul>
         </li>
       </ul>
     </div><!--/.col -->
     <div class="app-col-middle">
-      <input type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." [(ngModel)]="criterium.value" />
+      <input type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." [(ngModel)]="criterium.value"  (keyup.enter)="search()" />
     </div><!--/.col -->
     <div class="app-col-right text-right">
       <ul *ngIf="!last" class="list-unstyled app-clean-mg app-select">

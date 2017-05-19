@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   mainClass: string = this.classes['home'];
 
   constructor(
-    private state: AppState,
+    public state: AppState,
     private searchService: SearchService,
     private appservice: AppService,
     private http: Http,

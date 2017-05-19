@@ -86,41 +86,54 @@
   }
 }
 
-// archiv
-.app-page-archiv {
+// archiv level 2
+.app-page-archiv-level-2 {
   display: flex;
   height: 0px;
-}
-
-// reader
-.app-page-archiv-reader {
-  //background-color: red;
-  display: flex;
-  height: 0px;
-  app-article-viewer {
-    //background-color: green;
+  app-archiv {
     display: flex;
     flex: 1;
   }
   .app-content {
     padding-right: 95px;
-    //background-color: yellow;
     display: flex;
     flex: 1;
     .container {
-      //background-color: blue;
       display: flex;
       .row {
-        //background-color: aquamarine;
         display: flex;
         flex: 1;
         .app-col-left {
-          //background-color: antiquewhite;
+          flex: 1;
+          overflow: auto;
+        }
+      }
+    }
+  }
+}
+
+// reader
+.app-page-archiv-reader {
+  display: flex;
+  height: 0px;
+  app-article-viewer {
+    display: flex;
+    flex: 1;
+  }
+  .app-content {
+    padding-right: 95px;
+    display: flex;
+    flex: 1;
+    .container {
+      display: flex;
+      .row {
+        display: flex;
+        flex: 1;
+        .app-col-left {
           flex: 1;
           overflow: auto;
         }
         .app-col-right {
-          //background-color: blueviolet;
           flex: 1;
           overflow: auto;
           margin-right: 80px;

@@ -6501,9 +6501,24 @@ h4 + hr {
   .app-content .dropdown-menu {
     border: 1px solid #d9d9d9 !important; }
 
-.app-page-archiv {
+.app-page-archiv-level-2 {
   display: flex;
   height: 0px; }
+  .app-page-archiv-level-2 app-archiv {
+    display: flex;
+    flex: 1; }
+  .app-page-archiv-level-2 .app-content {
+    padding-right: 95px;
+    display: flex;
+    flex: 1; }
+    .app-page-archiv-level-2 .app-content .container {
+      display: flex; }
+      .app-page-archiv-level-2 .app-content .container .row {
+        display: flex;
+        flex: 1; }
+        .app-page-archiv-level-2 .app-content .container .row .app-col-left {
+          flex: 1;
+          overflow: auto; }
 
 .app-page-archiv-reader {
   display: flex;

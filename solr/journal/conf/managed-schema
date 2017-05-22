@@ -145,17 +145,21 @@
     <field name="title" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     <field name="subtitle" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     <field name="non_sort_title" type="text_cz" indexed="true" stored="true" multiValued="false"/>
-    <field name="autor" type="text_cz" indexed="true" stored="true" multiValued="true"/>
-    <field name="keywords" type="string" indexed="true" stored="true" multiValued="true"/>
+    <field name="autor" type="text_lowercase" indexed="true" stored="true" multiValued="true"/>
+    <field name="keywords" type="lowercase" indexed="true" stored="true" multiValued="true"/>
+    <dynamicField name="keywords_*" type="lowercase" indexed="true" stored="true" multiValued="true"/>
+    
     <field name="datum" type="tdate" indexed="true" stored="true" multiValued="false"/>
+    <field name="year" type="tint" indexed="true" stored="true" multiValued="false"/>
     
     <field name="isRecenzovany" type="boolean" indexed="true" stored="true" multiValued="false"/>
     <field name="ocr" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     
     <field name="mods" type="string" indexed="false" stored="true" multiValued="false"/>
     
-    <field name="_text_" type="text_general" indexed="true" stored="false" multiValued="true"/>
+    <field name="_text_" type="text_cz" indexed="true" stored="false" multiValued="true"/>
     
+    <field name="abstract" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     
     
     <!-- Only enabled in the "schemaless" data-driven example (assuming the client
@@ -167,6 +171,7 @@
     <copyField source="autor" dest="_text_"/>
     <copyField source="keywords" dest="_text_"/>
     <copyField source="datum" dest="_text_"/>
+    <copyField source="abstract" dest="_text_"/>
     <copyField source="ocr" dest="_text_"/>
 
     <!-- uncomment the following to ignore any fields that don't already match an existing 
@@ -427,6 +432,7 @@
       <analyzer>
         <tokenizer class="solr.KeywordTokenizerFactory"/>
         <filter class="solr.LowerCaseFilterFactory" />
+        <filter class="solr.ASCIIFoldingFilterFactory"/>     
       </analyzer>
     </fieldType>
 
@@ -463,6 +469,14 @@
     <fieldType name="ignored" stored="false" indexed="false" docValues="false" multiValued="true" class="solr.StrField" />
 
 
+    <!-- Lowercase bez diakrity -->
+    <fieldType name="text_lowercase" class="solr.TextField" positionIncrementGap="100">
+      <analyzer> 
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.ASCIIFoldingFilterFactory"/>       
+      </analyzer>
+    </fieldType>
 
 
     <!-- some examples for different languages (generally ordered by ISO code) -->

@@ -50,8 +50,10 @@ export class SearchComponent implements OnInit {
       
     this.route.params
       .switchMap((params: Params) => Observable.of(params['date'])).subscribe(date => {
-        let j = JSON.parse(date);
-        this.changeRangeFormValue(j[0], j[1]);
+        if(date){  
+          let j = JSON.parse(date);
+          this.changeRangeFormValue(j[0], j[1]);
+        }
       });
   }
   prevPage() {

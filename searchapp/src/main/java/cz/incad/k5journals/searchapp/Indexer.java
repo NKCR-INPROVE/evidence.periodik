@@ -36,6 +36,8 @@ public class Indexer {
   int total;
   JSONObject response;
 
+  Map<String, Integer> dates = new HashMap();
+
   public Indexer() {
     try {
       opts = Options.getInstance();
@@ -58,7 +60,7 @@ public class Indexer {
   /**
    * Index doc only
    *
-   * @param pid document identifier 
+   * @param pid document identifier
    * @param index doc index in parent children
    */
   public void indexPid(String pid, int index) {
@@ -70,19 +72,21 @@ public class Indexer {
       idoc.addField("mods", mods.toString());
       JSONObject item = getItem(pid);
       idoc.addField("datanode", item.optBoolean("datanode"));
-      idoc.addField("model", item.optString("model"));
+      String model =item.optString("model");
+      idoc.addField("model", model);
       response.increment(item.optString("model"));
       idoc.addField("root_title", item.optString("root_title"));
       idoc.addField("idx", index);
 
-      
       JSONArray ctx = item.getJSONArray("context");
+      String parent = null;
       for (int i = 0; i < ctx.length(); i++) {
         String model_path = "";
         String pid_path = "";
         JSONArray ja = ctx.getJSONArray(i);
         if (ja.length() > 1) {
-          idoc.addField("parents", ja.getJSONObject(ja.length() - 2).getString("pid"));
+          parent =  ja.getJSONObject(ja.length() - 2).getString("pid");
+          idoc.addField("parents", parent);
         }
         for (int j = 0; j < ja.length(); j++) {
           model_path += ja.getJSONObject(j).getString("model") + "/";
@@ -98,7 +102,15 @@ public class Indexer {
       }
 
       setTitleInfo(idoc, mods);
+      setNames(idoc, mods);
+      setKeywords(idoc, mods);
+      setAbstract(idoc, mods);
       setGenre(idoc, mods);
+      if("article".equalsIgnoreCase(model)){
+        setDatum(idoc, parent);
+      } else {
+        setDatum(idoc, mods, pid);
+      }
       LOGGER.log(Level.INFO, "indexed: {0}", total++);
       client.add(idoc);
       client.commit();
@@ -321,9 +333,90 @@ public class Indexer {
 
   }
 
-  private void setGenre(SolrInputDocument idoc, JSONObject mods) {
+  private void setKeywords(SolrInputDocument idoc, JSONObject mods) {
 
     String prefix = "mods:";
+    Object o = mods.opt("mods:subject");
+    if (o == null) {
+      prefix = "";
+      o = mods.opt("subject");
+    }
+
+    if (o instanceof JSONObject) {
+      JSONObject jo = ((JSONObject) o).optJSONObject(prefix + "topic");
+      if (jo != null && jo.has("lang")) {
+        String lang = jo.optString("lang");
+        idoc.addField("keywords_" + lang, jo.optString("content"));
+      }
+      idoc.addField("keywords", jo.optString("content"));
+
+    } else if (o instanceof JSONArray) {
+      JSONArray ja = (JSONArray) o;
+      for (int i = 0; i < ja.length(); i++) {
+        JSONObject jo = ja.getJSONObject(i).optJSONObject(prefix + "topic");
+        if (jo != null && jo.has("lang")) {
+          String lang = jo.optString("lang");
+          idoc.addField("keywords_" + lang, jo.optString("content"));
+        }
+        idoc.addField("keywords", jo.optString("content"));
+      }
+    }
+
+  }
+
+  private void setAbstract(SolrInputDocument idoc, JSONObject mods) {
+
+    String prefix = "mods:";
+    Object o = mods.opt("mods:abstract");
+    if (o == null) {
+      prefix = "";
+      o = mods.opt("abstract");
+    }
+
+    if (o instanceof JSONObject) {
+      JSONObject jo = (JSONObject) o;
+      if (jo.has("lang")) {
+        String lang = jo.optString("lang");
+        idoc.addField("abstract_" + lang, jo.optString("content"));
+      }
+    } else if (o instanceof String) {
+      idoc.addField("abstract", o);
+    }
+  }
+
+  private void setNames(SolrInputDocument idoc, JSONObject mods) {
+
+    String prefix = "mods:";
+    Object o = mods.opt("mods:name");
+    if (o == null) {
+      prefix = "";
+      o = mods.opt("name");
+    }
+    if (o instanceof JSONObject) {
+      JSONObject jo = (JSONObject) o;
+      if (jo.has("type") && "personal".equals(jo.getString("type")) && jo.has(prefix + "namePart")) {
+        String autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
+                + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content") + " ";
+        idoc.addField("autor", autor);
+      }
+
+    } else if (o instanceof JSONArray) {
+      JSONArray ja = (JSONArray) o;
+      for (int i = 0; i < ja.length(); i++) {
+        JSONObject jo = ja.getJSONObject(i);
+        if (jo.has("type") && "personal".equals(jo.getString("type")) && jo.has(prefix + "namePart")) {
+          String autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
+                  + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content") + " ";
+          idoc.addField("autor", autor);
+        }
+      }
+    }
+
+  }
+
+  private void setGenre(SolrInputDocument idoc, JSONObject mods) {
+
+    //String prefix = "mods:";
     Object o = mods.opt("mods:genre");
     if (o != null) {
       if (o instanceof JSONArray) {
@@ -341,6 +434,32 @@ public class Indexer {
           idoc.addField("genre", g);
         }
       }
+    }
+  }
+
+  private void setDatum(SolrInputDocument idoc, JSONObject mods, String pid) {
+
+    
+    JSONObject o = mods.optJSONObject("mods:originInfo");
+    if (o != null) {
+      int date = o.optInt("mods:dateIssued");
+      dates.put(pid, date);
+      idoc.addField("year", date);
+    } else {
+      //Pokus starych zaznamu
+      o = mods.optJSONObject("mods:part");
+      if (o != null) {
+        int date = o.optInt("mods:date");
+        dates.put(pid, date);
+        idoc.addField("year", date);
+      }
+    }
+  }
+
+  
+  private void setDatum(SolrInputDocument idoc, String parent) {
+    if (dates.containsKey(parent)) {
+        idoc.addField("year", dates.get(parent));
     }
   }
 }

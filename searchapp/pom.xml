@@ -55,7 +55,28 @@
 
   <build>
     <plugins>
-      
+      <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+       <version>1.6.0</version>
+      <executions>
+        <execution>
+          <id>exec-npm-install</id>
+          <phase>generate-sources</phase>
+          <configuration>
+            <executable>npm</executable>
+            <workingDirectory>${project.basedir}/src/main/ngClient/dist</workingDirectory>  
+            <arguments>
+              <argument>run</argument>
+              <argument>build.prod</argument>
+            </arguments>
+          </configuration>
+          <goals>
+            <goal>exec</goal>
+          </goals>
+        </execution>
+      </executions>
+      </plugin>
       
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
@@ -68,6 +89,7 @@
                 <include>*.bundle.js</include>
                 <include>*.bundle.js.gz</include>
                 <include>*.bundle.map</include>
+                <include>index.html</include>
               </includes>
               <excludes>
                 <exclude>index.jsp</exclude>

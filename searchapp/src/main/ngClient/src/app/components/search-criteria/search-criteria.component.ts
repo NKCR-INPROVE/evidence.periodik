@@ -32,7 +32,6 @@ export class SearchCriteriaComponent implements OnInit {
     this.criteria.push(new Criterium());
     this.route.params
       .switchMap((params: Params) => Observable.of(params['criteria'])).subscribe(criteria => {
-        console.log('criteria');
         if (criteria) {
           this.criteria = [];
           let j = JSON.parse(criteria);

@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
+import { NouisliderComponent } from 'ng2-nouislider';
 
-import {  URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 
 import { Criterium } from '../../models/criterium';
 import { SearchService } from '../../services/search.service';
@@ -13,80 +16,150 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  
-  @ViewChild('results') results: ElementRef; 
+
+  @ViewChild('results') results: ElementRef;
+  @ViewChild('dateSlider') public dateSlider: NouisliderComponent;
   docs: any[];
-  numFound : number;
-  
+  numFound: number;
+
   start: number;
   rowsSelect: number[] = [10, 20, 30];
   rows: number = 10;
-  
-  dateRange: number[] = [1, 5];
+  dateMin: number = 0;
+  dateMax: number = 1;
+  dateOd: number = 0;
+  dateDo: number = 1;
+  dateRange: number[] = [0, 1];
+
+  public dateForm: FormGroup;
+
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.getStats();
     this.route.params
       .switchMap((params: Params) => Observable.of(params['start'])).subscribe(start => {
-        console.log('start: ' + start);
         this.start = +start;
       });
+      
+    this.route.params
+      .switchMap((params: Params) => Observable.of(params['date'])).subscribe(date => {
+        let j = JSON.parse(date);
+        this.changeRangeFormValue(j[0], j[1]);
+      });
   }
-  prevPage(){
+  prevPage() {
     this.start = Math.max(0, this.start - this.rows);
     this.setPage();
   }
-  nextPage(){
+  nextPage() {
     this.start += this.rows;
     this.setPage();
   }
-  
-  setPage(){
+
+  setPage() {
     let p = {};
     Object.assign(p, this.route.snapshot.params);
     console.log(p)
     p['start'] = this.start;
     this.router.navigate([p], { relativeTo: this.route });
   }
-  
-  setRows(r: number){
+
+  setRows(r: number) {
     this.rows = r;
     let p = {};
     Object.assign(p, this.route.snapshot.params);
-    console.log(p)
     p['rows'] = this.rows;
     this.router.navigate([p], { relativeTo: this.route });
   }
-  
-  search(criteria: Criterium[]){
+
+  search(criteria: Criterium[]) {
     this.numFound = 0;
 
     var params = new URLSearchParams();
     params.set('q', '*:*');
     params.set('fq', 'model:article');
-    params.set('start', this.start+'');
-    params.set('rows', this.rows+'');
-    for(let i in criteria){
-      if(criteria[i].field){
+    params.set('start', this.start + '');
+    params.set('rows', this.rows + '');
+    for (let i in criteria) {
+      if (criteria[i].field) {
         params.append('fq', criteria[i].field + ':' + criteria[i].value);
       } else {
         params.append('fq', criteria[i].value);
       }
     }
     
+    //Add date filter
+    params.append('fq', 'year:['+this.dateForm.controls['range'].value[0]+' TO '+this.dateForm.controls['range'].value[1]+']');
+
+    //Rok jako stats
+    params.set('stats', 'true');
+    params.set('stats.field', 'year');
+
     this.searchService.search(params).subscribe(res => {
-      console.log(this.results);
-      console.log(this.results.nativeElement.offsetTop);
+
       this.docs = res['response']['docs'];
       this.numFound = res['response']['numFound'];
-      this.results.nativeElement.scrollIntoView();
-      //document.getElementsByTagName('body')[0].scrollTop = this.results.nativeElement.offsetTop;
+
+      if (res.hasOwnProperty('stats') && res['stats']['stats_fields'].hasOwnProperty('year')) {
+        this.changeRangeFormValue(res['stats']['stats_fields']['year']['min'], res['stats']['stats_fields']['year']['max']);
+      }
+
+      //this.results.nativeElement.scrollIntoView();
+
     });
+  }
+
+  getStats() {
+
+    this.dateMin = 2000;
+    this.dateMax = 2017;
+    this.dateForm = this.formBuilder.group({ 'range': [[this.dateMin, this.dateMax]] });
+
+    var params = new URLSearchParams();
+    params.set('q', '*:*');
+    params.set('rows', '0');
+    //Rok jako stats
+    params.set('stats', 'true');
+    params.set('stats.field', 'year');
+
+    this.searchService.search(params).subscribe(res => {
+      if (res.hasOwnProperty('stats') && res['stats']['stats_fields'].hasOwnProperty('year')) {
+
+
+        this.dateMin = res['stats']['stats_fields']['year']['min'];
+        this.dateMax = res['stats']['stats_fields']['year']['max'];
+        this.dateForm = this.formBuilder.group({ 'range': [[this.dateMin, this.dateMax]] });
+        //this.changeRangeFormValue(, );
+
+      }
+
+      //this.results.nativeElement.scrollIntoView();
+
+    });
+  }
+
+  changeRangeFormValue(dateOd: number, dateDo: number) {
+    const control = <FormControl>this.dateForm.controls['range'];
+    const newRange = control.value;
+    newRange[0] = dateOd;
+    newRange[1] = dateDo;
+    control.setValue(newRange);
+  }
+
+  onDateChange(e) {
+    let p = {};
+    Object.assign(p, this.route.snapshot.params);
+    console.log(this.dateForm.controls['range'].value)
+    p['date'] = JSON.stringify(this.dateForm.controls['range'].value);
+    this.router.navigate([p], { relativeTo: this.route });
+    return;
   }
 
 }

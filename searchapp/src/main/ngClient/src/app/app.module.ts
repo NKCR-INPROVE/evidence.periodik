@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { RouterModule }   from '@angular/router';
 
-import {Store, StoreModule} from "@ngrx/store";
-import {SearchReducer} from "./reducers/search.reducer";
+//import {Store, StoreModule} from "@ngrx/store";
+//import {SearchReducer} from "./reducers/search.reducer";
 
 import { BsDropdownModule } from 'ng2-bootstrap';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
@@ -72,6 +72,7 @@ export function createTranslateLoader(http: Http) {
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     JsonpModule,
     SlimLoadingBarModule.forRoot(),

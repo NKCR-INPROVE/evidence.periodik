@@ -15,13 +15,19 @@
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
                   <form class="form-inline">
                     <div class="form-group">
-                      <label>Datum publikování:</label> od roku <input type="text" class="form-control"> do roku <input type="text" class="form-control">
+                      <label>Datum publikování:</label> 
+                      od roku <input type="text" class="form-control" name="dateOd" [(ngModel)]="dateForm.controls.range.value[0]"> 
+                      do roku <input type="text" class="form-control" name="dateDo" [(ngModel)]="dateForm.controls.range.value[1]">
                     </div>
                   </form>
                 </div><!--/.col -->
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
-                  <div id="slider"></div>
-                  <nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="dateRange" [tooltips]="[ true, true ]" ></nouislider>
+                  <div id="slider">
+                    <form [formGroup]="dateForm">
+                      <nouislider [connect]="true" [min]="dateMin" [max]="dateMax" [step]="1" [formControl]="dateForm.controls.range"
+                        (end)="onDateChange($event)" [tooltips]="[ true, true ]" #dateSlider ></nouislider>
+                    </form>
+                  </div>
                 </div><!--/.col -->
               </div><!--/.row -->
             </div><!--/.app-section -->

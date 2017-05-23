@@ -35,6 +35,10 @@ import { ArticleViewerComponent } from './components/article-viewer/article-view
 import { ArchivItemComponent } from './components/archiv-item/archiv-item.component';
 import { ArchivItemLeftComponent } from './components/archiv-item-left/archiv-item-left.component';
 import { SearchCriteriaComponent } from './components/search-criteria/search-criteria.component';
+import { SearchTabsComponent } from './components/search-tabs/search-tabs.component';
+import { SearchAuthorsComponent } from './components/search-authors/search-authors.component';
+import { SearchGenresComponent } from './components/search-genres/search-genres.component';
+import { SearchKeywordsComponent } from './components/search-keywords/search-keywords.component';
 
 
 
@@ -67,7 +71,11 @@ export function createTranslateLoader(http: Http) {
     PdfViewerComponent,
     ArchivItemComponent,
     ArchivItemLeftComponent,
-    SearchCriteriaComponent
+    SearchCriteriaComponent,
+    SearchTabsComponent,
+    SearchAuthorsComponent,
+    SearchGenresComponent,
+    SearchKeywordsComponent
   ],
   imports: [
     BrowserModule,

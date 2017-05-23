@@ -45,7 +45,9 @@ export class AppState {
   
   public mainClass: string;
   
-  breadcrumbs = [];
+  public breadcrumbs = [];
+  
+  public route: string;
   
   setConfig(cfg){
     this.config = cfg;
@@ -63,8 +65,7 @@ export class AppState {
   }
   
   //params
-  classChanged(){    
-    console.log(this.mainClass);
+  classChanged(){
     this._classSubject.next(this);
   }
   

@@ -119,6 +119,10 @@ export class AppComponent implements OnInit {
         this.state.clear();
       }
     });
+    
+//    this.route..subscribe(data => {
+//      console.log(this.route.outlet);
+//    });
 
     this.paramsObserver = this.route.queryParams.subscribe(searchParams => {
       this.processUrlParams(searchParams);
@@ -129,8 +133,9 @@ export class AppComponent implements OnInit {
 
   setMainClass(url: string) {
     let p = url.split('/');
-    this.state.mainClass = this.classes[p[1].split(';')[0]];
-    this.mainClass = this.classes[p[1].split(';')[0]];
+    this.state.route = p[1].split(';')[0];
+    this.state.mainClass = this.classes[this.state.route];
+    this.mainClass = this.classes[this.state.route];
   }
 
   processUrlParams(searchParams) {
@@ -145,9 +150,7 @@ export class AppComponent implements OnInit {
   }
   
   classChanged(){
-    
     this.mainClass = this.state.mainClass;
-    console.log(this.mainClass);
   }
 
   setUrl(route: string) {

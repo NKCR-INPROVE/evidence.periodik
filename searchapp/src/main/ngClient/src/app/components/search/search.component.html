@@ -5,7 +5,9 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="cokoliv">
-            <app-search-criteria (onSearch)="search($event)"></app-search-criteria>
+            <router-outlet></router-outlet>
+ 
+            <div  *ngIf="showResults()">
             <div class="app-section app-section-slider app-brand lighten-6">
               <div class="row">
                 <div class="col-xs-12">
@@ -101,6 +103,8 @@
                 </li>
               </ul>
             </nav><!--/.app-pagination -->
+            </div>
+            
           </div><!--/.tab-pane -->
           
           <div role="tabpanel" class="tab-pane" id="rejstrik-autoru">

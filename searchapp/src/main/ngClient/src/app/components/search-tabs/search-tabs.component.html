@@ -3,12 +3,12 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-9 col-md-offset-3">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs">
           <li role="presentation"><span>Vyhledat:</span></li>
-          <li role="presentation" class="active"><a href="#cokoliv" aria-controls="cokoliv" role="tab" data-toggle="tab">cokoliv</a></li>
-          <li role="presentation"><a href="#rejstrik-autoru" aria-controls="rejstrik-autoru" role="tab" data-toggle="tab">rejstřík autorů</a></li>
-          <li role="presentation"><a href="#rubriky" aria-controls="rubriky" role="tab" data-toggle="tab">rubriky</a></li>
-          <li role="presentation"><a href="#rejstrik-klicovych-slov" aria-controls="rejstrik-klicovych-slov" role="tab" data-toggle="tab">rejstřík klíčových slov</a></li>
+          <li role="presentation" [routerLink]="['hledat', 'cokoli']" routerLinkActive="active"><a [routerLink]="['hledat', 'cokoli']" >cokoliv</a></li>
+          <li role="presentation" [routerLink]="['hledat', 'autory']" routerLinkActive="active"><a  [routerLink]="['hledat', 'autory']" >rejstřík autorů</a></li>
+          <li role="presentation" [routerLink]="['hledat', 'rubriky']" routerLinkActive="active"><a  [routerLink]="['hledat', 'rubriky']" aria-controls="rubriky" role="tab" data-toggle="tab">rubriky</a></li>
+          <li role="presentation" [routerLink]="['hledat', 'keywords']" routerLinkActive="active"><a  [routerLink]="['hledat', 'keywords']" aria-controls="rejstrik-klicovych-slov" role="tab" data-toggle="tab">rejstřík klíčových slov</a></li>
         </ul>
       </div><!--/.col -->
     </div><!--./row -->

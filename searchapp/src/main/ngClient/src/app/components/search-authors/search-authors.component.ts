@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Criterium } from '../../models/criterium';
 
 @Component({
   selector: 'app-search-authors',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-authors.component.scss']
 })
 export class SearchAuthorsComponent implements OnInit {
+
+  //@Input() criterium: Criterium;
+  @Output() onSearch: EventEmitter<Criterium[]> = new EventEmitter<Criterium[]>();
 
   constructor() { }
 

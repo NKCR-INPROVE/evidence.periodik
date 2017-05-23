@@ -114,28 +114,14 @@
 
 // reader
 .app-page-archiv-reader {
-  display: flex;
-  height: 0px;
-  app-article-viewer {
-    display: flex;
-    flex: 1;
-  }
   .app-content {
-    padding-right: 95px;
-    display: flex;
-    flex: 1;
+    //padding-right: 95px;
     .container {
-      display: flex;
       .row {
-        display: flex;
-        flex: 1;
         .app-col-left {
-          flex: 1;
-          overflow: auto;
+          padding-right: 95px;
         }
         .app-col-right {
-          flex: 1;
-          overflow: auto;
           margin-right: 80px;
         }
       }

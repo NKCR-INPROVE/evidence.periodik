@@ -10,6 +10,9 @@ import { URLSearchParams } from '@angular/http';
 import { Criterium } from '../../models/criterium';
 import { SearchService } from '../../services/search.service';
 
+import { AppService } from '../../services/app.service';
+
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -22,7 +25,7 @@ export class SearchComponent implements OnInit {
   docs: any[];
   numFound: number;
 
-  start: number;
+  start: number = 0;
   rowsSelect: number[] = [10, 20, 30];
   rows: number = 10;
   dateMin: number = 0;
@@ -35,6 +38,7 @@ export class SearchComponent implements OnInit {
 
 
   constructor(
+    private service: AppService,
     private router: Router,
     private route: ActivatedRoute,
     private searchService: SearchService,
@@ -42,10 +46,14 @@ export class SearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
+    this.service.searchSubject.subscribe((criteria: Criterium[]) => this.search(criteria))
     this.getStats();
     this.route.params
       .switchMap((params: Params) => Observable.of(params['start'])).subscribe(start => {
-        this.start = +start;
+        if(start){
+          this.start = +start;
+        }
       });
       
     this.route.params
@@ -79,6 +87,11 @@ export class SearchComponent implements OnInit {
     Object.assign(p, this.route.snapshot.params);
     p['rows'] = this.rows;
     this.router.navigate([p], { relativeTo: this.route });
+  }
+  
+  showResults(){
+    let s = this.route.snapshot.children[0].url[0].path;
+    return s.indexOf('cokoli') > -1;
   }
 
   search(criteria: Criterium[]) {

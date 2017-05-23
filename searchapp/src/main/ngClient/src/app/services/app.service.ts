@@ -9,6 +9,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { AppState } from '../app.state';
 import { SearchService } from './search.service';
+import { Criterium } from '../models/criterium';
 
 declare var xml2json: any;
 
@@ -19,6 +20,10 @@ export class AppService {
   public _langSubject = new Subject();
   public langSubject: Observable<any> = this._langSubject.asObservable();
 
+  //Observe searchs
+  public _searchSubject = new Subject();
+  public searchSubject: Observable<any> = this._searchSubject.asObservable();
+
   constructor(
     private state: AppState,
     private search: SearchService,
@@ -26,7 +31,10 @@ export class AppService {
     private http: Http
   ) { }
 
-
+  searchFired(criteria: Criterium[]){
+    this._searchSubject.next(criteria);
+  }
+  
   changeLang(lang: string) {
     console.log('lang changed to ' + lang);
     this.state.currentLang = lang;

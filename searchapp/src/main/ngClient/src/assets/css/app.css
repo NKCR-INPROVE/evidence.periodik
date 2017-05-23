@@ -6371,6 +6371,7 @@ h4 + hr {
     border-color: #e5d1d7 !important;
     border-radius: 0 !important; }
   #slider .noUi-handle {
+    left: -28px;
     border-color: #e5d1d7 !important; }
     #slider .noUi-handle:before, #slider .noUi-handle:after {
       background: #e5d1d7; }
@@ -6520,28 +6521,10 @@ h4 + hr {
           flex: 1;
           overflow: auto; }
 
-.app-page-archiv-reader {
-  display: flex;
-  height: 0px; }
-  .app-page-archiv-reader app-article-viewer {
-    display: flex;
-    flex: 1; }
-  .app-page-archiv-reader .app-content {
-    padding-right: 95px;
-    display: flex;
-    flex: 1; }
-    .app-page-archiv-reader .app-content .container {
-      display: flex; }
-      .app-page-archiv-reader .app-content .container .row {
-        display: flex;
-        flex: 1; }
-        .app-page-archiv-reader .app-content .container .row .app-col-left {
-          flex: 1;
-          overflow: auto; }
-        .app-page-archiv-reader .app-content .container .row .app-col-right {
-          flex: 1;
-          overflow: auto;
-          margin-right: 80px; }
+.app-page-archiv-reader .app-content .container .row .app-col-left {
+  padding-right: 95px; }
+.app-page-archiv-reader .app-content .container .row .app-col-right {
+  margin-right: 80px; }
 
 .app-page-search .tab-content {
     /*.app-section:not(.app-section-search-form) {
@@ -6685,8 +6668,28 @@ footer {
   .app-page-home .app-content .row div[class*=col]:first-child img {
     margin-top: -175px; }
 
-  .app-page-archiv-reader .app-content {
-    padding-right: 0; }
+  .app-page-archiv-reader {
+    display: flex;
+    height: 0px; }
+    .app-page-archiv-reader app-article-viewer {
+      display: flex;
+      flex: 1; }
+    .app-page-archiv-reader .app-content {
+      display: flex;
+      flex: 1; }
+      .app-page-archiv-reader .app-content .container {
+        display: flex; }
+        .app-page-archiv-reader .app-content .container .row {
+          display: flex;
+          flex: 1; }
+          .app-page-archiv-reader .app-content .container .row .app-col-left {
+            flex: 1;
+            overflow: auto;
+            padding-right: 15px; }
+          .app-page-archiv-reader .app-content .container .row .app-col-right {
+            flex: 1;
+            overflow: auto;
+            /*margin-right: 80px;*/ }
 
   .app-content .app-col-left .app-section:first-child {
     margin-bottom: 50px; }

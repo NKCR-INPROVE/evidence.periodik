@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { SearchService } from '../../services/search.service';
+import { Criterium } from '../../models/criterium';
 
 @Component({
   selector: 'app-search-genres',
@@ -18,8 +18,7 @@ export class SearchGenresComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private searchService: SearchService,
-    private formBuilder: FormBuilder) { }
+    private searchService: SearchService) { }
 
   ngOnInit() {
     this.getGenres();
@@ -50,7 +49,10 @@ export class SearchGenresComponent implements OnInit {
   }
   
   search(genre: string){
-    
+    let c = new Criterium();
+    c.field = 'genre';
+    c.value = genre;
+    this.router.navigate(['/hledat/cokoli', {criteria: JSON.stringify([c]), start: 0}])
   }
 
 }

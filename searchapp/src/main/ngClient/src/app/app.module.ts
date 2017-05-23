@@ -39,6 +39,7 @@ import { SearchTabsComponent } from './components/search-tabs/search-tabs.compon
 import { SearchAuthorsComponent } from './components/search-authors/search-authors.component';
 import { SearchGenresComponent } from './components/search-genres/search-genres.component';
 import { SearchKeywordsComponent } from './components/search-keywords/search-keywords.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 
 
@@ -75,7 +76,8 @@ export function createTranslateLoader(http: Http) {
     SearchTabsComponent,
     SearchAuthorsComponent,
     SearchGenresComponent,
-    SearchKeywordsComponent
+    SearchKeywordsComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -112,8 +114,9 @@ export function createTranslateLoader(http: Http) {
       ]},
       { path: 'kontakt', component: FreeTextComponent },
       { path: 'e-shop', component: FreeTextComponent },
-      { path: 'hledat', component: SearchComponent  ,
+      { path: 'hledat', component: SearchComponent,
       children:[
+        { path: '', redirectTo: 'cokoli', pathMatch: 'full'},
         { path: 'cokoli', component: SearchCriteriaComponent},
         { path: 'autory', component: SearchAuthorsComponent},
         { path: 'keywords', component: SearchKeywordsComponent},

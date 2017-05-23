@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Rx';
 
 import { Criterium } from '../../models/criterium';
 
+import { AppService } from '../../services/app.service';
+
 @Component({
   selector: 'app-search-criteria',
   templateUrl: './search-criteria.component.html',
@@ -20,10 +22,12 @@ export class SearchCriteriaComponent implements OnInit {
     { field: 'title', label: 'název' },
     { field: 'autor', label: 'autor' },
     { field: 'keywords', label: 'klíčová slova' },
+    { field: 'genre', label: 'rubrika' },
     { field: 'ocr', label: 'plný text dokumentu' }
   ]
 
   constructor(
+    private service: AppService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -37,10 +41,14 @@ export class SearchCriteriaComponent implements OnInit {
           let j = JSON.parse(criteria);
           for (let i in j) {
             let c: Criterium = new Criterium();
+          
             Object.assign(c, j[i]);
+          
             this.criteria.push(c);
           }
-          this.onSearch.emit(this.criteria);
+          
+          //this.onSearch.emit(this.criteria);
+          this.service.searchFired(this.criteria);
         }
       });
   }

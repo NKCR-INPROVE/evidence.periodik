@@ -21,7 +21,7 @@
             <div class="app-section">
               <nav class="app-nav-items">
                 <ul class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
-                  <li><a href="#" class="active" title="">A</a></li>
+                  <li><a (click)="setLetter('a')" class="active" title="">A</a></li>
                   <li><a href="#" title="">B</a></li>
                   <li><a href="#" title="">C</a></li>
                   <li><a href="#" title="">D</a></li>
@@ -55,66 +55,15 @@
               <div class="row">
                 <div class="col-xs-6">
                   <ul class="list-unstyled">
-                    <li><a href="#" title="">hackingly</a></li>
-                    <li><a href="#" title="">haggish</a></li>
-                    <li><a href="#" title="">hagiocracy</a></li>
-                    <li><a href="#" title="">hamiltonian</a></li>
-                    <li><a href="#" title="">hamiticized</a></li>
-                    <li><a href="#" title="">harbourside</a></li>
-                    <li><a href="#" title="">hardball</a></li>
-                    <li><a href="#" title="">having</a></li>
-                    <li><a href="#" title="">headily</a></li>
-                    <li><a href="#" title="">headreach</a></li>
-                    <li><a href="#" title="">heartfelt</a></li>
-                    <li><a href="#" title="">hekate</a></li>
-                    <li><a href="#" title="">heliast</a></li>
-                    <li><a href="#" title="">hellenistically</a></li>
-                    <li><a href="#" title="">heracliteanism</a></li>
-                    <li><a href="#" title="">hexadic</a></li>
-                    <li><a href="#" title="">hiker</a></li>
+                    <li *ngFor="let k of keywords1"><a (click)="search(k[0])" title="">{{k[0] | translate}} ({{k[1]}})</a></li>
                   </ul>
                 </div><!--/.col -->
                 <div class="col-xs-6">
                   <ul class="list-unstyled">
-                    <li><a href="#" title="">hiss</a></li>
-                    <li><a href="#" title="">histomorphologically</a></li>
-                    <li><a href="#" title="">hob</a></li>
-                    <li><a href="#" title="">hocussing</a></li>
-                    <li><a href="#" title="">holohedral</a></li>
-                    <li><a href="#" title="">horeb</a></li>
-                    <li><a href="#" title="">hornlike</a></li>
-                    <li><a href="#" title="">hosannaing</a></li>
-                    <li><a href="#" title="">hotelman</a></li>
-                    <li><a href="#" title="">housekeeperlike</a></li>
-                    <li><a href="#" title="">humidor</a></li>
-                    <li><a href="#" title="">humulone</a></li>
-                    <li><a href="#" title="">hurst</a></li>
-                    <li><a href="#" title="">huzzah</a></li>
-                    <li><a href="#" title="">hydrastinine</a></li>
-                    <li><a href="#" title="">hydriodic</a></li>
-                    <li><a href="#" title="">hyperbolizing</a></li>
+                    <li *ngFor="let k of keywords2"><a (click)="search(k[0])" title="">{{k[0] | translate}} ({{k[1]}})</a></li>
                   </ul>
                 </div><!--/.col -->
               </div><!--/.row -->
             </div><!--/.app-section -->
             
-            <!-- App pagination -->
-            <nav class="app-pagination text-center">
-              <ul class="pagination">
-                <li>
-                  <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">Předchozí</span>
-                  </a>
-                </li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                  <a href="#" aria-label="Next">
-                    <span aria-hidden="true">Další</span>
-                  </a>
-                </li>
-              </ul>
-            </nav><!--/.app-pagination -->
+            <app-pagination [pages]="pages" (onGotoPage)="setPage($event)"></app-pagination>

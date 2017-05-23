@@ -7,6 +7,7 @@
     border-radius: 0 !important;
   }
   .noUi-handle {
+    left: -28px;
     border-color: $app-slider-base-color !important;
     &:before,
     &:after {

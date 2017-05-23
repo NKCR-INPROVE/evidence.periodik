@@ -27,38 +27,6 @@
     }
   }
 
-  // reader
-  .app-page-archiv-reader {
-    display: flex;
-    height: 0px;
-    app-article-viewer {
-      display: flex;
-      flex: 1;
-    }
-    .app-content {
-      //padding-right: 95px;
-      display: flex;
-      flex: 1;
-      .container {
-        display: flex;
-        .row {
-          display: flex;
-          flex: 1;
-          .app-col-left {
-            flex: 1;
-            overflow: auto;
-            padding-right: 15px;
-          }
-          .app-col-right {
-            flex: 1;
-            overflow: auto;
-            /*margin-right: 80px;*/
-          }
-        }
-      }
-    }
-  }
-
   .app-content {
     .app-col-left {
       .app-section:first-child {
@@ -115,6 +83,44 @@
       }
     }
   }
+  
+  // reader
+  .app-page-archiv-reader {
+    display: flex;
+    height: 0px;
+    app-article-viewer {
+      display: flex;
+      flex: 1;
+    }
+    .app-content {
+      display: flex;
+      flex: 1;
+      .container {
+        display: flex;
+        .row {
+          display: flex;
+          flex: 1;
+          .app-col-left {
+            flex: 1;
+            overflow: auto;
+            max-width: 585px;
+          }
+          .app-col-right {
+            flex: 1;
+            max-width: 585px;
+            margin-right: 0;
+            padding-right: 0;
+            padding-left: 0;
+            margin-left: 15px;
+            overflow: auto;
+            > div {
+              overflow: initial;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 /*** Large Devices, Wide Screens ***/
@@ -152,6 +158,34 @@
 }
 
 /*** Custom ***/
-@media only screen and (max-width : 767px) {
-
+@media only screen and (max-width : 1360px) {
+  // reader
+  .app-page-archiv-reader {
+    .app-content {
+      .container {
+        .row {
+          .app-col-right {
+            margin-right: 80px;
+          }
+        }
+      }
+    }
+  }
 }
+
+@media only screen and (max-width : 960px) {
+   // reader
+  .app-page-archiv-reader {
+    .app-content {
+      .container {
+        .row {
+          .app-col-left {
+            padding-right: 95px;
+          }
+        }
+      }
+    }
+  }
+}
+
+

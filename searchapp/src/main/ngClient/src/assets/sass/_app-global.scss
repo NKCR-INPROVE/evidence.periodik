@@ -34,6 +34,10 @@ header {
   flex: none;
 }
 
+.slim-loading-bar-progress {
+  height: 0 !important;
+}
+
 p {
   margin-bottom: 20px
 }

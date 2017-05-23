@@ -112,7 +112,14 @@ export function createTranslateLoader(http: Http) {
       ]},
       { path: 'kontakt', component: FreeTextComponent },
       { path: 'e-shop', component: FreeTextComponent },
-      { path: 'hledat', component: SearchComponent },
+      { path: 'hledat', component: SearchComponent  ,
+      children:[
+        { path: 'cokoli', component: SearchCriteriaComponent},
+        { path: 'autory', component: SearchAuthorsComponent},
+        { path: 'keywords', component: SearchKeywordsComponent},
+        { path: 'rubriky', component: SearchGenresComponent}
+        
+      ]},
       { path: 'hledat/:criteria', component: SearchComponent },
       { path: 'article/:pid', component: ArticleViewerComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }

@@ -1,13 +1,13 @@
 <!-- App pagination -->
 <nav class="app-pagination text-center">
   <ul class="pagination">
-    <li>
+    <li *ngIf="current > 0">
       <a (click)="prev()" aria-label="Previous">
         <span aria-hidden="true">{{'Předchozí' | translate}}</span>
       </a>
     </li>
-    <li *ngFor="let p of pages" class.active="current === p"><a (click)="gotoPage(p)">{{p}}</a></li>
-    <li>
+    <li *ngFor="let p of pages" [class.active]="current === p"><a (click)="gotoPage(p)">{{p+1}}</a></li>
+    <li *ngIf="current < totalPages - 1">
       <a (click)="next()" aria-label="Next">
         <span aria-hidden="true">{{'Další' | translate}}</span>
       </a>

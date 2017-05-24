@@ -75,7 +75,7 @@ export class SearchComponent implements OnInit {
 
   setPage() {
     let p = {};
-    Object.assign(p, this.route.snapshot.params);
+    Object.assign(p, this.route.snapshot.firstChild.params);
     console.log(p)
     p['start'] = this.start;
     this.router.navigate([p], { relativeTo: this.route });
@@ -170,10 +170,12 @@ export class SearchComponent implements OnInit {
 
   onDateChange(e) {
     let p = {};
-    Object.assign(p, this.route.snapshot.params);
-    console.log(this.dateForm.controls['range'].value)
+    Object.assign(p, this.route.snapshot.firstChild.params);
     p['date'] = JSON.stringify(this.dateForm.controls['range'].value);
-    this.router.navigate([p], { relativeTo: this.route });
+    
+    //this.router.navigate([p], { relativeTo: this.route });
+    
+    this.router.navigate(['/hledat/cokoli', p]);
     return;
   }
 

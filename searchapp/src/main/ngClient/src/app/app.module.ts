@@ -118,12 +118,12 @@ export function createTranslateLoader(http: Http) {
       children:[
         { path: '', redirectTo: 'cokoli', pathMatch: 'full'},
         { path: 'cokoli', component: SearchCriteriaComponent},
+        { path: 'cokoli/:criteria', component: SearchCriteriaComponent },
         { path: 'autory', component: SearchAuthorsComponent},
         { path: 'keywords', component: SearchKeywordsComponent},
         { path: 'rubriky', component: SearchGenresComponent}
         
       ]},
-      { path: 'hledat/:criteria', component: SearchComponent },
       { path: 'article/:pid', component: ArticleViewerComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ])

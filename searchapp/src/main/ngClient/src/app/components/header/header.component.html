@@ -31,7 +31,7 @@
     </div><!--/.navbar-header -->
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li routerLink="home" routerLinkActive="active"><a routerLink="home" title="Aktuální číslo">{{'Aktuální číslo' | translate}}</a></li>
+        <li routerLink="home" #aa="routerLinkActive" [attr.active]="aa.isActive" routerLinkActive="active"><a routerLink="home" title="Aktuální číslo">{{'Aktuální číslo' | translate}}</a></li>
         <li routerLinkActive="active" class="dropdown">
           <a href="#" title="O časopisu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           <span routerLink="o-casopisu">{{'menu.o-casopisu_' | translate}}</span> <span class="caret"></span></a>

@@ -6,28 +6,47 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit {
-  @Input() pages: number[];
+  @Input() numPages: number;
+  @Input() totalPages: number;
   @Output() onGotoPage: EventEmitter<number> = new EventEmitter<number>();
   
+  pages: number[];
   current: number = 0;
   
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.pages);
+    this.setPages();
+  }
+  
+  ngOnChanges(){
+    this.setPages();
+  }
+  
+  setPages(){
+    this.pages = [];
+    let pagesToShow = Math.min(this.numPages, this.totalPages);
+    let min: number = Math.min(Math.max(0, this.current - Math.floor(pagesToShow / 2)), this.totalPages - pagesToShow);
+    let max: number = min + pagesToShow;
+    for(let i = min; i< max; i++){
+      this.pages.push(i);
+    }
   }
   
   prev(){
     this.current = Math.max(0, this.current - 1);
+    this.setPages();
     this.onGotoPage.emit(this.current);
   }
   next(){
-    this.current++;
+    this.current = Math.min(this.current + 1, this.totalPages);
+    this.setPages();
     this.onGotoPage.emit(this.current);
   }
   gotoPage(p: number){
     this.current = p;
+    this.setPages();
     this.onGotoPage.emit(this.current);
   }
   

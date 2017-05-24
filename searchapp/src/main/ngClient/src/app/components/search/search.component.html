@@ -27,7 +27,7 @@
                   <div id="slider">
                     <form [formGroup]="dateForm">
                       <nouislider [connect]="true" [min]="dateMin" [max]="dateMax" [step]="1" [formControl]="dateForm.controls.range"
-                        (end)="onDateChange($event)" [tooltips]="[ true, true ]" #dateSlider ></nouislider>
+                        (end)="onDateChange($event)" [tooltips]="[ false, true ]" #dateSlider ></nouislider>
                     </form>
                   </div>
                 </div><!--/.col -->
@@ -107,17 +107,7 @@
             
           </div><!--/.tab-pane -->
           
-          <div role="tabpanel" class="tab-pane" id="rejstrik-autoru">
-            <app-search-authors></app-search-authors>
-          </div><!--/.tab-pane -->
           
-          <div role="tabpanel" class="tab-pane" id="rubriky">
-            <app-search-genres></app-search-genres>
-          </div><!--/.tab-pane -->
-          
-          <div role="tabpanel" class="tab-pane" id="rejstrik-klicovych-slov">
-            <app-search-keywords></app-search-keywords>
-          </div><!--/.tab-pane -->
         </div><!--/.tab-content -->
       </div><!--/.col -->
     </div><!--/.row -->

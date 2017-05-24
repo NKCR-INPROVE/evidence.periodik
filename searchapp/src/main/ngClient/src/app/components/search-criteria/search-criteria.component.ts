@@ -73,8 +73,11 @@ export class SearchCriteriaComponent implements OnInit {
   }
 
   search() {
-    this.router.navigate(['/hledat', {criteria: JSON.stringify(this.criteria), start: 0}])
-    //this.onSearch.emit(this.criteria);
+    let p = {};
+    Object.assign(p, this.route.snapshot.params);
+    p['criteria'] = JSON.stringify(this.criteria);
+    p['start'] = 0;
+    this.router.navigate(['/hledat/cokoli', p]);
   }
 
 }

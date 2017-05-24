@@ -20,33 +20,14 @@
             
             <div class="app-section">
               <nav class="app-nav-items">
-                <ul class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
-                  <li><a (click)="setLetter('a')" class="active" title="">A</a></li>
-                  <li><a href="#" title="">B</a></li>
-                  <li><a href="#" title="">C</a></li>
-                  <li><a href="#" title="">D</a></li>
-                  <li><a href="#" title="">E</a></li>
-                  <li><a href="#" title="">F</a></li>
-                  <li><span class="app-brand-text text-lighten-2">G</span></li>
-                  <li class="active"><a href="#" title="">H</a></li>
-                  <li><a href="#" title="">I</a></li>
-                  <li><a href="#" title="">J</a></li>
-                  <li><a href="#" title="">K</a></li>
-                  <li><a href="#" title="">L</a></li>
-                  <li><a href="#" title="">M</a></li>
-                  <li><a href="#" title="">N</a></li>
-                  <li><a href="#" title="">O</a></li>
-                  <li><a href="#" title="">P</a></li>
-                  <li><span class="app-brand-text text-lighten-2">Q</span></li>
-                  <li><a href="#" title="">R</a></li>
-                  <li><a href="#" title="">S</a></li>
-                  <li><a href="#" title="">T</a></li>
-                  <li><a href="#" title="">U</a></li>
-                  <li><a href="#" title="">V</a></li>
-                  <li><a href="#" title="">W</a></li>
-                  <li><span class="app-brand-text text-lighten-2">X</span></li>
-                  <li><span class="app-brand-text text-lighten-2">Y</span></li>
-                  <li><a href="#" title="">Z</a></li>
+                <ul *ngIf="keywords.length > 0" class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
+                  <li *ngFor="let l of letters" [class.active]="l === letter">
+                    <a (click)="setLetter(l)" 
+                      [class.app-brand-text]="isEmpty(l)" 
+                      [class.text-lighten-2]="isEmpty(l)" 
+                      
+                      title="">{{l}}</a>
+                  </li>
                 </ul>
               </nav>
             </div><!--/.app-section -->
@@ -55,15 +36,15 @@
               <div class="row">
                 <div class="col-xs-6">
                   <ul class="list-unstyled">
-                    <li *ngFor="let k of keywords1"><a (click)="search(k[0])" title="">{{k[0] | translate}} ({{k[1]}})</a></li>
+                    <li *ngFor="let k of keywords1"><a (click)="search(k[0])" title="">{{k[0] | translate}}</a></li>
                   </ul>
                 </div><!--/.col -->
                 <div class="col-xs-6">
                   <ul class="list-unstyled">
-                    <li *ngFor="let k of keywords2"><a (click)="search(k[0])" title="">{{k[0] | translate}} ({{k[1]}})</a></li>
+                    <li *ngFor="let k of keywords2"><a (click)="search(k[0])" title="">{{k[0] | translate}}</a></li>
                   </ul>
                 </div><!--/.col -->
               </div><!--/.row -->
             </div><!--/.app-section -->
             
-            <app-pagination [pages]="pages" (onGotoPage)="setPage($event)"></app-pagination>
+            <app-pagination [numPages]="5" [totalPages]="totalPages" (onGotoPage)="setPage($event)"></app-pagination>

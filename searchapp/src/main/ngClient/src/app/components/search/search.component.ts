@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationStart, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { NouisliderComponent } from 'ng2-nouislider';
 
@@ -24,6 +24,7 @@ export class SearchComponent implements OnInit {
   @ViewChild('dateSlider') public dateSlider: NouisliderComponent;
   docs: any[];
   numFound: number;
+  totalPages: number = 0;
 
   start: number = 0;
   rowsSelect: number[] = [10, 20, 30];
@@ -49,6 +50,19 @@ export class SearchComponent implements OnInit {
     
     this.service.searchSubject.subscribe((criteria: Criterium[]) => this.search(criteria))
     this.getStats();
+    this.router.events.subscribe(val => {
+      if (val instanceof NavigationEnd) {
+        if(this.route.snapshot.firstChild.params.hasOwnProperty('start')){
+         this.start = +this.route.snapshot.firstChild.params['start'];
+        }
+        if(this.route.snapshot.firstChild.params.hasOwnProperty('rows')){
+         this.rows = +this.route.snapshot.firstChild.params['rows'];
+        }
+      } else if (val instanceof NavigationStart) {
+      
+        console.log('1');
+      }
+    });
     this.route.params
       .switchMap((params: Params) => Observable.of(params['start'])).subscribe(start => {
         if(start){
@@ -64,34 +78,14 @@ export class SearchComponent implements OnInit {
         }
       });
   }
-  prevPage() {
-    this.start = Math.max(0, this.start - this.rows);
-    this.setPage();
-  }
-  nextPage() {
-    this.start += this.rows;
-    this.setPage();
-  }
-
-  setPage() {
-    let p = {};
-    Object.assign(p, this.route.snapshot.firstChild.params);
-    console.log(p)
-    p['start'] = this.start;
-    this.router.navigate([p], { relativeTo: this.route });
-  }
-
-  setRows(r: number) {
-    this.rows = r;
-    let p = {};
-    Object.assign(p, this.route.snapshot.params);
-    p['rows'] = this.rows;
-    this.router.navigate([p], { relativeTo: this.route });
-  }
   
   showResults(){
     let s = this.route.snapshot.children[0].url[0].path;
     return s.indexOf('cokoli') > -1;
+  }
+  
+  lastResult(){
+    return Math.min(this.start + this.rows + 1, this.numFound);
   }
 
   search(criteria: Criterium[]) {
@@ -131,6 +125,7 @@ export class SearchComponent implements OnInit {
 
       this.docs = res['response']['docs'];
       this.numFound = res['response']['numFound'];
+      this.totalPages = Math.floor(this.numFound / this.rows);
       
       if (this.numFound == 0){
         this.changeRangeFormValue(this.dateMin, this.dateMax);
@@ -179,11 +174,27 @@ export class SearchComponent implements OnInit {
     let p = {};
     Object.assign(p, this.route.snapshot.firstChild.params);
     p['date'] = JSON.stringify(this.dateForm.controls['range'].value);
-    
-    //this.router.navigate([p], { relativeTo: this.route });
-    
     this.router.navigate(['/hledat/cokoli', p]);
     return;
   }
+  
+
+  setPage(page: number) {
+    this.start = page * this.rows;
+    let p = {};
+    Object.assign(p, this.route.snapshot.firstChild.params);
+    console.log(p)
+    p['start'] = this.start;
+    this.router.navigate(['/hledat/cokoli', p]);
+  }
+
+  setRows(r: number) {
+    this.rows = r;
+    let p = {};
+    Object.assign(p, this.route.snapshot.firstChild.params);
+    p['rows'] = this.rows;
+    this.router.navigate(['/hledat/cokoli', p]);
+  }
+  
 
 }

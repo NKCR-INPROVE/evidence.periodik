@@ -1,7 +1,7 @@
 <section class="app-content">
   <div *ngIf="journal" class="container">
     <div class="row">
-      <div class="col-xs-12 app-col-left">
+      <div *ngIf="!state.isFull" class="col-xs-12 app-col-left">
         <h2>
           <app-journal-details [journal]="journal"></app-journal-details>
         </h2>
@@ -33,7 +33,6 @@
       
       <div class="col-xs-12 app-col-right">
         <!--<div *ngIf="loading" class="img-responsive app-thumb-doc" >loading...</div>-->
-        <div *ngIf="loading">loading...</div>
         <div *ngIf="isPdf">
           <pdf-viewer [src]="fullSrc" 
                       [original-size]="true" 
@@ -43,6 +42,7 @@
                       (after-load-complete)="afterLoad($event)"
                       style="display: block;"
           ></pdf-viewer>
+        <div *ngIf="loading" style="position: absolute;width:100%;height:100%;background:white;left:0;top:0;">loading...</div>
         </div>
         <img *ngIf="!isPdf && !loading" [src]="fullSrc" alt="" class="img-responsive app-thumb-doc" />
       </div><!--/.col -->
@@ -54,9 +54,27 @@
 <div class="app-sidebar">
   <div class="app-sidebar-wrapper">
     <div class="app-sidebar-top visible-md visible-lg">
-      <div class="app-item">
-        <button class="btn app-btn app-btn-ico app-ico-white app-ico-27-27 app-ico-svg-two" rel="tooltip" title="Minimalizovat">
-          <a href="archiv-4.html">
+      <div *ngIf="!state.isFull" class="app-item">
+        <button class="btn app-btn app-btn-ico app-ico-white app-ico-27-27 app-ico-svg-two" rel="tooltip" title="Maximalizovat" (click)="maximize()">
+          
+            <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.66 26.66">
+                <title>ctecka_maximalizovat</title>
+                <path d="M398.27,358.75H373a0.66,0.66,0,0,0-.66.66v12.14a0.66,0.66,0,0,0,.66.66,0.67,0.67,0,0,0,.67-0.66V360.09h24v24H386.07a0.67,0.67,0,1,0,0,1.34h12.21a0.67,0.67,0,0,0,.67-0.67V359.42a0.67,0.67,0,0,0-.67-0.67h0Z" transform="translate(-372.29 -358.75)"/>
+                <path d="M372.29,384.74a0.67,0.67,0,0,0,.66.67h9.28a0.67,0.67,0,0,0,.67-0.67v-9.28a0.67,0.67,0,0,0-.67-0.67H373a0.67,0.67,0,0,0-.66.67v9.28h0Zm1.34-8.61h7.95v7.95h-7.95v-7.95Z" transform="translate(-372.29 -358.75)"/>
+                <path d="M394.08,363.62a0.67,0.67,0,0,0-.95,0l-7.55,7.56v-4.35a0.67,0.67,0,1,0-1.34,0v6a0.67,0.67,0,0,0,.67.67h6a0.67,0.67,0,0,0,0-1.34h-4.35l7.56-7.55a0.66,0.66,0,0,0,0-.94h0Z" transform="translate(-372.29 -358.75)"/>
+            </svg>
+            <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.66 26.66">
+                <title>ctecka_maximalizovat_over</title>
+                <path d="M398.27,358.75H373a0.66,0.66,0,0,0-.66.66v12.14a0.66,0.66,0,0,0,.66.66,0.67,0.67,0,0,0,.67-0.66V360.09h24v24H386.07a0.67,0.67,0,1,0,0,1.34h12.21a0.67,0.67,0,0,0,.67-0.67V359.42a0.67,0.67,0,0,0-.67-0.67h0Z" transform="translate(-372.29 -358.75)"/>
+                <path d="M372.29,384.74a0.67,0.67,0,0,0,.66.67h9.28a0.67,0.67,0,0,0,.67-0.67v-9.28a0.67,0.67,0,0,0-.67-0.67H373a0.67,0.67,0,0,0-.66.67v9.28h0Z" transform="translate(-372.29 -358.75)"/>
+                <path d="M394.08,363.62a0.67,0.67,0,0,0-.95,0l-7.55,7.56v-4.35a0.67,0.67,0,1,0-1.34,0v6a0.67,0.67,0,0,0,.67.67h6a0.67,0.67,0,0,0,0-1.34h-4.35l7.56-7.55a0.66,0.66,0,0,0,0-.94h0Z" transform="translate(-372.29 -358.75)"/>
+            </svg>
+          
+        </button>
+      </div><!--/.app-item -->
+      <div *ngIf="state.isFull" class="app-item">
+        <button class="btn app-btn app-btn-ico app-ico-white app-ico-27-27 app-ico-svg-two" rel="tooltip" title="Minimalizovat" (click)="minimize()">
+          
             <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.66 26.66">
                 <title>ctecka_minimalizovat</title>
                 <path d="M398.27,358.75H373a0.66,0.66,0,0,0-.66.66v12.14a0.66,0.66,0,0,0,.66.66,0.67,0.67,0,0,0,.67-0.66V360.09h24v24H386.07a0.67,0.67,0,1,0,0,1.34h12.21a0.67,0.67,0,0,0,.67-0.67V359.42a0.67,0.67,0,0,0-.67-0.67h0Z" transform="translate(-372.29 -358.75)"/>
@@ -69,7 +87,7 @@
                 <path d="M372.29,384.74a0.67,0.67,0,0,0,.66.67h9.28a0.67,0.67,0,0,0,.67-0.67v-9.28a0.67,0.67,0,0,0-.67-0.67H373a0.67,0.67,0,0,0-.66.67v9.28h0Z" transform="translate(-372.29 -358.75)"/>
                 <path d="M394.08,363.62a0.67,0.67,0,0,0-.95,0l-7.55,7.56v-4.35a0.67,0.67,0,1,0-1.34,0v6a0.67,0.67,0,0,0,.67.67h6a0.67,0.67,0,0,0,0-1.34h-4.35l7.56-7.55a0.66,0.66,0,0,0,0-.94h0Z" transform="translate(-372.29 -358.75)"/>
             </svg>
-          </a>
+          
         </button>
       </div><!--/.app-item -->
       <div class="app-item">
@@ -99,9 +117,27 @@
     </div><!--/.app-sidebar-top -->
     
     <div class="app-sidebar-bottom">
-      <div class="app-item visible-xs visible-sm">
-        <button class="btn app-btn app-btn-ico app-ico-white app-ico-27-27 app-ico-svg-two" rel="tooltip" title="Minimalizovat">
-          <a href="archiv-4.html">
+      <div *ngIf="!state.isFull" class="app-item visible-xs visible-sm">
+        <button class="btn app-btn app-btn-ico app-ico-white app-ico-27-27 app-ico-svg-two" rel="tooltip" title="Maximalizovat" (click)="maximize()">
+          
+            <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.66 26.66">
+                <title>ctecka_maximalizovat</title>
+                <path d="M398.27,358.75H373a0.66,0.66,0,0,0-.66.66v12.14a0.66,0.66,0,0,0,.66.66,0.67,0.67,0,0,0,.67-0.66V360.09h24v24H386.07a0.67,0.67,0,1,0,0,1.34h12.21a0.67,0.67,0,0,0,.67-0.67V359.42a0.67,0.67,0,0,0-.67-0.67h0Z" transform="translate(-372.29 -358.75)"/>
+                <path d="M372.29,384.74a0.67,0.67,0,0,0,.66.67h9.28a0.67,0.67,0,0,0,.67-0.67v-9.28a0.67,0.67,0,0,0-.67-0.67H373a0.67,0.67,0,0,0-.66.67v9.28h0Zm1.34-8.61h7.95v7.95h-7.95v-7.95Z" transform="translate(-372.29 -358.75)"/>
+                <path d="M394.08,363.62a0.67,0.67,0,0,0-.95,0l-7.55,7.56v-4.35a0.67,0.67,0,1,0-1.34,0v6a0.67,0.67,0,0,0,.67.67h6a0.67,0.67,0,0,0,0-1.34h-4.35l7.56-7.55a0.66,0.66,0,0,0,0-.94h0Z" transform="translate(-372.29 -358.75)"/>
+            </svg>
+            <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.66 26.66">
+                <title>ctecka_maximalizovat_over</title>
+                <path d="M398.27,358.75H373a0.66,0.66,0,0,0-.66.66v12.14a0.66,0.66,0,0,0,.66.66,0.67,0.67,0,0,0,.67-0.66V360.09h24v24H386.07a0.67,0.67,0,1,0,0,1.34h12.21a0.67,0.67,0,0,0,.67-0.67V359.42a0.67,0.67,0,0,0-.67-0.67h0Z" transform="translate(-372.29 -358.75)"/>
+                <path d="M372.29,384.74a0.67,0.67,0,0,0,.66.67h9.28a0.67,0.67,0,0,0,.67-0.67v-9.28a0.67,0.67,0,0,0-.67-0.67H373a0.67,0.67,0,0,0-.66.67v9.28h0Z" transform="translate(-372.29 -358.75)"/>
+                <path d="M394.08,363.62a0.67,0.67,0,0,0-.95,0l-7.55,7.56v-4.35a0.67,0.67,0,1,0-1.34,0v6a0.67,0.67,0,0,0,.67.67h6a0.67,0.67,0,0,0,0-1.34h-4.35l7.56-7.55a0.66,0.66,0,0,0,0-.94h0Z" transform="translate(-372.29 -358.75)"/>
+            </svg>
+          
+        </button>
+      </div><!--/.app-item -->
+      <div *ngIf="state.isFull" class="app-item visible-xs visible-sm">
+        <button class="btn app-btn app-btn-ico app-ico-white app-ico-27-27 app-ico-svg-two" rel="tooltip" title="Minimalizovat" (click)="minimize()">
+          
             <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.66 26.66">
                 <title>ctecka_minimalizovat</title>
                 <path d="M398.27,358.75H373a0.66,0.66,0,0,0-.66.66v12.14a0.66,0.66,0,0,0,.66.66,0.67,0.67,0,0,0,.67-0.66V360.09h24v24H386.07a0.67,0.67,0,1,0,0,1.34h12.21a0.67,0.67,0,0,0,.67-0.67V359.42a0.67,0.67,0,0,0-.67-0.67h0Z" transform="translate(-372.29 -358.75)"/>
@@ -114,7 +150,7 @@
                 <path d="M372.29,384.74a0.67,0.67,0,0,0,.66.67h9.28a0.67,0.67,0,0,0,.67-0.67v-9.28a0.67,0.67,0,0,0-.67-0.67H373a0.67,0.67,0,0,0-.66.67v9.28h0Z" transform="translate(-372.29 -358.75)"/>
                 <path d="M394.08,363.62a0.67,0.67,0,0,0-.95,0l-7.55,7.56v-4.35a0.67,0.67,0,1,0-1.34,0v6a0.67,0.67,0,0,0,.67.67h6a0.67,0.67,0,0,0,0-1.34h-4.35l7.56-7.55a0.66,0.66,0,0,0,0-.94h0Z" transform="translate(-372.29 -358.75)"/>
             </svg>
-          </a>
+          
         </button>
       </div><!--/.app-item -->
       <div class="app-item visible-xs visible-sm">

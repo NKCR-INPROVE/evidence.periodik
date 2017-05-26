@@ -45,6 +45,9 @@ export class AppState {
   
   public mainClass: string;
   
+  //Controls full screen viewer
+  public isFull: boolean = false;
+  
   public breadcrumbs = [];
   
   public route: string;

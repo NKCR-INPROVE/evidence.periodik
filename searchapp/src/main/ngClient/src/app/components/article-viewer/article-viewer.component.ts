@@ -129,6 +129,15 @@ export class ArticleViewerComponent implements OnInit {
   zoomOut() {
     this.zoom = this.zoom - .5;
   }
+  
+  minimize(){
+    this.state.isFull = false;
+    
+  }
+  
+  maximize(){
+    this.state.isFull = true;
+  }
 
   next() {
     let pid = this.journal.siblings[this.siblingIndex + 1]['pid'];

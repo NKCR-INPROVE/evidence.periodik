@@ -1,10 +1,10 @@
-<header>
+<header *ngIf="!state.isFull">
   <app-header></app-header>
 </header><!--/header -->
 <main [class]="mainClass">
   <router-outlet></router-outlet>
 </main><!--/.main -->
-<footer class="app-brand text-shades white-text">
+<footer *ngIf="!state.isFull" class="app-brand text-shades white-text">
   <app-footer></app-footer>
 </footer><!--/.footer -->
 <ng2-slim-loading-bar></ng2-slim-loading-bar>

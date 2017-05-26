@@ -25,6 +25,11 @@ export class SearchCriteriaComponent implements OnInit {
     { field: 'genre', label: 'rubrika' },
     { field: 'ocr', label: 'plný text dokumentu' }
   ]
+  
+  operators = [
+    { val: 'AND', label: 'a zároveň' },
+    { val: 'OR', label: 'nebo' }
+  ]
 
   constructor(
     private service: AppService,
@@ -63,12 +68,35 @@ export class SearchCriteriaComponent implements OnInit {
         return this.fields[i].label;
       }
     }
+    
     return 'kdekoliv';
+  }
+  
+  setOperator(criterium: Criterium, val: string){
+    criterium.operator = val;
+  }
+  
+  getOperator(criterium: Criterium): string{
+    for (let i in this.operators){
+      if (criterium.operator === this.operators[i].val){
+        return this.operators[i].label;
+      }
+    }
+    return 'a zároveň';
     
   }
 
-
   addCriterium() {
+    this.criteria.push(new Criterium());
+  }
+
+  removeCriterium(i: number) {
+    this.criteria.splice(i, 1);
+    this.search();
+  }
+  
+  reset(){
+    this.criteria = [];
     this.criteria.push(new Criterium());
   }
 

@@ -19,101 +19,34 @@
             
             <div class="app-section">
               <nav class="app-nav-items">
-                <ul class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
-                  <li class="active"><a href="#" class="active" title="">A</a></li>
-                  <li><a href="#" title="">B</a></li>
-                  <li><a href="#" title="">C</a></li>
-                  <li><a href="#" title="">D</a></li>
-                  <li><a href="#" title="">E</a></li>
-                  <li><a href="#" title="">F</a></li>
-                  <li><span class="app-brand-text text-lighten-2">G</span></li>
-                  <li><a href="#" title="">H</a></li>
-                  <li><a href="#" title="">I</a></li>
-                  <li><a href="#" title="">J</a></li>
-                  <li><a href="#" title="">K</a></li>
-                  <li><a href="#" title="">L</a></li>
-                  <li><a href="#" title="">M</a></li>
-                  <li><a href="#" title="">N</a></li>
-                  <li><a href="#" title="">O</a></li>
-                  <li><a href="#" title="">P</a></li>
-                  <li><span class="app-brand-text text-lighten-2">Q</span></li>
-                  <li><a href="#" title="">R</a></li>
-                  <li><a href="#" title="">S</a></li>
-                  <li><a href="#" title="">T</a></li>
-                  <li><a href="#" title="">U</a></li>
-                  <li><a href="#" title="">V</a></li>
-                  <li><a href="#" title="">W</a></li>
-                  <li><span class="app-brand-text text-lighten-2">X</span></li>
-                  <li><span class="app-brand-text text-lighten-2">Y</span></li>
-                  <li><a href="#" title="">Z</a></li>
+                <ul *ngIf="authors.length > 0" class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
+                  <li *ngFor="let l of state.letters" [class.active]="l === letter">
+                    <a (click)="setLetter(l)" 
+                      [class.app-brand-text]="isEmpty(l)" 
+                      [class.text-lighten-2]="isEmpty(l)" 
+                      
+                      title="">{{l}}</a>
+                  </li>
                 </ul>
               </nav>
             </div><!--/.app-section -->
             
             <div class="app-section app-font-pt-serif app-brand-text">
+              
               <div class="row">
                 <div class="col-xs-6">
                   <ul class="list-unstyled">
-                    <li><a href="#" title="">Abdigal Jiří</a></li>
-                    <li><a href="#" title="">Albrech Jan</a></li>
-                    <li><a href="#" title="">Amaroun Václav</a></li>
-                    <li><a href="#" title="">Antalová Jiřina</a></li>
-                    <li><a href="#" title="">Abdigal Jiří</a></li>
-                    <li><a href="#" title="">Albrech Jan</a></li>
-                    <li><a href="#" title="">Amaroun Václav</a></li>
-                    <li><a href="#" title="">Antalová Jiřina</a></li>
-                    <li><a href="#" title="">Abdigal Jiří</a></li>
-                    <li><a href="#" title="">Albrech Jan</a></li>
-                    <li><a href="#" title="">Amaroun Václav</a></li>
-                    <li><a href="#" title="">Antalová Jiřina</a></li>
-                    <li><a href="#" title="">Abdigal Jiří</a></li>
-                    <li><a href="#" title="">Albrech Jan</a></li>
-                    <li><a href="#" title="">Amaroun Václav</a></li>
-                    <li><a href="#" title="">Antalová Jiřina</a></li>
-                    <li><a href="#" title="">Abdigal Jiří</a></li>
+                    <li *ngFor="let k of authors1"><a (click)="search(k[0])" title="">{{k[0] | translate}}</a></li>
                   </ul>
                 </div><!--/.col -->
                 <div class="col-xs-6">
                   <ul class="list-unstyled">
-                    <li><a href="#" title="">Abdigal Jiří</a></li>
-                    <li><a href="#" title="">Albrech Jan</a></li>
-                    <li><a href="#" title="">Amaroun Václav</a></li>
-                    <li><a href="#" title="">Antalová Jiřina</a></li>
-                    <li><a href="#" title="">Abdigal Jiří</a></li>
-                    <li><a href="#" title="">Albrech Jan</a></li>
-                    <li><a href="#" title="">Amaroun Václav</a></li>
-                    <li><a href="#" title="">Antalová Jiřina</a></li>
-                    <li><a href="#" title="">Abdigal Jiří</a></li>
-                    <li><a href="#" title="">Albrech Jan</a></li>
-                    <li><a href="#" title="">Amaroun Václav</a></li>
-                    <li><a href="#" title="">Antalová Jiřina</a></li>
-                    <li><a href="#" title="">Abdigal Jiří</a></li>
-                    <li><a href="#" title="">Albrech Jan</a></li>
-                    <li><a href="#" title="">Amaroun Václav</a></li>
-                    <li><a href="#" title="">Antalová Jiřina</a></li>
-                    <li><a href="#" title="">Abdigal Jiří</a></li>
+                    <li *ngFor="let k of authors2"><a (click)="search(k[0])" title="">{{k[0] | translate}}</a></li>
                   </ul>
                 </div><!--/.col -->
               </div><!--/.row -->
             </div><!--/.app-section -->
             
-            <!-- App pagination -->
-            <nav class="app-pagination text-center">
-              <ul class="pagination">
-                <li>
-                  <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">Předchozí</span>
-                  </a>
-                </li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                  <a href="#" aria-label="Next">
-                    <span aria-hidden="true">Další</span>
-                  </a>
-                </li>
-              </ul>
-            </nav><!--/.app-pagination -->
+            
+            
+            <app-pagination [numPages]="5" [totalPages]="totalPages" (onGotoPage)="setPage($event)"></app-pagination>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { SearchService } from '../../services/search.service';
+import { AppState } from '../../app.state';
 import { Criterium } from '../../models/criterium';
 
 @Component({
@@ -22,39 +23,11 @@ export class SearchKeywordsComponent implements OnInit {
   page: number = 0;
   totalPages: number;
   
-  letters = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z'
-  ];
-  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private searchService: SearchService) { }
+    private searchService: SearchService,
+    public state: AppState) { }
 
   ngOnInit() {
     this.getKeywords();
@@ -63,7 +36,7 @@ export class SearchKeywordsComponent implements OnInit {
   getKeywords(){
     var params = new URLSearchParams();
     params.set('q', '*:*');
-    params.set('fq', '-genre:""');
+//    params.set('fq', '-genre:""');
     params.set('rows', '0');
     //Rok jako stats
     params.set('facet', 'true');
@@ -140,7 +113,7 @@ export class SearchKeywordsComponent implements OnInit {
   search(s: string){
     let c = new Criterium();
     c.field = 'keywords';
-    c.value = s;
+    c.value = '"' + s + '"';
     this.router.navigate(['/hledat/cokoli', {criteria: JSON.stringify([c]), start: 0}])
   }
 }

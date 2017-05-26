@@ -51,7 +51,7 @@ export class SearchGenresComponent implements OnInit {
   search(genre: string){
     let c = new Criterium();
     c.field = 'genre';
-    c.value = genre;
+    c.value = '"' + genre + '"';;
     this.router.navigate(['/hledat/cokoli', {criteria: JSON.stringify([c]), start: 0}])
   }
 

@@ -1,5 +1,5 @@
 <div class="app-section app-section-search-form">  
-  <div class="app-item" *ngFor="let criterium of criteria; let last=last">
+  <div class="app-item" *ngFor="let criterium of criteria; let last=last; let idx = index">
     <div class="app-col-left">
       <ul class="list-unstyled app-clean-mg app-select">
         <li class="dropdown">
@@ -16,9 +16,9 @@
     <div class="app-col-right text-right">
       <ul *ngIf="!last" class="list-unstyled app-clean-mg app-select">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">a zároveň <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{getOperator(criterium)}} <span class="caret"></span></a>
           <ul class="dropdown-menu app-clean-border">
-            <li><a href="#">nebo</a></li>
+            <li *ngFor="let op of operators"><a (click)="setOperator(criterium, op.val)">{{op.label}}</a></li>
           </ul>
         </li>
       </ul>
@@ -32,7 +32,7 @@
       </button>
     </div><!--/.col -->
     <div class="app-col-close">
-      <button  *ngIf="!last" class="btn app-btn app-btn-ico app-ico-20-20 app-ico-pink-hover">
+      <button  *ngIf="!last" class="btn app-btn app-btn-ico app-ico-20-20 app-ico-pink-hover" (click)="removeCriterium(idx)">
         <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <title>zavrit</title>
           <path d="M385,362a10,10,0,1,0,10,10A10,10,0,0,0,385,362Zm6.21,14.79-1.41,1.41-4.54-4.54-4.54,4.54-1.41-1.41,4.54-4.54-4.54-4.54,1.41-1.41,4.54,4.54,4.54-4.54,1.41,1.41-4.54,4.54Z" transform="translate(-375 -362)"/>
@@ -58,7 +58,7 @@
       </button>
     </div><!--/.col -->
     <div class="col-xs-6 text-right">
-      <button class="btn app-btn app-btn-transparent app-ico-24-25 app-font-20 app-ico-svg-two">
+      <button class="btn app-btn app-btn-transparent app-ico-24-25 app-font-20 app-ico-svg-two" (click)="reset()">
         <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.86 28.53">
           <title>vymazat</title>
           <path d="M321.52,413.8H319.7a0.7,0.7,0,1,0,0,1.41h1.82A0.7,0.7,0,1,0,321.52,413.8Z" transform="translate(-319 -390.47)"/>

@@ -102,16 +102,26 @@ export class SearchComponent implements OnInit {
     params.set('fq', 'model:article');
     params.set('start', this.start + '');
     params.set('rows', this.rows + '');
-    for (let i in criteria) {
-      if (criteria[i].field) {
-        params.append('fq', criteria[i].field + ':' + criteria[i].value);
-      } else {
-        params.append('fq', criteria[i].value);
+    if (criteria.length > 0){
+      let fq = '';
+      for (let i = 0; i < criteria.length; i++) {
+        if(i > 0){
+          fq += criteria[i].operator + ' ';
+        }
+        if (criteria[i].field) {
+          fq += criteria[i].field + ':' + criteria[i].value + ' ';
+        } else {
+          fq += criteria[i].value + ' ';
+        }
       }
+      params.append('fq', fq.trim());
     }
     
     //Add date filter
     params.append('fq', 'year:['+this.dateForm.controls['range'].value[0]+' TO '+this.dateForm.controls['range'].value[1]+']');
+    
+    
+    console.log(params.toString());
 
     //Rok jako stats
     params.set('stats', 'true');
@@ -121,8 +131,10 @@ export class SearchComponent implements OnInit {
 
       this.docs = res['response']['docs'];
       this.numFound = res['response']['numFound'];
-
-      if (res.hasOwnProperty('stats') && res['stats']['stats_fields'].hasOwnProperty('year')) {
+      
+      if (this.numFound == 0){
+        this.changeRangeFormValue(this.dateMin, this.dateMax);
+      } else if (res.hasOwnProperty('stats') && res['stats']['stats_fields'].hasOwnProperty('year')) {
         this.changeRangeFormValue(res['stats']['stats_fields']['year']['min'], res['stats']['stats_fields']['year']['max']);
       }
 
@@ -146,16 +158,11 @@ export class SearchComponent implements OnInit {
 
     this.searchService.search(params).subscribe(res => {
       if (res.hasOwnProperty('stats') && res['stats']['stats_fields'].hasOwnProperty('year')) {
-
-
         this.dateMin = res['stats']['stats_fields']['year']['min'];
         this.dateMax = res['stats']['stats_fields']['year']['max'];
         this.dateForm = this.formBuilder.group({ 'range': [[this.dateMin, this.dateMax]] });
-        //this.changeRangeFormValue(, );
 
       }
-
-      //this.results.nativeElement.scrollIntoView();
 
     });
   }

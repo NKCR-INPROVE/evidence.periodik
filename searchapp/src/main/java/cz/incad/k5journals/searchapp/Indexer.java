@@ -106,8 +106,14 @@ public class Indexer {
       setKeywords(idoc, mods);
       setAbstract(idoc, mods);
       setGenre(idoc, mods);
-      if("article".equalsIgnoreCase(model)){
-        setDatum(idoc, parent);
+      setISSN(idoc, mods);
+      
+      if (dates.containsKey(parent)) {
+          idoc.addField("year", dates.get(parent));
+          dates.put(pid, dates.get(parent));
+      
+//      if("article".equalsIgnoreCase(model)){
+//        setDatum(idoc, parent);
       } else {
         setDatum(idoc, mods, pid);
       }
@@ -372,6 +378,7 @@ public class Indexer {
       prefix = "";
       o = mods.opt("abstract");
     }
+    
 
     if (o instanceof JSONObject) {
       JSONObject jo = (JSONObject) o;
@@ -379,6 +386,8 @@ public class Indexer {
         String lang = jo.optString("lang");
         idoc.addField("abstract_" + lang, jo.optString("content"));
       }
+      idoc.addField("abstract", jo.optString("content"));
+      
     } else if (o instanceof String) {
       idoc.addField("abstract", o);
     }
@@ -396,7 +405,7 @@ public class Indexer {
       JSONObject jo = (JSONObject) o;
       if (jo.has("type") && "personal".equals(jo.getString("type")) && jo.has(prefix + "namePart")) {
         String autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
-                + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content") + " ";
+                + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content");
         idoc.addField("autor", autor);
       }
 
@@ -406,7 +415,7 @@ public class Indexer {
         JSONObject jo = ja.getJSONObject(i);
         if (jo.has("type") && "personal".equals(jo.getString("type")) && jo.has(prefix + "namePart")) {
           String autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
-                  + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content") + " ";
+                  + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content");
           idoc.addField("autor", autor);
         }
       }
@@ -437,9 +446,25 @@ public class Indexer {
     }
   }
 
-  private void setDatum(SolrInputDocument idoc, JSONObject mods, String pid) {
+  private void setISSN(SolrInputDocument idoc, JSONObject mods) {
 
     
+    String prefix = "mods:";
+    Object o = mods.opt(prefix + "identifier");
+    if (o == null) {
+      prefix = "";
+      o = mods.opt("identifier");
+    }
+    if (o instanceof JSONObject) {
+      JSONObject jo = (JSONObject) o;
+      if (jo.has("type") && jo.optString("type").equals("issn")) {
+        idoc.addField("issn", jo.optString("content"));
+      }
+    } 
+  }
+
+  private void setDatum(SolrInputDocument idoc, JSONObject mods, String pid) {
+
     JSONObject o = mods.optJSONObject("mods:originInfo");
     if (o != null) {
       int date = o.optInt("mods:dateIssued");

@@ -8,11 +8,11 @@ import { AppState } from '../../app.state';
 import { Criterium } from '../../models/criterium';
 
 @Component({
-  selector: 'app-article-result',
-  templateUrl: './article-result.component.html',
-  styleUrls: ['./article-result.component.scss']
+  selector: 'app-article-info',
+  templateUrl: './article-info.component.html',
+  styleUrls: ['./article-info.component.scss']
 })
-export class ArticleResultComponent implements OnInit {
+export class ArticleInfoComponent implements OnInit {
   @Input('article') article;
   @Input('active') active: boolean;
   langObserver: Subscription;
@@ -25,6 +25,8 @@ export class ArticleResultComponent implements OnInit {
   subTitle: string;
   nonSort: string;
   
+  keywords: string[] = [];
+  
   viewed: number = 0;
   
   lang: string;
@@ -33,6 +35,9 @@ export class ArticleResultComponent implements OnInit {
     'cs': 'cze',
     'en': 'eng'
   };
+  
+  doi: string;
+  isPeerReviewed: boolean = false;
 
   constructor(
     private router: Router,
@@ -45,12 +50,21 @@ export class ArticleResultComponent implements OnInit {
     this.langObserver = this.service.langSubject.subscribe(
       (lang) => {
         this.lang = lang;
-        this.setTitleInfo();
+        this.setData();
 
       }
     );
-
-    //let mods = this.article['mods']["mods:modsCollection"]["mods:mods"];
+    this.setData();
+  }
+  
+  ngOnChanges(){
+    this.setData();
+  }
+  
+  setData(){
+    if (!this.article){
+      return;
+    }
 
     let mods = JSON.parse(this.article['mods']);
     if (mods["mods:relatedItem"] && mods["mods:relatedItem"]["mods:part"] && mods["mods:relatedItem"]["mods:part"]["mods:extent"]) {
@@ -58,19 +72,27 @@ export class ArticleResultComponent implements OnInit {
         ' - ' + mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:end"];
     }
     
-    this.service.getViewed(this.article['pid']).subscribe(res => this.viewed = res);
-    
     this.titleInfo = mods["mods:titleInfo"];
-    
     this.setTitleInfo();
     this.setNames(mods);
-    //console.log(mods);
-    if(this.active){
-      setTimeout(() => {
-        this.elementRef.nativeElement.scrollIntoView();
-      }, 100);
-      
+    
+    if (mods.hasOwnProperty("mods:identifier")) {
+      let ids =  mods["mods:identifier"];
+      if (ids.hasOwnProperty('length')) {
+        for(let i in ids){
+          if(ids[i]["type"] === 'doi'){
+            this.doi = ids[i]['content'];
+          }
+        }
+      } else {
+        if(ids["type"] === 'doi'){
+          this.doi = ids['content'];
+        }
+      }
     }
+    
+    this.isPeerReviewed = this.article['genre'].indexOf('peer-reviewed') > -1;
+    
   }
 
 
@@ -97,6 +119,7 @@ export class ArticleResultComponent implements OnInit {
   setNames(mods){
     //name/type="personal"	namepart/type="family"
     //name/type="personal"	namePart/type"given"
+    this.authors = [];
     if (mods.hasOwnProperty("mods:name")) {
       let name = mods["mods:name"];
       if (name.hasOwnProperty('length')) {
@@ -115,13 +138,16 @@ export class ArticleResultComponent implements OnInit {
       
     }
   }
+  
+  setKeywords(){
+    this.keywords = [];
+  }
 
   ngOnDestroy() {
     this.langObserver.unsubscribe();
   }
   
   onAuthorClicked(s: string){
-//    this.onSearchAuthor.emit(s);
     let c = new Criterium();
     c.field = 'autor';
     c.value = '"' + s + '"';

@@ -7,7 +7,7 @@ import { RouterModule }   from '@angular/router';
 //import {Store, StoreModule} from "@ngrx/store";
 //import {SearchReducer} from "./reducers/search.reducer";
 
-import { BsDropdownModule } from 'ng2-bootstrap';
+import { BsDropdownModule, ModalModule } from 'ng2-bootstrap';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -40,6 +40,7 @@ import { SearchAuthorsComponent } from './components/search-authors/search-autho
 import { SearchGenresComponent } from './components/search-genres/search-genres.component';
 import { SearchKeywordsComponent } from './components/search-keywords/search-keywords.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { ArticleInfoComponent } from './components/article-info/article-info.component';
 
 
 
@@ -77,7 +78,8 @@ export function createTranslateLoader(http: Http) {
     SearchAuthorsComponent,
     SearchGenresComponent,
     SearchKeywordsComponent,
-    PaginationComponent
+    PaginationComponent,
+    ArticleInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,7 @@ export function createTranslateLoader(http: Http) {
     JsonpModule,
     SlimLoadingBarModule.forRoot(),
     NouisliderModule,
-    BsDropdownModule.forRoot(),
+    BsDropdownModule.forRoot(), ModalModule.forRoot(),
     TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

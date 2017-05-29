@@ -181,7 +181,7 @@
       
       
       <div class="app-item">
-        <button class="btn app-btn app-btn-ico app-ico-white app-ico-27-27 app-ico-svg-two" rel="tooltip" title="Informace">
+        <button rel="tooltip" [title]="'Informace o článku' | translate" (click)="infoModal.show()" class="btn app-btn app-btn-ico app-ico-white app-ico-27-27 app-ico-svg-two">
           <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.13 25.13">
             <title>ctecka_info</title>
             <path d="M331.62,392.75a12.57,12.57,0,1,0,12.57,12.57,12.58,12.58,0,0,0-12.57-12.57h0Zm0,23.88a11.31,11.31,0,1,1,11.31-11.31,11.32,11.32,0,0,1-11.31,11.31h0ZM332,397.92a1.63,1.63,0,1,1-1.63,1.63,1.63,1.63,0,0,1,1.63-1.63h0Zm1.49,4.29h-2.76a1,1,0,1,0,0,1.94h0.1v5.66H329.7v1.94h4.8v-1.94h-1.06v-7.6h0Z" transform="translate(-319.05 -392.75)"/>
@@ -265,12 +265,12 @@
   </div><!--/.app-sidevar-wrapper -->
 </div><!--/.app sidebar -->
 
-  
-<div class="modal fade app-modal" id="app-modal" tabindex="-1" role="dialog" aria-labelledby="app-modalLabel">
+<div class="modal fade app-modal" bsModal #infoModal="bs-modal" 
+     tabindex="-1" role="dialog" aria-labelledby="app-modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content app-brand lighten-5">
       <div class="modal-header app-clean-border">
-        <button type="button" class="btn app-btn app-btn-ico app-ico-25-25 app-ico-svg-two pull-right	" data-dismiss="modal" aria-label="Close">
+        <button (click)="infoModal.hide()" type="button" class="btn app-btn app-btn-ico app-ico-25-25 app-ico-svg-two pull-right	" data-dismiss="modal" aria-label="Close">
           <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.12 25.12">
             <title>zavrit_okno</title>
             <polygon points="17.82 9.03 16.4 7.61 12.87 11.15 9.33 7.61 7.92 9.03 11.45 12.56 7.92 16.1 9.33 17.51 12.87 13.97 16.4 17.51 17.82 16.1 14.28 12.56 17.82 9.03"/>
@@ -283,24 +283,10 @@
         </button>
       </div><!--/.modal header -->
       <div class="modal-body">
-        <h4 class="app-clean-mg app-font-s16">Článek</h4>
+        <h4 class="app-clean-mg app-font-s16">{{'Článek' | translate}}</h4>
         <hr />
         <div class="app-item">
-          <h4 class="app-font-pt-serif" data-toggle="modal" data-target="#app-modal">
-            „Přistání u pustých břehů českých“: Náboženský obraz českých zemí.
-          </h4>
-          <p class="app-font-s14">
-            <label class="app-clean-mg app-font-roboto-cb">Autor:</label> Han Fenclová<br />
-            <label class="app-clean-mg app-font-roboto-cb">Autor:</label> Jan Novák<br />
-            <label class="app-clean-mg app-font-roboto-cb">Klíčová slova:</label> dějiny, časopis, knihy<br />
-            <label class="app-clean-mg app-font-roboto-cb">Abstrakt:</label> Časopis Knihy a dějiny je odborné periodikum, které od roku 1994 vydává Knihovna AV ČR. Časopis je zaměřen na zveřejňování výsledků bádání v oblasti dějin knihy, knihtisku a knihoven v Čechách a na Moravě s časovým omezením do poloviny 19. století.<br />
-            <label class="app-clean-mg app-font-roboto-cb">Zdroj:</label> Knihy a dějiny, 2016, ročník 5, číslo 1, ISSN 1210-8510<br />
-            <label class="app-clean-mg app-font-roboto-cb">Rubrika:</label> články<br />
-            <label class="app-clean-mg app-font-roboto-cb">Rozsah stran:</label> s. 10-25<br />
-            <label class="app-clean-mg app-font-roboto-cb">Identifikátor:</label> DOI<br />
-            <label class="app-clean-mg app-font-roboto-cb">Status recenzování:</label> recenzovaný článek<br />
-            <label class="app-clean-mg app-font-roboto-cb">Licence:</label> CC-BY-SA<br />
-          </p>
+          <app-article-info [article]="article"></app-article-info>
         </div>
       </div><!--/.modal-body -->
     </div><!--/.modal-content -->

@@ -66,7 +66,7 @@ export class ArticleViewerComponent implements OnInit {
       if (res['datanode']) {
         this.article = res;
 
-        if (this.article.hasOwnProperty("pdf")) {
+        if (this.article.hasOwnProperty("url_pdf")) {
           this.isPdf = true;
           this.fullSrc = this.state.config['context'] + 'img?uuid=' + this.pid + '&stream=IMG_FULL&action=GETRAW';
         } else {
@@ -74,8 +74,9 @@ export class ArticleViewerComponent implements OnInit {
           this.fullSrc = this.state.config['context'] + 'img?uuid=' + this.pid + '&stream=IMG_FULL&action=GETRAW';
           this.loading = false;
         }
-        let ctx = res['context'][0];
-        let parent = ctx[ctx.length - 2]['pid'];
+        //let ctx = res['context'][0];
+//        let parent = ctx[ctx.length - 2]['pid'];
+        let parent = res['parents'][0];
         if (!this.journal || this.journal.pid !== parent) {
           this.service.getJournal(parent).subscribe((a) => {
             if (a.pid) {
@@ -149,6 +150,10 @@ export class ArticleViewerComponent implements OnInit {
     let pid = this.journal.siblings[this.siblingIndex - 1]['pid'];
     this.journal = null;
     this.router.navigate(['/article', pid]);
+  }
+  
+  info(){
+    
   }
 
   hasNext() {

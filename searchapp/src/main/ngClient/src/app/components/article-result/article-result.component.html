@@ -3,7 +3,7 @@
 </h3>
 <div>{{subTitle}}</div>
 <div>
-  <span *ngFor="let author of authors; let last = last">{{author}}<span *ngIf="!last"> - </span></span>
+  <span *ngFor="let author of authors; let last = last"><a (click)="onAuthor(author)">{{author}}</a><span *ngIf="!last"> - </span></span>
   <span  *ngIf="viewed > 0" [title]="'Počet zobrazení' | translate">
   <span class="app-pipe">|</span><!--
   --><button class="btn app-btn app-btn-ico app-ico-24-25 app-ico-black">

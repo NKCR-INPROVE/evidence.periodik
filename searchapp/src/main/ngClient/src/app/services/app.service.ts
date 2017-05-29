@@ -43,6 +43,19 @@ export class AppService {
   }
 
   getItem(pid: string): Observable<any> {
+    var url = '/search/journal/select';
+    let params = new URLSearchParams();
+
+    params.set('q', 'pid:"' + pid + '"');
+    params.set('wt', 'json');
+
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        return response.json()['response']['docs'][0];
+      });
+  }
+
+  getItemK5(pid: string): Observable<any> {
     var url = this.state.config['api_point'] + '/item/' + pid;
 
     return this.http.get(url)
@@ -91,7 +104,6 @@ export class AppService {
 
 
     return this.http.get(url, {search: params}).map((response: Response) => {
-      console.log(response);
       let j = response.json()['response']['docs'][0];
 
       let ret = new Journal();

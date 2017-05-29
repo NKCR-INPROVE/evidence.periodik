@@ -77,7 +77,7 @@ export class ArticleViewerComponent implements OnInit {
           this.loading = false;
         }
         //let ctx = res['context'][0];
-//        let parent = ctx[ctx.length - 2]['pid'];
+        //        let parent = ctx[ctx.length - 2]['pid'];
         let parent = res['parents'][0];
         if (!this.journal || this.journal.pid !== parent) {
           this.service.getJournal(parent).subscribe((a) => {
@@ -132,13 +132,13 @@ export class ArticleViewerComponent implements OnInit {
   zoomOut() {
     this.zoom = this.zoom - .5;
   }
-  
-  minimize(){
+
+  minimize() {
     this.state.isFull = false;
-    
+
   }
-  
-  maximize(){
+
+  maximize() {
     this.state.isFull = true;
   }
 
@@ -153,8 +153,8 @@ export class ArticleViewerComponent implements OnInit {
     this.journal = null;
     this.router.navigate(['/article', pid]);
   }
-  
-  toggleShare(){
+
+  toggleShare() {
     this.showShare = !this.showShare;
   }
 
@@ -169,5 +169,28 @@ export class ArticleViewerComponent implements OnInit {
   hasPrev() {
     return this.siblingIndex > 0;
   }
+
+  url() {
+    return window.location.href;
+    //return this.router.url;
+  }
+
+  _socialUrl() {
+    return window.location.href;
+    //return this.route.snapshot.pathFromRoot;
+  }
+
+  facebookShare() {
+    var share = "https://www.facebook.com/sharer/sharer.php?u=" + this._socialUrl();
+    window.open(share, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    return false;
+  }
+
+  googlePlusShare() {
+    var share = "https://plus.google.com/share?url=" + this._socialUrl();
+    window.open(share, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    return false;
+  }
+
 
 }

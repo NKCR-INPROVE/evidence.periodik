@@ -25,6 +25,8 @@ export class ArticleViewerComponent implements OnInit {
   journal: Journal;
 
   siblingIndex: number;
+  isPrintSupported: boolean = false;
+  showShare: boolean = false;
 
   constructor(
     private service: AppService,
@@ -152,8 +154,8 @@ export class ArticleViewerComponent implements OnInit {
     this.router.navigate(['/article', pid]);
   }
   
-  info(){
-    
+  toggleShare(){
+    this.showShare = !this.showShare;
   }
 
   hasNext() {

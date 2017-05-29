@@ -6525,6 +6525,10 @@ h4 + hr {
 
 .app-page-archiv-reader .app-content .container .row .app-col-right {
   padding-right: 110px; }
+  .app-page-archiv-reader .app-content .container .row .app-col-right.app-col-right-full {
+    flex: auto;
+    margin-left: auto;
+    margin-right: auto; }
   .app-page-archiv-reader .app-content .container .row .app-col-right > div {
     overflow: auto; }
 

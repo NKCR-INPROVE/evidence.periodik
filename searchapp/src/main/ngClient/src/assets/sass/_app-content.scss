@@ -118,6 +118,11 @@
     .container {
       .row {
         .app-col-right {
+          &.app-col-right-full {
+            flex: auto;
+            margin-left: auto;
+            margin-right: auto;
+          }
           padding-right: 110px;
           > div {
             overflow: auto;

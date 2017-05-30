@@ -59,18 +59,23 @@ public class SearchServlet extends HttpServlet {
       response.addHeader("Access-Control-Allow-Methods", "GET, POST");
       response.addHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-//      int handlerIdx = request.getRequestURI().lastIndexOf("/") + 1;
-//      int solrIdx = request.getRequestURI().indexOf("/search/") + 8;
-//      String handler = request.getRequestURI().substring(handlerIdx);
       Options opts = Options.getInstance();
+      int handlerIdx = request.getRequestURI().lastIndexOf("/") + 1;
+      int solrIdx = request.getRequestURI().indexOf("/search/") + 8;
+      String handler = request.getRequestURI().substring(handlerIdx);
+      String core = request.getRequestURI().substring(solrIdx, handlerIdx);
+      
+      String solrhost = opts.getString("solr.host", "http://localhost:8983/solr/")
+              + core  + handler + "?" + request.getQueryString();
       
 
       
-        String solrhost = opts.getString("api.point", "http://localhost:8080/search/api/v5.0")
-                + "/search?" + request.getQueryString();
-        String userFilter = "";
+      
+//        String solrhost = opts.getString("api.point", "http://localhost:8080/search/api/v5.0")
+//                + "/search?" + request.getQueryString();
+        
 
-        LOGGER.log(Level.INFO, "requesting url {0}", solrhost + userFilter);
+        LOGGER.log(Level.INFO, "requesting url {0}", solrhost);
         Map<String, String> reqProps = new HashMap<>();
         reqProps.put("Content-Type", "application/json");
         reqProps.put("Accept", "application/json");

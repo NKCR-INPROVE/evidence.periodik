@@ -42,7 +42,9 @@
                       (after-load-complete)="afterLoad($event)"
                       style="display: block;"
           ></pdf-viewer>
-        <div *ngIf="loading" style="position: absolute;width:100%;height:100%;background:white;left:0;top:0;">loading...</div>
+          <div *ngIf="loading" class="app-loading app-brand-text">
+            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate app-brand-text"></span> Loading pdf...
+          </div>
         </div>
         <img *ngIf="!isPdf && !loading" [src]="fullSrc" alt="" class="img-responsive app-thumb-doc" />
       </div><!--/.col -->

@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "Roboto-Condensed";
+  src: url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.eot");
+  src: local("Roboto Condensed"), local("Roboto Condensed Bold"), local("Roboto-Condensed Bold"), local("Roboto-Condensed-Bold"), url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.woff2") format("woff2"), url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.woff") format("woff"), url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.ttf") format("truetype"), url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.svg#Condensed") format("svg");
+  font-weight: 700;
+  font-style: normal; }
+@font-face {
+  font-family: "Roboto-Condensed-Bold";
+  src: url("Roboto-../fonts/Roboto-Condensed/Roboto-Condensed-Bold.eot");
+  src: local("Roboto Condensed Bold"), local("Roboto-Condensed Bold"), local("Roboto-Condensed-Bold"), url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.woff2") format("woff2"), url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.woff") format("woff"), url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.ttf") format("truetype"), url("../fonts/Roboto-Condensed/Roboto-Condensed-Bold.svg#Condensed") format("svg"); }
+
+/*# sourceMappingURL=roboto-condensed-fontface-bold.css.map */

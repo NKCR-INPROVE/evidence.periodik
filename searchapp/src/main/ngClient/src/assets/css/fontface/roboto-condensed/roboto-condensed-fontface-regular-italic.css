@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "Roboto-Condensed";
+  src: url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.eot");
+  src: local("Roboto Condensed"), local("Roboto Condensed RegularItalic"), local("Roboto-Condensed RegularItalic"), local("Roboto-Condensed-RegularItalic"), url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.woff2") format("woff2"), url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.woff") format("woff"), url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.ttf") format("truetype"), url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.svg#Condensed") format("svg");
+  font-weight: 400;
+  font-style: italic; }
+@font-face {
+  font-family: "Roboto-Condensed-RegularItalic";
+  src: url("Roboto-../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.eot");
+  src: local("Roboto Condensed RegularItalic"), local("Roboto-Condensed RegularItalic"), local("Roboto-Condensed-RegularItalic"), url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.woff2") format("woff2"), url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.woff") format("woff"), url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.ttf") format("truetype"), url("../fonts/Roboto-Condensed/Roboto-Condensed-RegularItalic.svg#Condensed") format("svg"); }
+
+/*# sourceMappingURL=roboto-condensed-fontface-regular-italic.css.map */

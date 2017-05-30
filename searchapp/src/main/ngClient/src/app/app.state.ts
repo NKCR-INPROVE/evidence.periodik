@@ -12,6 +12,9 @@ export class AppState {
 
   private _classSubject = new Subject();
   public classChangedSubject: Observable<any> = this._classSubject.asObservable();
+
+  private _fullScreenSubject = new Subject();
+  public fullScreenSubject: Observable<any> = this._fullScreenSubject.asObservable();
   
   public _paramsSubject = new Subject();
   public paramsSubject: Observable<any> = this._paramsSubject.asObservable();
@@ -100,6 +103,12 @@ export class AppState {
   //params
   classChanged(){
     this._classSubject.next(this);
+  }
+  
+  fullScreenChanged(b: boolean){
+    
+    this.isFull = b;
+    this._fullScreenSubject.next(b);
   }
   
   

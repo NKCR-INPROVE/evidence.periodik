@@ -1,4 +1,4 @@
-<div class="app-title">
+<header *ngIf="!appState.isFull"><div class="app-title">
   <div class="container">
     <div class="row">
       <div class="col-xs-9 col-sm-10">
@@ -71,3 +71,5 @@
 <!--/.app breadcumb -->
 
 <app-search-tabs *ngIf="appState.route === 'hledat'"></app-search-tabs>
+
+</header><!--/header -->

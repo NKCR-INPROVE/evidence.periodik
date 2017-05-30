@@ -43,7 +43,7 @@ export class AppService {
   }
 
   getItem(pid: string): Observable<any> {
-    var url = '/search/journal/select';
+    var url = this.state.config['context'] + 'search/journal/select';
     let params = new URLSearchParams();
 
     params.set('q', 'pid:"' + pid + '"');
@@ -74,7 +74,7 @@ export class AppService {
   }
 
   getChildren(pid: string): Observable<any> {
-    var url = '/search/journal/select';
+    var url = this.state.config['context'] + 'search/journal/select';
     let params = new URLSearchParams();
 
     params.set('q', '*:*');
@@ -95,7 +95,7 @@ export class AppService {
 
   getJournal(pid: string): Observable<Journal> {
 
-    var url = '/search/journal/select';
+    var url = this.state.config['context'] + 'search/journal/select';
       let params = new URLSearchParams();
 
       params.set('q', 'pid:"' + pid + '"');
@@ -220,7 +220,7 @@ export class AppService {
   getArticles(pid: string): Observable<any[]> {
     const getRange = (pid: string): Observable<any> => {
 
-      var url = '/search/journal/select';
+      var url = this.state.config['context'] + 'search/journal/select';
       let params = new URLSearchParams();
 
       params.set('q', '*:*');
@@ -277,7 +277,7 @@ export class AppService {
 
   getArticles2(pid: string): Observable<any[]> {
     console.log('getArticles', pid);
-    var url = '/search/journal/select';
+    var url = this.state.config['context'] + 'search/journal/select';
     let params = new URLSearchParams();
 
     params.set('q', '*:*');
@@ -350,7 +350,7 @@ export class AppService {
 
 
   getMods(pid: string): Observable<any> {
-    let url = '/search/journal/select';
+    let url = this.state.config['context'] + 'search/journal/select';
     let params = new URLSearchParams();
 
     params.set('q', '*:*');
@@ -381,7 +381,7 @@ export class AppService {
   }
 
   getViewed(pid: string): Observable<number> {
-    let url = '/search/views/select';
+    let url = this.state.config['context'] + 'search/views/select';
     let params = new URLSearchParams();
 
     params.set('q', '*:*');
@@ -410,7 +410,7 @@ export class AppService {
   }
 
   getSiblings(pid: string): Observable<any> {
-    let url = '/search/journal/select';
+    let url = this.state.config['context'] + 'search/journal/select';
     let params = new URLSearchParams();
 
     params.set('q', 'pid:"' + pid + '"');

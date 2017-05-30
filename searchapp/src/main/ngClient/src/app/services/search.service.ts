@@ -26,7 +26,7 @@ export class SearchService {
 
   search(params : URLSearchParams) {
 
-    var url = "/search/journal/select";
+    var url = this.state.config['context'] + 'search/journal/select';
 
     
     return this.http.get(url, { search: params }).map(res => {

@@ -76,9 +76,9 @@ export class ArchivComponent implements OnInit {
           this.setMainClass();
     this.service.getItem(this.currentPid).subscribe(res => {
       this.currentItem = res;
-      let ctx = res['context'][0];
-      if (ctx.length > 1) {
-        this.currentParent = ctx[ctx.length - 2]['pid'];
+      //let ctx = res['context'][0];
+      if (res['parents'] > 1) {
+        this.currentParent = res['parents'][0];
       } else {
         this.currentParent = null;
       }

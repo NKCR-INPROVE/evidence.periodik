@@ -25,6 +25,21 @@ export class HeaderComponent implements OnInit {
     this.appState.stateChangedSubject.subscribe(val=> {
       this.menu = this.appState.config['menu'];
     });
+    
+//    this.appState.fullScreenSubject.subscribe(val=> {
+//      if(!val){
+//        setTimeout(()=>{
+//          this.menu = this.appState.config['menu'];
+//        }, 100);
+//        
+//      } else {
+//        this.menu = {};
+//      }
+//    });
+  }
+  
+  ngOnDestroy(){
+    
   }
   
   isVisible(h: string, sub: string){

@@ -134,12 +134,11 @@ export class ArticleViewerComponent implements OnInit {
   }
 
   minimize() {
-    this.state.isFull = false;
-
+    this.state.fullScreenChanged(false);
   }
 
   maximize() {
-    this.state.isFull = true;
+    this.state.fullScreenChanged(true);
   }
 
   next() {

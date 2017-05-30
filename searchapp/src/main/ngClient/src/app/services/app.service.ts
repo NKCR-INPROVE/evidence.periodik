@@ -365,7 +365,7 @@ export class AppService {
   }
 
   setViewed(pid: string): Observable<any> {
-    let url = '/search/views/update';
+    let url = this.state.config['context'] + 'search/views/update';
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     let add = {add: {doc:{}, commitWithin:10}};

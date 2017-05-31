@@ -23,27 +23,29 @@
   <nav class="navbar app-brand app-clean-border app-clean-mg">
     <div class="container">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">-->
+        <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
       </div><!--/.navbar-header -->
-      <div id="navbar" class="collapse navbar-collapse">
+      <!--<div id="navbar" class="collapse navbar-collapse">-->
+      <div id="navbar" class="navbar-collapse" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
         <ul class="nav navbar-nav">
           <li routerLink="home" #aa="routerLinkActive" [attr.active]="aa.isActive" routerLinkActive="active"><a routerLink="home" title="Aktuální číslo">{{'Aktuální číslo' | translate}}</a></li>
-          <li routerLinkActive="active" class="dropdown">
-            <a href="#" title="O časopisu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <li routerLinkActive="active" class="btn-group" dropdown>
+            <a dropdownToggle type="button" class="dropdown-toggle">
             <span routerLink="o-casopisu">{{'menu.o-casopisu_' | translate}}</span> <span class="caret"></span></a>
-            <ul class="dropdown-menu app-clean-border">
+            <ul *dropdownMenu class="dropdown-menu app-clean-border" role="menu">
               <li *ngFor="let m of menu['o-casopisu']" ><a *ngIf="m.visible" [routerLink]="['o-casopisu', m.route]">{{'menu.o-casopisu.'+m.route+'_' | translate}}</a></li>
             </ul>
           </li>
-          <li routerLinkActive="active" class="dropdown">
-            <a href="#" title="Pro autory" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <li routerLinkActive="active" class="btn-group" dropdown>
+            <a dropdownToggle type="button" class="dropdown-toggle">
             <span routerLink="pro-autory">{{'menu.pro-autory_' | translate}}</span> <span class="caret"></span></a>
-            <ul class="dropdown-menu app-clean-border">
+            <ul *dropdownMenu class="dropdown-menu app-clean-border" role="menu">
               <li *ngFor="let m of menu['pro-autory']" ><a *ngIf="m.visible" [routerLink]="['pro-autory', m.route]">{{'menu.pro-autory.'+m.route+'_' | translate}}</a></li>
             </ul>
           </li>

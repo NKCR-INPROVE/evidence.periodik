@@ -1,0 +1,78 @@
+// --- MIXIN ---
+
+// set border
+@mixin set-border($position, $height, $style, $color) {
+  @if ($position=="top") {
+    border-width: $height 0 0 0;
+    border-style: solid;
+    border-color: $color;
+  }
+  @else if ($position=="right") {
+    border-width: 0 $height 0 0;
+    border-style: solid;
+    border-color: $color;
+  }
+  @else if ($position=="bottom") {
+    border-width: 0 0 $height 0;
+    border-style: solid;
+    border-color: $color;
+  }
+  @else if ($position=="left") {
+    border-width: 0 0 0 $height;
+    border-style: solid;
+    border-color: $color;
+  }
+  @else if ($position=="right-left-bottom") {
+    border-width: 0 $height $height $height;
+    border-style: solid;
+    border-color: $color;
+  }
+  @else {
+    border-width: $height $height $height $height;
+    border-style: solid;
+    border-color: $color;
+  }
+}
+
+// set vertical align
+@mixin set-vertical-align($height) {
+  height: $height#{px};
+  line-height: $height#{px};
+}
+
+// roboto fontface
+$roboto-font-path: '~/assets/fonts' !default;
+
+@mixin roboto-font($name, $variant, $type, $weight, $style) {
+
+  $font-full-path: '#{$roboto-font-path}/#{$name}-#{$variant}/#{$name}-#{$variant}';
+
+  @font-face {
+    font-family: '#{$name}-#{$variant}';
+    src: url('#{$font-full-path}-#{$type}.eot');
+    src: local('#{$name} #{$variant}'),
+         local('#{$name} #{$variant} #{$type}'),
+         local('#{$name}-#{$variant} #{$type}'),
+         local('#{$name}-#{$variant}-#{$type}'),
+         url('#{$font-full-path}-#{$type}.eot?#iefix') format('embedded-opentype'),
+         url('#{$font-full-path}-#{$type}.woff2') format('woff2'),
+         url('#{$font-full-path}-#{$type}.woff') format('woff'),
+         url('#{$font-full-path}-#{$type}.ttf') format('truetype'),
+         url('#{$font-full-path}-#{$type}.svg##{$variant}') format('svg');
+    font-weight: $weight;
+    font-style: $style;
+  }
+
+  @font-face {
+    font-family: '#{$name}-#{$variant}-#{$type}';
+    src: url('#{$name}-#{$font-full-path}-#{$type}.eot');
+    src: local('#{$name} #{$variant} #{$type}'),
+         local('#{$name}-#{$variant} #{$type}'),
+         local('#{$name}-#{$variant}-#{$type}'),
+         url('#{$font-full-path}-#{$type}.eot?#iefix') format('embedded-opentype'),
+         url('#{$font-full-path}-#{$type}.woff2') format('woff2'),
+         url('#{$font-full-path}-#{$type}.woff') format('woff'),
+         url('#{$font-full-path}-#{$type}.ttf') format('truetype'),
+         url('#{$font-full-path}-#{$type}.svg##{$variant}') format('svg');
+  }
+}

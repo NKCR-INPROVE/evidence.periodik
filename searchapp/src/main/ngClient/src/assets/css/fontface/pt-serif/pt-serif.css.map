@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,UAaC;EAXG,WAAM,EAAE,UAAU;EAClB,WAAM,EAAE,GAAG;EACX,UAAK,EAAE,MAAM;EAGf,GAAG,EAAE,6CAA6C;EAClD,GAAG,EAAE,oSAIgE;ACZvE,UAaC;EAXG,WAAM,EAAE,UAAU;EAClB,WAAM,EAAE,GAAG;EACX,UAAK,EAAE,MAAM;EAGf,GAAG,EAAE,4CAA4C;EACjD,GAAG,EAAE,gSAI+D;ACZtE,UAaC;EAXG,WAAM,EAAE,UAAU;EAClB,WAAM,EAAE,GAAG;EACX,UAAK,EAAE,MAAM;EAGf,GAAG,EAAE,0CAA0C;EAC/C,GAAG,EAAE,wRAI6D;ACZpE,UAaC;EAXG,WAAM,EAAE,UAAU;EAClB,WAAM,EAAE,GAAG;EACX,UAAK,EAAE,MAAM;EAGf,GAAG,EAAE,iDAAiD;EACtD,GAAG,EAAE,oTAIoE",
-"sources": ["../../../sass/fontface/pt-serif/_regular.scss","../../../sass/fontface/pt-serif/_italic.scss","../../../sass/fontface/pt-serif/_bold.scss","../../../sass/fontface/pt-serif/_bold-italic.scss"],
-"names": [],
-"file": "pt-serif.css"
-}

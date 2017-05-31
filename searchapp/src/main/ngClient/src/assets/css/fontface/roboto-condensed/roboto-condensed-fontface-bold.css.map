@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAiDE,UAcC;EAbC,WAAW,EAAE,kBAAsB;EACnC,GAAG,EAAE,0DAAsC;EAC3C,GAAG,EAAE,qhBAQgE;EACrE,WAAW,EC3DmC,GAAG;ED4DjD,UAAU,EC5DyC,MAAM;AD+D3D,UAWC;EAVC,WAAW,EAAE,uBAA+B;EAC5C,GAAG,EAAE,iEAA+C;EACpD,GAAG,EAAE,0fAOgE",
-"sources": ["../../../sass/_app-mixin.scss","../../../sass/fontface/roboto-condensed/roboto-condensed-fontface-bold.scss"],
-"names": [],
-"file": "roboto-condensed-fontface-bold.css"
-}

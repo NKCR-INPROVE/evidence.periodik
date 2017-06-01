@@ -1,3 +1,4 @@
+// --- ROOT STYLE ---
 @import "sass/app-variables";
 @import "sass/app-palette";
 @import "sass/app-color";
@@ -10,6 +11,7 @@
 
 @import "sass/fontface/roboto-condensed/roboto-condensed-fontface";
 @import "sass/fontface/pt-serif/pt-serif";
+//@import "app/app.component.scss";
 @import "sass/app-global";
 @import "sass/app-button";
 @import "sass/app-slider";

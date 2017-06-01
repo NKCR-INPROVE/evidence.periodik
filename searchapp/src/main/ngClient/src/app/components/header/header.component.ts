@@ -57,5 +57,6 @@ export class HeaderComponent implements OnInit {
   logActual(){
     console.log(this.appState.actualNumber);
   }
-
+  
+  public isCollapsed: boolean = true;
 }

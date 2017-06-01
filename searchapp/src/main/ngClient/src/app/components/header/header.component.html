@@ -23,16 +23,14 @@
   <nav class="navbar app-brand app-clean-border app-clean-mg">
     <div class="container">
       <div class="navbar-header">
-        <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">-->
-        <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed" aria-controls="navbar">
+        <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
       </div><!--/.navbar-header -->
-      <!--<div id="navbar" class="collapse navbar-collapse">-->
-      <div id="navbar" class="navbar-collapse" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
+      <div id="navbar" class="collapse navbar-collapse" [collapse]="isCollapsed">
         <ul class="nav navbar-nav">
           <li routerLink="home" #aa="routerLinkActive" [attr.active]="aa.isActive" routerLinkActive="active"><a routerLink="home" title="Aktuální číslo">{{'Aktuální číslo' | translate}}</a></li>
           <li routerLinkActive="active" class="btn-group" dropdown>

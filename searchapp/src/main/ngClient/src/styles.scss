@@ -7,11 +7,10 @@
 
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "../node_modules/nouislider/distribute/nouislider.css";
-//@import "assets/bower_components/roboto-fontface/css/roboto-condensed/sass/roboto-condensed-fontface";
 
 @import "sass/fontface/roboto-condensed/roboto-condensed-fontface";
 @import "sass/fontface/pt-serif/pt-serif";
-//@import "app/app.component.scss";
+
 @import "sass/app-global";
 @import "sass/app-button";
 @import "sass/app-slider";

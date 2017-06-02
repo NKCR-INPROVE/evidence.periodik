@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAiDE,UAcC;EAbC,WAAW,EAAE,kBAAsB;EACnC,GAAG,EAAE,wEAAsC;EAC3C,GAAG,EAAE,gnBAQgE;EACrE,WAAW,EC3D0C,GAAG;ED4DxD,UAAU,EC5DgD,MAAM;AD+DlE,UAWC;EAVC,WAAW,EAAE,8BAA+B;EAC5C,GAAG,EAAE,+EAA+C;EACpD,GAAG,EAAE,qlBAOgE",
-"sources": ["../../../sass/_app-mixin.scss","../../../sass/fontface/roboto-condensed/roboto-condensed-fontface-light-italic.scss"],
-"names": [],
-"file": "roboto-condensed-fontface-light-italic.css"
-}

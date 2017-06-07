@@ -118,9 +118,9 @@ export function createTranslateLoader(http: Http) {
       { path: 'e-shop', component: FreeTextComponent },
       { path: 'hledat', component: SearchComponent,
       children:[
-        { path: '', redirectTo: 'cokoli', pathMatch: 'full'},
-        { path: 'cokoli', component: SearchCriteriaComponent},
-        { path: 'cokoli/:criteria', component: SearchCriteriaComponent },
+        { path: '', redirectTo: 'cokoliv', pathMatch: 'full'},
+        { path: 'cokoliv', component: SearchCriteriaComponent},
+        { path: 'cokoliv/:criteria', component: SearchCriteriaComponent },
         { path: 'autory', component: SearchAuthorsComponent},
         { path: 'keywords', component: SearchKeywordsComponent},
         { path: 'rubriky', component: SearchGenresComponent}

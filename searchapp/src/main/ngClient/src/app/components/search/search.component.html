@@ -7,8 +7,8 @@
           <div role="tabpanel" class="tab-pane active" id="cokoliv">
             <router-outlet></router-outlet>
  
-            <div  *ngIf="showResults()">
-            <div class="app-section app-section-slider app-brand lighten-6">
+            <div *ngIf="showResults()">
+            <div *ngIf="dateForm" class="app-section app-section-slider app-brand lighten-6">
               <div class="row">
                 <div class="col-xs-12">
                   <input type="checkbox" />
@@ -34,7 +34,7 @@
               </div><!--/.row -->
             </div><!--/.app-section -->
             
-            <div class="app-section app-sort-headline">
+            <div *ngIf="numFound" class="app-section app-sort-headline">
               <div class="row">
                 <div class="col-xs-12 col-sm-6">
                   <h2 class="app-font-s42 app-clean-mg">Výsledky vyhledávání</h2>
@@ -52,6 +52,7 @@
                   </ul>
                 </div><!--/.col -->
               </div><!--/.row -->
+              <div></div>
               <hr />
               <div class="row">
                 <div class="col-xs-12 col-sm-6">

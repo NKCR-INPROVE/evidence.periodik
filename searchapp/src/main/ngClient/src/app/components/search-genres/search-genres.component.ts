@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+
+import { AppState } from '../../app.state';
 import { SearchService } from '../../services/search.service';
 import { Criterium } from '../../models/criterium';
 
@@ -11,20 +13,30 @@ import { Criterium } from '../../models/criterium';
   templateUrl: './search-genres.component.html',
   styleUrls: ['./search-genres.component.scss']
 })
-export class SearchGenresComponent implements OnInit {
+export class SearchGenresComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
   
   genres: any[] = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private searchService: SearchService) { }
+    private searchService: SearchService,
+    public state: AppState) { }
 
   ngOnInit() {
     this.getGenres();
   }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((s: Subscription) => {
+      s.unsubscribe();
+    });
+    this.subscriptions = [];
+  }
   
   getGenres(){
+    if (this.state.config) {
     var params = new URLSearchParams();
     params.set('q', '*:*');
     params.set('fq', '-genre:""');
@@ -37,22 +49,23 @@ export class SearchGenresComponent implements OnInit {
     this.searchService.search(params).subscribe(res => {
       
       this.genres = res['facet_counts']['facet_fields']['genre'];
-      
-//      let gs = res['facet_counts']['facet_fields']['genre'];
-//      for(let i in gs){
-//        if(gs[i][0] !== ''){
-//          this.genres.push(gs[i]);
-//        }
-//      }
 
     });
+    } else {
+
+      this.subscriptions.push(this.state.stateChangedSubject.subscribe(
+        () => {
+          this.getGenres();
+        }
+      ));
+    }
   }
   
   search(genre: string){
     let c = new Criterium();
     c.field = 'genre';
     c.value = '"' + genre + '"';;
-    this.router.navigate(['/hledat/cokoli', {criteria: JSON.stringify([c]), start: 0}])
+    this.router.navigate(['/hledat/cokoliv', {criteria: JSON.stringify([c]), start: 0}])
   }
 
 }

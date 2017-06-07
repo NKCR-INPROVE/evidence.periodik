@@ -26,6 +26,12 @@
     },
     "archiv_": "Archiv",
     "hledat_": "Hledat",
+    "hledat":{
+      "cokoliv_": "Cokoliv",
+      "autory_": "Rejstřík autorů",
+      "rubriky_": "Rubriky",
+      "keywords_": "Rejstřík klíčových slov"
+    },
     "kontakt_": "Kontakt",
     "e-shop_": "Eshop"
   },

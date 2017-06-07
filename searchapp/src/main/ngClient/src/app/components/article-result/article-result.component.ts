@@ -125,7 +125,7 @@ export class ArticleResultComponent implements OnInit {
     let c = new Criterium();
     c.field = 'autor';
     c.value = '"' + s + '"';
-    this.router.navigate(['/hledat/cokoli', {criteria: JSON.stringify([c]), start: 0}])
+    this.router.navigate(['/hledat/cokoliv', {criteria: JSON.stringify([c]), start: 0}])
   }
 
 }

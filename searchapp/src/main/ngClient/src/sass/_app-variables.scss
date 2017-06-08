@@ -39,6 +39,9 @@ $app-brand-d-2:					#b17686 !default;
 $app-col-close-width:		40px; 
 $app-slider-base-color:	    $app-brand-l-3;
 
+// paths
+$roboto-font-path: '~/assets/fonts' !default;
+$icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "assets/fonts/glyphicons/") !default;
 
 
 //== Scaffolding
@@ -99,7 +102,7 @@ $headings-color:          inherit !default;
 
 // [converter] If $bootstrap-sass-asset-helper if used, provide path relative to the assets load path.
 // [converter] This is because some asset helpers, such as Sprockets, do not work with file-relative paths.
-$icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "assets/fonts/glyphicons/") !default;
+//$icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "assets/fonts/glyphicons/") !default;
 
 //** File name for all font files.
 $icon-font-name:          "glyphicons-halflings-regular" !default;

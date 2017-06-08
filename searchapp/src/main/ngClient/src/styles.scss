@@ -1,3 +1,5 @@
+$roboto-font-path: '/assets/fonts' !default
+
 // --- ROOT STYLE ---
 @import "sass/app-variables";
 @import "sass/app-palette";
@@ -8,7 +10,8 @@
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "../node_modules/nouislider/distribute/nouislider.css";
 
-@import "sass/fontface/roboto-condensed/roboto-condensed-fontface";
+@import "sass/test/roboto-condensed/sass/roboto-condensed-fontface";
+//@import "sass/fontface/roboto-condensed/roboto-condensed-fontface";
 @import "sass/fontface/pt-serif/pt-serif";
 
 @import "sass/app-global";

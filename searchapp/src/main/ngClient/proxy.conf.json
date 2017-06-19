@@ -31,14 +31,15 @@
     "secure": false
   },
   "/texts": {
-    "target": "http://localhost:8084/searchapp/texts",
+    "target": "http://localhost:8084/k5journals/texts",
+    "logLevel": "debug",
     "pathRewrite": {
       "^/texts":""
     },
     "changeOrigin": false,
     "secure": false
   },
-  "/search": {
+  "/search_": {
     "target": "https://kramerius.lib.cas.cz/search/api/v5.0/search",
     "ignorePath": false,
     "logLevel": "debug",

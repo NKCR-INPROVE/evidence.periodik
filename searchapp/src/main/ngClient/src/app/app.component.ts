@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
 
   classes = {
     'home': 'app-page-home',
+    'actual': 'app-page-actual',
     'o-casopisu': 'app-page-ocasopisu',
     'pro-autory': 'app-page-pokyny-pro-autory',
     'archiv': 'app-page-archiv-level-1',

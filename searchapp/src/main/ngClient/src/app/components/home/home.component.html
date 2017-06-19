@@ -1,62 +1,45 @@
-<section class="app-jumbotron">
-  <div class="jumbotron app-clean-pd app-brand lighten-4">
-    <div class="container">
-      <div class="row">
-        <div *ngIf="actual" class="col-xs-12 col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3">
-          <h2>
-            <app-journal-details [journal]="actual"></app-journal-details>
-          </h2>
-          <button class="btn app-btn app-btn-default app-btn-inverse app-ico-21-17" [routerLink]="['/article',actual.pid]">
+<section class="app-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-3 app-col-left">
+        <p>
+          <img [src]="img" alt="" routerLink="home" />
+        </p>
+        <p>
+          <button class="btn app-btn app-btn-default app-ico-21-17" routerLink="/actual" >
             <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.09 16.87" class="app-ico">
               <title>prohlizet</title>
               <path d="M324.38,396h0a0.78,0.78,0,0,0-.55.23,0.79,0.79,0,0,0-.23.56v11.85a0.79,0.79,0,0,0,.79.79,9.78,9.78,0,0,1,7,2.61v-12.4a0.75,0.75,0,0,0-.11-0.4c-1.75-2.81-5.1-3.24-6.94-3.24h0Z" transform="translate(-321 -395.97)"/>
               <path d="M340.5,408.61V396.76a0.79,0.79,0,0,0-.23-0.56,0.78,0.78,0,0,0-.55-0.23h0c-1.84,0-5.2.43-6.94,3.24a0.76,0.76,0,0,0-.11.4V412a9.78,9.78,0,0,1,7-2.61,0.79,0.79,0,0,0,.79-0.79h0Z" transform="translate(-321 -395.97)"/>
               <path d="M342.3,398.7h-0.57v9.91a2,2,0,0,1-2,2,8.77,8.77,0,0,0-6,2,19,19,0,0,1,8.37.16,0.79,0.79,0,0,0,1-.77V399.49a0.79,0.79,0,0,0-.79-0.79h0Z" transform="translate(-321 -395.97)"/>
               <path d="M322.36,408.61V398.7h-0.57a0.79,0.79,0,0,0-.79.79v12.56a0.79,0.79,0,0,0,1,.77,19,19,0,0,1,8.37-.16,8.77,8.77,0,0,0-6-2,2,2,0,0,1-2-2h0Z" transform="translate(-321 -395.97)"/>
-            </svg>
-            {{'PROHLÍŽET CELÉ ČÍSLO' | translate }}
-          </button>
-        </div><!--/.col -->
-      </div><!--/.row -->
-    </div><!--/.container -->
-  </div><!--/.jumbotron -->
-</section><!--/.app-jumbotron -->
-
-
-<section class="app-content">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-4 col-md-3 app-col-left">
-        <p>
-          <img [src]="img" alt="" />
-        </p>
-        <h4 class="app-font-roboto-cb">{{'Starší čísla' | translate }}:</h4>
-        <p *ngIf="actual" class="app-font-roboto-cr app-cursor-pointer">
-          <span *ngFor="let c of actual.siblings.reverse()" class="show">
-            <app-journal-details *ngIf="c.pid !== actual.pid" [journal]="c" (click)="gotoArchiv(c.pid)"></app-journal-details>
-          </span>
-        </p>
-        <p>
-          <button class="btn app-btn app-btn-default app-ico-21-17">
-            <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 16.64" class="app-ico">
-              <title>archiv</title>
-              <path d="M342.73,411.25l-4.91-13.5-0.27-.75-0.75.27-3,1.09-0.75.27,0.27,0.75,4.91,13.5,0.27,0.75,0.75-.27,3-1.09L343,412Zm-5.87-4.45-2.39-6.56,3-1.09,2.39,6.56Zm3.07,3.77a1,1,0,1,1,.6-1.28,1,1,0,0,1-.6,1.28h0Z" transform="translate(-322 -397)"/>
-              <path d="M326,397.67h-4v16h4.79v-16H326Zm-1.6,13.57a1,1,0,1,1,1-1,1,1,0,0,1-1,1h0Zm1.6-4.59H322.8v-7H326v7Z" transform="translate(-322 -397)"/>
-              <path d="M332.18,397.67h-4v16H333v-16h-0.8Zm-1.6,13.57a1,1,0,1,1,1-1,1,1,0,0,1-1,1h0Zm1.6-4.59H329v-7h3.19v7Z" transform="translate(-322 -397)"/>
-            </svg> {{'ARCHIV STARŠÍCH ROČNÍKŮ' | translate }}
+            </svg> AKTUÁLNÍ ČÍSLO {{'aa'}}
           </button>
         </p>
       </div><!--/.col -->
-      <div *ngIf="actual" class="col-xs-12 col-sm-8 col-md-9 app-col-right">
-        <div class="app-section" *ngFor="let genre of actual.genres">
-          <h4 class="app-clean-mg">{{'genre.' + genre | translate}}</h4>
-          <hr />
-          <div *ngFor="let art of actual.genresObject[genre].articles">
-            <app-article-result [article]="art"></app-article-result>
+      <div class="col-xs-12 col-sm-8 col-md-9 app-col-right">
+        <h2 class="app-font-s42">Knihy a dějiny</h2>
+        <p class="app-font-roboto-cb">
+          <app-free-text></app-free-text>
+        </p>
+        <div class="app-card z-depth-3">
+          <div>
+            <span>Aktuálně:</span>
           </div>
-        </div><!--/.app section -->
+          <div>
+            <app-free-text [page]="'news'"></app-free-text>
+          </div>
+        </div>
+        <hr />
+        <h5 class="app-font-roboto-cb">Časopis je zařazen v databázích:</h5>
+        <div class="app-logo-wrapper">
+          <img src="assets/img/logo-cejsh.png" alt="" />
+          <img src="assets/img/logo-ee.png" alt="" />
+          <img src="assets/img/logo-doaj.png" alt="" />
+          <img src="assets/img/logo-erihplus.png" alt="" />
+          <img src="assets/img/logo-ebsco.png" alt="" />
+        </div><!--/.app logo wrapper -->
       </div><!--/.col -->
     </div><!--./row -->
   </div><!--/.container -->
-</section><!--/.app-content -->
-  
+</section><!--/.section -->

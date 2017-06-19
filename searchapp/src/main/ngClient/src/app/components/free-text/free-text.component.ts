@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -12,10 +12,11 @@ import { AppService } from '../../services/app.service';
   styleUrls: ['./free-text.component.scss']
 })
 export class FreeTextComponent implements OnInit, OnDestroy {
-  
-  langObserver: Subscription;
-  stateObserver: Subscription;
-  routeObserver: Subscription;
+
+  @Input() page: string;
+
+
+  subscriptions: Subscription[] = [];
 
   text: string;
   id: string;
@@ -26,41 +27,37 @@ export class FreeTextComponent implements OnInit, OnDestroy {
     private router: Router) { }
 
   ngOnInit() {
-    this.setImg();
-    this.langObserver = this.appService.langSubject.subscribe(
+    this.subscriptions.push(this.appService.langSubject.subscribe(
       () => {
-        this.appService.getText(this.id).subscribe(t => this.text = t);
+        this.getText();
       }
-    );
+    ));
 
-    this.stateObserver = this.state.stateChangedSubject.subscribe(
-      () => {
-        this.setImg();
-      }
-    );
-
-    this.routeObserver = this.router.events.subscribe(val => {
-      if (val instanceof NavigationEnd) {
-        this.id = val.url.substring(1);
-        if (this.state.currentLang){
-          this.appService.getText(this.id).subscribe(t => this.text = t);
+    if (!this.page) {
+      this.subscriptions.push(this.router.events.subscribe(val => {
+        if (val instanceof NavigationEnd) {
+          this.id = val.url.substring(1);
+          if (this.state.currentLang) {
+            this.getText();
+          }
         }
-      }
-    });
-
-  }
-  
-  ngOnDestroy(){
-    this.langObserver.unsubscribe();
-    this.stateObserver.unsubscribe();
-    this.routeObserver.unsubscribe();
-  }
-
-  setImg() {
-    if (this.state.actualNumber) {
-      this.img = this.state.imgSrc;
-      //this.img = 'img/item/' + this.state.actualNumber.pid + '/thumb';
+      }));
+    } else {
+      this.id = this.page;
+      this.getText();
     }
+
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((s: Subscription) => {
+      s.unsubscribe();
+    });
+    this.subscriptions = [];
+  }
+
+  getText() {
+    this.appService.getText(this.id).subscribe(t => this.text = t);
   }
 
 }

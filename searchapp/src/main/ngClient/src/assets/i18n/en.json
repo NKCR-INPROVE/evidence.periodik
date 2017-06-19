@@ -15,8 +15,10 @@
   "recenzovaný článek":"peer reviewed",
   "nerecenzovaný článek":"non peer reviewed",
   "Trvalý odkaz":"Permanent link",
+  "home": "Home",
   "menu":{
-    "home_": "Actual number",
+    "home_": "Home",
+    "actual_": "Actual number",
     "o-casopisu_": "About journal",
     "o-casopisu":{
       "redakce_": "Editor",

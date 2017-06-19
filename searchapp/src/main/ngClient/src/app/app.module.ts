@@ -41,6 +41,8 @@ import { SearchGenresComponent } from './components/search-genres/search-genres.
 import { SearchKeywordsComponent } from './components/search-keywords/search-keywords.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ArticleInfoComponent } from './components/article-info/article-info.component';
+import { ActualComponent } from './components/actual/actual.component';
+import { FreePageComponent } from './components/free-page/free-page.component';
 
 
 
@@ -79,7 +81,9 @@ export function createTranslateLoader(http: Http) {
     SearchGenresComponent,
     SearchKeywordsComponent,
     PaginationComponent,
-    ArticleInfoComponent
+    ArticleInfoComponent,
+    ActualComponent,
+    FreePageComponent
   ],
   imports: [
     BrowserModule,
@@ -100,22 +104,23 @@ export function createTranslateLoader(http: Http) {
     //StoreModule, storeManager,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
+      { path: 'actual', component: ActualComponent },
       { path: 'archiv', component: ArchivComponent },
       { path: 'archiv/:pid', component: ArchivComponent },
       { path: 'pro-autory', component: PokynyComponent ,
       children:[
-        { path: '', component: FreeTextComponent},
-        { path: '**', component: FreeTextComponent}
+        { path: '', component: FreePageComponent},
+        { path: '**', component: FreePageComponent}
         
       ]},
       { path: 'o-casopisu', component: OCasopisuComponent,
       children:[
-        { path: '', component: FreeTextComponent},
-        { path: '**', component: FreeTextComponent}
+        { path: '', component: FreePageComponent},
+        { path: '**', component: FreePageComponent}
         
       ]},
-      { path: 'kontakt', component: FreeTextComponent },
-      { path: 'e-shop', component: FreeTextComponent },
+      { path: 'kontakt', component: FreePageComponent },
+      { path: 'e-shop', component: FreePageComponent },
       { path: 'hledat', component: SearchComponent,
       children:[
         { path: '', redirectTo: 'cokoliv', pathMatch: 'full'},

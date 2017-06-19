@@ -117,7 +117,7 @@ public class Indexer {
       } else {
         setDatum(idoc, mods, pid);
       }
-      LOGGER.log(Level.INFO, "indexed: {0}", total++);
+      LOGGER.log(Level.INFO, "indexed: {0} with idx {1}", new Object[]{total++, index});
       client.add(idoc);
       client.commit();
     } catch (SolrServerException | IOException | JSONException ex) {

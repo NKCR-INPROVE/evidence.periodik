@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppService } from '../../services/app.service';
-
 import { Journal } from '../../models/journal.model';
-
 import { AppState } from '../../app.state';
 
 @Component({
@@ -16,6 +14,7 @@ export class ActualComponent implements OnInit {
   
   img: string = '';
   actual: Journal;
+  krameriusLink: string;
   //articles: any[] = [];
 
   constructor(
@@ -41,6 +40,7 @@ export class ActualComponent implements OnInit {
     if (this.state.actualNumber) {
       this.actual = this.state.actualNumber;
       this.img = this.state.imgSrc;
+      this.krameriusLink = this.state.config['k5'] + this.state.config['journal'];
       //this.img = 'img/item/' + this.state.actualNumber.pid + '/thumb';
     }
   }

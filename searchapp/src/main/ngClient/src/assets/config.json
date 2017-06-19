@@ -6,6 +6,7 @@
   "journal": "uuid:fc144bf1-8d61-4f4b-80f9-e4a772db32dc",
   "model": "periodicalvolume",
   "sort_field": "datum_end",
+  "k5": "https://kramerius.lib.cas.cz/client/index.vm?q=&page=doc#pid=",
   "searchParams": {
     "rows": 20
   },

@@ -27,7 +27,7 @@
                   <div id="slider">
                     <form [formGroup]="dateForm">
                       <nouislider [connect]="true" [min]="dateMin" [max]="dateMax" [step]="1" [formControl]="dateForm.controls.range"
-                        (end)="onDateChange($event)" [tooltips]="[ false, true ]" #dateSlider ></nouislider>
+                        (end)="onDateChange($event)" [tooltips]="[ true, true ]" #dateSlider ></nouislider>
                     </form>
                   </div>
                 </div><!--/.col -->

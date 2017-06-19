@@ -3,7 +3,9 @@
       <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-3 app-col-left">
           <p>
-            <img [src]="img" alt="" routerLink="/home" title="Seznam článků z nejnovějšího čísla" />
+            <a routerLink="/home" title="Seznam článků z nejnovějšího čísla "> 
+            <img [src]="img" alt="" />
+            </a>
           </p>
         </div><!--/.col -->
         <div class="col-xs-12 col-sm-8 col-md-9 app-col-right" [innerHTML]="text"></div><!--/.col -->

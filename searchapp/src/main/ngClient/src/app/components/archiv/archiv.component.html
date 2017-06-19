@@ -33,11 +33,10 @@
             <div *ngIf="isRoot()" class="col-xs-12 col-sm-6">
               <ul class="list-unstyled app-select">
                 <li>Výsledky řadit:</li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">od nejnovějších <span class="caret"></span></a>
-                  <ul class="dropdown-menu app-clean-border">
-                    <li><a href="#">od nejstarších</a></li>
-                    <li><a href="#">dle relevance</a></li>
+                <li class="dropdown" dropdown>
+                  <a dropdownToggle type="button" class="dropdown-toggle" >{{currentSort.label}} <span class="caret"></span></a>
+                  <ul *dropdownMenu class="dropdown-menu app-clean-border"  role="menu">
+                    <li *ngFor="let s of sorts"><a (click)="setSort(s)">{{s.label}}</a></li>
                   </ul>
                 </li>
               </ul>

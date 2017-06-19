@@ -73,14 +73,14 @@ export class AppService {
       });
   }
 
-  getChildren(pid: string): Observable<any> {
+  getChildren(pid: string, dir: string = 'asc'): Observable<any> {
     var url = this.state.config['context'] + 'search/journal/select';
     let params = new URLSearchParams();
 
     params.set('q', '*:*');
     params.set('fq', 'parents:"' + pid + '"');
     params.set('wt', 'json');
-    params.set('sort', 'idx asc');
+    params.set('sort', 'idx ' + dir);
     params.set('rows', '500');
 
     return this.http.get(url, { search: params })

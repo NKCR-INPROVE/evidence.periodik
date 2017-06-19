@@ -18,7 +18,13 @@ export class ArchivComponent implements OnInit {
   parentItems: any[];
   currentParent: string;
   cache: any = {};
-
+  
+  sorts = [
+    {label:"od nejstaršího", dir:"asc"},
+    {label:"od nejnovějšího", dir:"desc"}
+  ];
+  currentSort = this.sorts[0];
+  
   constructor(
     private service: AppService,
     private state: AppState,
@@ -64,6 +70,13 @@ export class ArchivComponent implements OnInit {
     this.parentItems = [];
     this.setItems(this.state.config['journal']);
   }
+  setSort(s){
+    this.currentSort = s;
+    let x = s.dir === 'asc' ? 1 : -1;
+    this.items.sort((a, b) => {
+      return (a['idx'] - b['idx']) * x;
+    });
+  }
 
   drillDown(pid: string) {
     //this.parentItems = this.cache[this.currentPid]['items'];
@@ -73,14 +86,19 @@ export class ArchivComponent implements OnInit {
   setItems(pid: string) {
     //let parent = this.currentPid;
     this.currentPid = pid;
-          this.setMainClass();
+    this.setMainClass();
+    
     this.service.getItem(this.currentPid).subscribe(res => {
-      this.currentItem = res;
-      //let ctx = res['context'][0];
-      if (res['parents'] > 1) {
-        this.currentParent = res['parents'][0];
-      } else {
-        this.currentParent = null;
+      if (this.currentPid === this.state.config['journal']){
+        this.currentItem = {pid: this.currentPid, parents: null};
+      }else {
+        this.currentItem = res;
+        //let ctx = res['context'][0];
+        if (res['parents'] > 1) {
+          this.currentParent = res['parents'][0];
+        } else {
+          this.currentParent = null;
+        }
       }
 
       if (!this.cache.hasOwnProperty(this.currentPid)) {

@@ -42,9 +42,9 @@
                 <div class="col-xs-12 col-sm-6">
                   <ul class="list-unstyled app-select">
                     <li>Výsledky řadit:</li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">od nejnovějších <span class="caret"></span></a>
-                      <ul class="dropdown-menu app-clean-border">
+                    <li class="dropdown" dropdown>
+                      <a dropdownToggle class="dropdown-toggle" role="button" >od nejnovějších <span class="caret"></span></a>
+                      <ul *dropdownMenu class="dropdown-menu app-clean-border">
                         <li><a href="#">od nejstarších</a></li>
                         <li><a href="#">dle relevance</a></li>
                       </ul>

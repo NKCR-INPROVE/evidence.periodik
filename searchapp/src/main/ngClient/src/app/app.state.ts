@@ -32,10 +32,11 @@ export class AppState {
   rows: number = 10;
 
   sorts = [
-    //{ "label": "Dle relevance", "field": "score desc" },
-    { "label": "Dle idetifikatoru", "field": "uniqueid asc" },
-    { "label": "Dle data", "field": "rok_vzniku desc" },
-    { "label": "Dle autora", "field": "autor_sort asc" }
+    { "label": "Dle relevance", "field": "score desc" },
+    { "label": "od nejnovějších", "field": "rok_vzniku asc" },
+    { "label": "od nejstarších", "field": "rok_vzniku desc" },
+    { "label": "podle názvu A-Z", "field": "autor_sort asc" }
+    
   ];
   currentSort: any = this.sorts[0];
   currentLang : string;

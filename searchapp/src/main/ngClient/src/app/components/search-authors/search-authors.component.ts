@@ -73,11 +73,11 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
   }
 
     setLetter(l: string){
-      if (this.letter === null) {
+//      if (this.letter === null) {
         this.letter = l;
-      } else {
-        this.letter = null;
-      }
+//      } else {
+//        this.letter = null;
+//      }
       this.filter();
     }
 

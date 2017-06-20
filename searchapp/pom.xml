@@ -7,7 +7,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>searchapp</name>
+  <name>k5journals</name>
 
   <properties>
     <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -56,26 +56,26 @@
   <build>
     <plugins>
       <plugin>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>exec-maven-plugin</artifactId>
-       <version>1.6.0</version>
-      <executions>
-        <execution>
-          <id>exec-npm-install</id>
-          <phase>generate-sources</phase>
-          <configuration>
-            <executable>npm</executable>
-            <workingDirectory>${project.basedir}/src/main/ngClient/dist</workingDirectory>  
-            <arguments>
-              <argument>run</argument>
-              <argument>build.prod</argument>
-            </arguments>
-          </configuration>
-          <goals>
-            <goal>exec</goal>
-          </goals>
-        </execution>
-      </executions>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>exec-npm-install</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <executable>npm</executable>
+              <workingDirectory>${project.basedir}/src/main/ngClient/dist</workingDirectory>  
+              <arguments>
+                <argument>run</argument>
+                <argument>build.prod</argument>
+              </arguments>
+            </configuration>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       
       <plugin>
@@ -86,10 +86,12 @@
             <fileset>
               <directory>${project.basedir}/src/main/webapp</directory>
               <includes>
+                <include>*.bundle.css</include>
                 <include>*.bundle.js</include>
                 <include>*.bundle.js.gz</include>
                 <include>*.bundle.map</include>
                 <include>index.html</include>
+                <include>assets/*/**</include>
               </includes>
               <excludes>
                 <exclude>index.jsp</exclude>
@@ -156,27 +158,68 @@
         <version>1.5.3</version> 
         <executions> 
           <execution> 
+            <id>replace-for-index</id>
+            <phase>prepare-package</phase> 
+            <goals> 
+              <goal>replace</goal> 
+            </goals>  
+            <configuration> 
+              <file>${project.basedir}/src/main/webapp/index.html</file> 
+              <replacements> 
+                <replacement> 
+                  <token>&lt;!doctype html&gt;</token> 
+                  <value>&lt;%@page contentType="text/html" pageEncoding="UTF-8"%&gt;&lt;!doctype html&gt;</value> 
+                </replacement> 
+                <replacement> 
+                  <token>base href="/"</token> 
+                  <value>base href="/k5journals/"</value> 
+                </replacement> 
+              </replacements> 
+            </configuration> 
+          </execution> 
+	  
+          <execution> 
+            <id>replace-for-config</id>
+            <phase>prepare-package</phase> 
+            <goals> 
+              <goal>replace</goal> 
+            </goals>  
+            <configuration> 
+              <file>${project.basedir}/src/main/webapp/assets/config.json</file> 
+              <replacements> 
+                <replacement> 
+                  <token>&lt;!doctype html&gt;</token> 
+                  <value>&lt;%@page contentType="text/html" pageEncoding="UTF-8"%&gt;&lt;!doctype html&gt;</value> 
+                </replacement> 
+                <replacement> 
+                  <token>"context" : "/",</token> 
+                  <value>"context" : "/k5journals/",</value> 
+                </replacement> 
+              </replacements> 
+            </configuration> 
+          </execution> 
+          
+          <execution> 
+            <id>replace-for-styles</id>
             <phase>prepare-package</phase> 
             <goals> 
               <goal>replace</goal> 
             </goals> 
+            
+            <configuration> 
+              <includes>
+                <include>${project.basedir}/src/main/webapp/styles.*.css</include>
+              </includes> 
+              <replacements> 
+                <replacement> 
+                  <token>/assets/fonts/</token> 
+                  <value>assets/fonts/</value> 
+                </replacement> 
+              </replacements> 
+            </configuration>  
           </execution> 
-        </executions> 
-        <configuration> 
-          <file>${project.basedir}/src/main/webapp/index.html</file> 
-          <replacements> 
-            <replacement> 
-              <token>&lt;!doctype html&gt;</token> 
-              <value>&lt;%@page contentType="text/html" pageEncoding="UTF-8"%&gt;&lt;!doctype html&gt;</value> 
-            </replacement> 
-            <replacement> 
-              <token>base href="/"</token> 
-              <value>base href="/searchapp/"</value> 
-            </replacement> 
-          </replacements> 
-        </configuration> 
+        </executions>
       </plugin>
-    
     
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

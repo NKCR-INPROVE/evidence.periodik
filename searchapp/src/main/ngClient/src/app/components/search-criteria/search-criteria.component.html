@@ -2,9 +2,9 @@
   <div class="app-item" *ngFor="let criterium of criteria; let last=last; let idx = index">
     <div class="app-col-left">
       <ul class="list-unstyled app-clean-mg app-select">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{getLabel(criterium)}} <span class="caret"></span></a>
-          <ul class="dropdown-menu app-clean-border">
+        <li class="dropdown" dropdown>
+          <a dropdownToggle class="dropdown-toggle" role="button" >{{getLabel(criterium)}} <span class="caret"></span></a>
+          <ul *dropdownMenu class="dropdown-menu app-clean-border">
             <li *ngFor="let f of fields"><a (click)="setField(criterium, f.field)">{{f.label}}</a></li>
           </ul>
         </li>
@@ -15,9 +15,9 @@
     </div><!--/.col -->
     <div class="app-col-right text-right">
       <ul *ngIf="!last" class="list-unstyled app-clean-mg app-select">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{getOperator(criterium)}} <span class="caret"></span></a>
-          <ul class="dropdown-menu app-clean-border">
+        <li dropdown class="dropdown">
+          <a dropdownToggle class="dropdown-toggle" role="button" >{{getOperator(criterium)}} <span class="caret"></span></a>
+          <ul *dropdownMenu class="dropdown-menu app-clean-border">
             <li *ngFor="let op of operators"><a (click)="setOperator(criterium, op.val)">{{op.label}}</a></li>
           </ul>
         </li>

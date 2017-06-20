@@ -8,7 +8,6 @@ import { RouterModule }   from '@angular/router';
 //import {SearchReducer} from "./reducers/search.reducer";
 
 import { BsDropdownModule, ModalModule, CollapseModule } from 'ngx-bootstrap';
-import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -91,7 +90,6 @@ export function createTranslateLoader(http: Http) {
     ReactiveFormsModule,
     HttpModule,
     JsonpModule,
-    SlimLoadingBarModule.forRoot(),
     NouisliderModule,
     BsDropdownModule.forRoot(), ModalModule.forRoot(), CollapseModule.forRoot(),
     TranslateModule.forRoot({

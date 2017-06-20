@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationExtras } from '@angular/router';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { AppService } from './services/app.service';
 import { SearchService } from './services/search.service';
@@ -38,8 +37,7 @@ export class AppComponent implements OnInit {
     private appservice: AppService,
     private http: Http,
     private route: ActivatedRoute,
-    private router: Router,
-    private slimLoader: SlimLoadingBarService) {
+    private router: Router) {
 
   }
 
@@ -95,18 +93,6 @@ export class AppComponent implements OnInit {
       return this.state.config;
     });
   }
-
-
-  startProgress() {
-    this.slimLoader.start(() => {
-      console.log('Loading complete');
-    });
-  }
-
-  completeProgress() {
-    this.slimLoader.complete();
-  }
-
 
   processUrl() {
     //this.searchService.getActual();

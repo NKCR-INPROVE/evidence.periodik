@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Criterium } from '../../models/criterium';
-
+import { AppState } from '../../app.state';
 import { AppService } from '../../services/app.service';
 
 @Component({
@@ -11,10 +12,11 @@ import { AppService } from '../../services/app.service';
   templateUrl: './search-criteria.component.html',
   styleUrls: ['./search-criteria.component.scss']
 })
-export class SearchCriteriaComponent implements OnInit {
+export class SearchCriteriaComponent implements OnInit, OnDestroy {
 
   //@Input() criterium: Criterium;
   @Output() onSearch: EventEmitter<Criterium[]> = new EventEmitter<Criterium[]>();
+  subscriptions: Subscription[] = [];
 
   criteria: Criterium[] = [];
   fields = [
@@ -32,6 +34,7 @@ export class SearchCriteriaComponent implements OnInit {
   ]
 
   constructor(
+    private state: AppState,
     private service: AppService,
     private router: Router,
     private route: ActivatedRoute
@@ -53,9 +56,25 @@ export class SearchCriteriaComponent implements OnInit {
           }
           
           //this.onSearch.emit(this.criteria);
-          this.service.searchFired(this.criteria);
+          if (this.state.config) {
+                this.service.searchFired(this.criteria);
+                } else {
+
+            this.subscriptions.push(this.state.configSubject.subscribe(
+              () => {
+                this.service.searchFired(this.criteria);
+              }
+            ));
+          }
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((s: Subscription) => {
+      s.unsubscribe();
+    });
+    this.subscriptions = [];
   }
   
   setField(criterium: Criterium, field: string){

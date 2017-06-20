@@ -21,6 +21,8 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
   public authorsFiltered: any[] = [];
   public authors1: any[];
   public authors2: any[];
+  
+  public qautor: string;
 
   rowsPerCol: number = 10;
   letter: string = null;
@@ -57,14 +59,18 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
       params.set('facet.limit', '-1');
       params.set('facet.sort', 'index');
       this.searchService.search(params).subscribe(res => {
+        this.authors= [];
+        for(let i in res['facet_counts']['facet_fields']['autor_facet']){
+          this.authors.push(res['facet_counts']['facet_fields']['autor_facet'][i][0]);
+        }
 
-        this.authors = res['facet_counts']['facet_fields']['autor_facet'];
+        //this.authors = res['facet_counts']['facet_fields']['autor_facet'];
         this.filter();
 
       });
     } else {
 
-      this.subscriptions.push(this.state.stateChangedSubject.subscribe(
+      this.subscriptions.push(this.state.configSubject.subscribe(
         () => {
           this.getAuthors();
         }
@@ -139,6 +145,10 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
       c.field = 'autor';
       c.value = '"' + s + '"';
       this.router.navigate(['/hledat/cokoliv', { criteria: JSON.stringify([c]), start: 0 }])
+    }
+    
+    searchInput(){
+      this.search(this.qautor);
     }
 
   }

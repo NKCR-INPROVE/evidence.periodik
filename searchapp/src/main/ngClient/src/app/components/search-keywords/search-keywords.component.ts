@@ -22,6 +22,8 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
   public keywords1: any[];
   public keywords2: any[];
 
+  public qkeyword: string;
+
   rowsPerCol: number = 10;
   letter: string = null;
   page: number = 0;
@@ -58,8 +60,11 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
       params.set('facet.limit', '-1');
       params.set('facet.sort', 'index');
       this.searchService.search(params).subscribe(res => {
-
-        this.keywords = res['facet_counts']['facet_fields']['keywords'];
+        this.keywords= [];
+        for(let i in res['facet_counts']['facet_fields']['keywords']){
+          this.keywords.push(res['facet_counts']['facet_fields']['keywords'][i][0]);
+        }
+        //this.keywords = res['facet_counts']['facet_fields']['keywords'];
         this.filter();
 
       });
@@ -137,4 +142,9 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
     c.value = '"' + s + '"';
     this.router.navigate(['/hledat/cokoliv', { criteria: JSON.stringify([c]), start: 0 }])
   }
+
+  searchInput() {
+    this.search(this.qkeyword);
+  }
+
 }

@@ -2,7 +2,8 @@
             <div class="app-section app-section-search-form app-section-search-form-full">
               <div class="app-item">
                 <div class="app-col-left">
-                  <input id="app-search-sections" type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." data-provide="typeahead" autocomplete="off">
+                  <input id="app-search-sections" type="text" class="form-control" placeholder="Vyhledávejte rubriky" 
+                         [typeahead]="genres" [(ngModel)]="qgenre" (typeaheadOnSelect)="searchInput()" />
                 </div>
                 <!--/.col -->
                 <div class="app-col-right">
@@ -22,7 +23,7 @@
               <div class="row">
                 <div class="col-xs-6 col-xs-offset-3">
                   <ul class="list-unstyled app-marked-item">
-                    <li *ngFor="let genre of genres"><a (click)="search(genre[0])" title="">{{'genre.'+genre[0] | translate}} ({{genre[1]}})</a></li>
+                    <li *ngFor="let genre of genres"><a (click)="search(genre)" title="">{{'genre.'+genre | translate}}</a></li>
                   </ul>
                 </div><!--/.col -->
               </div><!--/.row -->

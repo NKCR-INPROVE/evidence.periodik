@@ -15,8 +15,10 @@ import { Criterium } from '../../models/criterium';
 })
 export class SearchGenresComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
-  
+
   genres: any[] = [];
+
+  public qgenre: string;
 
   constructor(
     private router: Router,
@@ -34,38 +36,47 @@ export class SearchGenresComponent implements OnInit, OnDestroy {
     });
     this.subscriptions = [];
   }
-  
-  getGenres(){
-    if (this.state.config) {
-    var params = new URLSearchParams();
-    params.set('q', '*:*');
-    params.set('fq', '-genre:""');
-    params.set('rows', '0');
-    //Rok jako stats
-    params.set('facet', 'true');
-    params.set('facet.field', 'genre');
-    params.set('facet.mincount', '1');
-    params.set('facet.sort', 'index');
-    this.searchService.search(params).subscribe(res => {
-      
-      this.genres = res['facet_counts']['facet_fields']['genre'];
 
-    });
+  getGenres() {
+    if (this.state.config) {
+      var params = new URLSearchParams();
+      params.set('q', '*:*');
+      params.set('fq', '-genre:""');
+      params.set('rows', '0');
+      //Rok jako stats
+      params.set('facet', 'true');
+      params.set('facet.field', 'genre');
+      params.set('facet.mincount', '1');
+      params.set('facet.sort', 'index');
+      this.searchService.search(params).subscribe(res => {
+
+        this.genres= [];
+        for(let i in res['facet_counts']['facet_fields']['genre']){
+          this.genres.push(res['facet_counts']['facet_fields']['genre'][i][0]);
+        }
+        //this.genres = res['facet_counts']['facet_fields']['genre'];
+
+      });
     } else {
 
-      this.subscriptions.push(this.state.stateChangedSubject.subscribe(
+      this.subscriptions.push(this.state.configSubject.subscribe(
         () => {
           this.getGenres();
         }
       ));
     }
   }
-  
-  search(genre: string){
+
+  search(genre: string) {
     let c = new Criterium();
     c.field = 'genre';
     c.value = '"' + genre + '"';;
-    this.router.navigate(['/hledat/cokoliv', {criteria: JSON.stringify([c]), start: 0}])
+    this.router.navigate(['/hledat/cokoliv', { criteria: JSON.stringify([c]), start: 0 }])
   }
+
+  searchInput() {
+    this.search(this.qgenre);
+  }
+
 
 }

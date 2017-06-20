@@ -22,11 +22,11 @@
               <nav class="app-nav-items">
                 <ul *ngIf="keywords.length > 0" class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
                   <li *ngFor="let l of state.letters" [class.active]="l === letter">
-                    <a (click)="setLetter(l)" 
-                      [class.app-brand-text]="isEmpty(l)" 
-                      [class.text-lighten-2]="isEmpty(l)" 
-                      
+                    <a *ngIf="!isEmpty(l)" (click)="setLetter(l)" 
                       title="">{{l}}</a>
+                    <span *ngIf="isEmpty(l)" 
+                      class="app-brand-text text-lighten-2" 
+                      title="">{{l}}</span>
                   </li>
                 </ul>
               </nav>

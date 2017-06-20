@@ -32,15 +32,17 @@
           <img [src]="img" alt="" />
           </a>
         </p>
+        <!--
         <h4 class="app-font-roboto-cb">{{'Starší čísla' | translate }}:</h4>
         <p *ngIf="actual" class="app-font-roboto-cr app-cursor-pointer">
           <span *ngFor="let c of actual.siblings.reverse()" class="show">
             <app-journal-details *ngIf="c.pid !== actual.pid" [journal]="c" (click)="gotoArchiv(c.pid)"></app-journal-details>
           </span>
         </p>
+        -->
         <p>
           <button class="btn app-btn app-btn-default app-ico-21-17" >
-            <a [href]="krameriusLink" target="_blank">
+            <a routerLink="/archiv">
             <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 16.64" class="app-ico">
               <title>archiv</title>
               <path d="M342.73,411.25l-4.91-13.5-0.27-.75-0.75.27-3,1.09-0.75.27,0.27,0.75,4.91,13.5,0.27,0.75,0.75-.27,3-1.09L343,412Zm-5.87-4.45-2.39-6.56,3-1.09,2.39,6.56Zm3.07,3.77a1,1,0,1,1,.6-1.28,1,1,0,0,1-.6,1.28h0Z" transform="translate(-322 -397)"/>

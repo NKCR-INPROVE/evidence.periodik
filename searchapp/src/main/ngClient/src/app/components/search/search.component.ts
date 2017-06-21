@@ -36,6 +36,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   dateOd: number = 0;
   dateDo: number = 1;
   dateRange: number[] = [0, 1];
+  
+  onlyPeerReviewed: boolean = false;
 
   public dateForm: FormGroup;
 
@@ -62,6 +64,9 @@ export class SearchComponent implements OnInit, OnDestroy {
         }
         if (this.route.snapshot.firstChild.params.hasOwnProperty('rows')) {
           this.rows = +this.route.snapshot.firstChild.params['rows'];
+        }
+        if (this.route.snapshot.firstChild.params.hasOwnProperty('onlyPeerReviewed')) {
+          this.onlyPeerReviewed = this.route.snapshot.firstChild.params['onlyPeerReviewed'] === 'true';
         }
       } else if (val instanceof NavigationStart) {
 
@@ -125,6 +130,11 @@ export class SearchComponent implements OnInit, OnDestroy {
     //Add date filter
     if(this.dateForm){
       params.append('fq', 'year:[' + this.dateForm.controls['range'].value[0] + ' TO ' + this.dateForm.controls['range'].value[1] + ']');
+    }
+    
+    //Add onlyPeerReviewed
+    if(this.onlyPeerReviewed){
+      params.append('fq', 'genre:"peer-reviewed"')
     }
 
     //console.log(params.toString());
@@ -212,6 +222,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     let p = {};
     Object.assign(p, this.route.snapshot.firstChild.params);
     p['rows'] = this.rows;
+    this.router.navigate(['/hledat/cokoliv', p]);
+  }
+  
+  setPeerReviewed(){
+    //this.rows = r;
+    let p = {};
+    Object.assign(p, this.route.snapshot.firstChild.params);
+    p['onlyPeerReviewed'] = this.onlyPeerReviewed;
     this.router.navigate(['/hledat/cokoliv', p]);
   }
 

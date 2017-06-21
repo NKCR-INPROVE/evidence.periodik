@@ -19,6 +19,11 @@ export class ArchivComponent implements OnInit {
   currentParent: string;
   cache: any = {};
   
+  
+  volumeNumber: string;
+  issueNumber: string;
+  partName: string;
+  
   sorts = [
     {label:"od nejnovějšího", dir:"desc"},
     {label:"od nejstaršího", dir:"asc"}
@@ -99,6 +104,7 @@ export class ArchivComponent implements OnInit {
         } else {
           this.currentParent = null;
         }
+        this.setDetails();
       }
 
       if (!this.cache.hasOwnProperty(this.currentPid)) {
@@ -152,6 +158,54 @@ export class ArchivComponent implements OnInit {
       this.router.navigate(['home']);
     }
   }
+  
+  
+  
+  setDetails() {
+      let mods = JSON.parse(this.currentItem['mods']);
+      if (this.currentItem['model'] === 'periodicalvolume') {
+
+        if (mods['mods:originInfo']) {
+          //this.year = mods['mods:originInfo']['mods:dateIssued'];
+          if (mods['mods:titleInfo']) {
+            this.volumeNumber = mods['mods:titleInfo']['mods:partNumber'];
+          }
+        } else {
+          //podpora pro starsi mods. ne podle zadani
+          if (mods['part'] && mods['part']['date']) {
+            //this.year = mods['part']['date'];
+          } else if (mods['mods:part'] && mods['mods:part']['mods:date']) {
+            //this.year = mods['mods:part']['mods:date'];
+          }
+
+          if (mods['part'] && mods['part']['detail'] && mods['part']['detail']['number']) {
+            this.issueNumber = mods['part']['detail']['number'];
+          } else if (mods['mods:part'] && mods['mods:part']['mods:detail'] && mods['mods:part']['mods:detail']['mods:number']) {
+            this.issueNumber = mods['mods:part']['mods:detail']['mods:number'];
+          }
+        }
+      } else if (this.currentItem['model'] === 'periodicalitem') {
+        if (mods['mods:originInfo']) {
+          //this.year = mods['mods:originInfo']['mods:dateIssued'];
+          if (mods['mods:titleInfo']) {
+            this.issueNumber = mods['mods:titleInfo']['mods:partNumber'];
+            this.partName = mods['mods:titleInfo']['mods:partName'];
+          }
+        } else {
+
+
+          //podpora pro starsi mods. ne podle zadani
+          if (mods['part'] && mods['part']['detail'] && mods['part']['detail']['number']) {
+            this.issueNumber = mods['part']['detail']['number'];
+          } else if (mods['mods:part'] && mods['mods:part']['mods:detail'] && mods['mods:part']['mods:detail']['mods:number']) {
+            this.issueNumber = mods['mods:part']['mods:detail']['mods:number'];
+          }
+
+
+        }
+      }
+  }
+
 
   img(pid: string) {
     return this.state.config['context'] + 'img?uuid=' + pid + '&stream=IMG_THUMB&action=SCALE&scaledHeight=140';

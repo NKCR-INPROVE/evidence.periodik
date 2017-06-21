@@ -26,7 +26,7 @@
                   {{'Ročníky' || translate}}
                 </span>
                 <span *ngSwitchCase="'periodicalvolume'">
-                  {{currentItem['year']}}, {{'ročník' | translate}} {{currentItem['volumeNumber']}}
+                  {{currentItem['year']}}, {{'ročník' | translate}} {{volumeNumber}}
                 </span>
               </h2>
             </div><!--/.col -->
@@ -52,7 +52,7 @@
                 {{'Ročníky' || translate}}
               </span>
               <span *ngSwitchCase="'periodicalvolume'">
-                {{currentItem['year']}}, {{'ročník' | translate}} {{currentItem['volumeNumber']}}
+                {{currentItem['year']}}<span *ngIf="volumeNumber">, {{'ročník' | translate}} {{volumeNumber}}</span>
               </span>
             </h2>
           </span>

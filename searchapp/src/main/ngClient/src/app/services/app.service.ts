@@ -152,8 +152,8 @@ export class AppService {
     var url = this.state.config['api_point'] + '/item/' + pid + '/children';
 
     return this.http.get(url).map((response: Response) => {
-      //console.log(response);
       let childs: any[] = response.json();
+      //console.log(pid, childs);
       let last = childs[childs.length - 1];
       if (childs.length === 0) {
         return new Journal();

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { URLSearchParams } from '@angular/http';
 import { SearchService } from '../../services/search.service';
@@ -31,7 +31,6 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private searchService: SearchService,
     public state: AppState) { }
 
@@ -55,14 +54,14 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
       params.set('rows', '0');
       //Rok jako stats
       params.set('facet', 'true');
-      params.set('facet.field', 'keywords');
+      params.set('facet.field', 'keywords_facet');
       params.set('facet.mincount', '1');
       params.set('facet.limit', '-1');
       params.set('facet.sort', 'index');
       this.searchService.search(params).subscribe(res => {
         this.keywords= [];
-        for(let i in res['facet_counts']['facet_fields']['keywords']){
-          this.keywords.push(res['facet_counts']['facet_fields']['keywords'][i][0]);
+        for(let i in res['facet_counts']['facet_fields']['keywords_facet']){
+          this.keywords.push(res['facet_counts']['facet_fields']['keywords_facet'][i][0]);
         }
         //this.keywords = res['facet_counts']['facet_fields']['keywords'];
         this.filter();

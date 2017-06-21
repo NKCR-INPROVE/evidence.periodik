@@ -122,7 +122,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
       } else {
         this.authorsFiltered = this.authors;
       }
-      this.totalPages = Math.ceil(this.authorsFiltered.length / this.rowsPerCol);
+      this.totalPages = Math.ceil(this.authorsFiltered.length / (this.rowsPerCol*2));
       this.setCols();
     }
 
@@ -144,7 +144,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
     search(s: string){
       let c = new Criterium();
       c.field = 'autor';
-      c.value = '"' + s + '"';
+      c.value = '"' + s + '"~3';
       this.router.navigate(['/hledat/cokoliv', { criteria: JSON.stringify([c]), start: 0 }])
     }
     

@@ -3,7 +3,7 @@
               <div class="app-item">
                 <div class="app-col-left">
                   <input id="app-search-key-words" type="text" class="form-control" placeholder="Vyhledávejte klíčová slova" 
-                         [typeahead]="keywords" [(ngModel)]="qkeyword" (typeaheadOnSelect)="searchInput()" />
+                         [typeahead]="keywords" [(ngModel)]="qkeyword" (typeaheadOnSelect)="searchInput()" typeaheadOptionField="val" />
                 </div>
                 <!--/.col -->
                 <div class="app-col-right">
@@ -37,12 +37,12 @@
               <div class="row">
                 <div class="col-xs-6">
                   <ul class="list-unstyled">
-                    <li *ngFor="let k of keywords1"><a (click)="search(k)" title="">{{k | translate}}</a></li>
+                    <li *ngFor="let k of keywords1"><a (click)="search(k.val)" title="">{{k.val | translate}}</a></li>
                   </ul>
                 </div><!--/.col -->
                 <div class="col-xs-6">
                   <ul class="list-unstyled">
-                    <li *ngFor="let k of keywords2"><a (click)="search(k)" title="">{{k | translate}}</a></li>
+                    <li *ngFor="let k of keywords2"><a (click)="search(k.val)" title="">{{k.val | translate}}</a></li>
                   </ul>
                 </div><!--/.col -->
               </div><!--/.row -->

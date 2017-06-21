@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { URLSearchParams } from '@angular/http';
 import { SearchService } from '../../services/search.service';
+import { AppService } from '../../services/app.service';
 import { AppState } from '../../app.state';
 import { Criterium } from '../../models/criterium';
 
@@ -32,6 +33,7 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private searchService: SearchService,
+    private service: AppService,
     public state: AppState) { }
 
   ngOnInit() {
@@ -60,9 +62,16 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
       params.set('facet.sort', 'index');
       this.searchService.search(params).subscribe(res => {
         this.keywords= [];
+        
         for(let i in res['facet_counts']['facet_fields']['keywords_facet']){
-          this.keywords.push(res['facet_counts']['facet_fields']['keywords_facet'][i][0]);
+          let val: string = res['facet_counts']['facet_fields']['keywords_facet'][i][0];
+          let val_lower: string = val.toLocaleLowerCase(); 
+          this.keywords.push({val: val, val_lower: val_lower});
         }
+        
+        this.keywords.sort((a, b) => {
+          return a.val_lower.localeCompare(b.val_lower, 'cs');
+        });
         //this.keywords = res['facet_counts']['facet_fields']['keywords'];
         this.filter();
 
@@ -94,7 +103,7 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
     }
     let has = false;
     this.keywords.forEach((el) => {
-      let k: string = el[0];
+      let k: string = el.val[0];
       if (k.toLocaleLowerCase().charAt(0) === l.toLocaleLowerCase()) {
         has = true;
         return;
@@ -109,8 +118,9 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
 
       this.keywords.forEach((el) => {
         //        console.log(el);
-        let k: string = el[0];
-        if (k.toLocaleLowerCase().charAt(0) === this.letter.toLocaleLowerCase()) {
+        let k: string = el.val;
+        let first: string = k.toLocaleLowerCase().charAt(0);
+        if (this.service.removeDiacritics(first) === this.letter.toLocaleLowerCase()) {
           this.keywordsFiltered.push(el);
         }
       });

@@ -96,7 +96,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   lastResult() {
-    return Math.min(this.start + this.rows + 1, this.numFound);
+    return Math.min(this.start + this.rows, this.numFound);
   }
 
   search(criteria: Criterium[]) {
@@ -137,7 +137,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
       this.docs = res['response']['docs'];
       this.numFound = res['response']['numFound'];
-      this.totalPages = Math.floor(this.numFound / this.rows);
+      this.totalPages = Math.ceil(this.numFound / this.rows);
 
       if (this.numFound == 0) {
         this.changeRangeFormValue(this.dateMin, this.dateMax);

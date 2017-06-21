@@ -20,8 +20,8 @@ export class ArchivComponent implements OnInit {
   cache: any = {};
   
   sorts = [
-    {label:"od nejstaršího", dir:"asc"},
-    {label:"od nejnovějšího", dir:"desc"}
+    {label:"od nejnovějšího", dir:"desc"},
+    {label:"od nejstaršího", dir:"asc"}
   ];
   currentSort = this.sorts[0];
   

@@ -73,7 +73,7 @@ export class AppService {
       });
   }
 
-  getChildren(pid: string, dir: string = 'asc'): Observable<any> {
+  getChildren(pid: string, dir: string = 'desc'): Observable<any> {
     var url = this.state.config['context'] + 'search/journal/select';
     let params = new URLSearchParams();
 

@@ -51,8 +51,8 @@ public class Indexer {
   }
 
   private SolrClient getClient(String core) throws IOException {
-    SolrClient client = new HttpSolrClient.Builder(String.format("%s/%s",
-            opts.getString("solr.host", "http://localhost:8983"),
+    SolrClient client = new HttpSolrClient.Builder(String.format("%s%s",
+            opts.getString("solr.host", "http://localhost:8983/solr/"),
             core)).build();
     return client;
   }

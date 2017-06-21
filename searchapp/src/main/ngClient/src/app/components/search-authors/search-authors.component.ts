@@ -79,6 +79,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
   }
 
     setLetter(l: string){
+      this.page = 0;
 //      if (this.letter === null) {
         this.letter = l;
 //      } else {
@@ -121,19 +122,19 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
       } else {
         this.authorsFiltered = this.authors;
       }
-      this.totalPages = Math.floor(this.authorsFiltered.length / this.rowsPerCol);
+      this.totalPages = Math.ceil(this.authorsFiltered.length / this.rowsPerCol);
       this.setCols();
     }
 
     setCols(){
       this.authors1 = [];
       this.authors2 = [];
-      let min: number = this.page * this.rowsPerCol;
+      let min: number = this.page * this.rowsPerCol * 2;
       let max: number = Math.min(min + this.rowsPerCol, this.authorsFiltered.length);
       for (let i = min; i < max; i++) {
         this.authors1.push(this.authorsFiltered[i]);
       }
-      min = (this.page + 1) * this.rowsPerCol;
+      min = max;
       max = Math.min(min + this.rowsPerCol, this.authorsFiltered.length);
       for (let i = min; i < max; i++) {
         this.authors2.push(this.authorsFiltered[i]);

@@ -1,5 +1,5 @@
 <!-- App pagination -->
-<nav class="app-pagination text-center">
+<nav *ngIf="totalPages > 1" class="app-pagination text-center">
   <ul class="pagination">
     <li *ngIf="current > 0">
       <a (click)="prev()" aria-label="Previous">

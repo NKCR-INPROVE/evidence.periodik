@@ -79,6 +79,7 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
   }
 
   setLetter(l: string) {
+    this.page = 0;
     this.letter = l;
     this.filter();
   }
@@ -117,19 +118,20 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
     } else {
       this.keywordsFiltered = this.keywords;
     }
-    this.totalPages = Math.floor(this.keywordsFiltered.length / this.rowsPerCol);
+    this.totalPages = Math.ceil(this.keywordsFiltered.length / (this.rowsPerCol * 2));
     this.setCols();
   }
 
   setCols() {
     this.keywords1 = [];
     this.keywords2 = [];
-    let min: number = this.page * this.rowsPerCol;
+    let min: number = this.page * this.rowsPerCol * 2;
     let max: number = Math.min(min + this.rowsPerCol, this.keywordsFiltered.length);
     for (let i = min; i < max; i++) {
       this.keywords1.push(this.keywordsFiltered[i]);
     }
-    min = (this.page + 1) * this.rowsPerCol;
+    //min = (this.page + 1) * this.rowsPerCol * 2;
+    min = max;
     max = Math.min(min + this.rowsPerCol, this.keywordsFiltered.length);
     for (let i = min; i < max; i++) {
       this.keywords2.push(this.keywordsFiltered[i]);

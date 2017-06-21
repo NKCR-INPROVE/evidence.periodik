@@ -141,12 +141,15 @@
     <field name="index_3" type="tint" indexed="true" stored="true" multiValued="false"/>
     
     <field name="genre" type="string" indexed="true" stored="true" multiValued="true"/>
+    <field name="issn" type="string" indexed="true" stored="true" multiValued="true"/>
     
     <field name="title" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     <field name="subtitle" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     <field name="non_sort_title" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     <field name="autor" type="text_lowercase" indexed="true" stored="true" multiValued="true"/>
+    <field name="autor_facet" type="string" indexed="true" stored="true" multiValued="true"/>
     <field name="keywords" type="lowercase" indexed="true" stored="true" multiValued="true"/>
+    <field name="keywords_facet" type="string" indexed="true" stored="true" multiValued="true"/>
     <dynamicField name="keywords_*" type="lowercase" indexed="true" stored="true" multiValued="true"/>
     
     <field name="datum" type="tdate" indexed="true" stored="true" multiValued="false"/>
@@ -169,7 +172,9 @@
     <copyField source="pid" dest="_text_"/>
     <copyField source="title" dest="_text_"/>
     <copyField source="autor" dest="_text_"/>
+    <copyField source="autor" dest="autor_facet"/>
     <copyField source="keywords" dest="_text_"/>
+    <copyField source="keywords" dest="keywords_facet"/>
     <copyField source="datum" dest="_text_"/>
     <copyField source="abstract" dest="_text_"/>
     <copyField source="ocr" dest="_text_"/>

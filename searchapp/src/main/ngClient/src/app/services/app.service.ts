@@ -439,6 +439,19 @@ export class AppService {
       return response.text();
     }).catch(error => { return Observable.of('error gettting content: ' + error); });
   }
+  
+  
+
+  isHiddenByGenre(genres: string[]) {
+    //console.log(this.state.config['hiddenGenres'], genres);
+    for (let g in genres) {
+      //console.log(g);
+      if (this.state.config['hiddenGenres'].indexOf(genres[g]) > -1) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   /**
    * Utility for get json value from path 

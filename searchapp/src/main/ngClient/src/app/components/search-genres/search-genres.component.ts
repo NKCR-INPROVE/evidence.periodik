@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { AppState } from '../../app.state';
 import { SearchService } from '../../services/search.service';
+import { AppService } from '../../services/app.service';
 import { Criterium } from '../../models/criterium';
 
 @Component({
@@ -24,6 +25,7 @@ export class SearchGenresComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private searchService: SearchService,
+    private service: AppService,
     public state: AppState) { }
 
   ngOnInit() {
@@ -52,7 +54,10 @@ export class SearchGenresComponent implements OnInit, OnDestroy {
 
         this.genres= [];
         for(let i in res['facet_counts']['facet_fields']['genre']){
-          this.genres.push(res['facet_counts']['facet_fields']['genre'][i][0]);
+          let genre = res['facet_counts']['facet_fields']['genre'][i][0];
+          if(!this.service.isHiddenByGenre([genre])){
+            this.genres.push(genre);
+          }
         }
         //this.genres = res['facet_counts']['facet_fields']['genre'];
 

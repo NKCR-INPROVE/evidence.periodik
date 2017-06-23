@@ -169,14 +169,7 @@ export class ArchivComponent implements OnInit {
   }
 
   isHiddenByGenre(genres: string[]) {
-    //console.log(this.state.config['hiddenGenres'], genres);
-    for (let g in genres) {
-      //console.log(g);
-      if (this.state.config['hiddenGenres'].indexOf(genres[g]) > -1) {
-        return true;
-      }
-    }
-    return false;
+    return this.service.isHiddenByGenre(genres);
   }
 
   setDetails() {

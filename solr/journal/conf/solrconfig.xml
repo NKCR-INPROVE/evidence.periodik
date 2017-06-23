@@ -753,7 +753,7 @@
       <str name="qf">_text_</str>
       <str name="bq">genre:"main article"^2.0</str>
       <str name="bq">genre:"news"^1.5</str>
-      <str name="fl">pid,model,mods,parents,genre,title,subtitle,non_sort_title,url_pdf,datanode,abstract,year,keywords,idx</str>
+      <str name="fl">pid,model,mods,parents,genre,title,root_title,subtitle,non_sort_title,url_pdf,datanode,abstract,year,keywords,idx</str>
       <str name="json.nl">arrarr</str>
       
     </lst>

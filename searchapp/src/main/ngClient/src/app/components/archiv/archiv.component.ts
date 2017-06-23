@@ -19,6 +19,8 @@ export class ArchivComponent implements OnInit {
   currentParent: string;
   cache: any = {};
   
+  isDataNode: boolean = false;
+  
   
   volumeNumber: string;
   issueNumber: string;
@@ -109,9 +111,10 @@ export class ArchivComponent implements OnInit {
 
       if (!this.cache.hasOwnProperty(this.currentPid)) {
         this.service.getChildren(this.currentPid).subscribe(res => {
-          if (res[0]['datanode']) {
-            this.router.navigate(['/article', res[0]['pid']]);
-          } else {
+          this.isDataNode = res[0]['datanode'];
+          //if (res[0]['datanode']) {
+            //this.router.navigate(['/article', res[0]['pid']]);
+          //} else {
             this.cache[this.currentPid] = { items: res, parent: this.currentParent };
             this.items = res;
 
@@ -129,11 +132,17 @@ export class ArchivComponent implements OnInit {
                 this.cache[this.currentParent] = { items: res };
               });
             }
-          }
+          //}
+          if(this.isDataNode){
+            this.items.sort((a, b) => {
+              return a['idx'] - b['idx'];
+            });
+          }  
 
         });
       } else {
         this.items = this.cache[this.currentPid]['items'];
+        this.isDataNode = this.items[0]['datanode'];
         let p = this.cache[this.currentPid]['parent'];
         if (this.cache.hasOwnProperty(p)) {
           this.parentItems = this.cache[p]['items'];

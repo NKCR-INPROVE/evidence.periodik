@@ -57,10 +57,16 @@
             </h2>
           </span>
         </span><!--/.second level -->
-        
-        <div *ngFor="let item of items" class="media">
-          <app-archiv-item [item]="item" (drillDown)="drillDown($event)" class="show"></app-archiv-item>
-        </div><!--/.media -->
+        <ng-container *ngIf="!isDataNode">
+          <div *ngFor="let item of items" class="media">
+            <app-archiv-item [item]="item" (drillDown)="drillDown($event)" class="show"></app-archiv-item>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isDataNode">
+          <div *ngFor="let art of items">
+            <app-article-result [article]="art"></app-article-result>
+          </div>
+        </ng-container><!--/.media -->
         <p>
           Starší ročníky najdete v <a href="#" title="Digitální knihovně AV ČR">Digitální knihovně AV ČR</a>
         </p>

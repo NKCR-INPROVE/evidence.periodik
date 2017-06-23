@@ -158,6 +158,23 @@
 }
 
 /*** Custom ***/
+@media only screen and (min-width : 1430px) {
+  // reader
+  .app-page-archiv-reader {
+    .app-content {
+      .container {
+        .row {
+          .app-col-right {
+            &.app-col-right-full {
+              max-width: 1170px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width : 1360px) {
   // reader
   .app-page-archiv-reader {

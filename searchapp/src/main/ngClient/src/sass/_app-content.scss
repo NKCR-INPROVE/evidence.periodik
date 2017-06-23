@@ -122,6 +122,14 @@
             flex: auto;
             margin-left: auto;
             margin-right: auto;
+            
+            pdf-viewer {
+              canvas {
+                right: 0px;
+                margin-left: auto;
+                margin-right: auto;
+              }
+            }
           }
           padding-right: 110px;
           > div {

@@ -131,6 +131,16 @@
   }
 }
 
+// btn disabled
+.app-btn-disabled,
+.app-btn-disabled:hover {
+  color: $app-gray-50 !important;
+  
+  svg, svg:hover  {
+    fill: $app-gray-50 !important;
+  }
+}
+
 // btn square
 .app-btn-square {
   width: 60px;

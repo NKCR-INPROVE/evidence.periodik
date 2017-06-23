@@ -11,6 +11,7 @@ export class Journal{
     mods: any = null;
     genres : string[] = [];
     genresObject: any = {};
+    year: number;
   constructor(){
     
   }

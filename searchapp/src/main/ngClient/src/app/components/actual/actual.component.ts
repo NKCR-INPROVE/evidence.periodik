@@ -16,6 +16,7 @@ export class ActualComponent implements OnInit {
   actual: Journal;
   krameriusLink: string;
   //articles: any[] = [];
+pidActual: string;
 
   constructor(
     private service: AppService,
@@ -32,6 +33,7 @@ export class ActualComponent implements OnInit {
     this.state.stateChangedSubject.subscribe(
       () => {
         this.setData();
+//        this.findPid();
       }
     );
   }
@@ -43,6 +45,27 @@ export class ActualComponent implements OnInit {
       this.krameriusLink = this.state.config['k5'] + this.state.config['journal'];
       //this.img = 'img/item/' + this.state.actualNumber.pid + '/thumb';
     }
+  }
+  
+  findPid(){
+    this.pidActual = null;
+    this.findPidById(this.state.config['journal']);
+  }
+  
+  findPidById(pid: string){
+    this.service.getChildren(pid).subscribe(res => {
+      if(res.length === 0){
+        this.pidActual = null;
+        console.log('ERROR. Cannot find actual number');
+      } else if(res[0]['datanode']){
+        this.pidActual = pid;
+        this.service.getJournal(pid).subscribe(j => {
+          this.actual = j;
+        });
+      } else {
+        this.findPidById(res[0]['pid']);
+      }
+    });
   }
   
   gotoArchiv(pid: string){

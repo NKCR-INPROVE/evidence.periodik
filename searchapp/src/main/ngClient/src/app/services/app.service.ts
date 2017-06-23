@@ -114,6 +114,7 @@ export class AppService {
       ret.root_pid = j['root_pid'];
       ret.model = j['model'];
       ret.details = j['details'];
+      ret.year = j['year'];
       ret.siblings = null;
       ret.mods = null;
       ret.genres = [];
@@ -299,7 +300,6 @@ export class AppService {
       }
 
       if (articles.length > 0) {
-        console.log("articles", articles);
         return articles;
       } else {
         if (childs.length > 0) {

@@ -30,11 +30,11 @@ export class AppComponent implements OnInit {
     'hledat': 'app-page-search'
   };
   mainClass: string = this.classes['home'];
+  pidActual: string;
 
   constructor(
     public state: AppState,
-    private searchService: SearchService,
-    private appservice: AppService,
+    private service: AppService,
     private http: Http,
     private route: ActivatedRoute,
     private router: Router) {
@@ -73,24 +73,54 @@ export class AppComponent implements OnInit {
       if (cfg.hasOwnProperty('defaultLang')) {
         userLang = cfg['defaultLang'];
       }
-      this.appservice.changeLang(userLang);
+      this.service.changeLang(userLang);
+      
+      this.findActual();
 
-      this.appservice.getActual().subscribe((a) => {
-        if (a.pid && !this.state.actualNumber) {
-          this.state.setActual(a);
-          this.appservice.getArticles(this.state.actualNumber['pid']).subscribe(res => {
-            //this.appservice.setArticles(this.state.actualNumber, res);
-            this.state.actualNumber.setArticles(res);
-            this.state.stateChanged();
-          });
-          this.appservice.getMods(this.state.actualNumber['pid']).subscribe(mods => this.state.actualNumber.mods = mods);
-        }
-      });
+//      this.service.getActual().subscribe((a) => {
+//        if (a.pid && !this.state.actualNumber) {
+//          this.state.setActual(a);
+//          this.service.getArticles(this.state.actualNumber['pid']).subscribe(res => {
+//            //this.service.setArticles(this.state.actualNumber, res);
+//            this.state.actualNumber.setArticles(res);
+//            this.state.stateChanged();
+//          });
+//          this.service.getMods(this.state.actualNumber['pid']).subscribe(mods => this.state.actualNumber.mods = mods);
+//        }
+//      });
 
       //this._configSubject.next(cfg);
       //this.processUrl();
       this.state.stateChanged();
       return this.state.config;
+    });
+  }
+  
+  
+  findActual(){
+    this.pidActual = null;
+    this.findActualByPid(this.state.config['journal']);
+  }
+  
+  findActualByPid(pid: string){
+    this.service.getChildren(pid).subscribe(res => {
+      if(res.length === 0){
+        this.pidActual = null;
+        console.log('ERROR. Cannot find actual number');
+      } else if(res[0]['datanode']){
+        this.pidActual = pid;
+        this.service.getJournal(pid).subscribe(a => {
+          console.log(a['model']);
+          this.state.setActual(a);
+          this.service.getArticles(this.state.actualNumber['pid']).subscribe(res => {
+            this.state.actualNumber.setArticles(res);
+            this.service.getMods(this.state.actualNumber['pid']).subscribe(mods => this.state.actualNumber.mods = mods);
+            this.state.stateChanged();
+          });
+        });
+      } else {
+        this.findActualByPid(res[0]['pid']);
+      }
     });
   }
 

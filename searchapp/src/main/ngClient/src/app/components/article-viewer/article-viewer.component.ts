@@ -91,7 +91,7 @@ export class ArticleViewerComponent implements OnInit {
               });
               this.service.getMods(a['pid']).subscribe(mods => this.journal.mods = mods);
               //this.service.getSiblings(a['pid']).subscribe(siblings => {
-              this.service.getChildren(a['parent']).subscribe(siblings => {
+              this.service.getChildren(a['parent'], 'asc').subscribe(siblings => {
                 this.journal.siblings = siblings;
                 //console.log(siblings);
                 for (let i = 0; i < this.journal.siblings.length; i++) {

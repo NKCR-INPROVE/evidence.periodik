@@ -26,6 +26,7 @@ export class JournalDetailsComponent implements OnInit {
   }
 
   details() {
+    console.log(this.journal);
     if (this.journal.mods) {
       let mods = this.journal.mods;
       //console.log(mods);

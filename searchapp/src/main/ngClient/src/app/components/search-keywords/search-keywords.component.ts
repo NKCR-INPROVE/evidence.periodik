@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 import { URLSearchParams } from '@angular/http';
 import { SearchService } from '../../services/search.service';
@@ -32,12 +32,22 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private searchService: SearchService,
     private service: AppService,
     public state: AppState) { }
 
   ngOnInit() {
     this.getKeywords();
+    this.subscriptions.push(this.router.events.subscribe(val => {
+      if (val instanceof NavigationEnd) {
+        if (this.route.snapshot.params.hasOwnProperty('letter')) {
+          this.setLetter(this.route.snapshot.params['letter']);
+        } else {
+          this.setLetter(null);
+        }
+      }
+    }));
   }
 
   ngOnDestroy() {
@@ -90,6 +100,9 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
     this.page = 0;
     this.letter = l;
     this.filter();
+    if (l !== null) {
+      this.router.navigate([{ letter: l }], { relativeTo: this.route });
+    }
   }
 
   setPage(p: number) {

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
 import { SearchService } from '../../services/search.service';
@@ -21,7 +21,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
   public authorsFiltered: any[] = [];
   public authors1: any[];
   public authors2: any[];
-  
+
   public qautor: string;
 
   rowsPerCol: number = 10;
@@ -37,6 +37,15 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getAuthors();
+    this.subscriptions.push(this.router.events.subscribe(val => {
+      if (val instanceof NavigationEnd) {
+        if (this.route.snapshot.params.hasOwnProperty('letter')) {
+          this.setLetter(this.route.snapshot.params['letter']);
+        } else {
+          this.setLetter(null);
+        }
+      }
+    }));
   }
 
   ngOnDestroy() {
@@ -59,8 +68,8 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
       params.set('facet.limit', '-1');
       params.set('facet.sort', 'index');
       this.searchService.search(params).subscribe(res => {
-        this.authors= [];
-        for(let i in res['facet_counts']['facet_fields']['autor_facet']){
+        this.authors = [];
+        for (let i in res['facet_counts']['facet_fields']['autor_facet']) {
           this.authors.push(res['facet_counts']['facet_fields']['autor_facet'][i][0]);
         }
 
@@ -78,78 +87,78 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
     }
   }
 
-    setLetter(l: string){
-      this.page = 0;
-//      if (this.letter === null) {
-        this.letter = l;
-//      } else {
-//        this.letter = null;
-//      }
-      this.filter();
-    }
+  setLetter(l: string) {
+    this.page = 0;
 
-    setPage(p: number){
-      this.page = p;
-      this.setCols();
+    this.letter = l;
+    this.filter();
+    if (l !== null) {
+      this.router.navigate([{ letter: l }], { relativeTo: this.route });
     }
+  }
 
-    isEmpty(l: string){
-      if (this.authors.length === 0) {
-        return true;
+  setPage(p: number) {
+    this.page = p;
+    this.setCols();
+  }
+
+  isEmpty(l: string) {
+    if (this.authors.length === 0) {
+      return true;
+    }
+    let has = false;
+    this.authors.forEach((el) => {
+      let k: string = el[0];
+      if (k.toLocaleLowerCase().charAt(0) === l.toLocaleLowerCase()) {
+        has = true;
+        return;
       }
-      let has = false;
+    });
+    return !has;
+  }
+
+  filter() {
+    this.authorsFiltered = [];
+    if (this.letter !== null) {
+
       this.authors.forEach((el) => {
+        //        console.log(el);
         let k: string = el[0];
-        if (k.toLocaleLowerCase().charAt(0) === l.toLocaleLowerCase()) {
-          has = true;
-          return;
+        if (k.toLocaleLowerCase().charAt(0) === this.letter.toLocaleLowerCase()) {
+          this.authorsFiltered.push(el);
         }
       });
-      return !has;
+    } else {
+      this.authorsFiltered = this.authors;
     }
-
-    filter(){
-      this.authorsFiltered = [];
-      if (this.letter !== null) {
-
-        this.authors.forEach((el) => {
-          //        console.log(el);
-          let k: string = el[0];
-          if (k.toLocaleLowerCase().charAt(0) === this.letter.toLocaleLowerCase()) {
-            this.authorsFiltered.push(el);
-          }
-        });
-      } else {
-        this.authorsFiltered = this.authors;
-      }
-      this.totalPages = Math.ceil(this.authorsFiltered.length / (this.rowsPerCol*2));
-      this.setCols();
-    }
-
-    setCols(){
-      this.authors1 = [];
-      this.authors2 = [];
-      let min: number = this.page * this.rowsPerCol * 2;
-      let max: number = Math.min(min + this.rowsPerCol, this.authorsFiltered.length);
-      for (let i = min; i < max; i++) {
-        this.authors1.push(this.authorsFiltered[i]);
-      }
-      min = max;
-      max = Math.min(min + this.rowsPerCol, this.authorsFiltered.length);
-      for (let i = min; i < max; i++) {
-        this.authors2.push(this.authorsFiltered[i]);
-      }
-    }
-
-    search(s: string){
-      let c = new Criterium();
-      c.field = 'autor';
-      c.value = '"' + s + '"~3';
-      this.router.navigate(['/hledat/cokoliv', { criteria: JSON.stringify([c]), start: 0 }])
-    }
-    
-    searchInput(){
-      this.search(this.qautor);
-    }
-
+    this.totalPages = Math.ceil(this.authorsFiltered.length / (this.rowsPerCol * 2));
+    this.setCols();
   }
+
+  setCols() {
+    this.authors1 = [];
+    this.authors2 = [];
+    let min: number = this.page * this.rowsPerCol * 2;
+    let max: number = Math.min(min + this.rowsPerCol, this.authorsFiltered.length);
+    for (let i = min; i < max; i++) {
+      this.authors1.push(this.authorsFiltered[i]);
+    }
+    min = max;
+    max = Math.min(min + this.rowsPerCol, this.authorsFiltered.length);
+    for (let i = min; i < max; i++) {
+      this.authors2.push(this.authorsFiltered[i]);
+    }
+  }
+
+  search(s: string) {
+    let c = new Criterium();
+    c.field = 'autor';
+    c.value = '"' + s + '"~3';
+    this.router.navigate(['/hledat/cokoliv', { criteria: JSON.stringify([c]), start: 0 }])
+  }
+
+  searchInput() {
+    this.search(this.qautor);
+  }
+
+}

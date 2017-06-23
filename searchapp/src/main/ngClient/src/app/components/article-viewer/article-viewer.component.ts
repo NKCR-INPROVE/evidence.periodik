@@ -142,15 +142,19 @@ export class ArticleViewerComponent implements OnInit {
   }
 
   next() {
-    let pid = this.journal.siblings[this.siblingIndex + 1]['pid'];
-    this.journal = null;
-    this.router.navigate(['/article', pid]);
+    if (this.hasNext()){
+      let pid = this.journal.siblings[this.siblingIndex + 1]['pid'];
+      this.journal = null;
+      this.router.navigate(['/article', pid]);
+    }
   }
 
   prev() {
-    let pid = this.journal.siblings[this.siblingIndex - 1]['pid'];
-    this.journal = null;
-    this.router.navigate(['/article', pid]);
+    if (this.hasPrev()){
+      let pid = this.journal.siblings[this.siblingIndex - 1]['pid'];
+      this.journal = null;
+      this.router.navigate(['/article', pid]);
+    }
   }
 
   toggleShare() {

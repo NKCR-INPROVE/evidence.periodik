@@ -103,11 +103,11 @@
           .app-col-left {
             flex: 1;
             overflow: auto;
-            max-width: 585px;
+            max-width: 400px; // puvodne 585px, upraveno k testovani
           }
           .app-col-right {
             flex: 1;
-            max-width: 585px;
+            max-width: 770px; // puvodne 585px, upraveno k testovani
             margin-right: 0;
             padding-right: 0;
             padding-left: 0;

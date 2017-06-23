@@ -89,7 +89,7 @@
 // archiv level 2
 .app-page-archiv-level-2 {
   display: flex;
-  height: 0px;
+  //height: 0px;
   app-archiv {
     display: flex;
     flex: 1;
@@ -122,6 +122,14 @@
             flex: auto;
             margin-left: auto;
             margin-right: auto;
+            
+            pdf-viewer {
+              canvas {
+                right: 0px;
+                margin-left: auto;
+                margin-right: auto;
+              }
+            }
           }
           padding-right: 110px;
           > div {

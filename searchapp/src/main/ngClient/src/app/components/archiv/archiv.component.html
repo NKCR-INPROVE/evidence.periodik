@@ -64,7 +64,7 @@
         </ng-container>
         <ng-container *ngIf="isDataNode">
           <div *ngFor="let art of items">
-            <app-article-result [article]="art"></app-article-result>
+            <app-article-result *ngIf="!isHiddenByGenre(art['genre'])" [article]="art"></app-article-result>
           </div>
         </ng-container><!--/.media -->
         <p>

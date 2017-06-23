@@ -36,5 +36,7 @@
       {"route": "caste-dotazy", "visible":false}
     ]
 
-  }
+  },
+  "hiddenGenres":["cover", "advertisement", "peer-reviewed",
+      "colophon"]
 }

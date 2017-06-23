@@ -18,20 +18,20 @@ export class ArchivComponent implements OnInit {
   parentItems: any[];
   currentParent: string;
   cache: any = {};
-  
+
   isDataNode: boolean = false;
-  
-  
+
+
   volumeNumber: string;
   issueNumber: string;
   partName: string;
-  
+
   sorts = [
-    {label:"od nejnovějšího", dir:"desc"},
-    {label:"od nejstaršího", dir:"asc"}
+    { label: "od nejnovějšího", dir: "desc" },
+    { label: "od nejstaršího", dir: "asc" }
   ];
   currentSort = this.sorts[0];
-  
+
   constructor(
     private service: AppService,
     private state: AppState,
@@ -61,12 +61,12 @@ export class ArchivComponent implements OnInit {
       }
     );
   }
-  
-  setMainClass(){
-    
-        let sufix = this.isRoot() ? '-level-1' : '-level-2';
-        this.state.mainClass = 'app-page-archiv' + sufix;
-        this.state.classChanged();
+
+  setMainClass() {
+
+    let sufix = this.isRoot() ? '-level-1' : '-level-2';
+    this.state.mainClass = 'app-page-archiv' + sufix;
+    this.state.classChanged();
   }
 
   isRoot() {
@@ -77,7 +77,7 @@ export class ArchivComponent implements OnInit {
     this.parentItems = [];
     this.setItems(this.state.config['journal']);
   }
-  setSort(s){
+  setSort(s) {
     this.currentSort = s;
     let x = s.dir === 'asc' ? 1 : -1;
     this.items.sort((a, b) => {
@@ -94,11 +94,11 @@ export class ArchivComponent implements OnInit {
     //let parent = this.currentPid;
     this.currentPid = pid;
     this.setMainClass();
-    
+
     this.service.getItem(this.currentPid).subscribe(res => {
-      if (this.currentPid === this.state.config['journal']){
-        this.currentItem = {pid: this.currentPid, parents: null};
-      }else {
+      if (this.currentPid === this.state.config['journal']) {
+        this.currentItem = { pid: this.currentPid, parents: null };
+      } else {
         this.currentItem = res;
         //let ctx = res['context'][0];
         if (res['parents'] > 1) {
@@ -113,31 +113,31 @@ export class ArchivComponent implements OnInit {
         this.service.getChildren(this.currentPid).subscribe(res => {
           this.isDataNode = res[0]['datanode'];
           //if (res[0]['datanode']) {
-            //this.router.navigate(['/article', res[0]['pid']]);
+          //this.router.navigate(['/article', res[0]['pid']]);
           //} else {
-            this.cache[this.currentPid] = { items: res, parent: this.currentParent };
-            this.items = res;
+          this.cache[this.currentPid] = { items: res, parent: this.currentParent };
+          this.items = res;
 
-            if (this.currentParent === null) {
-              this.parentItems = [];
-            } else if (this.cache.hasOwnProperty(this.currentParent)) {
-              this.parentItems = this.cache[this.currentParent]['items'];
-              //this.currentParent = parent;
-            } else {
-              this.parentItems = [];
-              //this.currentParent = parent;
-              this.service.getChildren(this.currentParent).subscribe(res => {
-                this.parentItems = res;
-                //this.cache[this.currentParent] = {};
-                this.cache[this.currentParent] = { items: res };
-              });
-            }
+          if (this.currentParent === null) {
+            this.parentItems = [];
+          } else if (this.cache.hasOwnProperty(this.currentParent)) {
+            this.parentItems = this.cache[this.currentParent]['items'];
+            //this.currentParent = parent;
+          } else {
+            this.parentItems = [];
+            //this.currentParent = parent;
+            this.service.getChildren(this.currentParent).subscribe(res => {
+              this.parentItems = res;
+              //this.cache[this.currentParent] = {};
+              this.cache[this.currentParent] = { items: res };
+            });
+          }
           //}
-          if(this.isDataNode){
+          if (this.isDataNode) {
             this.items.sort((a, b) => {
               return a['idx'] - b['idx'];
             });
-          }  
+          }
 
         });
       } else {
@@ -167,52 +167,61 @@ export class ArchivComponent implements OnInit {
       this.router.navigate(['home']);
     }
   }
-  
-  
-  
+
+  isHiddenByGenre(genres: string[]) {
+    //console.log(this.state.config['hiddenGenres'], genres);
+    for (let g in genres) {
+      //console.log(g);
+      if (this.state.config['hiddenGenres'].indexOf(genres[g]) > -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   setDetails() {
-      let mods = JSON.parse(this.currentItem['mods']);
-      if (this.currentItem['model'] === 'periodicalvolume') {
+    let mods = JSON.parse(this.currentItem['mods']);
+    if (this.currentItem['model'] === 'periodicalvolume') {
 
-        if (mods['mods:originInfo']) {
-          //this.year = mods['mods:originInfo']['mods:dateIssued'];
-          if (mods['mods:titleInfo']) {
-            this.volumeNumber = mods['mods:titleInfo']['mods:partNumber'];
-          }
-        } else {
-          //podpora pro starsi mods. ne podle zadani
-          if (mods['part'] && mods['part']['date']) {
-            //this.year = mods['part']['date'];
-          } else if (mods['mods:part'] && mods['mods:part']['mods:date']) {
-            //this.year = mods['mods:part']['mods:date'];
-          }
-
-          if (mods['part'] && mods['part']['detail'] && mods['part']['detail']['number']) {
-            this.issueNumber = mods['part']['detail']['number'];
-          } else if (mods['mods:part'] && mods['mods:part']['mods:detail'] && mods['mods:part']['mods:detail']['mods:number']) {
-            this.issueNumber = mods['mods:part']['mods:detail']['mods:number'];
-          }
+      if (mods['mods:originInfo']) {
+        //this.year = mods['mods:originInfo']['mods:dateIssued'];
+        if (mods['mods:titleInfo']) {
+          this.volumeNumber = mods['mods:titleInfo']['mods:partNumber'];
         }
-      } else if (this.currentItem['model'] === 'periodicalitem') {
-        if (mods['mods:originInfo']) {
-          //this.year = mods['mods:originInfo']['mods:dateIssued'];
-          if (mods['mods:titleInfo']) {
-            this.issueNumber = mods['mods:titleInfo']['mods:partNumber'];
-            this.partName = mods['mods:titleInfo']['mods:partName'];
-          }
-        } else {
+      } else {
+        //podpora pro starsi mods. ne podle zadani
+        if (mods['part'] && mods['part']['date']) {
+          //this.year = mods['part']['date'];
+        } else if (mods['mods:part'] && mods['mods:part']['mods:date']) {
+          //this.year = mods['mods:part']['mods:date'];
+        }
 
-
-          //podpora pro starsi mods. ne podle zadani
-          if (mods['part'] && mods['part']['detail'] && mods['part']['detail']['number']) {
-            this.issueNumber = mods['part']['detail']['number'];
-          } else if (mods['mods:part'] && mods['mods:part']['mods:detail'] && mods['mods:part']['mods:detail']['mods:number']) {
-            this.issueNumber = mods['mods:part']['mods:detail']['mods:number'];
-          }
-
-
+        if (mods['part'] && mods['part']['detail'] && mods['part']['detail']['number']) {
+          this.issueNumber = mods['part']['detail']['number'];
+        } else if (mods['mods:part'] && mods['mods:part']['mods:detail'] && mods['mods:part']['mods:detail']['mods:number']) {
+          this.issueNumber = mods['mods:part']['mods:detail']['mods:number'];
         }
       }
+    } else if (this.currentItem['model'] === 'periodicalitem') {
+      if (mods['mods:originInfo']) {
+        //this.year = mods['mods:originInfo']['mods:dateIssued'];
+        if (mods['mods:titleInfo']) {
+          this.issueNumber = mods['mods:titleInfo']['mods:partNumber'];
+          this.partName = mods['mods:titleInfo']['mods:partName'];
+        }
+      } else {
+
+
+        //podpora pro starsi mods. ne podle zadani
+        if (mods['part'] && mods['part']['detail'] && mods['part']['detail']['number']) {
+          this.issueNumber = mods['part']['detail']['number'];
+        } else if (mods['mods:part'] && mods['mods:part']['mods:detail'] && mods['mods:part']['mods:detail']['mods:number']) {
+          this.issueNumber = mods['mods:part']['mods:detail']['mods:number'];
+        }
+
+
+      }
+    }
   }
 
 

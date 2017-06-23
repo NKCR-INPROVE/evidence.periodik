@@ -48,6 +48,17 @@ export class ActualComponent implements OnInit {
   gotoArchiv(pid: string){
     this.router.navigate(['archiv/', pid])
   }
+
+  isHiddenByGenre(genres: string[]) {
+    //console.log(this.state.config['hiddenGenres'], genres);
+    for (let g in genres) {
+      //console.log(g);
+      if (this.state.config['hiddenGenres'].indexOf(genres[g]) > -1) {
+        return true;
+      }
+    }
+    return false;
+  }
   
 
 }

@@ -37,6 +37,5 @@
     ]
 
   },
-  "hiddenGenres":["cover", "advertisement", "peer-reviewed",
-      "colophon"]
+  "hiddenGenres":["cover", "advertisement", "colophon"]
 }

@@ -58,7 +58,7 @@
           <h4 class="app-clean-mg">{{'genre.' + genre | translate}}</h4>
           <hr />
           <div *ngFor="let art of actual.genresObject[genre].articles">
-            <app-article-result [article]="art"></app-article-result>
+            <app-article-result *ngIf="!isHiddenByGenre(art['genre'])" [article]="art"></app-article-result>
           </div>
         </div><!--/.app section -->
       </div><!--/.col -->

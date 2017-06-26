@@ -39,6 +39,15 @@
     "changeOrigin": false,
     "secure": false
   },
+  "/login": {
+    "target": "http://localhost:8084/k5journals/login",
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/login":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  },
   "/search_": {
     "target": "https://kramerius.lib.cas.cz/search/api/v5.0/search",
     "ignorePath": false,

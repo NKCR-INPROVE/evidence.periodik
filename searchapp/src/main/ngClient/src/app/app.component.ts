@@ -76,19 +76,6 @@ export class AppComponent implements OnInit {
       this.service.changeLang(userLang);
       
       this.findActual();
-
-//      this.service.getActual().subscribe((a) => {
-//        if (a.pid && !this.state.actualNumber) {
-//          this.state.setActual(a);
-//          this.service.getArticles(this.state.actualNumber['pid']).subscribe(res => {
-//            //this.service.setArticles(this.state.actualNumber, res);
-//            this.state.actualNumber.setArticles(res);
-//            this.state.stateChanged();
-//          });
-//          this.service.getMods(this.state.actualNumber['pid']).subscribe(mods => this.state.actualNumber.mods = mods);
-//        }
-//      });
-
       //this._configSubject.next(cfg);
       //this.processUrl();
       this.state.stateChanged();

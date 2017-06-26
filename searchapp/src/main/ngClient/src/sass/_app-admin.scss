@@ -5,5 +5,24 @@ app-admin {
     h3, textarea {
       margin-bottom: 20px;
     }
+    .app-admin-nav {
+      .nav-pills {
+        > li {
+          &.active {
+            a {
+              &:hover {
+                background-color: $brand-primary;
+              }
+            }
+          }
+          a {
+            padding: 0 7px 2px 7px;
+            &:hover {
+              background-color: $app-brand-l-4;
+            }
+          }
+        }
+      }
+    }
   }
 }

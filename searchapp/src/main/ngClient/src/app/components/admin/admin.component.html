@@ -3,11 +3,12 @@
     <div class="row">
       <div class="col-xs-12">
         <h3>Amin page</h3>
+        <hr />
         <div class="row">
           <div class="col-xs-3">
-            <ul class="nav nav-pills nav-stacked">
-              <li role="app-page-nav"  *ngFor="let m of menu" ><a>{{m.label}}</a>
-                <ul class="nav-stacked nav-pills ">
+            <ul class="list-unstyled app-admin-nav">
+              <li role="app-page-nav"  *ngFor="let m of menu" ><strong><a>{{m.label}}</a></strong>
+                <ul class="nav-pills nav-stacked">
                   <li role="app-page-nav"  *ngFor="let m1 of m.menu" [class.active]="selected === m1.route">
                       <a  (click)="select(m1)">{{m1.route}}</a> <input type="checkbox" [checked]="m1.visible" />
                   </li>

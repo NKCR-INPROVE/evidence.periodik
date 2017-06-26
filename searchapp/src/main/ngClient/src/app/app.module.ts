@@ -7,7 +7,7 @@ import { RouterModule }   from '@angular/router';
 //import {Store, StoreModule} from "@ngrx/store";
 //import {SearchReducer} from "./reducers/search.reducer";
 
-import { BsDropdownModule, ModalModule, CollapseModule, TypeaheadModule } from 'ngx-bootstrap';
+import { BsDropdownModule, ModalModule, CollapseModule, TypeaheadModule, TooltipModule } from 'ngx-bootstrap';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -97,6 +97,7 @@ export function createTranslateLoader(http: Http) {
     NouisliderModule,
     BsDropdownModule.forRoot(), ModalModule.forRoot(), CollapseModule.forRoot(),
     TypeaheadModule.forRoot(),
+    TooltipModule.forRoot(),
     TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

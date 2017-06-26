@@ -12,11 +12,21 @@ typeahead-container {
       &.active {
         a {
           background-color: $app-brand-d-1 !important;
+          > span {
+            > strong {
+              color: $app-brand-d-3;
+            }
+          }
         }
       }
       & > a {
         &:hover {
           background-color: $app-brand-d-1 !important;
+          > span {
+            > strong {
+              color: $app-brand-d-3;
+            }
+          }
         }
       }
     }

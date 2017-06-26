@@ -15,9 +15,15 @@
   "recenzovaný článek":"peer reviewed",
   "nerecenzovaný článek":"non peer reviewed",
   "Trvalý odkaz":"Permanent link",
+  "SAVE": "SAVE",
   "home": "Home",
+  "news":"News",
   "menu":{
     "home_": "Home",
+    "home":{
+      "home_":"Home",
+      "news_":"News"
+    },
     "actual_": "Actual number",
     "o-casopisu_": "About journal",
     "o-casopisu":{
@@ -48,7 +54,8 @@
       "keywords_": "Rejstřík klíčových slov"
     },
     "kontakt_": "Contact",
-    "e-shop_": "Eshop"
+    "e-shop_": "Eshop",
+    "admin_": "Administration"
   },
   "genre": {
     "news": "News",

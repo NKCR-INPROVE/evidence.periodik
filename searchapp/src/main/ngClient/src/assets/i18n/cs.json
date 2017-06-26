@@ -2,8 +2,13 @@
   "q.placeholder": "Hledej v digitální knihovně ...",
   "Zpět na ročníky":"Zpět na ročníky",
   "home": "Hlavní stránka",
+  "news":"Aktuálně",
   "menu": {
     "home_": "Hlavní stránka",
+    "home":{
+      "home_":"Hlavní stránka",
+      "news_":"Aktuálně"
+    },
     "actual_": "Aktuální číslo",
     "o-casopisu_": "O časopisu",
     "o-casopisu": {
@@ -35,7 +40,8 @@
       "keywords_": "Rejstřík klíčových slov"
     },
     "kontakt_": "Kontakt",
-    "e-shop_": "Eshop"
+    "e-shop_": "Eshop",
+    "admin_": "Administrace"
   },
   "ARCHIV STARŠÍCH ROČNÍKŮ": "ARCHIV STARŠÍCH ROČNÍKŮ",
   "PROHLÍŽET CELÉ ČÍSLO": "PROHLÍŽET CELÉ ČÍSLO",
@@ -51,6 +57,7 @@
   "recenzovaný článek":"recenzovaný článek",
   "nerecenzovaný článek":"nerecenzovaný článek",
   "Trvalý odkaz":"Trvalý odkaz",
+  "SAVE": "ULOŽIT",
   "genre": {
     "news": "Zprávy",
     "table of content": "Obsah",

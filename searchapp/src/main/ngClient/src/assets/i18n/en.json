@@ -56,7 +56,8 @@
     },
     "kontakt_": "Contact",
     "e-shop_": "Eshop",
-    "admin_": "Administration"
+    "admin_": "Administration",
+    "prihlaseni_": "Login"
   },
   "genre": {
     "news": "News",

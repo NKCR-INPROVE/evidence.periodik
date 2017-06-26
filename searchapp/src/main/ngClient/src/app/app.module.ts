@@ -42,6 +42,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { ArticleInfoComponent } from './components/article-info/article-info.component';
 import { ActualComponent } from './components/actual/actual.component';
 import { FreePageComponent } from './components/free-page/free-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 
@@ -82,7 +84,9 @@ export function createTranslateLoader(http: Http) {
     PaginationComponent,
     ArticleInfoComponent,
     ActualComponent,
-    FreePageComponent
+    FreePageComponent,
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +135,9 @@ export function createTranslateLoader(http: Http) {
         
       ]},
       { path: 'article/:pid', component: ArticleViewerComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' }
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
+      { path: 'admin', component: AdminComponent },
     ])
   ],
   providers: [AppState, AppService, SearchService],

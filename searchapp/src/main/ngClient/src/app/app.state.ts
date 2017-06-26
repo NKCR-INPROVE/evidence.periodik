@@ -25,6 +25,12 @@ export class AppState {
   //Holds client configuration
   config: any;
   
+  loginuser: string;
+  loginpwd: string;
+  loginError: boolean = false;
+  logged: boolean = false;
+  redirectUrl: string = '/admin';
+  
   //Holds start query parameter
   start: number = 0;
 

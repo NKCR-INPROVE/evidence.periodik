@@ -8,5 +8,8 @@
   "langsMap" : {
     "cs": "cze",
     "en": "eng"
+  },
+  "users":{
+    "test": "test"
   }
 }

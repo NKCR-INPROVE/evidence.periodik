@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   menu: any = {};
 
   constructor(
-  public appState: AppState,
+  public state: AppState,
   private appservice: AppService) { }
 
   ngOnInit() {
@@ -21,14 +21,14 @@ export class HeaderComponent implements OnInit {
       this.currentLang = val;
     });
     
-    this.appState.stateChangedSubject.subscribe(val=> {
-      this.menu = this.appState.config['menu'];
+    this.state.stateChangedSubject.subscribe(val=> {
+      this.menu = this.state.config['menu'];
     });
     
-//    this.appState.fullScreenSubject.subscribe(val=> {
+//    this.state.fullScreenSubject.subscribe(val=> {
 //      if(!val){
 //        setTimeout(()=>{
-//          this.menu = this.appState.config['menu'];
+//          this.menu = this.state.config['menu'];
 //        }, 100);
 //        
 //      } else {
@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
   }
   
   logActual(){
-    console.log(this.appState.actualNumber);
+    console.log(this.state.actualNumber);
   }
   
   public isCollapsed: boolean = true;

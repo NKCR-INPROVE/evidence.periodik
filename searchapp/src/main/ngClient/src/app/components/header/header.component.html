@@ -1,11 +1,11 @@
-<header *ngIf="!appState.isFull">
+<header *ngIf="!state.isFull">
   <div class="app-title">
     <div class="container">
       <div class="row">
         <div class="col-xs-9 col-sm-10">
           <h1 class="app-clean-mg hidden-xs">
             <a routerLink="home" title="Časopis "> 
-              ČASOPIS <span  *ngIf="appState.actualNumber" class="app-font-roboto-cb">{{appState.actualNumber['root_title']}}</span>
+              ČASOPIS <span  *ngIf="state.actualNumber" class="app-font-roboto-cb">{{state.actualNumber['root_title']}}</span>
             </a>
           </h1>
           <a routerLink="home" title="Časopis knihy a dějiny" class="visible-xs">
@@ -15,6 +15,7 @@
         <div class="col-xs-3 col-sm-2 text-right">
           <a *ngIf="currentLang==='cs'" (click)="changeLang('en')" title="English" class="app-btn">English</a>
           <a *ngIf="currentLang==='en'" (click)="changeLang('cs')" title="Český" class="app-btn">Česky</a>
+          <a *ngIf="state.logged" routerLink="admin" title="Admin" class="app-btn">Admin</a>
         </div><!--/.col -->
       </div><!--/.row -->
     </div><!--/.container -->
@@ -71,5 +72,5 @@
   <app-breadcrumbs></app-breadcrumbs>
   <!--/.app breadcumb -->
 
-  <app-search-tabs *ngIf="appState.route === 'hledat'"></app-search-tabs>
+  <app-search-tabs *ngIf="state.route === 'hledat'"></app-search-tabs>
 </header><!--/header -->

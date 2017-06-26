@@ -44,7 +44,7 @@ import { ActualComponent } from './components/actual/actual.component';
 import { FreePageComponent } from './components/free-page/free-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
-
+import { AuthGuard } from "./services/auth-guard";
 
 
 //const storeManager = StoreModule.provideStore({ currentSearch: SearchReducer });
@@ -136,11 +136,12 @@ export function createTranslateLoader(http: Http) {
       ]},
       { path: 'article/:pid', component: ArticleViewerComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      { path: 'admin', component: AdminComponent },
+      { path: 'prihlaseni', component: LoginComponent },
+      { path: 'admin', 
+        canActivate: [AuthGuard],component: AdminComponent },
     ])
   ],
-  providers: [AppState, AppService, SearchService],
+  providers: [AppState, AppService, SearchService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

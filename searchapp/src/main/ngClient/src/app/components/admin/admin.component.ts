@@ -30,13 +30,14 @@ export class AdminComponent implements OnInit {
       for (let m in this.state.config['menu']) {
         this.menu.push({ label: m, menu: this.state.config['menu'][m] })
       }
-      console.log(this.menu);
+      
+      this.service.getText(this.selected).subscribe(t => this.text = t);
     });
   }
 
   select(m1: menuItem) {
-    this.service.getText(m1.route).subscribe(t => this.text = t);
     this.selected = m1.route;
+    this.service.getText(this.selected).subscribe(t => this.text = t);
   }
   
   save(){

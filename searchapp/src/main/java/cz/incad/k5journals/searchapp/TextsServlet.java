@@ -1,20 +1,28 @@
 package cz.incad.k5journals.searchapp;
 
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
 
 /**
  *
  * @author alberto
  */
 public class TextsServlet extends HttpServlet {
+
+  public static final Logger LOGGER = Logger.getLogger(TextsServlet.class.getName());
+  public static final String ACTION_NAME = "action";
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,31 +35,123 @@ public class TextsServlet extends HttpServlet {
    */
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    String lang = request.getParameter("lang");
-    String filename = InitServlet.CONFIG_DIR + File.separator + "texts"
-            + File.separator + request.getParameter("id");
-    File f;
-    if (lang != null) {
-      f = new File(filename + "_" + lang + ".html");
-      if (f.exists()) {
-        FileUtils.copyFile(f, response.getOutputStream());
-      }else {
-        f = new File(filename + ".html");
-        if (f.exists()) {
-          FileUtils.copyFile(f, response.getOutputStream());
+    try {
+
+      String actionNameParam = request.getParameter(ACTION_NAME);
+      if (actionNameParam != null) {
+
+        Actions actionToDo = Actions.valueOf(actionNameParam.toUpperCase());
+        actionToDo.doPerform(request, response);
+
+      } else {
+        PrintWriter out = response.getWriter();
+        out.print("Action missing");
+      }
+    } catch (IOException e1) {
+      LOGGER.log(Level.SEVERE, e1.getMessage(), e1);
+      response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e1.toString());
+      PrintWriter out = response.getWriter();
+      out.print(e1.toString());
+    } catch (SecurityException e1) {
+      LOGGER.log(Level.SEVERE, e1.getMessage(), e1);
+      response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+    } catch (Exception e1) {
+      LOGGER.log(Level.SEVERE, e1.getMessage(), e1);
+      response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      PrintWriter out = response.getWriter();
+      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e1.toString());
+      out.print(e1.toString());
+    }
+
+  }
+
+  enum Actions {
+
+    LOAD {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("text/html;charset=UTF-8");
+        String lang = request.getParameter("lang");
+        String filename = InitServlet.CONFIG_DIR + File.separator + "texts"
+                + File.separator + request.getParameter("id");
+        File f;
+        if (lang != null) {
+          f = new File(filename + "_" + lang + ".html");
+          if (f.exists()) {
+            FileUtils.copyFile(f, response.getOutputStream());
+          } else {
+            f = new File(filename + ".html");
+            if (f.exists()) {
+              FileUtils.copyFile(f, response.getOutputStream());
+            } else {
+              response.getWriter().println("Text not found in <h1>" + filename + ".html</h1>");
+            }
+          }
         } else {
-          response.getWriter().println("Text not found in <h1>" + filename + ".html</h1>");
+          f = new File(filename + ".html");
+          if (f.exists()) {
+            FileUtils.copyFile(f, response.getOutputStream());
+          } else {
+            response.getWriter().println("Text not found in <h1>" + filename + ".html</h1>");
+          }
         }
       }
-    } else {
-      f = new File(filename + ".html");
-      if (f.exists()) {
-        FileUtils.copyFile(f, response.getOutputStream());
-      } else {
-        response.getWriter().println("Text not found in <h1>" + filename + ".html</h1>");
+    },
+    SAVE {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject json = new JSONObject();
+
+        String lang = request.getParameter("lang");
+        String filename = InitServlet.CONFIG_DIR + File.separator + "texts"
+                + File.separator + request.getParameter("id");
+        File f;
+        String text = "";
+        StringBuilder jb = new StringBuilder();
+        String line = null;
+        try {
+          BufferedReader reader = request.getReader();
+          while ((line = reader.readLine()) != null) {
+            jb.append(line);
+          }
+        } catch (Exception e) {
+          
+          json.put("error", e);
+          /*report an error*/ 
+        }
+
+        if (lang != null) {
+          f = new File(filename + "_" + lang + ".html");
+          if (f.exists()) {
+            FileUtils.writeStringToFile(f, jb.toString());
+          } else {
+            f = new File(filename + ".html");
+            if (f.exists()) {
+              FileUtils.writeStringToFile(f, jb.toString());
+            } else {
+              FileUtils.writeStringToFile(f, jb.toString());
+              json.put("msg", "file " + filename + "created");
+            }
+          }
+        } else {
+          f = new File(filename + ".html");
+          if (f.exists()) {
+            FileUtils.writeStringToFile(f, jb.toString());
+          } else {
+            FileUtils.writeStringToFile(f, jb.toString());
+          }
+        }
+        LOGGER.log(Level.INFO, json.toString());
+        out.println(json.toString(2));
       }
-    }
+    };
+
+    abstract void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception;
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

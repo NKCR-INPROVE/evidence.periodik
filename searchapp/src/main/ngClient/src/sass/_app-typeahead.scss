@@ -1,20 +1,22 @@
 // --- TYPEAHEAD ---
 
-.typeahead {
-  &.dropdown-menu {
+typeahead-container {
+  width: 100%;
+  
+  .dropdown-menu {
     left: 0 !important;
     margin-top: 17px;
     width: 100%;
     @extend .app-font-pt-serif;
-    li {
+    & > li {
       &.active {
-        .dropdown-item {
-          background-color: $app-brand-d-1;
+        a {
+          background-color: $app-brand-d-1 !important;
         }
       }
-      .dropdown-item {
+      & > a {
         &:hover {
-          background-color: $app-brand-d-1;
+          background-color: $app-brand-d-1 !important;
         }
       }
     }

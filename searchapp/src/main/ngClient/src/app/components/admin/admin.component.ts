@@ -15,8 +15,9 @@ interface menuItem {
 })
 export class AdminComponent implements OnInit {
 
-  menu: any = [{ label: 'home', menu: [{ route: "home", visible: true }, { "route": "news", "visible": true }] }];
+  menu: any = [];
   selected: string = 'home';
+  visibleChanged: boolean = false;
 
   text: string;
 
@@ -43,15 +44,32 @@ export class AdminComponent implements OnInit {
       });
     }
   }
-  select(m1: menuItem) {
-    this.selected = m1.route;
+  select(m:string, m1: string) {
+    
+    if(m1){
+      this.selected = m +'/'+m1;
+    } else {
+      this.selected = m;
+    }
     this.service.getText(this.selected).subscribe(t => this.text = t);
   }
 
   save() {
-    this.service.saveText(this.selected, this.text).subscribe(res => {
+    let menuToSave = null;
+    if (this.visibleChanged){
+      menuToSave = {menu: {}};
+      for (let i=0; i<this.menu.length; i++) {
+        menuToSave.menu[this.menu[i].label] = this.menu[i].menu;
+      }
+    }
+    this.service.saveText(this.selected, this.text, JSON.stringify(menuToSave)).subscribe(res => {
       console.log(res);
     });
+  }
+  
+  changeVisible(){
+    this.visibleChanged = true;
+    //console.log(this.menu);
   }
 
 }

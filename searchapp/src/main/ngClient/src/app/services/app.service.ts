@@ -442,8 +442,11 @@ export class AppService {
     }).catch(error => { return Observable.of('error gettting content: ' + error); });
   }
 
-  saveText(id: string, text: string): Observable<string> {
+  saveText(id: string, text: string, menu: string = null): Observable<string> {
     var url = 'texts?action=SAVE&id=' + id + '&lang=' + this.state.currentLang;
+    if(menu){
+      url += '&menu=' + menu;
+    }
 
 
     let headers = new Headers({ 'Content-Type': 'text/plain;charset=UTF-8' });

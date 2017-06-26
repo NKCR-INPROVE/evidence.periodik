@@ -7,16 +7,25 @@
         <div class="row">
           <div class="col-xs-3">
             <ul class="list-unstyled app-admin-nav">
-              <li role="app-page-nav"  *ngFor="let m of menu" ><strong><a>{{'menu.'+m.label+'_' | translate}}</a></strong>
+              <li role="app-page-nav"  [class.active]="selected === 'home'" ><strong><a (click)="select('home', null)">{{'menu.home_' | translate}}</a></strong>
                 <ul class="nav-pills nav-stacked">
-                  <li role="app-page-nav"  *ngFor="let m1 of m.menu" [class.active]="selected === m1.route">
-                      <a  (click)="select(m1)">{{'menu.'+m.label+'.'+m1.route+'_' | translate}}</a> <input type="checkbox" [checked]="m1.visible" />
+                  <li role="app-page-nav" [class.active]="selected === 'home/news'">
+                      <a (click)="select('home', 'news')">{{'menu.home.news_' | translate}}</a> 
+                  </li>
+                </ul>
+              </li>
+              <li role="app-page-nav"  *ngFor="let m of menu" [class.active]="selected === m.label"><strong><a (click)="select(m.label, null)">{{'menu.'+m.label+'_' | translate}}</a></strong>
+                <ul class="nav-pills nav-stacked">
+                  <li role="app-page-nav"  *ngFor="let m1 of m.menu" [class.active]="selected === m.label + '/' +m1.route">
+                      <a (click)="select(m.label, m1.route)">{{'menu.'+m.label+'.'+m1.route+'_' | translate}}</a> 
+                      <input type="checkbox" [(ngModel)]="m1.visible" (change)="changeVisible()" />
                   </li>
                 </ul>
               </li>
             </ul>
           </div><!--/.col -->
           <div class="col-xs-9">
+            <h3>{{selected}} ({{state.currentLang}})</h3>
             <form class="clearfix">
               <textarea class="form-control" rows="28" [(ngModel)]="text" name="text"></textarea>
               <div class="form-inline pull-left">

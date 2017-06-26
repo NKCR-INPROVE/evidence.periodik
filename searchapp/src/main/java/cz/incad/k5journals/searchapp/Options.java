@@ -62,6 +62,14 @@ public class Options {
         LOGGER.log(Level.FINE, "key {0} will be overrided", key);
         client_conf.put(key, customClientConf.get(key));
       }
+      String fnmenu = InitServlet.CONFIG_DIR + File.separator + "menu.json";
+      File fmenu = new File(fnmenu);
+      if(fmenu.exists()){
+        JSONObject jsonMenu = new JSONObject(FileUtils.readFileToString(fmenu, "UTF-8"));
+        client_conf.put("menu", jsonMenu.get("menu"));
+      }    
+      
+      
       JSONObject customServerConf = new JSONObject(json).getJSONObject("server");
       Iterator keys2 = customServerConf.keys();
       while (keys2.hasNext()) {

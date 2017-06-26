@@ -112,14 +112,13 @@ public class TextsServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         JSONObject json = new JSONObject();
 
+        String id = request.getParameter("id");
         String lang = request.getParameter("lang");
         String filename = InitServlet.CONFIG_DIR + File.separator + "texts"
-                + File.separator + request.getParameter("id");
+                + File.separator + id;
         File f;
         String text = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         
-        LOGGER.info(lang);
-
         if (lang != null) {
           f = new File(filename + "_" + lang + ".html");
           FileUtils.writeStringToFile(f, text,Charset.forName("UTF-8"));
@@ -127,7 +126,15 @@ public class TextsServlet extends HttpServlet {
           f = new File(filename + ".html");
             FileUtils.writeStringToFile(f, text,Charset.forName("UTF-8"));
         }
-        LOGGER.log(Level.INFO, json.toString());
+        
+        String menu = request.getParameter("menu");
+        if(menu != null){
+          String fnmenu = InitServlet.CONFIG_DIR + File.separator + "menu.json";
+          File fmenu = new File(fnmenu);
+          FileUtils.writeStringToFile(fmenu, menu, Charset.forName("UTF-8"));
+        }
+        
+          LOGGER.log(Level.INFO, json.toString());
         out.println(json.toString(2));
       }
     };

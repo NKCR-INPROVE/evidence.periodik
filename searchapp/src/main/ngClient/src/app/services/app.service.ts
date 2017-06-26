@@ -444,7 +444,7 @@ export class AppService {
     var url = 'texts?action=SAVE&id=' + id + '&lang=' + this.state.currentLang;
     
     
-    let headers = new Headers({ 'Content-Type': 'text/plain' });
+    let headers = new Headers({ 'Content-Type': 'text/plain;charset=UTF-8' });
     let options = new RequestOptions({ headers: headers });
     
     return this.http.post(url, text, options)

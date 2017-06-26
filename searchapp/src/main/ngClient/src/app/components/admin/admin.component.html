@@ -6,22 +6,25 @@
         <div class="row">
           <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked">
-              <li role="app-page-nav" class="active"><a href="#">Home</a></li>
-              <li role="app-page-nav"><a href="#">Editor</a></li>
-              <li role="app-page-nav"><a href="#">Open Access</a></li>
-              <li role="app-page-nav"><a href="#">Join database</a></li>
+              <li role="app-page-nav"  *ngFor="let m of menu" ><a>{{m.label}}</a>
+                <ul class="nav-stacked nav-pills ">
+                  <li role="app-page-nav"  *ngFor="let m1 of m.menu" [class.active]="selected === m1.route">
+                      <a  (click)="select(m1)">{{m1.route}}</a> <input type="checkbox" [checked]="m1.visible" />
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div><!--/.col -->
           <div class="col-xs-9">
             <form class="clearfix">
-              <textarea class="form-control" rows="28"></textarea>
+              <textarea class="form-control" rows="28" [(ngModel)]="text" name="text"></textarea>
               <div class="form-inline pull-left">
                 <div class="form-group">
                   <input type="text" class="form-control" id="uuid" placeholder="uuid">
                 </div>
                 <button type="submit" class="btn app-btn app-btn-default">Indexovat uuid</button>
               </div>
-              <button class="btn app-btn app-btn-default app-btn-inverse pull-right">SAVE CODE</button>
+              <button class="btn app-btn app-btn-default app-btn-inverse pull-right" (click)="save()">SAVE CODE</button>
             </form><!--/.clearfix -->
           </div><!--/.col -->
         </div><!--/.row -->

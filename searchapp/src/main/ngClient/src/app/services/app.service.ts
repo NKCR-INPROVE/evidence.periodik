@@ -433,11 +433,26 @@ export class AppService {
   }
 
   getText(id: string): Observable<string> {
-    var url = 'texts?id=' + id + '&lang=' + this.state.currentLang;
+    var url = 'texts?action=LOAD&id=' + id + '&lang=' + this.state.currentLang;
 
     return this.http.get(url).map((response: Response) => {
       return response.text();
     }).catch(error => { return Observable.of('error gettting content: ' + error); });
+  }
+
+  saveText(id: string, text: string): Observable<string> {
+    var url = 'texts?action=SAVE&id=' + id + '&lang=' + this.state.currentLang;
+    
+    
+    let headers = new Headers({ 'Content-Type': 'text/plain' });
+    let options = new RequestOptions({ headers: headers });
+    
+    return this.http.post(url, text, options)
+      .map((response: Response) => {
+        return response.json();
+
+      }).catch(error => { return Observable.of('error saving content: ' + error); });
+
   }
   
   

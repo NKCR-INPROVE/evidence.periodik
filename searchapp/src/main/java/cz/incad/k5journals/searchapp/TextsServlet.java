@@ -5,8 +5,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,8 +46,11 @@ public class TextsServlet extends HttpServlet {
         actionToDo.doPerform(request, response);
 
       } else {
-        PrintWriter out = response.getWriter();
-        out.print("Action missing");
+
+        Actions actionToDo = Actions.valueOf("LOAD");
+        actionToDo.doPerform(request, response);
+//        PrintWriter out = response.getWriter();
+//        out.print("Action missing");
       }
     } catch (IOException e1) {
       LOGGER.log(Level.SEVERE, e1.getMessage(), e1);
@@ -111,40 +116,16 @@ public class TextsServlet extends HttpServlet {
         String filename = InitServlet.CONFIG_DIR + File.separator + "texts"
                 + File.separator + request.getParameter("id");
         File f;
-        String text = "";
-        StringBuilder jb = new StringBuilder();
-        String line = null;
-        try {
-          BufferedReader reader = request.getReader();
-          while ((line = reader.readLine()) != null) {
-            jb.append(line);
-          }
-        } catch (Exception e) {
-          
-          json.put("error", e);
-          /*report an error*/ 
-        }
+        String text = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        
+        LOGGER.info(lang);
 
         if (lang != null) {
           f = new File(filename + "_" + lang + ".html");
-          if (f.exists()) {
-            FileUtils.writeStringToFile(f, jb.toString());
-          } else {
-            f = new File(filename + ".html");
-            if (f.exists()) {
-              FileUtils.writeStringToFile(f, jb.toString());
-            } else {
-              FileUtils.writeStringToFile(f, jb.toString());
-              json.put("msg", "file " + filename + "created");
-            }
-          }
+          FileUtils.writeStringToFile(f, text,Charset.forName("UTF-8"));
         } else {
           f = new File(filename + ".html");
-          if (f.exists()) {
-            FileUtils.writeStringToFile(f, jb.toString());
-          } else {
-            FileUtils.writeStringToFile(f, jb.toString());
-          }
+            FileUtils.writeStringToFile(f, text,Charset.forName("UTF-8"));
         }
         LOGGER.log(Level.INFO, json.toString());
         out.println(json.toString(2));

@@ -1,8 +1,14 @@
 {
-  "q.placeholder": "Search digital library ...",
+  "q_placeholder": "Search keywords, articles, genres, authors...",
+  "q_genres_placeholder": "Search genres...",
+  "q_authors_placeholder": "Search authors...",
+  "q_keywords_placeholder": "Search keywords...",
   "Zpět na ročníky":"Back to volumes",
+  "ČASOPIS": "MAGAZINE",
   "ARCHIV STARŠÍCH ROČNÍKŮ": "OLD NUMBERS ARCHIVE",
   "PROHLÍŽET CELÉ ČÍSLO": "VIEW WHOLE NUMBER", 
+  "AKTUÁLNÍ ČÍSLO": "ACTUAL NUMBER", 
+  "Časopis je zařazen v databázích":"The magazine is included in the databases",
   "předchozí číslo": "previous number",
   "následující číslo": "next number",
   "Informace o článku": "Article info",
@@ -18,7 +24,7 @@
   "Trvalý odkaz":"Permanent link",
   "SAVE": "SAVE",
   "home": "Home",
-  "news":"News",
+  "home_news":"Currently",
   "menu":{
     "home_": "Home",
     "home":{

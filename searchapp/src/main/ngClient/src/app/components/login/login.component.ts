@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public state: AppState,
-    private service: AppService) { }
+    public service: AppService) { }
 
   ngOnInit() {
   }

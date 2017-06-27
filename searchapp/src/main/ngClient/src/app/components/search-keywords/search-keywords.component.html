@@ -2,7 +2,7 @@
             <div class="app-section app-section-search-form app-section-search-form-full">
               <div class="app-item">
                 <div class="app-col-left">
-                  <input id="app-search-key-words" type="text" class="form-control" placeholder="Vyhledávejte klíčová slova" 
+                  <input id="app-search-key-words" type="text" class="form-control" [placeholder]="'q_keywords_placeholder' | translate" 
                          [typeahead]="keywords" [(ngModel)]="qkeyword" (typeaheadOnSelect)="searchInput()" typeaheadOptionField="val" />
                 </div>
                 <!--/.col -->

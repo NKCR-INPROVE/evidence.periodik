@@ -2,7 +2,7 @@
             <div class="app-section app-section-search-form app-section-search-form-full">
               <div class="app-item">
                 <div class="app-col-left">
-                  <input id="app-search-sections" type="text" class="form-control" placeholder="Vyhledávejte rubriky" 
+                  <input id="app-search-sections" type="text" class="form-control" [placeholder]="'q_genres_placeholder' | translate" 
                          [typeahead]="genres" [(ngModel)]="qgenre" (typeaheadOnSelect)="searchInput()" />
                 </div>
                 <!--/.col -->

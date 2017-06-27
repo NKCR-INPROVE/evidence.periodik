@@ -97,7 +97,6 @@ export class AppComponent implements OnInit {
       } else if(res[0]['datanode']){
         this.pidActual = pid;
         this.service.getJournal(pid).subscribe(a => {
-          console.log(a['model']);
           this.state.setActual(a);
           this.service.getArticles(this.state.actualNumber['pid']).subscribe(res => {
             this.state.actualNumber.setArticles(res);

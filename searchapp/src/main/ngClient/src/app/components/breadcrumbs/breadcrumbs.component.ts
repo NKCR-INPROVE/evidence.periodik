@@ -12,11 +12,9 @@ import { AppService } from '../../services/app.service';
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss']
 })
-export class BreadcrumbsComponent implements OnInit {
-  
-  //langObserver: Subscription;
-  stateObserver: Subscription;
-  routeObserver: Subscription;
+export class BreadcrumbsComponent implements OnInit, OnDestroy {
+
+  subscriptions: Subscription[] = [];
   
   page : string = 'home';
   params : string = '';
@@ -30,15 +28,14 @@ export class BreadcrumbsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.stateObserver = this.state.stateChangedSubject.subscribe(
+    this.subscriptions.push(this.state.stateChangedSubject.subscribe(
       () => {
         this.setCrumbs();
       }
-    );
+    ));
 
-    this.routeObserver = this.router.events.subscribe(val => {
+    this.subscriptions.push(this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
-        console.log(val);
         let url = val.urlAfterRedirects.substring(1);
         this.page = url.split(";")[0];
         if (url.split(";").length > 1){
@@ -48,7 +45,14 @@ export class BreadcrumbsComponent implements OnInit {
         }
         this.setCrumbs();
       }
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((s: Subscription) => {
+      s.unsubscribe();
     });
+    this.subscriptions = [];
   }
   
   setCrumbs(){

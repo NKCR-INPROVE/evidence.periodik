@@ -1,8 +1,12 @@
 {
-  "q.placeholder": "Hledej v digitální knihovně ...",
+  "q_placeholder": "Vyhledávejte slova, články, rubriky, autory...",
+  "q_genres_placeholder": "Vyhledávejte rubriky...",
+  "q_authors_placeholder": "Vyhledávejte autory...",
+  "q_keywords_placeholder": "Vyhledávejte klíčová slova...",
+  "ČASOPIS": "ČASOPIS",
   "Zpět na ročníky":"Zpět na ročníky",
   "home": "Hlavní stránka",
-  "news":"Aktuálně",
+  "home_news":"Aktuálně",
   "menu": {
     "home_": "Hlavní stránka",
     "home":{
@@ -46,6 +50,8 @@
   },
   "ARCHIV STARŠÍCH ROČNÍKŮ": "ARCHIV STARŠÍCH ROČNÍKŮ",
   "PROHLÍŽET CELÉ ČÍSLO": "PROHLÍŽET CELÉ ČÍSLO",
+  "AKTUÁLNÍ ČÍSLO": "AKTUÁLNÍ ČÍSLO", 
+  "Časopis je zařazen v databázích":"Časopis je zařazen v databázích",
   "předchozí číslo": "předchozí číslo",
   "následující číslo": "následující číslo",
   "Informace o článku": "Informace o článku",

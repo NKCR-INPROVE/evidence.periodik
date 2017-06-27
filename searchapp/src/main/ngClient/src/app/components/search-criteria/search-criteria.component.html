@@ -11,7 +11,7 @@
       </ul>
     </div><!--/.col -->
     <div class="app-col-middle">
-      <input type="text" class="form-control" placeholder="Vyhledávejte slova, články, rubriky, autory..." [(ngModel)]="criterium.value"  (keyup.enter)="search()" />
+      <input type="text" class="form-control" [placeholder]="'q_placeholder' | translate" [(ngModel)]="criterium.value"  (keyup.enter)="search()" />
     </div><!--/.col -->
     <div class="app-col-right text-right">
       <ul *ngIf="!last" class="list-unstyled app-clean-mg app-select">

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 import { AppService } from '../../services/app.service';
 import { AppState } from '../../app.state';
 
@@ -7,7 +8,9 @@ import { AppState } from '../../app.state';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+
+  subscriptions: Subscription[] = [];
   
   currentLang: string = 'cs';
   menu: any = {};
@@ -17,13 +20,13 @@ export class HeaderComponent implements OnInit {
   private appservice: AppService) { }
 
   ngOnInit() {
-    this.appservice.langSubject.subscribe(val=> {
+    this.subscriptions.push(this.appservice.langSubject.subscribe(val=> {
       this.currentLang = val;
-    });
+    }));
     
-    this.state.stateChangedSubject.subscribe(val=> {
+    this.subscriptions.push(this.state.stateChangedSubject.subscribe(val=> {
       this.menu = this.state.config['menu'];
-    });
+    }));
     
 //    this.state.fullScreenSubject.subscribe(val=> {
 //      if(!val){
@@ -36,9 +39,12 @@ export class HeaderComponent implements OnInit {
 //      }
 //    });
   }
-  
-  ngOnDestroy(){
-    
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((s: Subscription) => {
+      s.unsubscribe();
+    });
+    this.subscriptions = [];
   }
   
   isVisible(h: string, sub: string){

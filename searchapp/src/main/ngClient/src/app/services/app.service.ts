@@ -448,7 +448,6 @@ export class AppService {
       url += '&menu=' + menu;
     }
 
-
     let headers = new Headers({ 'Content-Type': 'text/plain;charset=UTF-8' });
     let options = new RequestOptions({ headers: headers });
 

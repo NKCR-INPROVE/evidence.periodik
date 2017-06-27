@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AppService } from '../../services/app.service';
 import { AppState } from '../../app.state';
@@ -13,9 +14,11 @@ interface menuItem {
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, OnDestroy {
 
-  menu: any = [];
+  subscriptions: Subscription[] = [];
+
+  menu: any[] = [];
   selected: string = 'home';
   visibleChanged: boolean = false;
 
@@ -28,26 +31,36 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
 
     if (this.state.config) {
-
-      for (let m in this.state.config['menu']) {
-        this.menu.push({ label: m, menu: this.state.config['menu'][m] })
-      }
-
-      this.service.getText(this.selected).subscribe(t => this.text = t);
+      this.fillMenu();
     } else {
-      this.state.configSubject.subscribe(val => {
-        for (let m in this.state.config['menu']) {
-          this.menu.push({ label: m, menu: this.state.config['menu'][m] })
-        }
-
-        this.service.getText(this.selected).subscribe(t => this.text = t);
-      });
+      this.subscriptions.push(this.state.configSubject.subscribe(val => {
+        this.fillMenu();
+      }));
     }
+
+    this.subscriptions.push(this.service.langSubject.subscribe(val => {
+      this.service.getText(this.selected).subscribe(t => this.text = t);
+    }));
   }
-  select(m:string, m1: string) {
-    
-    if(m1){
-      this.selected = m +'/'+m1;
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((s: Subscription) => {
+      s.unsubscribe();
+    });
+    this.subscriptions = [];
+  }
+
+  fillMenu() {
+    for (let m in this.state.config['menu']) {
+      this.menu.push({ label: m, menu: this.state.config['menu'][m] })
+    }
+
+    this.service.getText(this.selected).subscribe(t => this.text = t);
+  }
+
+  select(m: string, m1: string) {
+    if (m1) {
+      this.selected = m + '/' + m1;
     } else {
       this.selected = m;
     }
@@ -56,18 +69,18 @@ export class AdminComponent implements OnInit {
 
   save() {
     let menuToSave = null;
-    if (this.visibleChanged){
-      menuToSave = {menu: {}};
-      for (let i=0; i<this.menu.length; i++) {
-        menuToSave.menu[this.menu[i].label] = this.menu[i].menu;
+    if (this.visibleChanged) {
+      menuToSave = {};
+      for (let i = 0; i < this.menu.length; i++) {
+        menuToSave[this.menu[i].label] = this.menu[i].menu;
       }
     }
     this.service.saveText(this.selected, this.text, JSON.stringify(menuToSave)).subscribe(res => {
       console.log(res);
     });
   }
-  
-  changeVisible(){
+
+  changeVisible() {
     this.visibleChanged = true;
     //console.log(this.menu);
   }

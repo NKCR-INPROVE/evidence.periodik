@@ -2,17 +2,14 @@
   <div class="app-title">
     <div class="container">
       <div class="row">
-        <div class="col-xs-9 col-sm-10">
-          <h1 class="app-clean-mg hidden-xs">
+        <div class="col-xs-6 col-sm-9">
+          <h1 class="app-clean-mg">
             <a routerLink="home" title="Časopis "> 
               {{'ČASOPIS' | translate}} <span  *ngIf="state.actualNumber" class="app-font-roboto-cb">{{state.actualNumber['root_title']}}</span>
             </a>
           </h1>
-          <a routerLink="home" title="Časopis knihy a dějiny" class="visible-xs">
-            <img src="assets/img/logo-brand.png" alt="Časopis knihy a dějiny" class="img-responsive" />
-          </a>
         </div><!--/.col -->
-        <div class="col-xs-3 col-sm-2 text-right">
+        <div class="col-xs-6 col-sm-3 text-right">
           <a routerLink="admin" title="Admin" class="app-btn">Admin</a>
           <a *ngIf="currentLang==='cs'" (click)="changeLang('en')" title="English" class="app-btn">English</a>
           <a *ngIf="currentLang==='en'" (click)="changeLang('cs')" title="Český" class="app-btn">Česky</a>

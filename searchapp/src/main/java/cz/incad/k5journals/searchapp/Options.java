@@ -66,7 +66,7 @@ public class Options {
       File fmenu = new File(fnmenu);
       if(fmenu.exists()){
         JSONObject jsonMenu = new JSONObject(FileUtils.readFileToString(fmenu, "UTF-8"));
-        client_conf.put("menu", jsonMenu.get("menu"));
+        client_conf.put("menu", jsonMenu);
       }    
       
       

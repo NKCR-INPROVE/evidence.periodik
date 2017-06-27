@@ -132,6 +132,7 @@ public class TextsServlet extends HttpServlet {
           String fnmenu = InitServlet.CONFIG_DIR + File.separator + "menu.json";
           File fmenu = new File(fnmenu);
           FileUtils.writeStringToFile(fmenu, menu, Charset.forName("UTF-8"));
+          Options.resetInstance();
         }
         
           LOGGER.log(Level.INFO, json.toString());

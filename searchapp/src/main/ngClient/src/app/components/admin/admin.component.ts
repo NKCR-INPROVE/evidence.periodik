@@ -21,6 +21,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   menu: any[] = [];
   selected: string = 'home';
   visibleChanged: boolean = false;
+  saved: boolean = false;
 
   text: string;
 
@@ -64,6 +65,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     } else {
       this.selected = m;
     }
+    this.saved = false;
     this.service.getText(this.selected).subscribe(t => this.text = t);
   }
 
@@ -78,6 +80,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
     this.service.saveText(this.selected, this.text, m).subscribe(res => {
       console.log(res);
+      this.saved = !res.hasOwnProperty('error');
     });
   }
 

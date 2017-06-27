@@ -118,7 +118,7 @@ export class AppService {
       ret.details = j['details'];
       ret.year = j['year'];
       ret.siblings = null;
-      ret.mods = null;
+      ret.mods = JSON.parse(j['mods']);
       ret.genres = [];
       ret.genresObject = {};
 

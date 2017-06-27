@@ -100,7 +100,7 @@ export class AppComponent implements OnInit {
           this.state.setActual(a);
           this.service.getArticles(this.state.actualNumber['pid']).subscribe(res => {
             this.state.actualNumber.setArticles(res);
-            this.service.getMods(this.state.actualNumber['pid']).subscribe(mods => this.state.actualNumber.mods = mods);
+            //this.service.getMods(this.state.actualNumber['pid']).subscribe(mods => this.state.actualNumber.mods = mods);
             this.state.stateChanged();
           });
         });

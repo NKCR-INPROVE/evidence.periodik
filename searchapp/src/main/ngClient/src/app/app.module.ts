@@ -110,7 +110,7 @@ export function createTranslateLoader(http: Http) {
       { path: 'home', component: HomeComponent },
       { path: 'actual', component: ActualComponent },
       { path: 'archiv', component: ArchivComponent },
-      { path: 'archiv/:pid', component: ArchivComponent },
+      //{ path: 'archiv/:pid', component: ArchivComponent },
       { path: 'pro-autory', component: PokynyComponent ,
       children:[
         { path: '', component: FreePageComponent},

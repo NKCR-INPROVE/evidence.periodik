@@ -39,9 +39,9 @@ export class AppState {
 
   sorts = [
     { "label": "Dle relevance", "field": "score desc" },
-    { "label": "od nejnovějších", "field": "rok_vzniku asc" },
-    { "label": "od nejstarších", "field": "rok_vzniku desc" },
-    { "label": "podle názvu A-Z", "field": "autor_sort asc" }
+    { "label": "od nejnovějších", "field": "year asc" },
+    { "label": "od nejstarších", "field": "year desc" },
+    { "label": "podle názvu A-Z", "field": "title_sort asc" }
     
   ];
   currentSort: any = this.sorts[0];
@@ -52,6 +52,7 @@ export class AppState {
   //Aktualni cislo
   public actualNumber : Journal;
   public imgSrc: string;
+  public krameriusUrl: string;
   
   public mainClass: string;
   
@@ -94,6 +95,7 @@ export class AppState {
   
   setConfig(cfg){
     this.config = cfg;
+    this.krameriusUrl = this.config['k5'] + this.config['journal'];
     this._configSubject.next(cfg);
   }
   

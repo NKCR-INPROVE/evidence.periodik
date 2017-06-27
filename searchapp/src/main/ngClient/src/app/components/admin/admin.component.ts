@@ -68,14 +68,15 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    let menuToSave = null;
+    let m = null;
     if (this.visibleChanged) {
-      menuToSave = {};
+      let menuToSave = {};
       for (let i = 0; i < this.menu.length; i++) {
         menuToSave[this.menu[i].label] = this.menu[i].menu;
       }
+      m = JSON.stringify(menuToSave);
     }
-    this.service.saveText(this.selected, this.text, JSON.stringify(menuToSave)).subscribe(res => {
+    this.service.saveText(this.selected, this.text, m).subscribe(res => {
       console.log(res);
     });
   }

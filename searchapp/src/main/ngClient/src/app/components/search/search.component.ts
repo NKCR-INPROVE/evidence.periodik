@@ -37,6 +37,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   dateDo: number = 1;
   dateRange: number[] = [0, 1];
   
+  currentSort: any;
+  
   onlyPeerReviewed: boolean = false;
 
   public dateForm: FormGroup;
@@ -54,6 +56,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.currentSort = this.state.sorts[0];
     this.subscriptions.push(this.service.searchSubject.subscribe((criteria: Criterium[]) => this.search(criteria)));
 
     this.getStats();
@@ -64,6 +67,17 @@ export class SearchComponent implements OnInit, OnDestroy {
         }
         if (this.route.snapshot.firstChild.params.hasOwnProperty('rows')) {
           this.rows = +this.route.snapshot.firstChild.params['rows'];
+        }
+        if (this.route.snapshot.firstChild.params.hasOwnProperty('sort')) {
+          let s = this.route.snapshot.firstChild.params['sort'];
+          for (let i in this.state.sorts){
+            console.log(this.state.sorts[i].field);
+            if (this.state.sorts[i].field === s){
+              this.currentSort = this.state.sorts[i];
+              break
+            }
+          }
+          console.log(s, this.currentSort);
         }
         if (this.route.snapshot.firstChild.params.hasOwnProperty('onlyPeerReviewed')) {
           this.onlyPeerReviewed = this.route.snapshot.firstChild.params['onlyPeerReviewed'] === 'true';
@@ -112,6 +126,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     params.set('fq', 'model:article');
     params.set('start', this.start + '');
     params.set('rows', this.rows + '');
+    console.log(this.currentSort.field);
+    params.set('sort', this.currentSort.field);
     if (criteria.length > 0) {
       let fq = '';
       for (let i = 0; i < criteria.length; i++) {
@@ -222,6 +238,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     let p = {};
     Object.assign(p, this.route.snapshot.firstChild.params);
     p['rows'] = this.rows;
+    this.router.navigate(['/hledat/cokoliv', p]);
+  }
+  
+  setSort(s: any) {
+    this.currentSort = s;
+    let p = {};
+    Object.assign(p, this.route.snapshot.firstChild.params);
+    p['sort'] = this.currentSort.field;
     this.router.navigate(['/hledat/cokoliv', p]);
   }
   

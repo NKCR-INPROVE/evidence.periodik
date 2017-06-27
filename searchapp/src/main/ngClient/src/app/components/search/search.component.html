@@ -37,16 +37,15 @@
             <div *ngIf="numFound" class="app-section app-sort-headline">
               <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                  <h2 class="app-font-s42 app-clean-mg">Výsledky vyhledávání</h2>
+                  <h2 class="app-font-s42 app-clean-mg">{{'Výsledky vyhledávání' | translate}}</h2>
                 </div><!--/.col -->
                 <div class="col-xs-12 col-sm-6">
                   <ul class="list-unstyled app-select">
-                    <li>Výsledky řadit:</li>
+                    <li>{{'Výsledky řadit' | translate}}:</li>
                     <li class="dropdown" dropdown>
-                      <a dropdownToggle class="dropdown-toggle" role="button" >od nejnovějších <span class="caret"></span></a>
+                      <a dropdownToggle class="dropdown-toggle" role="button" >{{currentSort.label | translate}}<span class="caret"></span></a>
                       <ul *dropdownMenu class="dropdown-menu app-clean-border">
-                        <li><a href="#">od nejstarších</a></li>
-                        <li><a href="#">dle relevance</a></li>
+                        <li *ngFor="let s of state.sorts"><a (click)="setSort(s)">{{s.label | translate}}</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -56,10 +55,10 @@
               <hr />
               <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                  Zobrazeny výsledky: <span class="app-font-roboto-cb">{{start + 1}} – {{lastResult()}}</span> z celkového počtu <span class="app-font-roboto-cb">{{numFound}}</span>
+                  {{'Zobrazeny výsledky' | translate}}: <span class="app-font-roboto-cb">{{start + 1}} – {{lastResult()}}</span> {{'z celkového počtu' | translate}} <span class="app-font-roboto-cb">{{numFound}}</span>
                 </div><!--/.col -->
                 <div class="col-xs-12 col-sm-6">
-                  Počet výsledků na stránku:
+                  {{'Počet výsledků na stránku' | translate}}:
                   <nav class="app-nav-items">
                     <ul class="list-unstyled app-brand-text app-font-roboto-cb">
                       <li *ngFor="let r of rowsSelect" [class.active]="this.rows === r"><a (click)="setRows(r)">{{r}}</a></li>

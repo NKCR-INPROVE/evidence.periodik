@@ -12,9 +12,10 @@
   },
   
   "sorts" : [
-    { "label": "dle relevance", "field": "score desc" },
-    { "label": "od nejnovějších", "field": "rok asc" },
-    { "label": "od nejstarších", "field": "rok desc" }
+    { "label": "Dle relevance", "field": "score desc" },
+    { "label": "od nejnovějších", "field": "year asc" },
+    { "label": "od nejstarších", "field": "year desc" },
+    { "label": "podle názvu A-Z", "field": "title_sort asc" }
   ],
   "menu":{
     "o-casopisu":[

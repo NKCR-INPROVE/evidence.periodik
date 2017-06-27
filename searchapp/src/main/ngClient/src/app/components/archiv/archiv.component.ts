@@ -34,7 +34,7 @@ export class ArchivComponent implements OnInit {
 
   constructor(
     private service: AppService,
-    private state: AppState,
+    public state: AppState,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -164,7 +164,10 @@ export class ArchivComponent implements OnInit {
         this.setItems(this.state.config['journal']);
       }
     } else {
-      this.router.navigate(['home']);
+      //this.router.navigate(['home']);
+    setTimeout(()=>{
+      this.initData();
+    },100);
     }
   }
 

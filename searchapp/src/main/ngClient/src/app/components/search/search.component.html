@@ -12,14 +12,14 @@
               <div class="row">
                 <div class="col-xs-12">
                   <input id="onlyPeerReviewed" type="checkbox" [(ngModel)]="onlyPeerReviewed" (ngModelChange)="setPeerReviewed()" />
-                  <label for="onlyPeerReviewed">pouze v recenzovaných článcích</label>
+                  <label for="onlyPeerReviewed">{{'pouze v recenzovaných článcích' | translate}}</label>
                 </div><!--/.col -->
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
                   <form class="form-inline">
                     <div class="form-group">
-                      <label>Datum publikování:</label> 
-                      od roku <input type="text" class="form-control" name="dateOd" [(ngModel)]="dateForm.controls.range.value[0]"> 
-                      do roku <input type="text" class="form-control" name="dateDo" [(ngModel)]="dateForm.controls.range.value[1]">
+                      <label>{{'Datum publikování' | translate}}:</label> 
+                      {{'od roku' | translate}} <input type="text" class="form-control" name="dateOd" [(ngModel)]="dateForm.controls.range.value[0]"> 
+                      {{'do roku' | translate}} <input type="text" class="form-control" name="dateDo" [(ngModel)]="dateForm.controls.range.value[1]">
                     </div>
                   </form>
                 </div><!--/.col -->

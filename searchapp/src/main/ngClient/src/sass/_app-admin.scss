@@ -7,6 +7,13 @@ app-admin {
     h3, textarea {
       margin-bottom: 20px;
     }
+    
+    textarea {
+      &.form-control {
+        @extend .app-font-helvetica;
+      }
+    }
+    
     .app-admin-nav {
       > li {
         &.active {

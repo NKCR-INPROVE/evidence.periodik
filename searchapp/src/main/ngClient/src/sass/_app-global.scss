@@ -122,6 +122,10 @@ h4+hr {
   font-family: 'PT Serif', serif;
 }
 
+.app-font-helvetica {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 // cleaners
 .app-clean-mg {
   margin: 0 !important;
@@ -240,4 +244,10 @@ h4+hr {
     from { transform: scale(1) rotate(0deg);}
     to { transform: scale(1) rotate(360deg);}
   } 
+}
+ 
+// alerts
+.alert {
+  @extend .app-font-helvetica;
+  font-size: 14px;
 }

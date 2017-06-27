@@ -32,6 +32,9 @@
           </div><!--/.col -->
           <div class="col-xs-9">
             <h3>{{selected}} ({{state.currentLang}})</h3>
+            <div *ngIf="saved" class="alert alert-success" role="alert">
+              {{'text.save-note-1' | translate}} <strong>{{selected}} ({{state.currentLang}})</strong> {{'text.save-note-2' | translate}}!
+            </div>
             <form class="clearfix">
               <textarea class="form-control" rows="28" [(ngModel)]="text" name="text"></textarea>
               <div class="form-inline pull-left">

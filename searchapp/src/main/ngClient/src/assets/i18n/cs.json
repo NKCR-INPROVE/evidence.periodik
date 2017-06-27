@@ -93,6 +93,8 @@
   "z celkového počtu":"z celkového počtu",
   "Počet výsledků na stránku": "Počet výsledků na stránku",
   "SAVE": "ULOŽIT",
+  "text.save-note-1": "Obsah stránky",
+  "text.save-note-2": "byl v pořádku uložen",
   "genre": {
     "news": "Zprávy",
     "table of content": "Obsah",

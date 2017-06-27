@@ -36,7 +36,7 @@
         <div *ngIf="isPdf">
           <pdf-viewer [src]="fullSrc" 
                       [original-size]="true" 
-                      [render-text]="true"
+                      [render-text]="false"
                       [show-all]="true"
                       [zoom]="zoom"
                       (after-load-complete)="afterLoad($event)"

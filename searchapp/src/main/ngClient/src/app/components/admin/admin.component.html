@@ -7,14 +7,20 @@
         <div class="row">
           <div class="col-xs-3">
             <ul class="list-unstyled app-admin-nav">
-              <li role="app-page-nav"  [class.active]="selected === 'home'" ><strong><a (click)="select('home', null)">{{'menu.home_' | translate}}</a></strong>
+              <li role="app-page-nav"  [class.active]="selected === 'home'" >
+                <strong>
+                  <a (click)="select('home', null)">{{'menu.home_' | translate}}</a>
+                </strong>
                 <ul class="nav-pills nav-stacked">
                   <li role="app-page-nav" [class.active]="selected === 'home/news'">
                       <a (click)="select('home', 'news')">{{'menu.home.news_' | translate}}</a> 
                   </li>
                 </ul>
               </li>
-              <li role="app-page-nav"  *ngFor="let m of menu" [class.active]="selected === m.label"><strong><a (click)="select(m.label, null)">{{'menu.'+m.label+'_' | translate}}</a></strong>
+              <li role="app-page-nav"  *ngFor="let m of menu" [class.active]="selected === m.label">
+                <strong>
+                  <a (click)="select(m.label, null)">{{'menu.'+m.label+'_' | translate}}</a>
+                </strong>
                 <ul class="nav-pills nav-stacked">
                   <li role="app-page-nav"  *ngFor="let m1 of m.menu" [class.active]="selected === m.label + '/' +m1.route">
                       <a (click)="select(m.label, m1.route)">{{'menu.'+m.label+'.'+m1.route+'_' | translate}}</a> 

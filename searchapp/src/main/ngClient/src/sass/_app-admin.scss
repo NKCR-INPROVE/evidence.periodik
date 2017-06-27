@@ -6,6 +6,29 @@ app-admin {
       margin-bottom: 20px;
     }
     .app-admin-nav {
+      > li {
+        &.active {
+          strong {
+            a {
+              background-color: $brand-primary;
+              color: $body-bg;
+              
+              &:hover {
+                background-color: $brand-primary;
+              }
+            }
+          } 
+        }
+        > strong {
+          > a {
+          padding: 0 7px 2px 7px;
+          border-radius: 4px;
+          &:hover {
+            background-color: $app-brand-l-4;
+          }
+        } 
+        }
+      }
       .nav-pills {
         > li {
           &.active {

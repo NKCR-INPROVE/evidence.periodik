@@ -124,6 +124,9 @@
             margin-right: auto;
             
             pdf-viewer {
+              div {
+                text-align: center;
+              }
               canvas {
                 right: 0px;
                 margin-left: auto;
@@ -133,6 +136,7 @@
           }
           padding-right: 110px;
           > div {
+            text-align: center;
             overflow: auto;
             position: relative;
           } 

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <h3>Amin page</h3>
+        <h3>Admin page</h3>
         <hr />
         <div class="row">
           <div class="col-xs-3">
@@ -31,7 +31,7 @@
             </ul>
           </div><!--/.col -->
           <div class="col-xs-9">
-            <h3>{{selected}} ({{state.currentLang}})</h3>
+            <h3>{{selected}} <span class="app-brand-text text-darken-1">({{state.currentLang}})</span></h3>
             <div *ngIf="saved" class="alert alert-success" role="alert">
               {{'text.save-note-1' | translate}} <strong>{{selected}} ({{state.currentLang}})</strong> {{'text.save-note-2' | translate}}!
             </div>

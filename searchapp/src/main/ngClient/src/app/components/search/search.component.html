@@ -8,88 +8,87 @@
             <router-outlet></router-outlet>
  
             <div *ngIf="showResults()">
-            <div *ngIf="dateForm" class="app-section app-section-slider app-brand lighten-6">
-              <div class="row">
-                <div class="col-xs-12">
-                  <input id="onlyPeerReviewed" type="checkbox" [(ngModel)]="onlyPeerReviewed" (ngModelChange)="setPeerReviewed()" />
-                  <label for="onlyPeerReviewed">{{'pouze v recenzovaných článcích' | translate}}</label>
-                </div><!--/.col -->
-                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
-                  <form class="form-inline">
-                    <div class="form-group">
-                      <label>{{'Datum publikování' | translate}}:</label> 
-                      {{'od roku' | translate}} <input type="text" class="form-control" name="dateOd" [(ngModel)]="dateForm.controls.range.value[0]"> 
-                      {{'do roku' | translate}} <input type="text" class="form-control" name="dateDo" [(ngModel)]="dateForm.controls.range.value[1]">
-                    </div>
-                  </form>
-                </div><!--/.col -->
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
-                  <div id="slider">
-                    <form [formGroup]="dateForm">
-                      <nouislider [connect]="true" [min]="dateMin" [max]="dateMax" [step]="1" [formControl]="dateForm.controls.range"
-                        (end)="onDateChange($event)" [tooltips]="[ true, true ]" #dateSlider ></nouislider>
+              <div *ngIf="dateForm" class="app-section app-section-slider app-brand lighten-6">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <input id="onlyPeerReviewed" type="checkbox" [(ngModel)]="onlyPeerReviewed" (ngModelChange)="setPeerReviewed()" />
+                    <label for="onlyPeerReviewed">{{'pouze v recenzovaných článcích' | translate}}</label>
+                  </div><!--/.col -->
+                  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+                    <form class="form-inline">
+                      <div class="form-group">
+                        <label>{{'Datum publikování' | translate}}:</label> 
+                        {{'od roku' | translate}} <input type="text" class="form-control" name="dateOd" [(ngModel)]="dateForm.controls.range.value[0]"> 
+                        {{'do roku' | translate}} <input type="text" class="form-control" name="dateDo" [(ngModel)]="dateForm.controls.range.value[1]">
+                      </div>
                     </form>
-                  </div>
-                </div><!--/.col -->
-              </div><!--/.row -->
-            </div><!--/.app-section -->
-            
-            <div *ngIf="numFound" class="app-section app-sort-headline">
-              <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                  <h2 class="app-font-s42 app-clean-mg">{{'Výsledky vyhledávání' | translate}}</h2>
-                </div><!--/.col -->
-                <div class="col-xs-12 col-sm-6">
-                  <ul class="list-unstyled app-select">
-                    <li>{{'Výsledky řadit' | translate}}:</li>
-                    <li class="dropdown" dropdown>
-                      <a dropdownToggle class="dropdown-toggle" role="button" >{{currentSort.label | translate}}<span class="caret"></span></a>
-                      <ul *dropdownMenu class="dropdown-menu app-clean-border">
-                        <li *ngFor="let s of state.sorts"><a (click)="setSort(s)">{{s.label | translate}}</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div><!--/.col -->
-              </div><!--/.row -->
-              <div></div>
-              <hr />
-              <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                  {{'Zobrazeny výsledky' | translate}}: <span class="app-font-roboto-cb">{{start + 1}} – {{lastResult()}}</span> {{'z celkového počtu' | translate}} <span class="app-font-roboto-cb">{{numFound}}</span>
-                </div><!--/.col -->
-                <div class="col-xs-12 col-sm-6">
-                  {{'Počet výsledků na stránku' | translate}}:
-                  <nav class="app-nav-items">
-                    <ul class="list-unstyled app-brand-text app-font-roboto-cb">
-                      <li *ngFor="let r of rowsSelect" [class.active]="this.rows === r"><a (click)="setRows(r)">{{r}}</a></li>
-                    </ul>
-                  </nav><!--/.app-nav-items -->
-                </div><!--/.col -->
-              </div><!--/.row -->
-            </div><!--/.app-section -->
-            
-            <div class="app-section app-section-results" #results>
-              <!--
-              <div class="app-item" *ngFor="let doc of docs">
-                2014, ročník 7, číslo 1, s. 68-99
-                <h3 class="app-brand-text app-font-pt-serif">{{doc.title}}</h3>
-                  Jan Munzar
-              </div>
-              -->
-              <div class="app-item" *ngFor="let doc of docs">
-                <app-article-result [article]="doc"></app-article-result>
-              </div>
+                  </div><!--/.col -->
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
+                    <div id="slider">
+                      <form [formGroup]="dateForm">
+                        <nouislider [connect]="true" [min]="dateMin" [max]="dateMax" [step]="1" [formControl]="dateForm.controls.range"
+                          (end)="onDateChange($event)" [tooltips]="[ true, true ]" #dateSlider ></nouislider>
+                      </form>
+                    </div>
+                  </div><!--/.col -->
+                </div><!--/.row -->
+              </div><!--/.app-section -->
               
-              <hr />
-            </div><!--/.app-section -->
+              <div *ngIf="!numFound" class="app-section">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <alert type="warning">
+                      <strong>{{'text.warning' | translate}}!</strong> {{'alert.no-results' | translate}}.
+                    </alert>
+                  </div>
+                </div>
+              </div><!--/.app-section -->
+        
+              <div *ngIf="numFound" class="app-section app-sort-headline">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    <h2 class="app-font-s42 app-clean-mg">{{'Výsledky vyhledávání' | translate}}</h2>
+                  </div><!--/.col -->
+                  <div class="col-xs-12 col-sm-6">
+                    <ul class="list-unstyled app-select">
+                      <li>{{'Výsledky řadit' | translate}}:</li>
+                      <li class="dropdown" dropdown>
+                        <a dropdownToggle class="dropdown-toggle" role="button" >{{currentSort.label | translate}}<span class="caret"></span></a>
+                        <ul *dropdownMenu class="dropdown-menu app-clean-border">
+                          <li *ngFor="let s of state.sorts"><a (click)="setSort(s)">{{s.label | translate}}</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div><!--/.col -->
+                </div><!--/.row -->
+                <div></div>
+                <hr />
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    {{'Zobrazeny výsledky' | translate}}: <span class="app-font-roboto-cb">{{start + 1}} – {{lastResult()}}</span> {{'z celkového počtu' | translate}} <span class="app-font-roboto-cb">{{numFound}}</span>
+                  </div><!--/.col -->
+                  <div class="col-xs-12 col-sm-6">
+                    {{'Počet výsledků na stránku' | translate}}:
+                    <nav class="app-nav-items">
+                      <ul class="list-unstyled app-brand-text app-font-roboto-cb">
+                        <li *ngFor="let r of rowsSelect" [class.active]="this.rows === r"><a (click)="setRows(r)">{{r}}</a></li>
+                      </ul>
+                    </nav><!--/.app-nav-items -->
+                  </div><!--/.col -->
+                </div><!--/.row -->
+              </div><!--/.app-section -->
             
-            <app-pagination [numPages]="5" [totalPages]="totalPages" (onGotoPage)="setPage($event)"></app-pagination>
+              <div class="app-section app-section-results" #results>
+                <div class="app-item" *ngFor="let doc of docs">
+                  <app-article-result [article]="doc"></app-article-result>
+                </div>
+                <hr *ngIf="numFound" />
+              </div><!--/.app-section -->
             
+              <app-pagination [numPages]="5" [totalPages]="totalPages" (onGotoPage)="setPage($event)"></app-pagination>
             </div>
             
           </div><!--/.tab-pane -->
-          
-          
         </div><!--/.tab-content -->
       </div><!--/.col -->
     </div><!--/.row -->

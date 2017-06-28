@@ -251,3 +251,15 @@ h4+hr {
   @extend .app-font-helvetica;
   font-size: 14px;
 }
+ 
+// tooltip
+.tooltip {
+  hr {
+    border-width: 1px;
+    border-color: $app-gray-30;
+    margin: 5px 0;
+  }
+  .app-wrapper {
+    padding: 5px 0;
+  }
+}

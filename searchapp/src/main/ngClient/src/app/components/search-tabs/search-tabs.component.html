@@ -6,15 +6,15 @@
         <ul class="nav nav-tabs">
           <li role="presentation"><span>{{'Vyhledat' | translate}}:</span></li>
           <li role="presentation" [routerLink]="['hledat', 'cokoliv']" routerLinkActive="active">
-            <a [routerLink]="['hledat', 'cokoliv']" >{{'cokoliv' | translate}}</a></li>
+            <a [routerLink]="['hledat', 'cokoliv']">{{'cokoliv' | translate}}</a></li>
           <li role="presentation" [routerLink]="['hledat', 'autory']" routerLinkActive="active">
-            <a  [routerLink]="['hledat', 'autory']" >{{'rejstřík autorů' | translate}}</a></li>
+            <a  [routerLink]="['hledat', 'autory']" class="app-item-authors">{{'rejstřík autorů' | translate}}</a></li>
           <li role="presentation" [routerLink]="['hledat', 'rubriky']" routerLinkActive="active">
-            <a  [routerLink]="['hledat', 'rubriky']" >{{'rubriky' | translate}}</a></li>
+            <a  [routerLink]="['hledat', 'rubriky']">{{'rubriky' | translate}}</a></li>
           <li role="presentation" [routerLink]="['hledat', 'keywords']" routerLinkActive="active">
-            <a  [routerLink]="['hledat', 'keywords']" >{{'rejstřík klíčových slov' | translate}}</a></li>
+            <a  [routerLink]="['hledat', 'keywords']" class="app-item-keywords">{{'rejstřík klíčových slov' | translate}}</a></li>
         </ul>
       </div><!--/.col -->
     </div><!--./row -->
   </div><!--/.container -->
-</div>
+</div><!--/.app-nav-tabs -->

@@ -5,6 +5,14 @@
   .nav-tabs {
     >li {
       &.active {
+        .app-item-keywords,
+        .app-item-authors {
+          @extend .app-cursor-pointer;
+          
+          &:hover {
+            color: $app-brand-l-1;
+          }
+        }
         >a,
         a:hover,
         a:focus {

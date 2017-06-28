@@ -52,6 +52,8 @@
   "SAVE": "SAVE",
   "text.save-note-1": "Page",
   "text.save-note-2": "saved succesfully",
+  "text.warning": "Warning",
+  "alert.no-results": "No results found. Please, try another query",
   "home": "Home",
   "home_news":"Currently",
   "menu":{

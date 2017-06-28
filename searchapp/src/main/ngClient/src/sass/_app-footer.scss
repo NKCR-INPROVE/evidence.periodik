@@ -4,7 +4,8 @@ footer {
   padding: 7px 0;
   .row {
     >div:first-child {
-      font-size: 1.8rem;
+      padding-top: 2px;
+      font-size: 1.4rem;
     }
     >div+div {
       padding-top: 2px;

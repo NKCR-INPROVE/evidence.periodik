@@ -28,6 +28,18 @@
                   </li>
                 </ul>
               </li>
+              
+              <li role="app-page-nav"  [class.active]="selected === 'e-shop'" >
+                <strong>
+                  <a (click)="select('e-shop', null)">{{'menu.e-shop_' | translate}}</a>
+                </strong>
+              </li>
+              
+              <li role="app-page-nav"  [class.active]="selected === 'kontakt'" >
+                <strong>
+                  <a (click)="select('kontakt', null)">{{'menu.kontakt_' | translate}}</a>
+                </strong>
+              </li>
             </ul>
           </div><!--/.col -->
           <div class="col-xs-9">

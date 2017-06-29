@@ -126,18 +126,19 @@ export class SearchComponent implements OnInit, OnDestroy {
     params.set('fq', 'model:article');
     params.set('start', this.start + '');
     params.set('rows', this.rows + '');
-    console.log(this.currentSort.field);
     params.set('sort', this.currentSort.field);
     if (criteria.length > 0) {
       let fq = '';
       for (let i = 0; i < criteria.length; i++) {
-        if (i > 0) {
-          fq += criteria[i].operator + ' ';
-        }
-        if (criteria[i].field) {
-          fq += criteria[i].field + ':' + criteria[i].value + ' ';
-        } else {
-          fq += criteria[i].value + ' ';
+        if(criteria[i].value){
+          if (fq !== '') {
+            fq += criteria[i].operator + ' ';
+          }
+          if (criteria[i].field) {
+            fq += criteria[i].field + ':' + criteria[i].value + ' ';
+          } else {
+            fq += criteria[i].value + ' ';
+          }
         }
       }
       params.append('fq', fq.trim());

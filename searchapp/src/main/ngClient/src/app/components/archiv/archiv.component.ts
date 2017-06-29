@@ -16,7 +16,7 @@ export class ArchivComponent implements OnInit {
   currentItem: any;
   items: any[];
   parentItems: any[];
-  currentParent: string;
+  currentParent: string = null;
   cache: any = {};
 
   isDataNode: boolean = false;
@@ -101,7 +101,7 @@ export class ArchivComponent implements OnInit {
       } else {
         this.currentItem = res;
         //let ctx = res['context'][0];
-        if (res['parents'] > 1) {
+        if (res['parents'].length > 0) {
           this.currentParent = res['parents'][0];
         } else {
           this.currentParent = null;

@@ -54,6 +54,11 @@
               <span *ngSwitchCase="'periodicalvolume'">
                 {{currentItem['year']}}<span *ngIf="volumeNumber">, {{'ročník' | translate}} {{volumeNumber}}</span>
               </span>
+              <span *ngSwitchCase="'periodicalitem'">
+                {{currentItem['year']}}<span *ngIf="volumeNumber">, {{'ročník' | translate}} {{volumeNumber}}</span>
+              <span *ngIf="issueNumber">, {{'číslo' | translate}} {{issueNumber}} </span>
+              <span *ngIf="partName">, {{partName}}</span>
+              </span>
             </h2>
           </span>
         </span><!--/.second level -->

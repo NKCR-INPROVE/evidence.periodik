@@ -59,6 +59,14 @@ export class JournalDetailsComponent implements OnInit {
 //          this.partName = mods['mods:titleInfo']['mods:partName'];
 //        }
         
+        this.appService.getMods(this.journal.parent).subscribe(parentMods => {
+          if(parentMods['mods:originInfo']){
+          this.year = parentMods['mods:originInfo']['mods:dateIssued'];
+          if (parentMods['mods:titleInfo']) {
+            this.volumeNumber = parentMods['mods:titleInfo']['mods:partNumber'];
+          }
+        }
+        });
         
         if (mods['mods:originInfo']) {
           //this.year = mods['mods:originInfo']['mods:dateIssued'];

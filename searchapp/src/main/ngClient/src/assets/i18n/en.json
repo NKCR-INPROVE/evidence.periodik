@@ -54,6 +54,9 @@
   "text.save-note-2": "saved succesfully",
   "text.warning": "Warning",
   "alert.no-results": "No results found. Please, try another query",
+  "Přihlásit uživatele":"User login",
+  "Přihlásit":"Login",
+  "Odhlásit":"Logout",
   "home": "Home",
   "home_news":"Currently",
   "menu":{

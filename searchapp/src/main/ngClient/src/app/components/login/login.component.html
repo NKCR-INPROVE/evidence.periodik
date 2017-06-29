@@ -21,8 +21,11 @@
             <div class="alert alert-warning" *ngIf="state.loginError">
               {{'Špatné přihlašovací údaje' | translate}}.
             </div>
-            <div>
-              <button class="btn btn-success btn-block app-border-radius" type="button" (click)="service.login()">Přihlásit uživatele</button>
+            <div *ngIf="!state.logged">
+              <button class="btn btn-success btn-block app-border-radius" type="button" (click)="service.login()">{{'Přihlásit uživatele' | translate}}</button>
+            </div>
+            <div *ngIf="state.logged">
+              <button type="button" class="btn btn-danger btn-block app-border-radius" (click)="service.logout()">{{'Odhlásit' | translate}}</button>
             </div>
           </div>
         </form>

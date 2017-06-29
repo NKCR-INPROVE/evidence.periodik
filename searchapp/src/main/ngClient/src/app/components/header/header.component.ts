@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
   public state: AppState,
-  private appservice: AppService) { }
+  public appservice: AppService) { }
 
   ngOnInit() {
     this.subscriptions.push(this.appservice.langSubject.subscribe(val=> {

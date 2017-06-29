@@ -494,11 +494,12 @@ export class AppService {
   }
 
   logout() {
-    this.doLogin().subscribe(res => {
+    this.doLogout().subscribe(res => {
       if (res.hasOwnProperty('error')) {
         console.log(res['error']);
       }
       this.state.logged = false;
+      this.router.navigate(['/home']);
     });
   }
 

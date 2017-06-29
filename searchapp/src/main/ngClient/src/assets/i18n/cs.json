@@ -97,6 +97,9 @@
   "text.save-note-2": "byl v pořádku uložen",
   "text.warning": "Upozornění",
   "alert.no-results": "Nebyly nalezeny žádné výsledky. Zkuste zadat jiný dotaz",
+  "Přihlásit uživatele":"Přihlásit uživatele",
+  "Přihlásit":"Přihlásit",
+  "Odhlásit":"Odhlásit",
   "genre": {
     "news": "Zprávy",
     "table of content": "Obsah",

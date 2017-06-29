@@ -10,7 +10,9 @@
           </h1>
         </div><!--/.col -->
         <div class="col-xs-6 col-sm-3 text-right">
-          <a routerLink="admin" title="Admin" class="app-btn">Admin</a>
+          <a *ngIf="state.logged" routerLink="admin" title="Admin" class="app-btn">Admin</a>
+          <a *ngIf="!state.logged" routerLink="prihlaseni" title="login" class="app-btn">{{'Přihlásit' | translate}}</a>
+          <a *ngIf="state.logged" (click)="appservice.logout()" title="logout" class="app-btn">{{'Odhlásit' | translate}}</a>
           <a *ngIf="currentLang==='cs'" (click)="changeLang('en')" title="English" class="app-btn">English</a>
           <a *ngIf="currentLang==='en'" (click)="changeLang('cs')" title="Český" class="app-btn">Česky</a>
         </div><!--/.col -->

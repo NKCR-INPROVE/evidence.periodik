@@ -39,8 +39,8 @@ export class AppState {
 
   sorts = [
     { "label": "Dle relevance", "field": "score desc" },
-    { "label": "od nejnovějších", "field": "year asc" },
-    { "label": "od nejstarších", "field": "year desc" },
+    { "label": "od nejnovějších", "field": "year desc" },
+    { "label": "od nejstarších", "field": "year asc" },
     { "label": "podle názvu A-Z", "field": "title_sort asc" }
     
   ];

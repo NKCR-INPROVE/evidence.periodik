@@ -54,13 +54,15 @@
         </p>
       </div><!--/.col -->
       <div *ngIf="actual" class="col-xs-12 col-sm-8 col-md-9 app-col-right">
-        <div class="app-section" *ngFor="let genre of actual.genres">
-          <h4 class="app-clean-mg">{{'genre.' + genre | translate}}</h4>
-          <hr />
-          <div *ngFor="let art of actual.genresObject[genre].articles">
-            <app-article-result *ngIf="!isHiddenByGenre(art['genre'])" [article]="art"></app-article-result>
-          </div>
-        </div><!--/.app section -->
+        <ng-container *ngFor="let genre of actual.genres">
+          <div class="app-section" *ngIf="actual.genresObject[genre].visible">
+            <h4 class="app-clean-mg">{{'genre.' + genre | translate}}</h4>
+            <hr />
+            <div *ngFor="let art of actual.genresObject[genre].articles">
+              <app-article-result *ngIf="!isHiddenByGenre(art['genre'])" [article]="art"></app-article-result>
+            </div>
+          </div><!--/.app section -->
+        </ng-container>
       </div><!--/.col -->
     </div><!--./row -->
   </div><!--/.container -->

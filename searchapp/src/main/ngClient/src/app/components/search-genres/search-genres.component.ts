@@ -44,6 +44,7 @@ export class SearchGenresComponent implements OnInit, OnDestroy {
       var params = new URLSearchParams();
       params.set('q', '*:*');
       params.set('fq', '-genre:""');
+      params.set('fq', 'model:article');
       params.set('rows', '0');
       //Rok jako stats
       params.set('facet', 'true');

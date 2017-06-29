@@ -29,7 +29,7 @@ export class Journal{
         if (art.hasOwnProperty("genre")) {
             for (let i in art['genre']) {
               let genre = art['genre'][i];
-              if (this.isGenreVisible(genre)) {
+              //if (this.isGenreVisible(genre)) {
                 if (this.genresObject.hasOwnProperty(genre)) {
                   this.genresObject[genre]['articles'].push(art);
                 } else {
@@ -38,7 +38,8 @@ export class Journal{
                   this.genresObject[genre]['articles'] = [];
                   this.genresObject[genre]['articles'].push(art);
                 }
-              }
+                this.genresObject[genre]['visible'] = this.isGenreVisible(genre);
+              //}
 
           
             }

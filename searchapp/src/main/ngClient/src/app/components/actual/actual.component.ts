@@ -76,5 +76,21 @@ pidActual: string;
     return this.service.isHiddenByGenre(genres);
   }
   
+  gotoArticle(){
+    this.findFirstdatanode(this.actual['pid']);
+  }
+  
+
+  findFirstdatanode(pid: string) {
+    this.service.getChildren(pid).subscribe(res => {
+      if (res[0]['datanode']) {
+        this.router.navigate(['/article', res[0]['pid']]);
+      } else {
+        this.findFirstdatanode(res[0]['pid']);
+      }
+    });
+  }
+
+  
 
 }

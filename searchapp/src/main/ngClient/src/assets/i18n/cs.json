@@ -103,7 +103,7 @@
   "genre": {
     "news": "Zprávy",
     "table of content": "Obsah",
-    "advertisement": "X",
+    "advertisement": "Reklama",
     "abstract": "Abstrakty",
     "introduction": "Úvod",
     "review": "Recenze",
@@ -114,10 +114,10 @@
     "preface": "Předmluva",
     "main article": "Hlavní články",
     "index": "Rejstřík",
-    "cover": "X",
+    "cover": "Obálka",
     "obituary": "Nekrology",
     "biographical portrait": "Medailonky",
-    "colophon": "X",
+    "colophon": "Tiráž",
     "interview": "Rozhovory",
     "annotations": "Anotace",
     "unspecified": "Nespecifikované"

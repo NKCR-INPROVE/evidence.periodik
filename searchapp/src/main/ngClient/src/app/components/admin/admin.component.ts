@@ -30,21 +30,33 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   editor;
 
+  ngOnInit() {
+  }
+  
+
+
+  constructor(
+    public state: AppState,
+    private service: AppService) { }
+
   ngAfterViewInit() {
     tinymce.init({
       selector: '#' + this.elementId,
       menubar: false,
-      plugins: ['link', 'paste', 'table'],
-      toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+      plugins: ['link', 'paste', 'table', 'save', 'code'],
+      toolbar: 'save | undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code',
       skin_url: 'assets/skins/lightgray',
       setup: editor => {
         this.editor = editor;
+        this.initData();
       },
-      
+      save_oncancelcallback: function () { console.log('Save canceled'); },
+      save_onsavecallback: () => this.save()
     });
+  }
+  
+  initData(){
     
-    
-
     if (this.state.config) {
       this.fillMenu();
     } else {
@@ -57,22 +69,14 @@ export class AdminComponent implements OnInit, OnDestroy {
       this.getText();
     }));
   }
-  
-
-
-  constructor(
-    public state: AppState,
-    private service: AppService) { }
-
-  ngOnInit() {
-  }
 
 
   ngOnDestroy() {
     this.subscriptions.forEach((s: Subscription) => {
       s.unsubscribe();
     });
-    this.subscriptions = [];
+    this.subscriptions = [];              
+    tinymce.remove(this.editor);
   }
 
   fillMenu() {

@@ -1,4 +1,4 @@
-// --- ADMIN ---
+  // --- ADMIN ---
 
 app-admin {
   .app-content {
@@ -8,10 +8,8 @@ app-admin {
       margin-bottom: 20px;
     }
     
-    textarea {
-      &.form-control {
-        @extend .app-font-helvetica;
-      }
+    .mce-tinymce {
+      margin-bottom: 20px;
     }
     
     .app-admin-nav {

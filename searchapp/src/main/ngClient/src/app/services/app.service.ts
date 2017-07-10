@@ -458,6 +458,17 @@ export class AppService {
       }).catch(error => { return Observable.of('error saving content: ' + error); });
 
   }
+  
+  index(uuid: string){
+    var url = 'index?action=INDEX_DEEP&id=' + uuid;
+
+    return this.http.get(url)
+      .map((response: Response) => {
+        return response.json();
+
+      }).catch(error => { return Observable.of('error indexing uuid: ' + error); });
+
+  }
 
   login() {
     this.state.loginError = false;

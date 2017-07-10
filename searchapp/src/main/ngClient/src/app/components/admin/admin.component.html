@@ -49,11 +49,14 @@
               <textarea class="form-control" rows="28" [id]="elementId"></textarea>
               <div class="form-inline pull-left">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="uuid" placeholder="uuid">
+                  <input type="text" class="form-control" id="indexUUID" placeholder="uuid" [(ngModel)]="indexUUID">
                 </div>
-                <button type="submit" class="btn app-btn app-btn-default">Indexovat uuid</button>
+                <button type="submit" class="btn app-btn app-btn-default" (click)="index()">{{'Pridat uuid' | translate}}</button>
               </div>
               <button class="btn app-btn app-btn-default app-btn-inverse pull-right" (click)="save()">{{'SAVE' | translate}}</button>
+              <div *ngIf="indexed" class="alert alert-success" role="alert">
+                {{indexUUID}} {{'text.indexed-note' | translate}}!
+              </div>
             </form><!--/.clearfix -->
           </div><!--/.col -->
         </div><!--/.row -->

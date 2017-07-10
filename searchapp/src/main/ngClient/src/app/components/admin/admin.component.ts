@@ -27,13 +27,13 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   text: string;
   elementId: string = 'editEl';
-
   editor;
+  
+  indexUUID: string;
+  indexed: boolean = false;
 
   ngOnInit() {
   }
-  
-
 
   constructor(
     public state: AppState,
@@ -101,6 +101,7 @@ export class AdminComponent implements OnInit, OnDestroy {
       this.selected = m;
     }
     this.saved = false;
+    this.indexed = false;
     this.getText();
   }
 
@@ -128,6 +129,13 @@ export class AdminComponent implements OnInit, OnDestroy {
   changeVisible() {
     this.visibleChanged = true;
     //console.log(this.menu);
+  }
+  
+  index(){
+    this.service.index(this.indexUUID).subscribe(res =>{
+      console.log(res);
+      this.indexed = !res.hasOwnProperty('error');
+    });
   }
 
 }

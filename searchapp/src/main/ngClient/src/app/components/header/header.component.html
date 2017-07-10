@@ -5,7 +5,7 @@
         <div class="col-xs-6 col-sm-9">
           <h1 class="app-clean-mg">
             <a routerLink="home" title="Časopis "> 
-              {{'ČASOPIS' | translate}} <span  *ngIf="state.actualNumber" class="app-font-roboto-cb">{{state.actualNumber['root_title']}}</span>
+              {{'ČASOPIS' | translate}} <span  *ngIf="state.actualNumber" class="app-font-roboto-cb">{{state.actualNumber['root_title'] | translate}}</span>
             </a>
           </h1>
         </div><!--/.col -->
@@ -59,7 +59,7 @@
                     <path d="M518.08,381a9,9,0,1,0-9,9,9,9,0,0,0,9-9h0Zm-9,6.78a6.78,6.78,0,1,1,6.78-6.78,6.79,6.79,0,0,1-6.78,6.78h0Z" transform="translate(-500 -372)"/>
                     <path d="M503.77,381h1.51a3.77,3.77,0,0,1,3.77-3.77v-1.51a5.28,5.28,0,0,0-5.27,5.27h0Z" transform="translate(-500 -372)"/>
                 </svg>
-              </button> Vyhledat
+              </button> {{'Vyhledat' | translate}}
             </a>
           </li>
         </ul><!--/.navbar-nav -->

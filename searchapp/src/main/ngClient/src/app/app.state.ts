@@ -38,7 +38,7 @@ export class AppState {
   rows: number = 10;
 
   sorts = [
-    { "label": "Dle relevance", "field": "score desc" },
+    { "label": "dle relevance", "field": "score desc" },
     { "label": "od nejnovějších", "field": "year desc" },
     { "label": "od nejstarších", "field": "year asc" },
     { "label": "podle názvu A-Z", "field": "title_sort asc" }

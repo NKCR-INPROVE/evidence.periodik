@@ -103,13 +103,24 @@ export class ArticleResultComponent implements OnInit {
         for(let i in name){
           let namePart = name[i]["mods:namePart"];
           if(name[i]["type"] === 'personal' && namePart){
-            this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+            //Chceme nejdriv prijmeni a potom jmeno
+            if(namePart[0]['type'] === 'family'){
+              this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+            } else {
+              this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
+            }
           }
         }
       } else {
         let namePart = name["mods:namePart"];
         if(name["type"] === 'personal' && name.hasOwnProperty("mods:namePart")){
-          this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+          //Chceme nejdriv prijmeni a potom jmeno
+          if(namePart[0]['type'] === 'family'){
+            this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+          } else {
+            this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
+          }
+          
         }
       }
       

@@ -22,6 +22,13 @@
             <div class="app-section">
               <nav class="app-nav-items">
                 <ul *ngIf="keywords.length > 0" class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
+                  <li [class.active]="'0-9' === letter">
+                    <a *ngIf="!isEmptyNumbers()" (click)="setLetter('0-9')" 
+                      title="">{{'0-9'}}</a>
+                    <span *ngIf="isEmptyNumbers()" 
+                      class="app-brand-text text-lighten-2" 
+                      title="">{{'0-9'}}</span>
+                  </li>
                   <li *ngFor="let l of state.letters" [class.active]="l === letter">
                     <a *ngIf="!isEmpty(l)" (click)="setLetter(l)" 
                       title="">{{l}}</a>

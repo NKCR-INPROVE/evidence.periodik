@@ -125,16 +125,36 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
     return !has;
   }
 
+  isEmptyNumbers() {
+    if (this.keywords.length === 0) {
+      return true;
+    }
+    let has = false;
+    this.keywords.forEach((el) => {
+      let k: string = el.val[0];
+      if (Number.isInteger(parseInt(k.toLocaleLowerCase().charAt(0)))) {
+        has = true;
+        return;
+      }
+    });
+    return !has;
+  }
+
   filter() {
     this.keywordsFiltered = [];
     if (this.letter !== null) {
 
       this.keywords.forEach((el) => {
-        //        console.log(el);
         let k: string = el.val;
         let first: string = k.toLocaleLowerCase().charAt(0);
-        if (this.service.removeDiacritics(first) === this.letter.toLocaleLowerCase()) {
-          this.keywordsFiltered.push(el);
+        if(this.letter === '0-9'){
+          if (Number.isInteger(parseInt(first))) {
+            this.keywordsFiltered.push(el);
+          }
+        }else{
+          if (this.service.removeDiacritics(first) === this.letter.toLocaleLowerCase()) {
+            this.keywordsFiltered.push(el);
+          }
         }
       });
     } else {

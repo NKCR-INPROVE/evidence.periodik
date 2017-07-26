@@ -21,7 +21,6 @@ export class ArchivComponent implements OnInit {
 
   isDataNode: boolean = false;
 
-
   volumeNumber: string;
   issueNumber: string;
   partName: string;
@@ -49,10 +48,9 @@ export class ArchivComponent implements OnInit {
             this.setItems(pid);
           }
         } else {
+          this.currentPid = null;
           this.initData();
         }
-
-
       });
 
     this.state.configSubject.subscribe(
@@ -86,8 +84,11 @@ export class ArchivComponent implements OnInit {
   }
 
   drillDown(pid: string) {
-    //this.parentItems = this.cache[this.currentPid]['items'];
-    this.setItems(pid);
+    
+    let p = {};
+    p['pid'] = pid;
+    this.router.navigate(['/archiv', p]);
+//    this.setItems(pid);
   }
 
   setItems(pid: string) {
@@ -162,6 +163,8 @@ export class ArchivComponent implements OnInit {
     if (this.state.actualNumber) {
       if (!this.currentPid) {
         this.setItems(this.state.config['journal']);
+      } else {
+        this.setItems(this.currentPid);
       }
     } else {
       //this.router.navigate(['home']);

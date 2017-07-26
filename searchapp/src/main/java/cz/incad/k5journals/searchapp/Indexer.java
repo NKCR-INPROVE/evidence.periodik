@@ -72,7 +72,7 @@ public class Indexer {
       idoc.addField("mods", mods.toString());
       JSONObject item = getItem(pid);
       idoc.addField("datanode", item.optBoolean("datanode"));
-      String model =item.optString("model");
+      String model = item.optString("model");
       idoc.addField("model", model);
       response.increment(item.optString("model"));
       idoc.addField("root_title", item.optString("root_title"));
@@ -85,7 +85,7 @@ public class Indexer {
         String pid_path = "";
         JSONArray ja = ctx.getJSONArray(i);
         if (ja.length() > 1) {
-          parent =  ja.getJSONObject(ja.length() - 2).getString("pid");
+          parent = ja.getJSONObject(ja.length() - 2).getString("pid");
           idoc.addField("parents", parent);
         }
         for (int j = 0; j < ja.length(); j++) {
@@ -107,11 +107,11 @@ public class Indexer {
       setAbstract(idoc, mods);
       setGenre(idoc, mods);
       setISSN(idoc, mods);
-      
+
       if (dates.containsKey(parent)) {
-          idoc.addField("year", dates.get(parent));
-          dates.put(pid, dates.get(parent));
-      
+        idoc.addField("year", dates.get(parent));
+        dates.put(pid, dates.get(parent));
+
 //      if("article".equalsIgnoreCase(model)){
 //        setDatum(idoc, parent);
       } else {
@@ -378,7 +378,6 @@ public class Indexer {
       prefix = "";
       o = mods.opt("abstract");
     }
-    
 
     if (o instanceof JSONObject) {
       JSONObject jo = (JSONObject) o;
@@ -387,7 +386,7 @@ public class Indexer {
         idoc.addField("abstract_" + lang, jo.optString("content"));
       }
       idoc.addField("abstract", jo.optString("content"));
-      
+
     } else if (o instanceof String) {
       idoc.addField("abstract", o);
     }
@@ -404,18 +403,33 @@ public class Indexer {
     if (o instanceof JSONObject) {
       JSONObject jo = (JSONObject) o;
       if (jo.has("type") && "personal".equals(jo.getString("type")) && jo.has(prefix + "namePart")) {
-        String autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
-                + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content");
+        String autor = "";
+        if (jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("type").equals("family")) {
+          autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
+                  + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content");
+        } else {
+
+          autor = jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content") + " "
+                  + jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content");
+        }
         idoc.addField("autor", autor);
       }
-
     } else if (o instanceof JSONArray) {
       JSONArray ja = (JSONArray) o;
       for (int i = 0; i < ja.length(); i++) {
         JSONObject jo = ja.getJSONObject(i);
         if (jo.has("type") && "personal".equals(jo.getString("type")) && jo.has(prefix + "namePart")) {
-          String autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
-                  + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content");
+
+          String autor = "";
+          if (jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("type").equals("family")) {
+            autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
+                    + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content");
+          } else {
+
+            autor = jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content") + " "
+                    + jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content");
+          }
+
           idoc.addField("autor", autor);
         }
       }
@@ -448,7 +462,6 @@ public class Indexer {
 
   private void setISSN(SolrInputDocument idoc, JSONObject mods) {
 
-    
     String prefix = "mods:";
     Object o = mods.opt(prefix + "identifier");
     if (o == null) {
@@ -460,7 +473,7 @@ public class Indexer {
       if (jo.has("type") && jo.optString("type").equals("issn")) {
         idoc.addField("issn", jo.optString("content"));
       }
-    } 
+    }
   }
 
   private void setDatum(SolrInputDocument idoc, JSONObject mods, String pid) {
@@ -481,10 +494,9 @@ public class Indexer {
     }
   }
 
-  
   private void setDatum(SolrInputDocument idoc, String parent) {
     if (dates.containsKey(parent)) {
-        idoc.addField("year", dates.get(parent));
+      idoc.addField("year", dates.get(parent));
     }
   }
 }

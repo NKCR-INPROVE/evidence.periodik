@@ -123,6 +123,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     var params = new URLSearchParams();
     params.set('q', '*:*');
+    params.set('q.op', 'AND');
     params.set('fq', 'model:article');
     params.set('start', this.start + '');
     params.set('rows', this.rows + '');

@@ -71,13 +71,13 @@ export class SearchComponent implements OnInit, OnDestroy {
         if (this.route.snapshot.firstChild.params.hasOwnProperty('sort')) {
           let s = this.route.snapshot.firstChild.params['sort'];
           for (let i in this.state.sorts){
-            console.log(this.state.sorts[i].field);
+            //console.log(this.state.sorts[i].field);
             if (this.state.sorts[i].field === s){
               this.currentSort = this.state.sorts[i];
               break
             }
           }
-          console.log(s, this.currentSort);
+          //console.log(s, this.currentSort);
         }
         if (this.route.snapshot.firstChild.params.hasOwnProperty('onlyPeerReviewed')) {
           this.onlyPeerReviewed = this.route.snapshot.firstChild.params['onlyPeerReviewed'] === 'true';
@@ -130,10 +130,11 @@ export class SearchComponent implements OnInit, OnDestroy {
     params.set('sort', this.currentSort.field);
     if (criteria.length > 0) {
       let fq = '';
+      let op = 'AND';
       for (let i = 0; i < criteria.length; i++) {
         if(criteria[i].value){
           if (fq !== '') {
-            fq += criteria[i].operator + ' ';
+            fq += criteria[i-1].operator + ' ';
           }
           if (criteria[i].field) {
             fq += criteria[i].field + ':' + criteria[i].value + ' ';

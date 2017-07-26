@@ -45,7 +45,7 @@ export class AdminComponent implements OnInit, OnDestroy {
       menubar: false,
       plugins: ['link', 'paste', 'table', 'save', 'code'],
       toolbar: 'save | undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code',
-      skin_url: 'assets/skins/lightgray',
+      skin_url: this.state.config['context'] +  'assets/skins/lightgray',
       setup: editor => {
         this.editor = editor;
         this.initData();

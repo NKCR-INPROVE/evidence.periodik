@@ -84,16 +84,24 @@ export class ArchivComponent implements OnInit {
   }
 
   drillDown(pid: string) {
-    
+
     let p = {};
     p['pid'] = pid;
     this.router.navigate(['/archiv', p]);
-//    this.setItems(pid);
+    //    this.setItems(pid);
+  }
+
+  setFocus() {
+    let el = document.getElementById('btn_' + this.currentPid);
+    if (el) {
+      el.focus();
+    }
   }
 
   setItems(pid: string) {
     //let parent = this.currentPid;
     this.currentPid = pid;
+
     this.setMainClass();
 
     this.service.getItem(this.currentPid).subscribe(res => {
@@ -156,7 +164,7 @@ export class ArchivComponent implements OnInit {
 
 
     });
-
+    this.setFocus();
   }
 
   initData() {
@@ -168,9 +176,9 @@ export class ArchivComponent implements OnInit {
       }
     } else {
       //this.router.navigate(['home']);
-    setTimeout(()=>{
-      this.initData();
-    },100);
+      setTimeout(() => {
+        this.initData();
+      }, 100);
     }
   }
 

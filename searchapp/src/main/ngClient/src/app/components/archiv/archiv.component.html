@@ -9,7 +9,7 @@
         </div><!--/.app item -->
         <div class="app-item-wrapper">
           <div class="app-item" *ngFor="let item of parentItems" (click)="drillDown(item.pid, currentParent)">
-            <button class="app-btn-arrow app-btn-arrow-right" [class.app-btn-active]="item.pid === currentPid">
+            <button class="app-btn-arrow app-btn-arrow-right" [class.app-btn-active]="item.pid === currentPid" [id]="'btn_'+item.pid">
               <app-archiv-item-left [item]="item" ></app-archiv-item-left>
             </button>
           </div><!--/.app item -->

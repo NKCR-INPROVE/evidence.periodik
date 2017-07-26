@@ -18,6 +18,7 @@ export class ArticleViewerComponent implements OnInit {
 
   fullSrc: string;
   isPdf: boolean = false;
+  downloadFilename: string;
   loading: boolean = true;
 
   zoom: number = 1.0;
@@ -70,9 +71,11 @@ export class ArticleViewerComponent implements OnInit {
 
         if (this.article.hasOwnProperty("url_pdf")) {
           this.isPdf = true;
+          this.downloadFilename = this.pid + '.pdf';
           this.fullSrc = this.state.config['context'] + 'img?uuid=' + this.pid + '&stream=IMG_FULL&action=GETRAW';
         } else {
           this.isPdf = false;
+          this.downloadFilename = this.pid;
           this.fullSrc = this.state.config['context'] + 'img?uuid=' + this.pid + '&stream=IMG_FULL&action=GETRAW';
           this.loading = false;
         }

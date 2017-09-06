@@ -16,6 +16,9 @@ export class ArchivComponent implements OnInit {
   currentItem: any;
   items: any[];
   parentItems: any[];
+  
+  visibleItems:number = 3;
+  visibleParentItems: any[];
   currentParent: string = null;
   cache: any = {};
 
@@ -141,6 +144,10 @@ export class ArchivComponent implements OnInit {
               this.cache[this.currentParent] = { items: res };
             });
           }
+          
+          
+          
+          
           //}
           if (this.isDataNode) {
             this.items.sort((a, b) => {
@@ -160,6 +167,28 @@ export class ArchivComponent implements OnInit {
           this.parentItems = [];
           this.currentParent = null;
         }
+      }
+      
+      this.visibleParentItems = [];
+      if(this.parentItems && this.parentItems.length > 0){
+        let start = 0;
+        for (let idx = 0; idx < this.parentItems.length; idx++){
+          if (this.parentItems[idx].pid === this.currentPid){
+            start = idx;
+          }
+        }
+
+        //visibleItems should be odd
+
+        start = Math.max(0, start - Math.floor(this.visibleItems/2));
+
+        let end = Math.min(start + this.visibleItems, this.parentItems.length);
+        start = Math.max(0, end - this.visibleItems);
+        for (let i = start; i < end; i++){
+          this.visibleParentItems.push(this.parentItems[i]);
+        }
+
+//        console.log(start, end, this.visibleParentItems);
       }
 
 

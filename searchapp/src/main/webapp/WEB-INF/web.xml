@@ -4,17 +4,19 @@
         <servlet-name>TextsServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.TextsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LocalFileServlet</servlet-name>
+        <servlet-class>cz.incad.k5journals.searchapp.LocalFileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TextsServlet</servlet-name>
         <url-pattern>/texts</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>InitServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.InitServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
     <servlet>
         <servlet-name>ImageServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.ImgServlet</servlet-class>
@@ -23,7 +25,6 @@
         <servlet-name>InitServlet</servlet-name>
         <url-pattern>/InitServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>StaticServlet</servlet-name>
         <jsp-file>/index.jsp</jsp-file>
@@ -42,7 +43,6 @@
         <url-pattern>/hledat/*</url-pattern>
         <url-pattern>/article/*</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.SearchServlet</servlet-class>
@@ -51,7 +51,6 @@
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search/*</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>ForwardServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.ForwardServlet</servlet-class>
@@ -108,7 +107,6 @@
         <servlet-name>FavoritesServlet</servlet-name>
         <url-pattern>/fav</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>IndexServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.IndexServlet</servlet-class>
@@ -116,6 +114,10 @@
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LocalFileServlet</servlet-name>
+        <url-pattern>/lf</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

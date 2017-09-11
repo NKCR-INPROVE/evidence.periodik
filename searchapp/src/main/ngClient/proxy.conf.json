@@ -39,6 +39,15 @@
     "changeOrigin": false,
     "secure": false
   },
+  "/lf": {
+    "target": "http://localhost:8084/k5journals/lf",
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/lf":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  },
   "/login": {
     "target": "http://localhost:8084/k5journals/login",
     "logLevel": "debug",

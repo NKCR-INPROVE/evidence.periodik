@@ -11,6 +11,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -79,6 +81,35 @@ public class LocalFileServlet extends HttpServlet {
   }
 
   enum Actions {
+    LIST {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+
+        resp.setContentType("application/json;charset=UTF-8");
+
+        PrintWriter out = resp.getWriter();
+        JSONObject json = new JSONObject();
+        try {
+
+          String path = InitServlet.CONFIG_DIR + File.separator + "texts" + File.separator + "files";
+          
+          File folder = new File(path);
+          File[] listOfFiles = folder.listFiles();
+
+          for (File file : listOfFiles) {
+              if (file.isFile()) {
+                json.append("files", file.getName());
+              }
+          }
+
+
+        } catch (Exception ex) {
+          LOGGER.log(Level.SEVERE, "error during file upload. Error: {0}", ex);
+          json.put("error", ex.toString());
+        }
+        out.println(json.toString(2));
+      }
+    },
     UPLOAD {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse resp) throws Exception {
@@ -147,7 +178,7 @@ public class LocalFileServlet extends HttpServlet {
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try (OutputStream out = response.getOutputStream()) {
-          String filename = request.getParameter("id");
+          String filename = request.getParameter("filename");
           String path = InitServlet.CONFIG_DIR + File.separator + "texts" + File.separator + "files";
           File f = new File(path + File.separator + filename);
           if (f.exists()) {

@@ -41,7 +41,9 @@
             </ul>
           </div><!--/.col -->
           <div class="col-xs-9">
-            <h3>{{selected}} <span class="app-brand-text text-darken-1">({{state.currentLang}})</span></h3>
+            <h3>{{selected}} <span class="app-brand-text text-darken-1">({{state.currentLang}})</span>
+              
+            </h3>
             <div *ngIf="saved" class="alert alert-success" role="alert">
               {{'text.save-note-1' | translate}} <strong>{{selected}} ({{state.currentLang}})</strong> {{'text.save-note-2' | translate}}!
             </div>
@@ -64,3 +66,30 @@
     </div><!--/.row -->
   </div><!--/.container -->
 </section>
+
+<ng-template #filesModal>
+</ng-template>
+
+  <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Files' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeFiles()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span><input type="file" ng2FileSelect [uploader]="uploader" (onCompleteAll)="uploaded()" />
+               <button type="button" class="btn btn-success btn-s"
+                        (click)="uploadFile()" [disabled]="!uploader.getNotUploadedItems().length">
+                    <span class="glyphicon glyphicon-upload"></span>Upload</button>
+                  
+              </span>
+        <ul>
+          <li *ngFor="let f of fileList"><a (click)="selectFile(f)">{{f}}</a></li>
+        </ul>
+      </div>
+      </div>
+      </div>
+</div>

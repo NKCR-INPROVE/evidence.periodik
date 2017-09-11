@@ -434,6 +434,14 @@ export class AppService {
     });
   }
 
+  getUploadedFiles(): Observable<any> {
+    var url = 'lf?action=LIST';
+
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    }).catch(error => { return Observable.of('error gettting content: ' + error); });
+  }
+
   getText(id: string): Observable<string> {
     var url = 'texts?action=LOAD&id=' + id + '&lang=' + this.state.currentLang;
 

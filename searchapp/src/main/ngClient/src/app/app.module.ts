@@ -14,6 +14,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { NouisliderModule } from 'ng2-nouislider';
 
+import { FileSelectDirective } from 'ng2-file-upload';
+
 import { AppState } from './app.state';
 import { AppService } from './services/app.service';
 import { SearchService } from './services/search.service';
@@ -60,6 +62,7 @@ export function createTranslateLoader(http: Http) {
 
 @NgModule({
   declarations: [
+  FileSelectDirective,
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -99,6 +102,7 @@ export function createTranslateLoader(http: Http) {
     TypeaheadModule.forRoot(),
     TooltipModule.forRoot(),
     AlertModule.forRoot(),
+    
     TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

@@ -1,8 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+
+
+import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { FileUploader } from 'ng2-file-upload';
 
 import { AppService } from '../../services/app.service';
 import { AppState } from '../../app.state';
+
 
 declare var tinymce: any;
 
@@ -18,7 +24,15 @@ interface menuItem {
 })
 export class AdminComponent implements OnInit, OnDestroy {
 
+  @ViewChild('filesModal') filesModal;
+  @ViewChild('childModal') public childModal: ModalDirective;
+
+
   subscriptions: Subscription[] = [];
+
+  public uploader: FileUploader = new FileUploader({ url: 'lf?action=UPLOAD' });
+
+  public modalRef: BsModalRef;
 
   menu: any[] = [];
   selected: string = 'home';
@@ -29,6 +43,9 @@ export class AdminComponent implements OnInit, OnDestroy {
   elementId: string = 'editEl';
   editor;
   
+  fileList: string[];
+selectedFile: string;
+
   indexUUID: string;
   indexed: boolean = false;
 
@@ -37,7 +54,8 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   constructor(
     public state: AppState,
-    private service: AppService) { }
+    private service: AppService,
+    private modalService: BsModalService) { }
 
   ngAfterViewInit() {
     if (this.state.config) {
@@ -48,34 +66,54 @@ export class AdminComponent implements OnInit, OnDestroy {
       }));
     }
   }
-  
-  initData(){
-    
-      this.fillMenu();
-      this.subscriptions.push(this.service.langSubject.subscribe(val => {
-        this.getText();
-      }));
-    
+
+  initData() {
+
+    this.fillMenu();
+    this.subscriptions.push(this.service.langSubject.subscribe(val => {
+      this.getText();
+    }));
+
   }
-  
-  initTiny(){
-    
+
+  initTiny() {
+    this.uploader.onSuccessItem = (item, response, status, headers) => this.uploaded();
+
     var that = this;
     tinymce.init({
       selector: '#' + this.elementId,
       menubar: false,
       plugins: ['link', 'paste', 'table', 'save', 'code', 'image'],
-      toolbar: 'save | undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code',
-      skin_url: this.state.config['context'] +  'assets/skins/lightgray',
+      toolbar: 'save | undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code mybutton',
+      skin_url: this.state.config['context'] + 'assets/skins/lightgray',
       setup: editor => {
         this.editor = editor;
         this.initData();
+        editor.addButton('mybutton', {
+          tooltip: 'Insert link to file',
+          icon: 'upload',
+          //icon: false,
+          onclick: function() {
+            that.browseFiles();
+            //editor.insertContent('&nbsp;<b>It\'s my button!</b>&nbsp;');
+          }
+        });
+      },
+      /*
+      file_picker_types: 'file image media',
+
+      file_picker_callback: function(cb, value, meta) {
+        console.log(cb, value, meta);
+        that.browseFiles();
+      },
+      file_browser_callback: function(field_name, url, type, win) {
+        that.win = win;
+        that.field_name = field_name;
+        console.log(win);
+        that.browseFiles();
+        //win.document.getElementById(field_name).value = 'my browser value';
       },
       
-      file_browser_callback: function(field_name, url, type, win) {
-        console.log('ss', url);
-        win.document.getElementById(field_name).value = 'my browser value';
-      },
       images_upload_handler: function (blobInfo, success, failure) {
         console.log(blobInfo);
         var xhr: XMLHttpRequest;
@@ -103,7 +141,6 @@ export class AdminComponent implements OnInit, OnDestroy {
         formData.append('file', blobInfo.blob(), blobInfo.filename());
         xhr.send(formData);
       },
-      file_picker_types: 'file image media',
 
       file_picker_callback: function(cb, value, meta) {
         var input = document.createElement('input');
@@ -133,7 +170,7 @@ export class AdminComponent implements OnInit, OnDestroy {
             blobCache.add(blobInfo);
 
             // call the callback and populate the Title field with the file name
-            
+            console.log(cb);
             cb(blobInfo.blobUri(), { title: file.name });
           };
         };
@@ -141,8 +178,8 @@ export class AdminComponent implements OnInit, OnDestroy {
         input.click();
       },
 
-
-      save_oncancelcallback: function () { console.log('Save canceled'); },
+*/
+      save_oncancelcallback: function() { console.log('Save canceled'); },
       save_onsavecallback: () => this.save()
     });
   }
@@ -152,7 +189,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((s: Subscription) => {
       s.unsubscribe();
     });
-    this.subscriptions = [];              
+    this.subscriptions = [];
     tinymce.remove(this.editor);
   }
 
@@ -163,8 +200,8 @@ export class AdminComponent implements OnInit, OnDestroy {
 
     this.getText();
   }
-  
-  getText(){
+
+  getText() {
     this.service.getText(this.selected).subscribe(t => {
       this.text = t;
       this.editor.setContent(this.text);
@@ -183,12 +220,12 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    
-          const content = this.editor.getContent();
-//          console.log(content);
-//          if(1<2){
-//            return;
-//          }
+
+    const content = this.editor.getContent();
+    //          console.log(content);
+    //          if(1<2){
+    //            return;
+    //          }
     let m = null;
     if (this.visibleChanged) {
       let menuToSave = {};
@@ -207,12 +244,42 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.visibleChanged = true;
     //console.log(this.menu);
   }
-  
-  index(){
-    this.service.index(this.indexUUID).subscribe(res =>{
+
+  index() {
+    this.service.index(this.indexUUID).subscribe(res => {
       console.log(res);
       this.indexed = !res.hasOwnProperty('error');
     });
+  }
+  
+  uploadFile(){
+    this.uploader.uploadAll();
+  }
+  
+  uploaded(){
+    this.service.getUploadedFiles().subscribe(res => {
+      this.fileList = res['files'];
+    })
+  }
+
+public selectFile(f: string){
+    this.selectedFile = f;
+  
+    this.childModal.hide();
+    this.editor.insertContent('&nbsp;<a target="_blank" href="lf?action=GET_FILE&filename=' + this.selectedFile + '">' + this.selectedFile + '</a>&nbsp;');
+}
+
+  public browseFiles() {
+    this.service.getUploadedFiles().subscribe(res => {
+      this.fileList = res['files'];
+    })
+    
+    this.childModal.show();
+  }
+
+  public closeFiles() {
+    this.childModal.hide();
+    //this.editor.insertContent('&nbsp;<b>' + this.selectedFile + '</b>&nbsp;');
   }
 
 }

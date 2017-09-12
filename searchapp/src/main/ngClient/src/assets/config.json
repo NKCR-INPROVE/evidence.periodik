@@ -41,7 +41,8 @@
       {"route": "caste-dotazy", "visible":false}
     ]},
   "e-shop": {"visible": true},
-  "kontakt": {"visible": true}
+  "kontakt": {"visible": true},
+  "news": {"visible": true}
 
   },
   "hiddenGenres":["cover", "advertisement", "colophon"]

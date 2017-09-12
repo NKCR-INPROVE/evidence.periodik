@@ -31,7 +31,7 @@
       </div><!--/.col -->
       <div class="col-xs-12 col-sm-8 col-md-9 app-col-right">
         <app-free-text [page]="'home'"></app-free-text>
-        <div class="app-card z-depth-3">
+        <div *ngIf="state.config && state.config.menu['news'].visible" class="app-card z-depth-3">
           <div>
             <span>{{'home_news' | translate }}:</span>
           </div>

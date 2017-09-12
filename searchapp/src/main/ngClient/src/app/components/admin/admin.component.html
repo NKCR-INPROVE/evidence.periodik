@@ -11,11 +11,14 @@
                 <strong>
                   <a (click)="select('home', null)">{{'menu.home_' | translate}}</a>
                 </strong>
+                <!--
                 <ul class="nav-pills nav-stacked">
                   <li role="app-page-nav" [class.active]="selected === 'home/news'">
                       <a (click)="select('home', 'news')">{{'menu.home.news_' | translate}}</a> 
+                      <input type="checkbox" [(ngModel)]="menu['news'].visible" (change)="changeVisible()" />
                   </li>
                 </ul>
+                -->
               </li>
               <li role="app-page-nav"  *ngFor="let m of menu" [class.active]="selected === m.label">
                 <strong>

@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   
   currentLang: string = 'cs';
-  menu: any = {};
+  menu: any = null;
 
   constructor(
   public state: AppState,

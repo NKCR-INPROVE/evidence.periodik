@@ -195,7 +195,8 @@ selectedFile: string;
 
   fillMenu() {
     for (let m in this.state.config['menu']) {
-      this.menu.push({ label: m, menu: this.state.config['menu'][m] })
+      this.menu.push({ label: m, menu: this.state.config['menu'][m]['submenu'], visible: this.state.config['menu'][m]['visible'] })
+      //this.menu = this.state.config['menu'];
     }
 
     this.getText();
@@ -230,7 +231,7 @@ selectedFile: string;
     if (this.visibleChanged) {
       let menuToSave = {};
       for (let i = 0; i < this.menu.length; i++) {
-        menuToSave[this.menu[i].label] = this.menu[i].menu;
+        menuToSave[this.menu[i].label] = {submenu:this.menu[i].menu, visible:this.menu[i].visible};
       }
       m = JSON.stringify(menuToSave);
     }

@@ -18,7 +18,9 @@
     { "label": "podle názvu A-Z", "field": "title_sort asc" }
   ],
   "menu":{
-    "o-casopisu":[
+    "o-casopisu":{
+      "visible": true,
+      "submenu":[
       {"route": "redakce", "visible":true},
       {"route": "open-access", "visible":true},
       {"route": "zapojeni", "visible":true},
@@ -27,15 +29,19 @@
       {"route": "fotogslerie", "visible":false},
       {"route": "oznameni-sefredaktora", "visible":false},
       {"route": "pripravujeme", "visible":false}
-    ],
-    "pro-autory":[
+    ]},
+    "pro-autory":{
+      "visible": true,
+      "submenu":[
       {"route": "recenzni-rizeni", "visible":true},
       {"route": "citacni-pravidla", "visible":true},
       {"route": "publikacni-etika", "visible":true},
       {"route": "recenzenti", "visible":false},
       {"route": "odkazy", "visible":false},
       {"route": "caste-dotazy", "visible":false}
-    ]
+    ]},
+  "e-shop": {"visible": true},
+  "kontakt": {"visible": true}
 
   },
   "hiddenGenres":["cover", "advertisement", "colophon"]

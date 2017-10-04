@@ -1,0 +1,15 @@
+// --- ROOT STYLE ---
+
+@import "sass/app-pallete";
+@import "sass/app-color";
+
+@import "sass/app-variables";
+
+@import "../node_modules/materialize-css/sass/materialize.scss";
+@import "../node_modules/mdi/scss/materialdesignicons.scss";
+
+@import "sass/app-mixins";
+@import "sass/app-global";
+@import "sass/app-header";
+@import "sass/app-facets";
+@import "sass/app-footer";

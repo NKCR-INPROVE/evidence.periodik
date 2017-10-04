@@ -1,0 +1,59 @@
+// --- GLOBAL ---
+
+html {
+  height: 100%;
+}
+
+body, 
+app-root {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  color: $primary-color !important;
+  
+  > .preloader-wrapper {
+    margin-top: 100px;
+  }
+}
+
+main {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  flex: 1 0 auto;
+  width: 100%;
+  position: relative;
+  //min-height: 500px;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+
+// cleaners
+.app-clean-mg {
+  margin: 0 !important;
+}
+
+.app-clean-pd {
+  padding: 0 !important;
+}
+
+
+// clearfix
+.clearfix {
+  @include clearfix();
+}
+
+
+// others
+.app-cursor-pointer {
+  cursor: pointer;
+}

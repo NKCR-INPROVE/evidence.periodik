@@ -1,0 +1,18 @@
+// --- VARIABLES --
+
+// font path
+$roboto-font-path: "assets/fonts/roboto/" !default;
+$mdi-font-path: "assets/fonts" !default;
+
+// colors
+$primary-color: color("cyan", "darken-1") !default;
+$primary-color-light: lighten($primary-color, 15%) !default;
+$primary-color-dark: darken($primary-color, 15%) !default;
+
+$secondary-color: color("grey", "darken-3") !default;
+
+// collapsible
+$collapsible-header-color: color("grey", "lighten-4") !default;
+
+// footer
+$footer-bg-color: color("grey", "darken-3") !default;

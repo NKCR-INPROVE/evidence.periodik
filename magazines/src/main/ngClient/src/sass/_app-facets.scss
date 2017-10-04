@@ -1,0 +1,34 @@
+// --- FACETS ---
+
+app-facets {
+  .collapsible {
+    .collapsible-header {
+      //background-color: $app-brand-l-6;
+      position: relative;
+      
+      .mdi-chevron-down, .mdi-chevron-left, .mdi-close-circle {
+        position: absolute;
+        top: 0;
+        right: 15px;
+      }
+      
+      .mdi-chevron-down {
+        display: none;
+      }
+      .mdi-chevron-left {
+        display: block;
+      }
+      &.active {
+        .mdi-chevron-down {
+          display: block;
+        }
+        .mdi-chevron-left {
+          display: none;
+        }
+      }
+    }
+    .collapsible-body {
+      @extend .app-clean-pd;
+    }
+  }
+}

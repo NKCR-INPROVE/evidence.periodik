@@ -1,0 +1,21 @@
+<mz-navbar>
+  <div class="container">
+    <a href="/" class="brand-logo">
+      Digitální knihovna AV ČR <span class="cyan-text text-lighten-4">|</span> <span class="cyan-text text-lighten-4">online časopisy</span>
+    </a><!--/.brand-logo -->
+    <mz-navbar-item-container [align]="'right'">
+      <mz-navbar-item routerLink="seznam-casopisu" routerLinkActive="active" #seznamCasopisu="routerLinkActive" [active]="seznamCasopisu.isActive">
+        <a routerLink="seznam-casopisu" title="Seznam časopisů">Seznam časopisů</a>
+      </mz-navbar-item>
+      <mz-navbar-item routerLink="o-projektu" routerLinkActive="active" #oProjektu="routerLinkActive" [active]="oProjektu.isActive">
+        <a routerLink="o-projektu" title="O projektu">O projektu</a>
+      </mz-navbar-item>
+      <mz-navbar-item routerLink="vydavatele" routerLinkActive="active" #vydavatele="routerLinkActive" [active]="vydavatele.isActive">
+        <a routerLink="vydavatele" title="Vydavatelé">Vydavatelé</a>
+      </mz-navbar-item>
+      <mz-navbar-item routerLink="kontakt" routerLinkActive="active" #kontakt="routerLinkActive" [active]="kontakt.isActive">
+        <a routerLink="kontakt" title="Kontakt">Kontakt</a>
+      </mz-navbar-item>
+    </mz-navbar-item-container>
+  </div><!--/.container -->
+</mz-navbar>

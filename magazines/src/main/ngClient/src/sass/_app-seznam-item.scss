@@ -1,0 +1,27 @@
+// --- SEZNAM ITEM ---
+
+app-seznam-item,
+app-vydavatele-detail {
+  .card {
+    margin: 0 0 20px 0;
+    @extend .app-card-shadow;
+    @extend .app-card-hoverable;
+    @extend .app-card-border;
+    
+    &:first-child {
+      margin-top: 10px;
+    }
+    
+    .card-content {
+      .row {
+        .col:first-child {
+          padding-left: 0;
+        }
+      }
+    }
+    
+    .app-card-detail {
+      margin-top: 10px;
+    }
+  }
+}

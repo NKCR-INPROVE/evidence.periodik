@@ -3,6 +3,7 @@
 app-header {
   nav {
     margin-bottom: 20px;
+    @extend .z-depth-0;
     
     .brand-logo {
       font-size: 1.6rem;

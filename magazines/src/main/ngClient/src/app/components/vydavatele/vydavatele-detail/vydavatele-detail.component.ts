@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-seznam-item',
-  templateUrl: './seznam-item.component.html',
-  styleUrls: ['./seznam-item.component.scss']
+  selector: 'app-vydavatele-detail',
+  templateUrl: './vydavatele-detail.component.html',
+  styleUrls: ['./vydavatele-detail.component.scss']
 })
-export class SeznamItemComponent implements OnInit {
+export class VydavateleDetailComponent implements OnInit {
   
   showingDetail: boolean = false;
- 
-  // --- PRO TESTOVANI, POTOM VYMAZAT --- !!!!
+  
+    // --- PRO TESTOVANI, POTOM VYMAZAT --- !!!!
   result = [
     {
       id: 1, 
@@ -67,7 +67,7 @@ export class SeznamItemComponent implements OnInit {
     }
   ]
   // --- PRO TESTOVANI, POTOM VYMAZAT --- !!!!
-  
+
   constructor() { }
 
   ngOnInit() {

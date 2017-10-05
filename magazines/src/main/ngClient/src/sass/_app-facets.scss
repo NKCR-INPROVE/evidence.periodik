@@ -1,10 +1,16 @@
 // --- FACETS ---
 
-app-facets {
+app-facets, 
+app-facets-used {
   .collapsible {
+    margin: 0 0 20px 0;
+    @extend .app-card-shadow;
+    @extend .app-card-hoverable;
+    @extend .app-card-border;
+    
     .collapsible-header {
-      //background-color: $app-brand-l-6;
       position: relative;
+      color: color("grey", "darken-1");
       
       .mdi-chevron-down, .mdi-chevron-left, .mdi-close-circle {
         position: absolute;

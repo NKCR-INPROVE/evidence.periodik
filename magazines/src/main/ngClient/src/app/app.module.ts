@@ -13,9 +13,11 @@ import { VydavateleComponent } from './components/vydavatele/vydavatele.componen
 import { KontaktComponent } from './components/kontakt/kontakt.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { FacetsComponent } from './components/facets/facets.component';
+import { FacetsComponent } from './components/seznam-casopisu/facets/facets.component';
 import { SeznamItemComponent } from './components/seznam-casopisu/seznam-item/seznam-item.component';
 import { SortBarComponent } from './components/seznam-casopisu/sort-bar/sort-bar.component';
+import { FacetsUsedComponent } from './components/seznam-casopisu/facets-used/facets-used.component';
+import { VydavateleDetailComponent } from './components/vydavatele/vydavatele-detail/vydavatele-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { SortBarComponent } from './components/seznam-casopisu/sort-bar/sort-bar
     FooterComponent,
     FacetsComponent,
     SeznamItemComponent,
-    SortBarComponent
+    SortBarComponent,
+    FacetsUsedComponent,
+    VydavateleDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,8 @@ import { SortBarComponent } from './components/seznam-casopisu/sort-bar/sort-bar
     RouterModule.forRoot([
       { path: 'seznam-casopisu', component: SeznamCasopisuComponent },
       { path: 'o-projektu', component: OProjektuComponent },
-      { path: 'vydavatele', component: VydavateleComponent },
+      { path: 'vydavatele', component: VydavateleComponent},
+      { path: 'vydavatele-detail', component: VydavateleDetailComponent},
       { path: 'kontakt', component: KontaktComponent },
       { path: '', redirectTo: 'seznam-casopisu', pathMatch: 'full' }
     ])

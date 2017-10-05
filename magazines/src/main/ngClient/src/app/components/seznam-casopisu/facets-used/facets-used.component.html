@@ -1,0 +1,16 @@
+<mz-collapsible [mode]="'expandable'">
+  <mz-collapsible-item [active]="true">
+    <mz-collapsible-item-header>
+      <strong>Aktivni filtry</strong>
+      <i mz-icon-mdi [icon]="'close-circle'" [class]="'app-clean-mg'"></i>
+    </mz-collapsible-item-header>
+    <mz-collapsible-item-body>
+      <mz-collection>
+        <mz-collection-item *ngFor="let facetUsed of facetsUsed">
+          {{facetUsed.item}}
+          <i mz-icon-mdi [icon]="'close'" [class]="'app-clean-mg app-cursor-pointer right red-text'"></i>
+        </mz-collection-item>
+      </mz-collection>
+    </mz-collapsible-item-body>
+  </mz-collapsible-item>
+</mz-collapsible>

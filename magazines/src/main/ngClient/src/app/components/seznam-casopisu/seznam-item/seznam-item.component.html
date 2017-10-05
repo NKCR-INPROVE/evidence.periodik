@@ -1,12 +1,54 @@
-<mz-card [hoverable]="true">
-  <mz-card-title>
-    Card Title
-  </mz-card-title>
+<mz-card *ngFor="let resultItem of result" [hoverable]="true" [textClass]="'grey-text text-darken-1'">
   <mz-card-content>
-    I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.
+    <div class="row app-clean-mg">
+      <div class="col s2">
+        <img [src]="'/assets/img/' + resultItem.img" alt="thumb" class="responsive-img" />
+      </div>
+      <div class="col s10">
+        <h5 class="grey-text text-darken-4">{{resultItem.title}}</h5>
+        <div>
+          <label>Vydavatel:</label>
+          <a href="#!" title="{{resultItem.vydavatel}}">{{resultItem.vydavatel}}</a>
+        </div>
+        <div>
+          <label>Oblast:</label>
+          <a href="#!" title="{{resultItem.oblast}}">{{resultItem.oblast}}</a>
+        </div>
+        <div>
+          <label>ISSN:</label>
+          {{resultItem.ISSN}}
+        </div>
+        <div>
+          <label>Klíčová slova:</label>
+          <span *ngFor="let keyword of resultItem.keywords">
+            <a href="#!" title="{{keyword.item}}">{{keyword.item}}</a>, 
+          </span>
+        </div>
+        <div>
+          <label>Přístup:</label>
+          <a href="#!" title="{{resultItem.pristup}}">{{resultItem.pristup}}</a>
+        </div>
+        <div>
+          <label>Kontakt:</label>
+          <a href="mailto: {{resultItem.kontakt}}" title="{{resultItem.kontakt}}">{{resultItem.kontakt}}</a>
+        </div>
+      </div><!--/.col -->
+    </div><!--/.row -->
+    
+    <div class="app-card-detail" [attr.id]="'app-card-detail-' + resultItem.id" style="display:none;">
+      {{resultItem.desc}}
+    </div>
   </mz-card-content>
   <mz-card-action class="clearfix">
-    <a href="#" class="left cyan-text text-darken-2">Vstup na web</a>
-    <a href="#" class="right app-clean-mg">Více informací</a>
+    <a href="{{resultItem.web}}" mz-tooltip [tooltip]="resultItem.web" [position]="'top'" class="left cyan-text text-darken-1" target="_blank">
+      <i class="app-mdi-open-in-new"></i>
+      Vstup na web
+    </a>
+    <a *ngIf="showingDetail" class="right app-clean-mg" (click)="toggleDetail('app-card-detail-' + resultItem.id)">
+      Méně informací
+    </a>
+    <a *ngIf="!showingDetail" class="right app-clean-mg" (click)="toggleDetail('app-card-detail-' + resultItem.id)">
+      Více informací
+    </a>
   </mz-card-action>
 </mz-card>

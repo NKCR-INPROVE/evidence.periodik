@@ -27,13 +27,17 @@ main {
   flex: 1 0 auto;
   width: 100%;
   position: relative;
-  //min-height: 500px;
+  min-height: 500px;
+  
+  a:hover {
+    opacity: 0.6;
+  }
 }
 
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
-  margin-bottom: 20px;
+  font-weight: 300;
 }
 
 
@@ -53,7 +57,33 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+// loading ico
+.preloader-wrapper {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
 // others
+a, 
 .app-cursor-pointer {
   cursor: pointer;
+}
+
+
+// card
+.app-card-shadow {
+  box-shadow: 0 2px 2px 0 rgba(38, 50, 56, 0), 0 1px 5px 0 rgba(38, 50, 56, 0.1), 0 3px 1px -20px rgba(38, 50, 56, 0.1);
+}
+
+.app-card-border {
+  @include set-border(all, 1, solid, #d5dfe3);
+}
+
+.app-card-hoverable {
+  &.hoverable {
+    &:hover {
+      box-shadow: 0 8px 17px 0 rgba(38, 50, 56, 0.1), 0 6px 20px 0 rgba(38, 50, 56, 0.19);
+    }
+  }
 }

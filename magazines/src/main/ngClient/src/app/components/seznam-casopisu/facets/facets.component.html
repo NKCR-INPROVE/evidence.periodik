@@ -1,14 +1,14 @@
-<mz-collapsible [mode]="'expandable'">
-  <mz-collapsible-item [active]="true" *ngFor="let facet of facets">
+<mz-collapsible [mode]="'expandable'" *ngIf="active">
+  <mz-collapsible-item [active]="true" *ngFor="let facet of state.facets">
     <mz-collapsible-item-header>
-      <strong>{{facet.title}}</strong>
+      <strong>{{facet.field | translate}}</strong>
       <i mz-icon-mdi [icon]="'chevron-down'" [class]="'app-clean-mg'"></i>
       <i mz-icon-mdi [icon]="'chevron-left'" [class]="'app-clean-mg'"></i>
     </mz-collapsible-item-header>
     <mz-collapsible-item-body>
       <mz-collection>
-        <mz-collection-item *ngFor="let facetItem of facet.items">
-          <a>{{facetItem.item}}</a>
+        <mz-collection-item *ngFor="let facetItem of facet.values">
+          <a (click)="addFilter(facet.field, facetItem[0])">{{facetItem[0]}}</a>
         </mz-collection-item>
       </mz-collection>
     </mz-collapsible-item-body>

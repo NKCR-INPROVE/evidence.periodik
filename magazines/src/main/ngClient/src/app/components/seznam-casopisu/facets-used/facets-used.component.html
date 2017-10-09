@@ -1,13 +1,14 @@
-<mz-collapsible [mode]="'expandable'">
+<mz-collapsible [mode]="'expandable'" *ngIf="state.filters.length > 0">
   <mz-collapsible-item [active]="true">
     <mz-collapsible-item-header>
       <strong>Aktivní filtry</strong>
-      <i mz-icon-mdi [icon]="'close-circle'" [class]="'app-clean-mg'" mz-tooltip [tooltip]="'Zrušit všechny filtry'" [position]="'top'"></i>
+      <i mz-icon-mdi [icon]="'close-circle'" [class]="'app-clean-mg'" mz-tooltip [tooltip]="'Zrušit všechny filtry'" [position]="'top'"
+         (click)="removeAllFilters()"></i>
     </mz-collapsible-item-header>
     <mz-collapsible-item-body>
       <mz-collection>
-        <mz-collection-item *ngFor="let facetUsed of facetsUsed">
-          {{facetUsed.item}}
+        <mz-collection-item *ngFor="let facetUsed of state.filters; let idx = index;">
+          <a (click)="removeFilter(idx)">{{facetUsed.field}}: {{facetUsed.value}}</a>
           <i mz-icon-mdi [icon]="'close'" [class]="'app-clean-mg app-cursor-pointer right red-text'" mz-tooltip [tooltip]="'Zrušit tento filtr'" [position]="'top'"></i>
         </mz-collection-item>
       </mz-collection>

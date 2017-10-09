@@ -1,0 +1,56 @@
+[
+    
+    {
+      id: 1, 
+      title: "Právník",
+      img: "thumb-dejiny.png", 
+      vydavatel: "Knihovna AV ČR, v. v. i.", 
+      oblast: "Sociálně-ekonomické vědy", 
+      issn: "1210-8510", 
+      pristup: "Open Access", 
+      kontakt: "kvo@knav.cz", 
+      keywords: [
+        "knihověda", 
+        "dějiny knihy",
+        "dějiny knihtisku",
+        "dějiny knihoven"
+      ],
+      desc: "Časopis je zaměřen na zveřejňování výsledků bádání v oblasti dějin knihy, knihtisku a knihoven v Čechách a na Moravě s časovým omezením do poloviny 19. století. Vedle pramenných a materiálových studií časopis uveřejňuje recenze a zprávy o domácí a zahraniční knihovědné produkci a informuje o konferencích a výstavách k dané tematice.",
+      web: "http://www.incad.cz"
+    },
+    {
+      id: 2,
+      title: "Toto je test dlouhého titulku",
+      img: "thumb-steve.png",
+      vydavatel: "Knihovna AV ČR, v. v. i.", 
+      oblast: "Aplikovaná fyzika", 
+      issn: "1210-8510", 
+      pristup: "Omezeně / S embargem", 
+      kontakt: "kvo@knav.cz", 
+      keywords: [
+         "knihověda", 
+         "dějiny knihy",
+         "dějiny knihtisku"
+      ],
+      desc: "Časopis je zaměřen na zveřejňování výsledků bádání v oblasti dějin knihy, knihtisku a knihoven v Čechách a na Moravě s časovým omezením do poloviny 19. století. Vedle pramenných a materiálových studií časopis uveřejňuje recenze a zprávy o domácí a zahraniční knihovědné produkci a informuje o konferencích a výstavách k dané tematice.",
+      web: "http://www.incad.cz"
+    },
+    {
+      id: 3,
+      title: "Věda a technika", 
+      img: "thumb-adiktologie.png",
+      vydavatel: "Knihovna AV ČR, v. v. i.", 
+      oblast: "Matematika, fyzika a informatika", 
+      issn: "1210-8510", 
+      pristup: "Open Access", 
+      kontakt: "kvo@knav.cz", 
+      keywords: [ 
+        "dějiny knihy",
+        "dějiny knihtisku",
+        "dějiny knihoven"
+      ],
+      desc: "Časopis je zaměřen na zveřejňování výsledků bádání v oblasti dějin knihy, knihtisku a knihoven v Čechách a na Moravě s časovým omezením do poloviny 19. století. Vedle pramenných a materiálových studií časopis uveřejňuje recenze a zprávy o domácí a zahraniční knihovědné produkci a informuje o konferencích a výstavách k dané tematice.",
+      web: "http://www.incad.cz"
+    }
+  
+  ]

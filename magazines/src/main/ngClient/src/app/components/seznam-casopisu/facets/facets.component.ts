@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+
+import {AppState} from '../../../app.state';
+import {AppService} from '../../../app.service';
 
 @Component({
   selector: 'app-facets',
@@ -7,35 +11,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FacetsComponent implements OnInit {
   
-  // --- PRO TESTOVANI, POTOM VYMAZAT --- !!!!
-  facets = [
-    {id: 1, title: "Přístup",
-      items: [
-        {item: "Open Access"},
-        {item: "Omezeně / S embargem"}
-      ]
-    },
-    {id: 2, title: "Oblast (sekce AV)",
-      items: [
-        {item: "Aplikovaná fyzika"},
-        {item: "Matematika, fyzika a informatika"},
-        {item: "Vědy o Zemi"},
-        {item: "Chemické vědy"}
-      ]
-    },
-    {id: 3, title: "Klíčová slova",
-      items: [
-        {item: "knihověda"},
-        {item: "dějiny knihy"},
-        {item: "dějiny knihtisku"},
-      ]
-    }
-  ]
-  // --- PRO TESTOVANI, POTOM VYMAZAT --- !!!!
-
-  constructor() { }
+  subscriptions: Subscription[] = [];
+  active : boolean = false;
+  
+  constructor(public state: AppState, private service: AppService) {
+    this.active = this.state.facets.length > 0;
+    this.subscriptions.push(this.state.stateChangedSubject.subscribe((st) => {
+      setTimeout(() => {
+        this.active = true;
+      }, 100);
+      
+    }));
+  }
 
   ngOnInit() {
+    
+  }
+
+  ngOnDestroy() {
+    this.active = false;
+    this.subscriptions.forEach((s: Subscription) => {
+      s.unsubscribe();
+    });
+    this.subscriptions = [];
+  }
+  
+  addFilter(field: string, value: string){
+    this.state.addFilter(field, value);
+    this.service.getIssues().subscribe();
   }
 
 }

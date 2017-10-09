@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+
+import {AppState} from '../../../app.state';
+import {AppService} from '../../../app.service';
+
 
 @Component({
   selector: 'app-facets-used',
@@ -7,16 +12,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FacetsUsedComponent implements OnInit {
   
-  // --- PRO TESTOVANI, POTOM VYMAZAT --- !!!!
-  facetsUsed = [
-    {id: 1, item: "dějiny knihoven"},
-    {id: 2, item: "stát"}
-  ]
-  // --- PRO TESTOVANI, POTOM VYMAZAT --- !!!!
+  subscriptions: Subscription[] = [];
 
-  constructor() { }
+  constructor(public state: AppState, private service: AppService) { }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((s: Subscription) => {
+      s.unsubscribe();
+    });
+    this.subscriptions = [];
+  }
+  
+  removeFilter(idx: number){
+    this.state.removeFilter(idx);
+    this.service.getIssues().subscribe();
+  }
+  
+  removeAllFilters(){
+    this.state.filters = [];
+    this.service.getIssues().subscribe();
   }
 
 }

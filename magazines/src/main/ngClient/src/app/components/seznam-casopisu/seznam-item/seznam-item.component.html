@@ -1,4 +1,4 @@
-<mz-card *ngFor="let resultItem of result" [hoverable]="true" [textClass]="'grey-text text-darken-1'">
+<mz-card [hoverable]="true" [textClass]="'grey-text text-darken-1'">
   <mz-card-content>
     <div class="row app-clean-mg">
       <div class="col s2">
@@ -16,12 +16,12 @@
         </div>
         <div>
           <label>ISSN:</label>
-          {{resultItem.ISSN}}
+          {{resultItem.issn}}
         </div>
         <div>
           <label>Klíčová slova:</label>
           <span *ngFor="let keyword of resultItem.keywords">
-            <a href="#!" title="{{keyword.item}}">{{keyword.item}}</a>, 
+            <a href="#!" title="{{keyword}}">{{keyword}}</a>, 
           </span>
         </div>
         <div>

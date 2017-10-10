@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>cz.incad.k5journals</groupId>
+  <artifactId>magazines</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>magazines</name>
+
+  <properties>
+    <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+    
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.solr</groupId>
+      <artifactId>solr-solrj</artifactId>
+      <version>6.5.0</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>pdfbox</artifactId>
+      <version>2.0.4</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-web-api</artifactId>
+      <version>7.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20140107</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+      <type>jar</type>
+    </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+            <type>jar</type>
+        </dependency>
+
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.5</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>exec-npm-install</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <executable>npm</executable>
+              <workingDirectory>${project.basedir}/src/main/ngClient/dist</workingDirectory>  
+              <arguments>
+                <argument>run</argument>
+                <argument>build.prod</argument>
+              </arguments>
+            </configuration>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${project.basedir}/src/main/webapp</directory>
+              <includes>
+                <include>*.bundle.css</include>
+                <include>*.bundle.js</include>
+                <include>*.bundle.js.gz</include>
+                <include>*.bundle.map</include>
+                <include>index.html</include>
+                <include>assets/*/**</include>
+              </includes>
+              <excludes>
+                <exclude>index.jsp</exclude>
+              </excludes>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          
+          <execution>
+            <id>copy-frontend-resources</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.basedir}/src/main/webapp</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/ngClient/dist</directory>
+                  <includes>
+                    <include>*/**</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          
+    
+        </executions>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+    
+      <!-- Insert jsp pageEncoding tag to index.html -->
+      <plugin> 
+        <groupId>com.google.code.maven-replacer-plugin</groupId> 
+        <artifactId>replacer</artifactId> 
+        <version>1.5.3</version> 
+        <executions> 
+          <execution> 
+            <id>replace-for-index</id>
+            <phase>prepare-package</phase> 
+            <goals> 
+              <goal>replace</goal> 
+            </goals>  
+            <configuration> 
+              <file>${project.basedir}/src/main/webapp/index.html</file> 
+              <replacements> 
+                <replacement> 
+                  <token>&lt;!doctype html&gt;</token> 
+                  <value>&lt;%@page contentType="text/html" pageEncoding="UTF-8"%&gt;&lt;!doctype html&gt;</value> 
+                </replacement> 
+                <replacement> 
+                  <token>base href="/"</token> 
+                  <value>base href="/magazines/"</value> 
+                </replacement> 
+              </replacements> 
+            </configuration> 
+          </execution> 
+	  
+          <execution> 
+            <id>replace-for-config</id>
+            <phase>prepare-package</phase> 
+            <goals> 
+              <goal>replace</goal> 
+            </goals>  
+            <configuration> 
+              <file>${project.basedir}/src/main/webapp/assets/config.json</file> 
+              <replacements> 
+                <replacement> 
+                  <token>&lt;!doctype html&gt;</token> 
+                  <value>&lt;%@page contentType="text/html" pageEncoding="UTF-8"%&gt;&lt;!doctype html&gt;</value> 
+                </replacement> 
+                <replacement> 
+                  <token>"context": "/",</token> 
+                  <value>"context": "/magazines/",</value> 
+                </replacement> 
+              </replacements> 
+            </configuration> 
+          </execution> 
+          
+          <execution> 
+            <id>replace-for-styles</id>
+            <phase>prepare-package</phase> 
+            <goals> 
+              <goal>replace</goal> 
+            </goals> 
+            
+            <configuration> 
+              <includes>
+                <include>${project.basedir}/src/main/webapp/styles.*.css</include>
+              </includes> 
+              <replacements> 
+                <replacement> 
+                  <token>/assets/fonts/</token> 
+                  <value>assets/fonts/</value> 
+                </replacement> 
+              </replacements> 
+            </configuration>  
+          </execution> 
+        </executions>
+      </plugin>
+    
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+          <compilerArguments>
+            <endorseddirs>${endorsed.dir}</endorseddirs>
+          </compilerArguments>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+      
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${endorsed.dir}</outputDirectory>
+              <silent>true</silent>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>javax</groupId>
+                  <artifactId>javaee-endorsed-api</artifactId>
+                  <version>7.0</version>
+                  <type>jar</type>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+        
+    </plugins>
+  </build>
+
+</project>

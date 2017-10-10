@@ -29,6 +29,7 @@ import { Subject } from 'rxjs/Subject';
   magazines = [];
   facets = [];
   filters: {field, value}[] = [];
+  currentSortDir: string = 'asc';
   
   editors = {};
   editorsType = [];

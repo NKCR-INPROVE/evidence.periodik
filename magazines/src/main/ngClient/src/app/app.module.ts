@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -27,6 +27,10 @@ import { VydavateleDetailComponent } from './components/vydavatele/vydavatele-de
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
+}
+
+export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 

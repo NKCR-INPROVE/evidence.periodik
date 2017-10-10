@@ -4,6 +4,7 @@
   </h5>
   <div class="right">
     <strong>Řazení:</strong>
-    <a>A-Z</a> <span class="grey-text text-lighten-2">|</span> <a class="grey-text text-lighten-1">Z-A</a>
+    <a (click)="setSort('asc')" [class]="state.currentSortDir === 'asc' ? '': 'grey-text text-lighten-1'">A-Z</a> <span class="grey-text text-lighten-2">|</span> 
+    <a [class]="state.currentSortDir === 'desc' ? '': 'grey-text text-lighten-1'" (click)="setSort('desc')">Z-A</a>
   </div>
 </div><!--/.clearfix -->

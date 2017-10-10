@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppState } from '../../../app.state';
+import { AppService } from '../../../app.service';
 
 @Component({
   selector: 'app-sort-bar',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SortBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public state: AppState, private service: AppService) { }
 
   ngOnInit() {
+  }
+  
+  setSort(dir: string){
+    this.state.currentSortDir = dir;
+    this.service.getMagazines().subscribe();
   }
 
 }

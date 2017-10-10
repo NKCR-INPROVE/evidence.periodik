@@ -14,7 +14,7 @@ export class AppService {
   public langSubject: Observable<any> = this._langSubject.asObservable();
 
   constructor(
-    private state: AppState,
+    public state: AppState,
     private translate: TranslateService,
     private http: Http) { }
   
@@ -32,6 +32,8 @@ export class AppService {
     params.set('q', '*');
     params.set('wt', 'json');
     params.set('indent', 'true');
+    params.set('rows', '50');
+    params.set('sort', 'titleCS ' + this.state.currentSortDir);
     params.set('json.nl', 'arrarr');
     params.set('facet', 'true');
     params.set('facet.mincount', '1');
@@ -61,6 +63,8 @@ export class AppService {
     params.set('q', 'vydavatel_id:"' + id + '"');
     params.set('wt', 'json');
     params.set('indent', 'true');
+    params.set('rows', '50');
+    params.set('sort', 'titleCS ' + this.state.currentSortDir);
     params.set('json.nl', 'arrarr');
     params.set('facet', 'true');
     params.set('facet.mincount', '1');

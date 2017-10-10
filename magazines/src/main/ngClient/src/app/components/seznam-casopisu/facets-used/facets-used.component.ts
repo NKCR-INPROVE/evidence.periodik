@@ -28,12 +28,12 @@ export class FacetsUsedComponent implements OnInit {
   
   removeFilter(idx: number){
     this.state.removeFilter(idx);
-    this.service.getIssues().subscribe();
+    this.service.getMagazines().subscribe();
   }
   
   removeAllFilters(){
     this.state.filters = [];
-    this.service.getIssues().subscribe();
+    this.service.getMagazines().subscribe();
   }
 
 }

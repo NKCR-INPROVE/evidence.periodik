@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col s12">
-      <div *ngFor="let vydavatel of vydavatele">
-        <h5>{{vydavatel.title}}</h5>
+    <div class="col s12" *ngIf="state.config">
+      <div *ngFor="let vydavatel of state.editorsType">
+        <h5>{{vydavatel}}</h5>
         <span class="grey-text text-darken-1">
           <ul>
-            <li *ngFor="let item of vydavatel.items">
-              <a routerLink="/vydavatele-detail" title="{{item.name}}">{{item.name}}</a>
+            <li *ngFor="let item of state.editors[vydavatel]">
+              <a [routerLink]="['/vydavatel', item.id]" title="{{item.name}}">{{item.name}}</a>
             </li>
           </ul>
         </span>

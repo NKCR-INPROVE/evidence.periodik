@@ -16,7 +16,7 @@ export class SeznamCasopisuComponent implements OnInit {
 
   constructor(public state: AppState, private service: AppService) {
     this.subscriptions.push(this.state.paramsSubject.subscribe((state) => {
-      this.service.getIssues().subscribe(res => {});
+      this.service.getMagazines().subscribe(res => {});
     }));
   }
 

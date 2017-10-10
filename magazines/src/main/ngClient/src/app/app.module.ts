@@ -62,7 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       { path: 'seznam-casopisu', component: SeznamCasopisuComponent },
       { path: 'o-projektu', component: OProjektuComponent },
       { path: 'vydavatele', component: VydavateleComponent},
-      { path: 'vydavatele-detail', component: VydavateleDetailComponent},
+      { path: 'vydavatel/:id', component: VydavateleDetailComponent},
       { path: 'kontakt', component: KontaktComponent },
       { path: '', redirectTo: 'seznam-casopisu', pathMatch: 'full' }
     ])

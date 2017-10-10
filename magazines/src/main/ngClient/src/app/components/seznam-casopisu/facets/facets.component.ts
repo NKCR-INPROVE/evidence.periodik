@@ -38,7 +38,7 @@ export class FacetsComponent implements OnInit {
   
   addFilter(field: string, value: string){
     this.state.addFilter(field, value);
-    this.service.getIssues().subscribe();
+    this.service.getMagazines().subscribe();
   }
 
 }

@@ -4,7 +4,6 @@ import { Subject } from 'rxjs/Subject';
   
 @Injectable()
   export class AppState {
-  
 
   private _stateSubject = new Subject();
   public stateChangedSubject: Observable<any> = this._stateSubject.asObservable();
@@ -29,8 +28,11 @@ import { Subject } from 'rxjs/Subject';
   //Seznam casopisu
   magazines = [];
   facets = [];
-  
   filters: {field, value}[] = [];
+  
+  editors = {};
+  editorsType = [];
+  editorsbyId = {};
   
   
   setConfig(cfg){
@@ -54,6 +56,25 @@ import { Subject } from 'rxjs/Subject';
     let fields = Object.keys(facets);
     for (let i = 0; i < fields.length; i++){
       this.facets.push({field: fields[i], values: facets[fields[i]]});
+    }
+    this._stateSubject.next(this);
+  }
+  
+  setEditors(resp: any){
+    this.editors = {};
+    this.editorsbyId = {};
+    this.editorsType = [];
+    let docs = resp['response']['docs'];
+    let typy = resp['facet_counts']['facet_fields']['typ'];
+    
+    for (let i = 0; i < typy.length; i++){
+      this.editorsType.push(typy[i]['name']);
+      this.editors[typy[i]['name']] = [];
+    }
+    for (let i = 0; i < docs.length; i++){
+      let doc = docs[i];
+      this.editors[doc["typ"]].push(doc);
+      this.editorsbyId[doc["id"]] = doc;
     }
     this._stateSubject.next(this);
   }

@@ -25,7 +25,7 @@ export class AppService {
     this._langSubject.next(lang);
   }
   
-  getIssues(): Observable<any> {
+  getMagazines(): Observable<any> {
     var url = this.state.config['context'] + 'search/magazines/select';
     let params = new URLSearchParams();
 
@@ -50,6 +50,57 @@ export class AppService {
       .map((response: Response) => {
         this.state.magazines = response.json()['response']['docs'];
         this.state.setFacets(response.json()['facet_counts']['facet_fields']);
+        return this.state;
+      });
+  }
+  
+  getEditorMagazines(id: string): Observable<any> {
+    var url = this.state.config['context'] + 'search/magazines/select';
+    let params = new URLSearchParams();
+
+    params.set('q', 'vydavatel_id:"' + id + '"');
+    params.set('wt', 'json');
+    params.set('indent', 'true');
+    params.set('json.nl', 'arrarr');
+    params.set('facet', 'true');
+    params.set('facet.mincount', '1');
+    params.append('facet.field', 'pristup');
+    params.append('facet.field', 'oblast');
+    params.append('facet.field', 'keywords');
+    
+    for (let i in this.state.filters){
+      let f: {field, value} = this.state.filters[i];
+      params.append('fq', f.field + ':"' + f.value + '"');
+    }
+    
+    this.state.clear();
+
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        this.state.magazines = response.json()['response']['docs'];
+        this.state.setFacets(response.json()['facet_counts']['facet_fields']);
+        return this.state;
+      });
+  }
+  
+  
+  getEditors(): Observable<any> {
+    var url = this.state.config['context'] + 'search/editors/select';
+    let params = new URLSearchParams();
+
+    params.set('q', '*');
+    params.set('wt', 'json');
+    params.set('indent', 'true');
+    params.set('json.nl', 'arrntv');
+    params.set('facet', 'true');
+    params.set('facet.mincount', '1');
+    params.append('facet.field', 'typ');
+    
+    this.state.clear();
+
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        this.state.setEditors(response.json());
         return this.state;
       });
   }

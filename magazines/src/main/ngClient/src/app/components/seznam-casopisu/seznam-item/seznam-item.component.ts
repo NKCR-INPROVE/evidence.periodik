@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import {AppState} from '../../../app.state';
 import {AppService} from '../../../app.service';
@@ -13,7 +14,8 @@ export class SeznamItemComponent implements OnInit {
   
   showingDetail: boolean = false;
   
-  constructor(public state: AppState, private service: AppService) { }
+  constructor(
+    private router: Router ,public state: AppState, private service: AppService) { }
 
   ngOnInit() {
   }
@@ -21,7 +23,8 @@ export class SeznamItemComponent implements OnInit {
   
   addFilter(field: string, value: string){
     this.state.addFilter(field, value);
-    this.service.getMagazines().subscribe();
+    this.router.navigate(['/seznam-casopisu']);
+//    this.service.getMagazines().subscribe();
   }
 
   // toggle content function by id

@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import {AppState} from '../../../app.state';
+import {AppService} from '../../../app.service';
+
 @Component({
   selector: 'app-seznam-item',
   templateUrl: './seznam-item.component.html',
@@ -10,9 +13,15 @@ export class SeznamItemComponent implements OnInit {
   
   showingDetail: boolean = false;
   
-  constructor() { }
+  constructor(public state: AppState, private service: AppService) { }
 
   ngOnInit() {
+  }
+  
+  
+  addFilter(field: string, value: string){
+    this.state.addFilter(field, value);
+    this.service.getMagazines().subscribe();
   }
 
   // toggle content function by id

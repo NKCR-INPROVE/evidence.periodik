@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import {AppState} from '../../../app.state';
 import {AppService} from '../../../app.service';
@@ -15,7 +15,10 @@ export class SeznamItemComponent implements OnInit {
   showingDetail: boolean = false;
   
   constructor(
-    private router: Router ,public state: AppState, private service: AppService) { }
+  private route: ActivatedRoute,
+    private router: Router, 
+    public state: AppState, 
+    private service: AppService) { }
 
   ngOnInit() {
   }
@@ -23,8 +26,11 @@ export class SeznamItemComponent implements OnInit {
   
   addFilter(field: string, value: string){
     this.state.addFilter(field, value);
-    this.router.navigate(['/seznam-casopisu']);
-//    this.service.getMagazines().subscribe();
+    if (this.route.snapshot.url[0].path.indexOf('seznam-casopisu') > -1){
+      this.service.getMagazines().subscribe();
+    } else {
+      this.router.navigate(['/seznam-casopisu']);
+    }
   }
 
   // toggle content function by id

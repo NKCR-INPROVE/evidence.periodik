@@ -32,16 +32,12 @@
     <servlet-mapping>
         <servlet-name>StaticServlet</servlet-name>
         <url-pattern>/home</url-pattern>
-        <url-pattern>/actual</url-pattern>
+        <url-pattern>/seznam-casopisu</url-pattern>
         <url-pattern>/admin</url-pattern>
-        <url-pattern>/prihlaseni</url-pattern>
-        <url-pattern>/archiv/*</url-pattern>
-        <url-pattern>/pro-autory/*</url-pattern>
-        <url-pattern>/o-casopisu/*</url-pattern>
+        <url-pattern>/vydavatele</url-pattern>
+        <url-pattern>/vydavatel/*</url-pattern>
+        <url-pattern>/o-projektu/*</url-pattern>
         <url-pattern>/kontakt/*</url-pattern>
-        <url-pattern>/e-shop/*</url-pattern>
-        <url-pattern>/hledat/*</url-pattern>
-        <url-pattern>/article/*</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>SearchServlet</servlet-name>

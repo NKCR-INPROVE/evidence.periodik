@@ -22,11 +22,11 @@ public class InitServlet extends HttpServlet {
   public static final Logger LOGGER = Logger.getLogger(InitServlet.class.getName());
 
 
-  //Directory where cant override configuration  
-  public static final String APP_DIR_KEY = "k5journals_app_dir";
+  //Directory where can override configuration  
+  public static final String APP_DIR_KEY = "magazines_app_dir";
 
-  //Directory where cant override configuration  
-  public static String CONFIG_DIR = ".k5journals";
+  //Directory where can override configuration  
+  public static String CONFIG_DIR = ".magazines";
 
   //Default config directory in webapp
   public static String DEFAULT_CONFIG_DIR = "/assets";

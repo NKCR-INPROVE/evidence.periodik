@@ -5,14 +5,21 @@
  */
 package cz.incad.k5journals.searchapp;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.JSONObject;
 
 /**
@@ -68,21 +75,17 @@ public class IndexServlet extends HttpServlet {
   }
 
   enum Actions {
-    INDEX_DEEP {
+    INDEX_MAGAZINES {
       @Override
       void doPerform(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
         resp.setContentType("application/json;charset=UTF-8");
-
         PrintWriter out = resp.getWriter();
         JSONObject json = new JSONObject();
         try {
 
           Indexer indexer = new Indexer();
-          for(String pid : req.getParameterValues("pid")){
-            json.put(pid, indexer.indexDeep(pid));
-          }
-          //indexer.indexPidAndChildren(req.getParameter("pid"));
+          json = indexer.indexFile(new File(Options.getInstance().getString("magazinesIndexFile")), "magazines");
 
         } catch (Exception ex) {
           json.put("error", ex.toString());
@@ -90,7 +93,7 @@ public class IndexServlet extends HttpServlet {
         out.println(json.toString(2));
       }
     },
-    INDEX_PID {
+    INDEX_EDITORS {
       @Override
       void doPerform(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
@@ -100,31 +103,12 @@ public class IndexServlet extends HttpServlet {
         try {
 
           Indexer indexer = new Indexer();
-          indexer.indexPid(req.getParameter("pid"), 0);
-          //out.println(indexer.getModsToJson(request.getParameter("pid")).toString(2));
+          json = indexer.indexFile(new File(Options.getInstance().getString("editorsIndexFile")), "editors");
 
         } catch (Exception ex) {
           json.put("error", ex.toString());
         }
         out.println(json.toString(2));
-      }
-    },
-    MODS {
-      @Override
-      void doPerform(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-
-        resp.setContentType("application/json;charset=UTF-8");
-
-        PrintWriter out = resp.getWriter();
-        JSONObject json = new JSONObject();
-        try {
-
-          Indexer indexer = new Indexer();
-          out.println(indexer.getModsToJson(req.getParameter("pid")).toString(2));
-
-        } catch (Exception ex) {
-          out.println(json.put("error", ex).toString(2));
-        }
       }
     };
 

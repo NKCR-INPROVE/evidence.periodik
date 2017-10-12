@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -101,15 +102,15 @@ public class Indexer {
       post.setEntity(new StringEntity(jo, "UTF-8"));
 
       HttpResponse response = client.execute(post);
-      System.out.println("\nSending 'POST' request to URL : " + url);
-      System.out.println("Post parameters : " + post.getEntity());
-      System.out.println("Response Code : "
+      LOGGER.log(Level.INFO, "Sending 'POST' request to URL : " + url);
+      LOGGER.log(Level.INFO, "Post parameters : " + post.getEntity());
+      LOGGER.log(Level.INFO, "Response Code : "
               + response.getStatusLine().getStatusCode());
 
       BufferedReader rd = new BufferedReader(
               new InputStreamReader(response.getEntity().getContent()));
 
-      StringBuffer result = new StringBuffer();
+      StringBuilder result = new StringBuilder();
       String line = "";
       while ((line = rd.readLine()) != null) {
         result.append(line);
@@ -119,7 +120,7 @@ public class Indexer {
       LOGGER.log(Level.INFO, result.toString());
       ret = new JSONObject(result.toString());
 
-    } catch (Exception ex) {
+    } catch (IOException | UnsupportedOperationException | UnsupportedCharsetException | JSONException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
       ret.put("error", ex);
     }

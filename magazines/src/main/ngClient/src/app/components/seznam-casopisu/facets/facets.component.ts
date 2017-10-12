@@ -15,6 +15,10 @@ export class FacetsComponent implements OnInit {
   active : boolean = false;
   
   constructor(public state: AppState, private service: AppService) {
+    
+  }
+
+  ngOnInit() {
     this.active = this.state.facets.length > 0;
     this.subscriptions.push(this.state.stateChangedSubject.subscribe((st) => {
       setTimeout(() => {
@@ -22,9 +26,6 @@ export class FacetsComponent implements OnInit {
       }, 100);
       
     }));
-  }
-
-  ngOnInit() {
     
   }
 
@@ -37,8 +38,10 @@ export class FacetsComponent implements OnInit {
   }
   
   addFilter(field: string, value: string){
-    this.state.addFilter(field, value);
-    this.service.getMagazines().subscribe();
+    if (!this.state.isFacetUsed(field, value)){
+      this.state.addFilter(field, value);
+      this.service.getMagazines().subscribe();
+    }
   }
 
 }

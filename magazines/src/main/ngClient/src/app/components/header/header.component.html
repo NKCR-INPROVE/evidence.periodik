@@ -1,11 +1,11 @@
 <mz-navbar>
   <div class="container">
-    <a href="/" class="brand-logo">
+    <a (click)="goHome()" class="brand-logo">
       Digitální knihovna AV ČR <span class="cyan-text text-lighten-4">|</span> <span class="cyan-text text-lighten-4">online časopisy</span>
     </a><!--/.brand-logo -->
     <mz-navbar-item-container [align]="'right'">
       <mz-navbar-item routerLink="seznam-casopisu" routerLinkActive="active" #seznamCasopisu="routerLinkActive" [active]="seznamCasopisu.isActive">
-        <a routerLink="seznam-casopisu" title="Seznam časopisů">Seznam časopisů</a>
+        <a (click)="goHome()" title="Seznam časopisů">Seznam časopisů</a>
       </mz-navbar-item>
       <mz-navbar-item routerLink="o-projektu" routerLinkActive="active" #oProjektu="routerLinkActive" [active]="oProjektu.isActive">
         <a routerLink="o-projektu" title="O projektu">O projektu</a>

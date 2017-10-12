@@ -2,7 +2,9 @@
   <mz-card-content>
     <div class="row app-clean-mg">
       <div class="col s2">
+        <a href="{{resultItem.web}}" mz-tooltip [tooltip]="resultItem.web" [position]="'top'" class="left cyan-text text-darken-1" target="_blank">
         <img [src]="resultItem.img" alt="thumb" class="responsive-img" />
+        </a>
       </div>
       <div class="col s10">
         <h5 class="grey-text text-darken-4">{{resultItem.title}}</h5>

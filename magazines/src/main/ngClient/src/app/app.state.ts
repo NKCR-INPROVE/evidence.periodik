@@ -56,9 +56,19 @@ import { Subject } from 'rxjs/Subject';
     this.facets = [];
     let fields = Object.keys(facets);
     for (let i = 0; i < fields.length; i++){
+      //this.facets.push({field: fields[i], values: facets[fields[i]].filter(f => !this.facetUsed(fields[i], f))});
       this.facets.push({field: fields[i], values: facets[fields[i]]});
     }
     this._stateSubject.next(this);
+  }
+  
+  isFacetUsed(field: string, value: string): boolean{
+    for (let i in this.filters){
+      if (this.filters[i].field === field && this.filters[i].value === value){
+        return true;
+      }
+    }
+    return false;
   }
   
   setEditors(resp: any){
@@ -85,7 +95,7 @@ import { Subject } from 'rxjs/Subject';
   }
   
   removeFilter(idx){
-    this.filters.splice(idx);
+    this.filters.splice(idx,1);
   }
   
 }

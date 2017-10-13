@@ -7,6 +7,7 @@ app-header {
     
     .brand-logo {
       font-size: 1.6rem;
+      //font-size: 1.6vw;
 
       span {
         font-weight: 100;
@@ -14,6 +15,23 @@ app-header {
           font-weight: 300;
         }
       }
+    }
+    
+    // mq
+    @media #{$large-and-up} {
+      #app-btn-sidenav {
+        display: none !important;
+      } 
+    }
+    @media #{$custom-1300-and-992} {
+      .brand-logo {
+        font-size: 1.5vw;
+      } 
+    }
+    @media #{$small-and-down} {
+      .brand-logo {
+        font-size: 3.5vw;
+      } 
     }
   }
 }

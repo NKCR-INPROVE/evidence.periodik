@@ -10,7 +10,7 @@
       </span>
       <strong>Vydávané časopisy:</strong>
       <div class="row">
-        <div class="col s8" *ngIf="state.magazines.length > 0">
+        <div class="col s12 m12 l12 xl8" *ngIf="state.magazines.length > 0">
           <app-seznam-item *ngFor="let resultItem of state.magazines" [resultItem]="resultItem"></app-seznam-item>
         </div><!--/.col -->
       </div><!--/.row -->

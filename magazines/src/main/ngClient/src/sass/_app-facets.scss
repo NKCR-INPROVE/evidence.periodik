@@ -35,6 +35,22 @@ app-facets-used {
     }
     .collapsible-body {
       @extend .app-clean-pd;
+      
+      .app-row {
+        display: table;
+        width: 100%;
+        
+        a {
+          display: table-cell;
+          width: 90%;
+          vertical-align: top;
+        }
+        span {
+          display: table-cell;
+          width: 10%;
+          vertical-align: top;
+        }
+      }
     }
   }
 }

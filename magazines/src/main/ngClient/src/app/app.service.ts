@@ -41,7 +41,7 @@ export class AppService {
     params.set('q', '*');
     params.set('wt', 'json');
     params.set('indent', 'true');
-    params.set('rows', '50');
+    params.set('rows', this.state.config['rows']);
     params.set('sort', 'titleCS ' + this.state.currentSortDir);
     params.set('json.nl', 'arrarr');
     params.set('facet', 'true');
@@ -72,7 +72,7 @@ export class AppService {
     params.set('q', 'vydavatel_id:"' + id + '"');
     params.set('wt', 'json');
     params.set('indent', 'true');
-    params.set('rows', '50');
+    params.set('rows', this.state.config['rows']);
     params.set('sort', 'titleCS ' + this.state.currentSortDir);
     params.set('json.nl', 'arrarr');
     params.set('facet', 'true');
@@ -104,6 +104,7 @@ export class AppService {
     params.set('q', '*');
     params.set('wt', 'json');
     params.set('indent', 'true');
+    params.set('rows', this.state.config['rows']);
     params.set('json.nl', 'arrntv');
     params.set('facet', 'true');
     params.set('facet.mincount', '1');

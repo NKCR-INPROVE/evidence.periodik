@@ -1,4 +1,5 @@
 {
   "context": "/",
-  "defaultLang": "cs"
+  "defaultLang": "cs",
+  "rows": 100
 }

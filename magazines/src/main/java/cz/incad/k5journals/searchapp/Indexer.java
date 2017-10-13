@@ -86,7 +86,7 @@ public class Indexer {
 
     try {
       String url = opts.getString("solr.host", "http://localhost:8983/solr/")
-              + core + "/update/json/docs";
+              + core + "/update/json/docs?commit=true";
 
       CloseableHttpClient client = HttpClients.createDefault();
       HttpPost post = new HttpPost(url);

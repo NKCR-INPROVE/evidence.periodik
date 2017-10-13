@@ -66,7 +66,9 @@
     {
       "id": "CBS",
       "typ": "Vydavatelé mimo AV ČR",
-      "name": "Česká botanická společnost"
+      "name": "Česká botanická společnost",
+      "adresa": " Benátská 433/2, 128 01 Praha 2 - Nové Město",
+      "web": "https://botanospol.cz/"
     },
     {
       "id": "FFMU",

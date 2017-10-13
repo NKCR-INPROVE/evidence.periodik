@@ -17,5 +17,27 @@
         <a routerLink="kontakt" title="Kontakt">Kontakt</a>
       </mz-navbar-item>
     </mz-navbar-item-container>
+    <a [id]="'app-btn-sidenav'" class="right">
+      <i mz-icon-mdi [icon]="'menu'"></i>
+    </a>
   </div><!--/.container -->
 </mz-navbar>
+
+<!-- Sidenav for responsive behavior -->
+<mz-sidenav [id]="'app-sidenav'" [collapseButtonId]="'app-btn-sidenav'">
+  <mz-sidenav-subheader>
+    Hlavní navigace
+  </mz-sidenav-subheader>
+  <mz-sidenav-link routerLink="seznam-casopisu" routerLinkActive="active" #seznamCasopisu="routerLinkActive" [active]="seznamCasopisu.isActive">
+    <a (click)="goHome()" title="Seznam časopisů">Seznam časopisů</a>
+  </mz-sidenav-link>
+  <mz-sidenav-link routerLink="o-projektu" routerLinkActive="active" #oProjektu="routerLinkActive" [active]="oProjektu.isActive">
+    <a routerLink="o-projektu" title="O projektu">O projektu</a>
+  </mz-sidenav-link>
+  <mz-sidenav-link routerLink="vydavatele" routerLinkActive="active" #vydavatele="routerLinkActive" [active]="vydavatele.isActive">
+    <a routerLink="vydavatele" title="Vydavatelé">Vydavatelé</a>
+  </mz-sidenav-link>
+  <mz-sidenav-link routerLink="kontakt" routerLinkActive="active" #kontakt="routerLinkActive" [active]="kontakt.isActive">
+    <a routerLink="kontakt" title="Kontakt">Kontakt</a>
+  </mz-sidenav-link>
+</mz-sidenav>

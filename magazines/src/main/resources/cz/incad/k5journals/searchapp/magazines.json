@@ -1,0 +1,57 @@
+[
+{
+      "id": 1, 
+      "title": "Právník",
+      "img": "https://kramerius.lib.cas.cz/search/img?uuid=uuid:e8273fdf-be68-4e0b-8b54-be7b0f55a4b0&stream=IMG_THUMB", 
+      "vydavatel": "Knihovna AV ČR, v. v. i.", 
+      "vydavatel_id": "KNAV", 
+      "oblast": "Sociálně-ekonomické vědy", 
+      "issn": "1210-8510", 
+      "pristup": "Open Access", 
+      "kontakt": "kvo@knav.cz", 
+      "keywords": [
+        "knihověda", 
+        "dějiny knihy",
+        "dějiny knihtisku",
+        "dějiny knihoven"
+      ],
+      "desc": "Časopis je zaměřen na zveřejňování výsledků bádání v oblasti dějin knihy, knihtisku a knihoven v Čechách a na Moravě s časovým omezením do poloviny 19. století. Vedle pramenných a materiálových studií časopis uveřejňuje recenze a zprávy o domácí a zahraniční knihovědné produkci a informuje o konferencích a výstavách k dané tematice.",
+      "web": "http://sluzby.incad.cz/k5journals/"
+    },
+    {
+      "id": 2,
+      "title": "Toto je test dlouhého titulku",
+      "img": "https://kramerius.lib.cas.cz/client/api/item/uuid:ff1f9130-2fb6-6195-656b-85ebff466e43/thumb",
+      "vydavatel": "Knihovna AV ČR, v. v. i.", 
+      "vydavatel_id": "KNAV", 
+      "oblast": "Aplikovaná fyzika", 
+      "issn": "1210-8510", 
+      "pristup": "Omezeně / S embargem", 
+      "kontakt": "kvo@knav.cz", 
+      "keywords": [
+         "knihověda", 
+         "dějiny knihy",
+         "dějiny knihtisku"
+      ],
+      "desc": "Časopis je zaměřen na zveřejňování výsledků bádání v oblasti dějin knihy, knihtisku a knihoven v Čechách a na Moravě s časovým omezením do poloviny 19. století. Vedle pramenných a materiálových studií časopis uveřejňuje recenze a zprávy o domácí a zahraniční knihovědné produkci a informuje o konferencích a výstavách k dané tematice.",
+      "web": "http://www.incad.cz"
+    },
+    {
+      "id": 3,
+      "title": "Věda a technika", 
+      "img": "https://kramerius.lib.cas.cz/client/api/item/uuid:1e3cbe41-81e0-44ef-ab59-b26711abcbab/thumb",
+      "vydavatel": "Archeologický ústav AV ČR, v. v. i., Praha", 
+      "vydavatel_id": "ARÚ", 
+      "oblast": "Matematika, fyzika a informatika", 
+      "issn": "1210-8510", 
+      "pristup": "Open Access", 
+      "kontakt": "kvo@knav.cz", 
+      "keywords": [ 
+        "dějiny knihy",
+        "dějiny knihtisku",
+        "dějiny knihoven"
+      ],
+      "desc": "Časopis je zaměřen na zveřejňování výsledků bádání v oblasti dějin knihy, knihtisku a knihoven v Čechách a na Moravě s časovým omezením do poloviny 19. století. Vedle pramenných a materiálových studií časopis uveřejňuje recenze a zprávy o domácí a zahraniční knihovědné produkci a informuje o konferencích a výstavách k dané tematice.",
+      "web": "http://kramerius.lib.cas.cz"
+    }
+]

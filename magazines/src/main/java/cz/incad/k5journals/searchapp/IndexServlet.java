@@ -8,18 +8,13 @@ package cz.incad.k5journals.searchapp;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 
 /**
@@ -85,7 +80,11 @@ public class IndexServlet extends HttpServlet {
         try {
 
           Indexer indexer = new Indexer();
-          json = indexer.indexFile(new File(Options.getInstance().getString("magazinesIndexFile")), "magazines");
+          File f = new File(InitServlet.CONFIG_DIR + File.separator + "magazines.json");
+          if(!f.exists()){
+            f = FileUtils.toFile(Options.class.getResource("/cz/incad/k5journals/searchapp/magazines.json"));
+          }
+          json = indexer.indexFile(f, "magazines");
 
         } catch (Exception ex) {
           json.put("error", ex.toString());
@@ -103,7 +102,11 @@ public class IndexServlet extends HttpServlet {
         try {
 
           Indexer indexer = new Indexer();
-          json = indexer.indexFile(new File(Options.getInstance().getString("editorsIndexFile")), "editors");
+          File f = new File(InitServlet.CONFIG_DIR + File.separator + "editors.json");
+          if(!f.exists()){
+            f = FileUtils.toFile(Options.class.getResource("/cz/incad/k5journals/searchapp/editors.json"));
+          }
+          json = indexer.indexFile(f, "editors");
 
         } catch (Exception ex) {
           json.put("error", ex.toString());

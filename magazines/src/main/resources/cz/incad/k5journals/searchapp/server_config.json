@@ -1,6 +1,4 @@
 {
-  "solr.host": "http://localhost:8983/solr/",
-  "magazinesIndexFile": "/home/alberto/Projects/K5Journals/stgit/K5Journals/solr/magazines/magazines.json",
-  "editorsIndexFile": "/home/alberto/Projects/K5Journals/stgit/K5Journals/solr/editors/editors.json"
+  "solr.host": "http://localhost:8983/solr/"
 	
 }

@@ -1,0 +1,91 @@
+[
+{
+      "id": "ARÚB",
+      "typ": "Ústavy AV ČR",
+      "name": "Archeologický ústav AV ČR, v. v. i., Brno",
+      "adresa": "Čechyňská 363/19, 602 00 Brno",
+      "web": "http://arub.avcr.cz/"
+    },
+    {
+      "id": "ARÚ",
+      "typ": "Ústavy AV ČR",
+      "name": "Archeologický ústav AV ČR, v. v. i., Praha",
+      "adresa": "Letenská 4, 118 01 Praha 1",
+      "web": "http://www.arup.cas.cz/"
+    },
+    {
+      "id": "EÚ",
+      "typ": "Ústavy AV ČR",
+      "name": "Etnologický ústav AV ČR, v. v. i.",
+      "adresa": "Na Florenci 3/1420, 110 00 Praha 1",
+      "web": "http://eu.avcr.cz/"
+    },
+    {
+      "id": "FLÚ",
+      "typ": "Ústavy AV ČR",
+      "name": "Filosofický ústav AV ČR, v. v. i.",
+      "adresa": "Jilská 1, 110 00 Praha 1",
+      "web": "http://www.flu.cas.cz/"
+    },
+    {
+      "id": "FGÚ",
+      "typ": "Ústavy AV ČR",
+      "name": "Fyziologický ústav AV ČR, v. v. i.",
+      "adresa": "Vídeňská 1083, Praha 4, 142 20",
+      "web": "http://www.fgu.cas.cz/"
+    },
+    {
+      "id": "KNAV",
+      "typ": "Ústavy AV ČR",
+      "name": "Knihovna Akademie věd ČR, v. v. i.",
+      "adresa": "Národní 3, 115 22 Praha 1",
+      "web": "http://www.lib.cas.cz/"
+    },
+    {
+      "id": "",
+      "typ": "Ústavy AV ČR",
+      "name": "Matematický ústav AV ČR, v. v. i.",
+      "adresa": "",
+      "web": ""
+    },
+    {
+      "id": "MÚ",
+      "typ": "Ústavy AV ČR",
+      "name": "Sociologický ústav AV ČR, v. v. i.",
+      "adresa": "Žitná 25, 115 67 Praha 1",
+      "web": "http://www.math.cas.cz/"
+    },
+    {
+      "id": "SSČ",
+      "typ": "Ústavy AV ČR",
+      "name": "Středisko společných činností AV ČR, v. v. i.",
+      "adresa": "Národní 3, 110 00 Praha 1",
+      "web": "http://ssc.avcr.cz/"
+    },
+
+    {
+      "id": "CBS",
+      "typ": "Vydavatelé mimo AV ČR",
+      "name": "Česká botanická společnost"
+    },
+    {
+      "id": "FFMU",
+      "typ": "Vydavatelé mimo AV ČR",
+      "name": "Filozofická fakulta, Masarykova univerzita"
+    },
+    {
+      "id": "FFOU",
+      "typ": "Vydavatelé mimo AV ČR",
+      "name": "Filozofická fakulta, Ostravská univerzita"
+    },
+    {
+      "id": "SPIM",
+      "typ": "Vydavatelé mimo AV ČR",
+      "name": "Sdružení pro inženýrskou mechaniku"
+    },
+    {
+      "id": "VSRO",
+      "typ": "Vydavatelé mimo AV ČR",
+      "name": "Vesmír, s. r. o."
+    }
+]

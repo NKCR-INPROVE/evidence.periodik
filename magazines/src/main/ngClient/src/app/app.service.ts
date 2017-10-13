@@ -25,6 +25,15 @@ export class AppService {
     this._langSubject.next(lang);
   }
   
+
+  getText(id: string): Observable<string> {
+    var url = 'texts?action=LOAD&id=' + id + '&lang=' + this.state.currentLang;
+
+    return this.http.get(url).map((response: Response) => {
+      return response.text();
+    }).catch(error => { return Observable.of('error gettting content: ' + error); });
+  }
+  
   getMagazines(): Observable<any> {
     var url = this.state.config['context'] + 'search/magazines/select';
     let params = new URLSearchParams();

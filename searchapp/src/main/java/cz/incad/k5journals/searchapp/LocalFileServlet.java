@@ -28,6 +28,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -92,16 +93,19 @@ public class LocalFileServlet extends HttpServlet {
         try {
 
           String path = InitServlet.CONFIG_DIR + File.separator + "texts" + File.separator + "files";
-          
-          File folder = new File(path);
-          File[] listOfFiles = folder.listFiles();
 
-          for (File file : listOfFiles) {
+          File folder = new File(path);
+          if (folder.exists()) {
+            File[] listOfFiles = folder.listFiles();
+
+            for (File file : listOfFiles) {
               if (file.isFile()) {
                 json.append("files", file.getName());
               }
+            }
+          } else {
+            json.put("files", new JSONArray());
           }
-
 
         } catch (Exception ex) {
           LOGGER.log(Level.SEVERE, "error during file upload. Error: {0}", ex);

@@ -126,6 +126,9 @@ public class TextsServlet extends HttpServlet {
         }
         
         String menu = request.getParameter("menu");
+        
+        
+          LOGGER.log(Level.INFO, "menu is " + menu);
         if(menu != null){
           String fnmenu = InitServlet.CONFIG_DIR + File.separator + "menu.json";
           File fmenu = new File(fnmenu);

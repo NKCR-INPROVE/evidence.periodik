@@ -80,6 +80,10 @@ public class LocalFileServlet extends HttpServlet {
       out.print(e1.toString());
     }
   }
+  
+  private static void upload(){
+    
+  }
 
   enum Actions {
     LIST {
@@ -124,13 +128,11 @@ public class LocalFileServlet extends HttpServlet {
         JSONObject json = new JSONObject();
         try {
 
-          String path = InitServlet.CONFIG_DIR + File.separator + "texts" + File.separator + "files";
-          new File(path).mkdirs();
           String id = request.getParameter("id");
 
           boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
-          System.out.println(isMultipart);
+          //System.out.println(isMultipart);
 
           // Create a factory for disk-based file items
           DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -157,16 +159,20 @@ public class LocalFileServlet extends HttpServlet {
 //              String value = item.getString();
 
             } else {
+              if(request.getParameter("cover") != null){
+                String fileName = InitServlet.CONFIG_DIR + File.separator + "cover.jpeg";
+                File uploadedFile = new File(fileName);
+                item.write(uploadedFile);
+                json.put("msg", "ok");
+              }else{
+                String path = InitServlet.CONFIG_DIR + File.separator + "texts" + File.separator + "files";
+                new File(path).mkdirs();
+                String fileName = item.getName();
+                File uploadedFile = new File(path + File.separator + fileName);
+                item.write(uploadedFile);
+                json.put("location", "lf?action=GET_FILE&id=" + fileName);
+              }
 
-//              String fieldName = item.getFieldName();
-              String fileName = item.getName();
-//              String contentType = item.getContentType();
-//              boolean isInMemory = item.isInMemory();
-//              long sizeInBytes = item.getSize();
-              File uploadedFile = new File(path + File.separator + fileName);
-              item.write(uploadedFile);
-
-              json.put("location", "lf?action=GET_FILE&id=" + fileName);
             }
           }
 

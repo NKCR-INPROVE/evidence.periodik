@@ -45,5 +45,5 @@
   "news": {"visible": true}
 
   },
-  "hiddenGenres":["cover", "advertisement", "colophon"]
+  "hiddenGenres":["cover", "advertisement", "colophon", "peer-reviewed"]
 }

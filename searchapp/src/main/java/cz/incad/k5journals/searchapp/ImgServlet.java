@@ -17,13 +17,17 @@
  */
 package cz.incad.k5journals.searchapp;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,33 +57,23 @@ public class ImgServlet extends HttpServlet {
           throws ServletException, IOException {
     try {
 
-      response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-      //response.setContentType("application/json;charset=UTF-8");
-      //PrintWriter out = response.getWriter();
-      response.addHeader("Access-Control-Allow-Methods", "GET, POST");
-      response.addHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-//      int handlerIdx = request.getRequestURI().lastIndexOf("/") + 1;
-//      int solrIdx = request.getRequestURI().indexOf("/search/") + 8;
-//      String handler = request.getRequestURI().substring(handlerIdx);
-      Options opts = Options.getInstance();
-      
-      
-        String solrhost = opts.getString("img.point", "http://localhost:8080/search/img");
-        //        + request.getPathInfo();
-        if(request.getQueryString() != null && !request.getQueryString().equals("")){
-          solrhost += "?" + request.getQueryString();
+      if (request.getParameter("obalka") != null) {
+        String path = InitServlet.CONFIG_DIR + File.separator + "cover.jpeg";
+        File f = new File(path);
+        if (f.exists()) {
+          try (OutputStream out = response.getOutputStream()) {
+            //response.setContentType("image/jpeg");
+            BufferedImage bi = ImageIO.read(f);
+            ImageIO.write(bi, "jpg", out);
+          }
+        } else {
+          getFromUrl(request, response);
         }
+      } else {
 
-        LOGGER.log(Level.INFO, "requesting url {0}", solrhost);
-        Map<String, String> reqProps = new HashMap<>();
-        reqProps.put("Content-Type", "application/json");
-        reqProps.put("Accept", "application/json");
-        InputStream inputStream = RESTHelper.inputStream(solrhost, reqProps);
-        org.apache.commons.io.IOUtils.copy(inputStream, response.getOutputStream());
-        //out.print(org.apache.commons.io.IOUtils.toString(inputStream, "UTF8"));
-      
-        
+        getFromUrl(request, response);
+      }
+
     } catch (IOException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     } catch (JSONException ex) {
@@ -87,17 +81,40 @@ public class ImgServlet extends HttpServlet {
     }
   }
 
-  // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-  /**
-   * Handles the HTTP <code>GET</code> method.
-   *
-   * @param request servlet request
-   * @param response servlet response
-   * @throws ServletException if a servlet-specific error occurs
-   * @throws IOException if an I/O error occurs
-   */
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+  private void getFromUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+    response.addHeader("Access-Control-Allow-Methods", "GET, POST");
+    response.addHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+    Options opts = Options.getInstance();
+
+    String solrhost = opts.getString("img.point", "http://localhost:8080/search/img");
+    //        + request.getPathInfo();
+    if (request.getQueryString() != null && !request.getQueryString().equals("")) {
+      solrhost += "?" + request.getQueryString();
+    }
+
+    LOGGER.log(Level.INFO, "requesting url {0}", solrhost);
+    Map<String, String> reqProps = new HashMap<>();
+    reqProps.put("Content-Type", "application/json");
+    reqProps.put("Accept", "application/json");
+    InputStream inputStream = RESTHelper.inputStream(solrhost, reqProps);
+    org.apache.commons.io.IOUtils.copy(inputStream, response.getOutputStream());
+    //out.print(org.apache.commons.io.IOUtils.toString(inputStream, "UTF8"));
+  
+}
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     processRequest(request, response);
   }
@@ -111,7 +128,7 @@ public class ImgServlet extends HttpServlet {
    * @throws IOException if an I/O error occurs
    */
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     processRequest(request, response);
   }
@@ -122,7 +139,7 @@ public class ImgServlet extends HttpServlet {
    * @return a String containing servlet description
    */
   @Override
-  public String getServletInfo() {
+        public String getServletInfo() {
     return "Short description";
   }// </editor-fold>
 

@@ -59,9 +59,14 @@
                 <div class="form-group">
                   <input type="text" class="form-control" id="indexUUID"  name="indexUUID" placeholder="uuid" [(ngModel)]="indexUUID">
                 </div>
-                <button type="submit" class="btn app-btn app-btn-default" (click)="index()">{{'Pridat uuid' | translate}}</button>
+                  <button type="button" class="btn app-btn app-btn-default" (click)="index()">{{'Pridat uuid' | translate}}</button>
+                  &nbsp;&nbsp;&nbsp;
+                <div class="form-group">
+                  <input type="file"  ng2FileSelect [uploader]="coverUploader">
+                </div>
+                  <button type="button" class="btn app-btn app-btn-default" (click)="uploadCover()">{{'nahrát obrázek' | translate}}</button>
+                {{coverMsg}}
               </div>
-              <button class="btn app-btn app-btn-default app-btn-inverse pull-right" (click)="save()">{{'SAVE' | translate}}</button>
               <div *ngIf="indexed" class="alert alert-success" role="alert">
                 {{indexUUID}} {{'text.indexed-note' | translate}}!
               </div>

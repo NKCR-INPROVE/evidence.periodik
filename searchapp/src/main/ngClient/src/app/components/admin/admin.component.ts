@@ -31,6 +31,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   public uploader: FileUploader = new FileUploader({ url: 'lf?action=UPLOAD' });
+  public coverUploader: FileUploader = new FileUploader({ url: 'lf?action=UPLOAD&cover=true' });
 
   public modalRef: BsModalRef;
 
@@ -44,10 +45,11 @@ export class AdminComponent implements OnInit, OnDestroy {
   editor;
   
   fileList: string[];
-selectedFile: string;
+  selectedFile: string;
 
   indexUUID: string;
   indexed: boolean = false;
+  coverMsg: string;
 
   ngOnInit() {
   }
@@ -78,6 +80,7 @@ selectedFile: string;
 
   initTiny() {
     this.uploader.onSuccessItem = (item, response, status, headers) => this.uploaded();
+    this.coverUploader.onSuccessItem = (item, response, status, headers) => this.coverUploaded();
 
     var that = this;
     tinymce.init({
@@ -261,6 +264,15 @@ selectedFile: string;
     this.service.getUploadedFiles().subscribe(res => {
       this.fileList = res['files'];
     })
+  }
+
+  
+  uploadCover(){
+    this.coverUploader.uploadAll();
+  }
+  
+  coverUploaded(){
+    this.coverMsg = 'ok';
   }
 
 public selectFile(f: string){

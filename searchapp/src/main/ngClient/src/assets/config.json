@@ -13,8 +13,8 @@
   
   "sorts" : [
     { "label": "dle relevance", "field": "score desc" },
-    { "label": "od nejnovějších", "field": "year desc" },
-    { "label": "od nejstarších", "field": "year asc" },
+    { "label": "od nejnovějšího", "field": "year desc" },
+    { "label": "od nejstaršího", "field": "year asc" },
     { "label": "podle názvu A-Z", "field": "title_sort asc" }
   ],
   "menu":{

@@ -128,7 +128,8 @@ export class AppState {
   
   setActual(a: Journal){
     this.actualNumber = a;
-    this.imgSrc = this.config['context'] + 'img?uuid=' + this.actualNumber.pid + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
+    this.imgSrc = this.config['context'] + 'img?obalka=true&uuid=' + this.actualNumber.pid + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
+    //this.imgSrc = this.config['context'] + 'img?obalka=true';
     this.stateChanged();
   }
   

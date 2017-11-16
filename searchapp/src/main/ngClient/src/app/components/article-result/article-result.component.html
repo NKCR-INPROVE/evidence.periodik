@@ -14,6 +14,8 @@
   </button> {{viewed}}
   </span>
 </div>
-<div *ngIf="rozsah">
-  <em>s. {{rozsah}}</em>
+
+<div>
+  <app-journal-details *ngIf="parentJournal" [journal]="parentJournal"></app-journal-details> | 
+  <em *ngIf="rozsah">s. {{rozsah}}</em>
 </div>

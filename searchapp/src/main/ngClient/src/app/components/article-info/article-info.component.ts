@@ -14,6 +14,7 @@ import { Criterium } from '../../models/criterium';
 })
 export class ArticleInfoComponent implements OnInit {
   @Input('article') article;
+  @Input('journal') journal;
   @Input('active') active: boolean;
   langObserver: Subscription;
 

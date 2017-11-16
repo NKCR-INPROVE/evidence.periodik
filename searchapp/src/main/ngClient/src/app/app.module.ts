@@ -47,6 +47,7 @@ import { FreePageComponent } from './components/free-page/free-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AuthGuard } from "./services/auth-guard";
+import { SafeHtmlPipe } from './services/safe-html.pipe';
 
 
 //const storeManager = StoreModule.provideStore({ currentSearch: SearchReducer });
@@ -88,7 +89,8 @@ export function createTranslateLoader(http: Http) {
     ActualComponent,
     FreePageComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,

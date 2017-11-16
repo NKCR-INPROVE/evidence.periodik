@@ -118,7 +118,7 @@ export class ArchivItemComponent implements OnInit {
   
 
   findFirstdatanode(pid: string) {
-    this.service.getChildren(pid).subscribe(res => {
+    this.service.getChildren(pid, 'asc').subscribe(res => {
       if (res[0]['datanode']) {
         this.router.navigate(['/article', res[0]['pid']]);
       } else {

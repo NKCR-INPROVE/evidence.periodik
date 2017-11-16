@@ -176,7 +176,7 @@ export class AppService {
 
         return ret;
       } else {
-        return this.getJournalByPid(last['pid'], model);
+        return this.getJournalByPid(last['pid'], model).switch();
       }
     });
   }
@@ -276,80 +276,6 @@ export class AppService {
       return res.json();
     });
   }
-
-
-  getArticles2(pid: string): Observable<any[]> {
-    console.log('getArticles', pid);
-    var url = this.state.config['context'] + 'search/journal/select';
-    let params = new URLSearchParams();
-
-    params.set('q', '*:*');
-    params.set('fq', 'parents:"' + pid + '"');
-    //params.set('fq', 'model:"article"');
-    params.set('wt', 'json');
-    params.set('sort', 'idx asc');
-    params.set('rows', '500');
-
-    return this.http.get(url, { search: params }).map((response: Response) => {
-      //return response.json()['response']['docs'];
-      let articles = [];
-      let childs: any[] = response.json()['response']['docs'];
-
-      for (let ch in childs) {
-        if (childs[ch]['model'] === 'article') {
-          articles.push(childs[ch]);
-        }
-      }
-
-      if (articles.length > 0) {
-        return articles;
-      } else {
-        if (childs.length > 0) {
-          return Observable.forkJoin([
-            Observable.of([]),
-            this.getArticles(childs[0]['pid']).map(res => res)
-          ]);
-          //return this.getArticles(childs[0]['pid']).subscribe();
-        } else {
-          return Observable.of([]);
-        }
-      }
-
-
-    });
-  }
-
-
-  getArticlesApi(pid: string): Observable<any[]> {
-    let url = this.state.config['api_point'] + '/item/' + pid + '/children';
-    //    let url = this.state.config['api_point'] + '/search';
-    //    url += '?q=parent_pid:' + pid.replace(':', '\\:') + '' + '&fq=fedora.model:article';
-
-    return this.http.get(url).map((response: Response) => {
-      //return response.json()['response']['docs'];
-      let articles = [];
-      let childs: any[] = response.json();
-
-      for (let ch in childs) {
-        if (childs[ch]['model'] === 'article') {
-          articles.push(childs[ch]);
-        }
-      }
-
-      if (articles.length > 0) {
-        return articles;
-      } else {
-        if (childs.length > 0) {
-          return this.getArticles(childs[0]['pid']);
-        } else {
-          return Observable.of([]);
-        }
-      }
-
-
-    });
-  }
-
 
   getMods(pid: string): Observable<any> {
     let url = this.state.config['context'] + 'search/journal/select';
@@ -451,14 +377,25 @@ export class AppService {
   }
 
   saveText(id: string, text: string, menu: string = null): Observable<string> {
-    var url = 'texts?action=SAVE&id=' + id + '&lang=' + this.state.currentLang;
+    
+    //var url = 'texts?action=SAVE&id=' + id + '&lang=' + this.state.currentLang;
+    var url = 'texts';
+    
+    var params = new URLSearchParams();
+    params.set('user', this.state.loginuser);
+    params.set('id', id);
+    params.set('action', 'SAVE');
+    params.set('lang', this.state.currentLang);
+    
     if(menu){
-      url += '&menu=' + menu;
+      params.set('menu', menu);
+      //url += '&menu=' + menu;
     }
 
     let headers = new Headers({ 'Content-Type': 'text/plain;charset=UTF-8' });
-    let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers, search: params });
 
+      
     return this.http.post(url, text, options)
       .map((response: Response) => {
         return response.json();

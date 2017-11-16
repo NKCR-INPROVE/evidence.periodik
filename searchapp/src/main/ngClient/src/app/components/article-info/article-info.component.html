@@ -2,6 +2,9 @@
     {{nonSort}} {{title}}
     <div>{{subTitle}}</div>
 </h4>
+<p *ngIf="journal" class="app-font-s14">
+  <app-journal-details [journal]="journal"></app-journal-details>
+</p>
 <p *ngIf="article" class="app-font-s14">
   <span *ngFor="let author of authors; let last = last">
     <label class="app-clean-mg app-font-roboto-cb">{{'Autor' | translate}}:</label> {{author}}<br />

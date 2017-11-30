@@ -9,7 +9,8 @@
     "build.prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "rebuild node-sass": "npm rebuild node-sass"
   },
   "private": true,
   "dependencies": {
@@ -33,6 +34,7 @@
     "ng2-pdf-viewer": "^1.0.2",
     "ng2-slim-loading-bar": "^4.0.0",
     "ngx-bootstrap": "^1.9.3",
+    "node-sass": "^4.7.2",
     "nouislider": "^9.2.0",
     "rxjs": "^5.1.0",
     "tinymce": "^4.6.4",
@@ -55,7 +57,6 @@
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "node-sass": "^4.5.2",
     "protractor": "~5.1.0",
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^6.0.3",

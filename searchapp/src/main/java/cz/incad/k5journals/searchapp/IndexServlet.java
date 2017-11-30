@@ -85,6 +85,7 @@ public class IndexServlet extends HttpServlet {
           //indexer.indexPidAndChildren(req.getParameter("pid"));
 
         } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
           json.put("error", ex.toString());
         }
         out.println(json.toString(2));

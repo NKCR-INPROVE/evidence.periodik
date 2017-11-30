@@ -1,8 +1,8 @@
 {
   "uuid":"http://lmda.silvarium.cz/",
-	"solr.host": "http://localhost:8983/solr/",
-	"k5.host": "http://localhost/search",
-	"api.point": "http://localhost/search/api/v5.0",
+    "solr.host": "http://localhost:8983/solr/",
+    "k5.host": "http://localhost/search",
+    "api.point": "http://localhost/search/api/v5.0",
   "img.point": "http://localhost/search/img",
 	"handlers" : ["select", "full"],
   "langsMap" : {

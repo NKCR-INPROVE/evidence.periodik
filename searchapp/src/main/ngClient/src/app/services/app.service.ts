@@ -405,7 +405,7 @@ export class AppService {
   }
   
   index(uuid: string){
-    var url = 'index?action=INDEX_DEEP&id=' + uuid;
+    var url = 'index?action=INDEX_DEEP&pid=' + uuid;
 
     return this.http.get(url)
       .map((response: Response) => {

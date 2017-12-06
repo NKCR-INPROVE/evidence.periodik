@@ -123,15 +123,22 @@ export class ArticleResultComponent implements OnInit {
           }
         }
       } else {
-        let namePart = name["mods:namePart"];
         if (name["type"] === 'personal' && name.hasOwnProperty("mods:namePart")) {
-          //Chceme nejdriv prijmeni a potom jmeno
-          if (namePart[0]['type'] === 'family') {
-            this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+          let namePart = name["mods:namePart"];
+          if (typeof namePart ==='string') {
+              this.authors.push(namePart);
           } else {
-            this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
+          if (typeof namePart[0] ==='string') {
+              this.authors.push(namePart[0]);
+          } else {
+            //Chceme nejdriv prijmeni a potom jmeno
+            if (namePart[0]['type'] === 'family') {
+              this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+            } else {
+              this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
+            }
           }
-
+        }
         }
       }
 

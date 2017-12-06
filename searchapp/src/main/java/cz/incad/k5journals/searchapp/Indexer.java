@@ -413,9 +413,13 @@ public class Indexer {
             if (jo.has("type") && "personal".equals(jo.getString("type")) && jo.has(prefix + "namePart")) {
                 String autor = "";
                 Object np = jo.get(prefix + "namePart");
+
                 if (np instanceof JSONArray) {
-                    if (jo.getJSONArray(prefix + "namePart").optJSONObject(0) != null) {
-                        if (jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("type").equals("family")) {
+                    JSONArray npja = (JSONArray) np;
+
+                    Object first = npja.get(0);
+                    if (first instanceof JSONObject) {
+                        if (((JSONObject) first).getString("type").equals("family")) {
                             autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
                                     + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content");
                         } else {
@@ -423,10 +427,10 @@ public class Indexer {
                             autor = jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content") + " "
                                     + jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content");
                         }
-                    } else if (jo.getJSONArray(prefix + "namePart").optString(0) != null) {
-                        autor = jo.getJSONArray(prefix + "namePart").optString(0);
+                    } else if (first instanceof String) {
+                        autor = (String) first;
                     }
-                } else if(np instanceof String){
+                } else if (np instanceof String) {
                     autor = (String) np;
                 }
 

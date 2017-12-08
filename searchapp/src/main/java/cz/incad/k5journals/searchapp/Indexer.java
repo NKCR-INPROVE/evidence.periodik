@@ -463,6 +463,7 @@ public class Indexer {
 
         //String prefix = "mods:";
         Object o = mods.opt("mods:genre");
+//        boolean hasMain = false;
         if (o != null) {
             if (o instanceof JSONArray) {
                 JSONArray ja = (JSONArray) o;
@@ -470,11 +471,17 @@ public class Indexer {
                     Object go = ja.get(i);
                     if (go instanceof JSONObject) {
                         String g = ja.getJSONObject(i).optString("type");
-                        if (g != null) {
-                            idoc.addField("genre", g);
+                        if (g != null && !"".equals(g)) {
+//                            if ("main article".equals(g) && !hasMain) {
+                                idoc.addField("genre", g);
+//                                hasMain = true;
+//                            }
                         }
                     } else if (go instanceof String) {
-                        idoc.addField("genre", (String) go);
+//                        if ("article".equals((String) go) && !hasMain) {
+//                            idoc.addField("genre", "main article");
+//                            hasMain = true;
+//                        }
                     }
                 }
 

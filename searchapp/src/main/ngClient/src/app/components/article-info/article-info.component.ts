@@ -116,39 +116,46 @@ export class ArticleInfoComponent implements OnInit {
       this.nonSort = this.titleInfo["mods:nonSort"];
     }
   }
-  
-  setNames(mods){
-    //name/type="personal"	namepart/type="family"
-    //name/type="personal"	namePart/type"given"
-    this.authors = [];
-    if (mods.hasOwnProperty("mods:name")) {
-      let name = mods["mods:name"];
-      if (name.hasOwnProperty('length')) {
-        for(let i in name){
-          let namePart = name[i]["mods:namePart"];
-          if(name[i]["type"] === 'personal' && namePart){
-          //Chceme nejdriv prijmeni a potom jmeno
-          if(namePart[0]['type'] === 'family'){
-            this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
-          } else {
-            this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
-          }
-          }
+
+    setNames(mods) {
+        //name/type="personal"	namepart/type="family"
+        //name/type="personal"	namePart/type"given"
+        if (mods.hasOwnProperty("mods:name")) {
+            let name = mods["mods:name"];
+            if (name.hasOwnProperty('length')) {
+                for (let i in name) {
+                    let namePart = name[i]["mods:namePart"];
+                    if (name[i]["type"] === 'personal' && namePart) {
+                        //Chceme nejdriv prijmeni a potom jmeno
+                        if (namePart[0]['type'] === 'family') {
+                            this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+                        } else {
+                            this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
+                        }
+                    }
+                }
+            } else {
+                if (name["type"] === 'personal' && name.hasOwnProperty("mods:namePart")) {
+                    let namePart = name["mods:namePart"];
+                    if (typeof namePart === 'string') {
+                        this.authors.push(namePart);
+                    } else {
+                        if (typeof namePart[0] === 'string') {
+                            this.authors.push(namePart[0]);
+                        } else {
+                            //Chceme nejdriv prijmeni a potom jmeno
+                            if (namePart[0]['type'] === 'family') {
+                                this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+                            } else {
+                                this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
+                            }
+                        }
+                    }
+                }
+            }
+
         }
-      } else {
-        let namePart = name["mods:namePart"];
-        if(name["type"] === 'personal' && name.hasOwnProperty("mods:namePart")){
-          //Chceme nejdriv prijmeni a potom jmeno
-          if(namePart[0]['type'] === 'family'){
-            this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
-          } else {
-            this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
-          }
-        }
-      }
-      
     }
-  }
   
   setKeywords(){
     this.keywords = [];

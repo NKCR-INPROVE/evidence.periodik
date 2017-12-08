@@ -90,7 +90,7 @@ export class ArticleViewerComponent implements OnInit {
 
               this.service.getArticles(a['pid']).subscribe(res => {
                 //this.service.setArticles(this.journal, res);
-                this.journal.setArticles(res);
+                this.journal.setArticles(res, this.state.config['mergeGenres']);
               });
               this.service.getMods(a['pid']).subscribe(mods => this.journal.mods = mods);
               //this.service.getSiblings(a['pid']).subscribe(siblings => {

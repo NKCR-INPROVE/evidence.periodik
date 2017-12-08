@@ -1,3 +1,5 @@
+import {AppState} from "app/app.state";
+
 
 export class Journal{
     pid: string =null;
@@ -16,7 +18,7 @@ export class Journal{
     
   }
   
-  setArticles(res1) {
+  setArticles(res1, mergeGenres) {
     if(!res1 || !res1.hasOwnProperty('response')){ 
       return; 
     }
@@ -29,6 +31,9 @@ export class Journal{
         if (art.hasOwnProperty("genre")) {
             for (let i in art['genre']) {
               let genre = art['genre'][i];
+              if (mergeGenres.hasOwnProperty(genre) ){
+                  genre = mergeGenres[genre];
+              }
               //if (this.isGenreVisible(genre)) {
                 if (this.genresObject.hasOwnProperty(genre)) {
                   this.genresObject[genre]['articles'].push(art);

@@ -112,6 +112,7 @@
         "introduction": "Úvod",
         "review": "Recenze",
         "peer-reviewed": "Recenzované články",
+        "věnování": "Věnování",
         "dedication": "Věnování",
         "bibliography": "Bibliografie",
         "editorial": "Editorial",
@@ -126,7 +127,9 @@
         "annotations": "Anotace",
         "unspecified": "Nespecifikované",
         "titulní list": "Titulní list",
+        "title page": "Titulní list",
         "adresář": "Adresář",
+        "directory": "Adresář",
         "editorsNote":"Editorial"
     },
     "dummy": ""

@@ -82,9 +82,23 @@ export class ArticleInfoComponent implements OnInit {
         this.isPeerReviewed = false;
 
         let mods = JSON.parse(this.article['mods']);
-        if (mods["mods:relatedItem"] && mods["mods:relatedItem"]["mods:part"] && mods["mods:relatedItem"]["mods:part"]["mods:extent"]) {
-            this.rozsah = mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:start"] +
-                ' - ' + mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:end"];
+        
+        
+        if (mods["mods:relatedItem"] && mods["mods:relatedItem"]["mods:part"]) {
+
+            let part = mods["mods:relatedItem"]["mods:part"];
+            if (part.hasOwnProperty('length')) {
+                for (let i in part) {
+                    if (part[i].hasOwnProperty('mods:extent')) {
+
+                        this.rozsah = part[i]["mods:extent"]["mods:start"] +
+                            ' - ' + part[i]["mods:extent"]["mods:end"];
+                    }
+                }
+            } else if (part["mods:extent"]) {
+                this.rozsah = part["mods:extent"]["mods:start"] +
+                    ' - ' + part["mods:extent"]["mods:end"];
+            }
         }
 
         this.titleInfo = mods["mods:titleInfo"];

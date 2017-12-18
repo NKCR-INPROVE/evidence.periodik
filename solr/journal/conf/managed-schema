@@ -144,6 +144,8 @@
     <field name="issn" type="string" indexed="true" stored="true" multiValued="true"/>
     
     <field name="title" type="text_cz" indexed="true" stored="true" multiValued="false"/>
+    <field name="title_sort" type="collatedCS" indexed="true" stored="true" sortMissingLast="true" />
+    
     <field name="subtitle" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     <field name="non_sort_title" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     <field name="autor" type="text_lowercase" indexed="true" stored="true" multiValued="true"/>
@@ -170,7 +172,8 @@
     <!-- <copyField source="*" dest="_text_"/> -->
 
     <copyField source="pid" dest="_text_"/>
-    <copyField source="title" dest="_text_"/>
+    <copyField source="title*" dest="_text_"/>
+    <copyField source="title" dest="title_sort"/>
     <copyField source="autor" dest="_text_"/>
     <copyField source="autor" dest="autor_facet"/>
     <copyField source="keywords" dest="_text_"/>
@@ -497,6 +500,10 @@
         <filter class="solr.CzechStemFilterFactory"/>       
       </analyzer>
     </fieldType>
+    
+    
+    <fieldType name="collatedCS" class="solr.ICUCollationField"
+           locale="cs" strength="primary" alternate="shifted" numeric="true" />
     
     <!-- German -->
     <dynamicField name="*_txt_de" type="text_de"  indexed="true"  stored="true"/>

@@ -8,7 +8,7 @@
             <router-outlet></router-outlet>
  
             <div *ngIf="showResults()">
-              <div *ngIf="dateForm" class="app-section app-section-slider app-brand lighten-6">
+              <div  class="app-section app-section-slider app-brand lighten-6">
                 <div class="row">
                   <div class="col-xs-12">
                     <input id="onlyPeerReviewed" type="checkbox" [(ngModel)]="onlyPeerReviewed" (ngModelChange)="setPeerReviewed()" />
@@ -18,17 +18,15 @@
                     <form class="form-inline">
                       <div class="form-group">
                         <label>{{'Datum publikování' | translate}}:</label> 
-                        {{'od roku' | translate}} <input type="text" class="form-control" name="dateOd" [(ngModel)]="dateForm.controls.range.value[0]"> 
-                        {{'do roku' | translate}} <input type="text" class="form-control" name="dateDo" [(ngModel)]="dateForm.controls.range.value[1]">
+                        {{'od roku' | translate}} <input type="text" (keyup.enter)="dateChange()" (blur)="dateChange()" class="form-control" name="dateOd" [(ngModel)]="dateOd"> 
+                        {{'do roku' | translate}} <input type="text" (keyup.enter)="dateChange()" class="form-control" name="dateDo" [(ngModel)]="dateDo">
                       </div>
                     </form>
                   </div><!--/.col -->
                   <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
                     <div id="slider">
-                      <form [formGroup]="dateForm">
-                        <nouislider [connect]="true" [min]="dateMin" [max]="dateMax" [step]="1" [formControl]="dateForm.controls.range"
+                        <nouislider [connect]="true" [min]="dateMin" [max]="dateMax" [step]="1" [(ngModel)]="dateRange"
                           (end)="onDateChange($event)" [tooltips]="[ true, true ]" #dateSlider ></nouislider>
-                      </form>
                     </div>
                   </div><!--/.col -->
                 </div><!--/.row -->
@@ -44,7 +42,7 @@
                 </div>
               </div><!--/.app-section -->
         
-              <div *ngIf="numFound" class="app-section app-sort-headline">
+              <div *ngIf="numFound > 0" class="app-section app-sort-headline">
                 <div class="row">
                   <div class="col-xs-12 col-sm-6">
                     <h2 class="app-font-s42 app-clean-mg">{{'Výsledky vyhledávání' | translate}}</h2>

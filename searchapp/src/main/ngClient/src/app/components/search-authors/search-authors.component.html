@@ -20,7 +20,7 @@
             
             <div class="app-section">
               <nav class="app-nav-items">
-                <ul *ngIf="authors.length > 0" class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
+                <ul *ngIf="loaded && authors.length > 0" class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
                   <li *ngFor="let l of state.letters" [class.active]="l === letter">
                     <a *ngIf="!isEmpty(l)" (click)="setLetter(l)" 
                       title="">{{l}}</a>
@@ -37,12 +37,12 @@
               <div class="row">
                 <div class="col-xs-6">
                   <ul class="list-unstyled">
-                    <li *ngFor="let k of authors1"><a (click)="search(k)" title="">{{k}}</a></li>
+                    <li *ngFor="let k of authors1"><a (click)="search(k.val)" title="">{{k.val}}</a></li>
                   </ul>
                 </div><!--/.col -->
                 <div class="col-xs-6">
                   <ul class="list-unstyled">
-                    <li *ngFor="let k of authors2"><a (click)="search(k)" title="">{{k}}</a></li>
+                    <li *ngFor="let k of authors2"><a (click)="search(k.val)" title="">{{k.val}}</a></li>
                   </ul>
                 </div><!--/.col -->
               </div><!--/.row -->

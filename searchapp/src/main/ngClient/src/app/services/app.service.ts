@@ -293,19 +293,31 @@ export class AppService {
   }
 
   setViewed(pid: string): Observable<any> {
-    let url = this.state.config['context'] + 'search/views/update';
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    let add = { add: { doc: {}, commitWithin: 10 } };
-    let body = add['add']['doc'];
-    body['pid'] = pid;
-    body['views'] = { 'inc': 1 };
+      let url = this.state.config['context'] + 'index';
+    let params = new URLSearchParams();
 
-    return this.http.post(url, JSON.stringify(add), options)
+    params.set('action', 'SET_VIEW');
+    params.set('pid',  pid);
+    return this.http.get(url, { search: params })
       .map((response: Response) => {
         return response.json();
 
       });
+      
+      
+//    let url = this.state.config['context'] + 'search/views/update';
+//    let headers = new Headers({ 'Content-Type': 'application/json' });
+//    let options = new RequestOptions({ headers: headers });
+//    let add = { add: { doc: {}, commitWithin: 10 } };
+//    let body = add['add']['doc'];
+//    body['pid'] = pid;
+//    body['views'] = { 'inc': 1 };
+
+//    return this.http.post(url, JSON.stringify(add), options)
+//      .map((response: Response) => {
+//        return response.json();
+//
+//      });
   }
 
   getViewed(pid: string): Observable<number> {

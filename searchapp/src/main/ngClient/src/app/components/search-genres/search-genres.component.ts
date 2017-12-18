@@ -60,7 +60,9 @@ export class SearchGenresComponent implements OnInit, OnDestroy {
             this.genres.push(genre);
           }
         }
-        //this.genres = res['facet_counts']['facet_fields']['genre'];
+        this.genres.sort((a, b) => {
+          return a.localeCompare(b, 'cs');
+        });
 
       });
     } else {

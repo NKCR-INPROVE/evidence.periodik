@@ -22,8 +22,9 @@
   {{article.zdroj}}<br />
   </span>
   <span *ngIf="article.genre">
-  <label class="app-clean-mg app-font-roboto-cb">{{'Rubrika' | translate}}:</label> 
-  {{article.genre}}<br />
+    <label class="app-clean-mg app-font-roboto-cb">{{'Rubrika' | translate}}:</label> 
+    <ng-container *ngFor="let g of article.genre"><span *ngIf="g !== 'peer-reviewed'">{{'genre.' +g | translate}}</span></ng-container>
+    <br />
   </span>
   
   <label class="app-clean-mg app-font-roboto-cb">{{'Rozsah stran' | translate}}:</label> s. {{rozsah}}<br />

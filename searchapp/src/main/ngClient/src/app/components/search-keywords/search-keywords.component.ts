@@ -75,8 +75,10 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
         
         for(let i in res['facet_counts']['facet_fields']['keywords_facet']){
           let val: string = res['facet_counts']['facet_fields']['keywords_facet'][i][0];
-          let val_lower: string = val.toLocaleLowerCase(); 
-          this.keywords.push({val: val, val_lower: val_lower});
+          if(val && val !== ''){
+            let val_lower: string = val.toLocaleLowerCase(); 
+            this.keywords.push({val: val, val_lower: val_lower});
+          }
         }
         
         this.keywords.sort((a, b) => {

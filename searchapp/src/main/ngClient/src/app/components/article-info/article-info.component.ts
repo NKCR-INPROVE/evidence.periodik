@@ -1,121 +1,135 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import {Component, OnInit, Input, ElementRef} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
 
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
-import { AppService } from '../../services/app.service';
-import { AppState } from '../../app.state';
-import { Criterium } from '../../models/criterium';
+import {AppService} from '../../services/app.service';
+import {AppState} from '../../app.state';
+import {Criterium} from '../../models/criterium';
 
 @Component({
-  selector: 'app-article-info',
-  templateUrl: './article-info.component.html',
-  styleUrls: ['./article-info.component.scss']
+    selector: 'app-article-info',
+    templateUrl: './article-info.component.html',
+    styleUrls: ['./article-info.component.scss']
 })
 export class ArticleInfoComponent implements OnInit {
-  @Input('article') article;
-  @Input('journal') journal;
-  @Input('active') active: boolean;
-  langObserver: Subscription;
+    @Input('article') article;
+    @Input('journal') journal;
+    @Input('active') active: boolean;
+    langObserver: Subscription;
 
-  rozsah: string;
-  authors: string[] = [];
-  
-  titleInfo: any;
-  title: string;
-  subTitle: string;
-  nonSort: string;
-  
-  keywords: string[] = [];
-  
-  viewed: number = 0;
-  
-  lang: string;
-  
-  langsMap = {
-    'cs': 'cze',
-    'en': 'eng'
-  };
-  
-  doi: string;
-  isPeerReviewed: boolean = false;
+    rozsah: string;
+    authors: string[] = [];
 
-  constructor(
-    private router: Router,
-  private elementRef: ElementRef,
-    private service: AppService,
-    private state: AppState) { }
+    titleInfo: any;
+    title: string;
+    subTitle: string;
+    nonSort: string;
 
-  ngOnInit() {
-    this.lang = this.state.currentLang;
-    this.langObserver = this.service.langSubject.subscribe(
-      (lang) => {
-        this.lang = lang;
+    keywords: string[] = [];
+
+    viewed: number = 0;
+
+    lang: string;
+
+    langsMap = {
+        'cs': 'cze',
+        'en': 'eng'
+    };
+
+    doi: string;
+    isPeerReviewed: boolean = false;
+
+    constructor(
+        private router: Router,
+        private elementRef: ElementRef,
+        private service: AppService,
+        private state: AppState) {}
+
+    ngOnInit() {
+        this.lang = this.state.currentLang;
+        this.langObserver = this.service.langSubject.subscribe(
+            (lang) => {
+                this.lang = lang;
+                this.setData();
+
+            }
+        );
         this.setData();
-
-      }
-    );
-    this.setData();
-  }
-  
-  ngOnChanges(){
-    this.setData();
-  }
-  
-  setData(){
-    if (!this.article){
-      return;
     }
 
-    let mods = JSON.parse(this.article['mods']);
-    if (mods["mods:relatedItem"] && mods["mods:relatedItem"]["mods:part"] && mods["mods:relatedItem"]["mods:part"]["mods:extent"]) {
-      this.rozsah = mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:start"] +
-        ' - ' + mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:end"];
+    ngOnChanges() {
+        this.setData();
     }
-    
-    this.titleInfo = mods["mods:titleInfo"];
-    this.setTitleInfo();
-    this.setNames(mods);
-    
-    if (mods.hasOwnProperty("mods:identifier")) {
-      let ids =  mods["mods:identifier"];
-      if (ids.hasOwnProperty('length')) {
-        for(let i in ids){
-          if(ids[i]["type"] === 'doi'){
-            this.doi = ids[i]['content'];
-          }
+
+    setData() {
+        if (!this.article) {
+            return;
         }
-      } else {
-        if(ids["type"] === 'doi'){
-          this.doi = ids['content'];
-        }
-      }
-    }
-    
-    this.isPeerReviewed = this.article['genre'].indexOf('peer-reviewed') > -1;
-    
-  }
+
+        this.authors = [];
+        this.rozsah = "";
 
 
-  setTitleInfo() {
-    
-    let modsLang = this.langsMap[this.lang];
-    
-    if (this.titleInfo.hasOwnProperty('length')) {
-      this.title = this.titleInfo[0]["mods:title"];
-      for(let i in this.titleInfo){
-        if (this.titleInfo[i]["lang"] === modsLang){
-           this.title = this.titleInfo[i]["mods:title"];
-           this.subTitle = this.titleInfo[i]["mods:subTitle"];
-          this.nonSort = this.titleInfo[i]["mods:nonSort"];
+        this.title = "";
+        this.subTitle = "";
+        this.nonSort = "";
+
+        this.keywords = [];
+
+        this.viewed = 0;
+        this.doi = "";
+        this.isPeerReviewed = false;
+
+        let mods = JSON.parse(this.article['mods']);
+        if (mods["mods:relatedItem"] && mods["mods:relatedItem"]["mods:part"] && mods["mods:relatedItem"]["mods:part"]["mods:extent"]) {
+            this.rozsah = mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:start"] +
+                ' - ' + mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:end"];
         }
-      }
-    } else {
-      this.title = this.titleInfo["mods:title"];
-      this.subTitle = this.titleInfo["mods:subTitle"];
-      this.nonSort = this.titleInfo["mods:nonSort"];
+
+        this.titleInfo = mods["mods:titleInfo"];
+        this.setTitleInfo();
+        this.setNames(mods);
+
+        if (mods.hasOwnProperty("mods:identifier")) {
+            let ids = mods["mods:identifier"];
+            if (ids.hasOwnProperty('length')) {
+                for (let i in ids) {
+                    if (ids[i]["type"] === 'doi') {
+                        this.doi = ids[i]['content'];
+                    }
+                }
+            } else {
+                if (ids["type"] === 'doi') {
+                    this.doi = ids['content'];
+                }
+            }
+        }
+
+        this.isPeerReviewed = this.article['genre'].indexOf('peer-reviewed') > -1;
+
     }
-  }
+
+
+    setTitleInfo() {
+
+        let modsLang = this.langsMap[this.lang];
+
+        if (this.titleInfo.hasOwnProperty('length')) {
+            this.title = this.titleInfo[0]["mods:title"];
+            for (let i in this.titleInfo) {
+                if (this.titleInfo[i]["lang"] === modsLang) {
+                    this.title = this.titleInfo[i]["mods:title"];
+                    this.subTitle = this.titleInfo[i]["mods:subTitle"];
+                    this.nonSort = this.titleInfo[i]["mods:nonSort"];
+                }
+            }
+        } else {
+            this.title = this.titleInfo["mods:title"];
+            this.subTitle = this.titleInfo["mods:subTitle"];
+            this.nonSort = this.titleInfo["mods:nonSort"];
+        }
+    }
 
     setNames(mods) {
         //name/type="personal"	namepart/type="family"
@@ -156,20 +170,20 @@ export class ArticleInfoComponent implements OnInit {
 
         }
     }
-  
-  setKeywords(){
-    this.keywords = [];
-  }
 
-  ngOnDestroy() {
-    this.langObserver.unsubscribe();
-  }
-  
-  onAuthorClicked(s: string){
-    let c = new Criterium();
-    c.field = 'autor';
-    c.value = '"' + s + '"';
-    this.router.navigate(['/hledat/cokoliv', {criteria: JSON.stringify([c]), start: 0}])
-  }
+    setKeywords() {
+        this.keywords = [];
+    }
+
+    ngOnDestroy() {
+        this.langObserver.unsubscribe();
+    }
+
+    onAuthorClicked(s: string) {
+        let c = new Criterium();
+        c.field = 'autor';
+        c.value = '"' + s + '"';
+        this.router.navigate(['/hledat/cokoliv', {criteria: JSON.stringify([c]), start: 0}])
+    }
 
 }

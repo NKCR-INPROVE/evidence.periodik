@@ -17,6 +17,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
+  loaded: boolean = false;
   public authors: any[] = [];
   public authorsFiltered: any[] = [];
   public authors1: any[];
@@ -67,14 +68,28 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
       params.set('facet.mincount', '1');
       params.set('facet.limit', '-1');
       params.set('facet.sort', 'index');
+      this.loaded = false;
       this.searchService.search(params).subscribe(res => {
         this.authors = [];
         for (let i in res['facet_counts']['facet_fields']['autor_facet']) {
-          this.authors.push(res['facet_counts']['facet_fields']['autor_facet'][i][0]);
+//          this.authors.push(res['facet_counts']['facet_fields']['autor_facet'][i][0]);
+          
+          
+          let val: string = res['facet_counts']['facet_fields']['autor_facet'][i][0];
+          if(val && val !== ''){
+            let val_lower: string = val.toLocaleLowerCase(); 
+            this.authors.push({val: val, val_lower: val_lower});
+          }
+          
+          
         }
-
-        //this.authors = res['facet_counts']['facet_fields']['autor_facet'];
+        
+        this.authors.sort((a, b) => {
+          return a.val_lower.localeCompare(b.val_lower, 'cs');
+        });
+        
         this.filter();
+        this.loaded = true;
 
       });
     } else {
@@ -108,7 +123,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
     }
     let has = false;
     this.authors.forEach((el) => {
-      let k: string = el[0];
+      let k: string = el.val[0];
       if (k.toLocaleLowerCase().charAt(0) === l.toLocaleLowerCase()) {
         has = true;
         return;

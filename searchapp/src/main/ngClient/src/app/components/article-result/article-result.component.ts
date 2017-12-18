@@ -62,7 +62,9 @@ export class ArticleResultComponent implements OnInit {
                 ' - ' + mods["mods:relatedItem"]["mods:part"]["mods:extent"]["mods:end"];
         }
 
-        this.service.getViewed(this.article['pid']).subscribe(res => this.viewed = res);
+        this.service.getViewed(this.article['pid']).subscribe(res => {
+            this.viewed = res;
+        });
 
         this.titleInfo = mods["mods:titleInfo"];
 

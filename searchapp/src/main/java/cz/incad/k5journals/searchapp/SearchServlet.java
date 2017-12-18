@@ -68,9 +68,6 @@ public class SearchServlet extends HttpServlet {
       String solrhost = opts.getString("solr.host", "http://localhost:8983/solr/")
               + core  + handler + "?" + request.getQueryString();
       
-
-      
-      
 //        String solrhost = opts.getString("api.point", "http://localhost:8080/search/api/v5.0")
 //                + "/search?" + request.getQueryString();
         

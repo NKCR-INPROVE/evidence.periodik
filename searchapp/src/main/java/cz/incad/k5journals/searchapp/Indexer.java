@@ -57,6 +57,24 @@ public class Indexer {
         return client;
     }
 
+    public void setView(String pid) {
+        try {
+            SolrClient client = getClient("views");
+            SolrInputDocument idoc = new SolrInputDocument();
+            idoc.setField("pid", pid);
+
+            Map<String, Object> fieldModifier = new HashMap<>(1);
+            fieldModifier.put("inc", "1");
+            idoc.addField("views", fieldModifier);  // add the map as the field value
+            client.add(idoc, 10);
+            client.commit();
+            client.close();
+        } catch (IOException | SolrServerException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     /**
      * Index doc only
      *
@@ -473,7 +491,7 @@ public class Indexer {
                         String g = ja.getJSONObject(i).optString("type");
                         if (g != null && !"".equals(g)) {
 //                            if ("main article".equals(g) && !hasMain) {
-                                idoc.addField("genre", g);
+                            idoc.addField("genre", g);
 //                                hasMain = true;
 //                            }
                         }

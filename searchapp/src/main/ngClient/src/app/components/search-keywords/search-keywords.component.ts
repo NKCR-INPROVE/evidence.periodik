@@ -183,6 +183,7 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
   }
 
   search(s: string) {
+      this.state.resetDates();
     let c = new Criterium();
     c.field = 'keywords';
     c.value = '"' + s + '"';

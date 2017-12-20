@@ -18,14 +18,14 @@
                     <form class="form-inline">
                       <div class="form-group">
                         <label>{{'Datum publikování' | translate}}:</label> 
-                        {{'od roku' | translate}} <input type="text" (keyup.enter)="dateChange()" (blur)="dateChange()" class="form-control" name="dateOd" [(ngModel)]="dateOd"> 
-                        {{'do roku' | translate}} <input type="text" (keyup.enter)="dateChange()" class="form-control" name="dateDo" [(ngModel)]="dateDo">
+                        {{'od roku' | translate}} <input type="text" (keyup.enter)="dateChange()" (blur)="dateChange()" class="form-control" name="dateOd" [(ngModel)]="state.dateOd"> 
+                        {{'do roku' | translate}} <input type="text" (keyup.enter)="dateChange()" class="form-control" name="dateDo" [(ngModel)]="state.dateDo">
                       </div>
                     </form>
                   </div><!--/.col -->
                   <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
                     <div id="slider">
-                        <nouislider [connect]="true" [min]="dateMin" [max]="dateMax" [step]="1" [(ngModel)]="dateRange"
+                        <nouislider [connect]="true" [min]="state.dateMin" [max]="state.dateMax" [step]="1" [(ngModel)]="state.dateRange"
                           (end)="onDateChange($event)" [tooltips]="[ true, true ]" #dateSlider ></nouislider>
                     </div>
                   </div><!--/.col -->

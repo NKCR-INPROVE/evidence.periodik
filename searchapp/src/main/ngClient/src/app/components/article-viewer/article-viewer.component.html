@@ -292,8 +292,8 @@
   </div><!--/.modal-dialog -->
 </div><!--/.modal -->
 
-<div bsModal #linkModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="linkModal" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+<div bsModal #linkModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="linkModal" aria-hidden="true" >
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title pull-left">{{'Trvalý odkaz' | translate}}</h4>
@@ -302,7 +302,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <input [value]="url()" />
+        <input [value]="url()" type="text" [size]="url().length" />
       </div>
     </div>
   </div>

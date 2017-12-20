@@ -82,7 +82,7 @@ public class ImgServlet extends HttpServlet {
   }
 
   private void getFromUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+    //response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
     response.addHeader("Access-Control-Allow-Methods", "GET, POST");
     response.addHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
@@ -94,10 +94,11 @@ public class ImgServlet extends HttpServlet {
       solrhost += "?" + request.getQueryString();
     }
 
+    
     LOGGER.log(Level.INFO, "requesting url {0}", solrhost);
     Map<String, String> reqProps = new HashMap<>();
-    reqProps.put("Content-Type", "application/json");
-    reqProps.put("Accept", "application/json");
+//    reqProps.put("Content-Type", "application/json");
+//    reqProps.put("Accept", "application/json");
     InputStream inputStream = RESTHelper.inputStream(solrhost, reqProps);
     org.apache.commons.io.IOUtils.copy(inputStream, response.getOutputStream());
     //out.print(org.apache.commons.io.IOUtils.toString(inputStream, "UTF8"));

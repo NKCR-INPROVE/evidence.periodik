@@ -1,5 +1,4 @@
 import {Component, OnInit, OnDestroy, ViewChild, ElementRef} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 import {Router, ActivatedRoute, Params, NavigationStart, NavigationEnd} from '@angular/router';
 import {Observable} from 'rxjs/Rx';
@@ -31,11 +30,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     start: number = 0;
     rowsSelect: number[] = [10, 20, 30];
     rows: number = 10;
-    dateMin: number = 2000;
-    dateMax: number = 2019;
-    dateOd: number = 2000;
-    dateDo: number = 2019;
-    dateRange: number[] = [0, 1];
     hasDateFilter: boolean = false;
 
     currentSort: any;
@@ -51,8 +45,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         private state: AppState,
         private router: Router,
         private route: ActivatedRoute,
-        private searchService: SearchService,
-        private formBuilder: FormBuilder
+        private searchService: SearchService
     ) {}
 
     ngOnInit() {
@@ -173,9 +166,8 @@ export class SearchComponent implements OnInit, OnDestroy {
         }
 
         //Add date filter
-        if (this.dateOd) {
-            params.append('fq', 'year:[' + this.dateOd + ' TO ' + this.dateDo + ']');
-        }
+            params.append('fq', 'year:[' + this.state.dateOd + ' TO ' + this.state.dateDo + ']');
+        
 
         //Add onlyPeerReviewed
         if (this.onlyPeerReviewed) {
@@ -191,7 +183,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             this.totalPages = Math.ceil(this.numFound / this.rows);
 
             if (this.numFound == 0) {
-                this.changeRangeFormValue(this.dateMin, this.dateMax);
+                this.changeRangeFormValue(this.state.dateMin, this.state.dateMax);
             } else if (res.hasOwnProperty('stats') && res['stats']['stats_fields'].hasOwnProperty('year')) {
                 //this.changeRangeFormValue(res['stats']['stats_fields']['year']['min'], res['stats']['stats_fields']['year']['max']);
             }
@@ -203,8 +195,8 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     getStats() {
         if (this.state.config) {
-            this.dateMin = 2000;
-            this.dateMax = 2019;
+            this.state.dateMin = 2000;
+            this.state.dateMax = 2019;
                               //this.dateForm = this.formBuilder.group({ 'range': [[this.dateMin, this.dateMax]] });
 
             var params = new URLSearchParams();
@@ -216,12 +208,12 @@ export class SearchComponent implements OnInit, OnDestroy {
 
             this.searchService.search(params).subscribe(res => {
                 if (res.hasOwnProperty('stats') && res['stats']['stats_fields'].hasOwnProperty('year')) {
-                    this.dateMin = res['stats']['stats_fields']['year']['min'];
-                    this.dateMax = res['stats']['stats_fields']['year']['max'];
+                    this.state.dateMin = res['stats']['stats_fields']['year']['min'];
+                    this.state.dateMax = res['stats']['stats_fields']['year']['max'];
                     if (!this.hasDateFilter) {
-                        this.dateOd = this.dateMin;
-                        this.dateDo = this.dateMax;
-                        this.dateRange = [this.dateOd, this.dateDo];
+                        this.state.dateOd = this.state.dateMin;
+                        this.state.dateDo = this.state.dateMax;
+                        this.state.dateRange = [this.state.dateOd, this.state.dateDo];
                     }
                     //this.dateForm = this.formBuilder.group({ 'range': [[this.dateMin, this.dateMax]] });
 
@@ -238,18 +230,13 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     changeRangeFormValue(dateOd: number, dateDo: number) {
-        //    const control = <FormControl>this.dateForm.controls['range'];
-        //    const newRange = control.value;
-        //    newRange[0] = dateOd;
-        //    newRange[1] = dateDo;
-        //    control.setValue(newRange);
-        this.dateOd = dateOd;
-        this.dateDo = dateDo;
-        this.dateRange = [dateOd, dateDo];
+        this.state.dateOd = dateOd;
+        this.state.dateDo = dateDo;
+        this.state.dateRange = [dateOd, dateDo];
     }
 
     dateChange() {
-        this.onDateChange([this.dateOd, this.dateDo]);
+        this.onDateChange([this.state.dateOd, this.state.dateDo]);
     }
     onDateChange(e) {
         if (e) {
@@ -258,7 +245,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         let p = {};
         Object.assign(p, this.route.snapshot.firstChild.params);
         //p['date'] = JSON.stringify(this.dateForm.controls['range'].value);
-        p['date'] = JSON.stringify(this.dateRange);
+        p['date'] = JSON.stringify(this.state.dateRange);
         p['start'] = 0;
         this.router.navigate(['/hledat/cokoliv', p]);
         return;

@@ -76,6 +76,7 @@ export class SearchGenresComponent implements OnInit, OnDestroy {
   }
 
   search(genre: string) {
+      this.state.resetDates();
     let c = new Criterium();
     c.field = 'genre';
     c.value = '"' + genre + '"';;

@@ -61,6 +61,13 @@ export class AppState {
   
   public breadcrumbs = [];
   
+  
+    dateMin: number = 2000;
+    dateMax: number = 2019;
+    dateOd: number = 2000;
+    dateDo: number = 2019;
+    dateRange: number[] = [0, 1];
+  
   public route: string;
   
   
@@ -92,6 +99,12 @@ export class AppState {
     'Y',
     'Z'
   ];
+  
+  resetDates() {
+        this.dateOd = this.dateMin;
+        this.dateDo = this.dateMax;
+        this.dateRange = [this.dateOd, this.dateDo];
+    }
   
   setConfig(cfg){
     this.config = cfg;

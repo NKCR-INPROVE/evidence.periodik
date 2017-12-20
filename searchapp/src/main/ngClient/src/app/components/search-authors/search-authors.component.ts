@@ -166,6 +166,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
   }
 
   search(s: string) {
+      this.state.resetDates();
     let c = new Criterium();
     c.field = 'autor';
     c.value = '"' + s + '"~3';

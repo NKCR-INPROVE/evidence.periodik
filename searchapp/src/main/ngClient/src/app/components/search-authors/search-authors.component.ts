@@ -138,7 +138,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
 
       this.authors.forEach((el) => {
         //        console.log(el);
-        let k: string = el[0];
+        let k: string = el.val;
         if (k.toLocaleLowerCase().charAt(0) === this.letter.toLocaleLowerCase()) {
           this.authorsFiltered.push(el);
         }

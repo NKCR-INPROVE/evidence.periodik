@@ -87,6 +87,7 @@ public class Indexer {
         try {
             idoc.addField("pid", pid);
             mods = getModsToJson(pid).getJSONObject("mods:modsCollection").getJSONObject("mods:mods");
+            LOGGER.log(Level.INFO, "mods: {0}", mods);
             idoc.addField("mods", mods.toString());
             JSONObject item = getItem(pid);
             idoc.addField("datanode", item.optBoolean("datanode"));
@@ -336,10 +337,14 @@ public class Indexer {
             for (int i = 0; i < ja.length(); i++) {
                 JSONObject jo = ja.getJSONObject(i);
                 if (jo.has("lang")) {
-                    String lang = jo.optString("lang");
-                    idoc.addField("title_" + lang, jo.optString(prefix + "title"));
-                    idoc.addField("subtitle_" + lang, jo.optString(prefix + "subTitle"));
-                    idoc.addField("non_sort_title_" + lang, jo.optString(prefix + "nonSort"));
+                    if(jo.has("type") && "alternative".equals(jo.getString("type"))){
+                        //Mozna chceme jeste pridat alternativni titulek
+                    } else {
+                        String lang = jo.optString("lang");
+                        idoc.addField("title_" + lang, jo.optString(prefix + "title"));
+                        idoc.addField("subtitle_" + lang, jo.optString(prefix + "subTitle"));
+                        idoc.addField("non_sort_title_" + lang, jo.optString(prefix + "nonSort"));
+                    }
                 } else {
                     if (!hasDefault) {
                         idoc.addField("title", jo.optString(prefix + "title"));
@@ -429,30 +434,8 @@ public class Indexer {
         if (o instanceof JSONObject) {
             JSONObject jo = (JSONObject) o;
             if (jo.has("type") && "personal".equals(jo.getString("type")) && jo.has(prefix + "namePart")) {
-                String autor = "";
                 Object np = jo.get(prefix + "namePart");
-
-                if (np instanceof JSONArray) {
-                    JSONArray npja = (JSONArray) np;
-
-                    Object first = npja.get(0);
-                    if (first instanceof JSONObject) {
-                        if (((JSONObject) first).getString("type").equals("family")) {
-                            autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
-                                    + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content");
-                        } else {
-
-                            autor = jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content") + " "
-                                    + jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content");
-                        }
-                    } else if (first instanceof String) {
-                        autor = (String) first;
-                    }
-                } else if (np instanceof String) {
-                    autor = (String) np;
-                }
-
-                idoc.addField("autor", autor);
+                idoc.addField("autor", namePart(np));
             }
         } else if (o instanceof JSONArray) {
             JSONArray ja = (JSONArray) o;
@@ -460,21 +443,36 @@ public class Indexer {
                 JSONObject jo = ja.getJSONObject(i);
                 if (jo.has("type") && "personal".equals(jo.getString("type")) && jo.has(prefix + "namePart")) {
 
-                    String autor = "";
-                    if (jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("type").equals("family")) {
-                        autor = jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content") + " "
-                                + jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content");
-                    } else {
-
-                        autor = jo.getJSONArray(prefix + "namePart").getJSONObject(1).getString("content") + " "
-                                + jo.getJSONArray(prefix + "namePart").getJSONObject(0).getString("content");
-                    }
-
-                    idoc.addField("autor", autor);
+                    Object np = jo.get(prefix + "namePart");
+                idoc.addField("autor", namePart(np));
                 }
             }
         }
 
+    }
+    
+    private String namePart(Object np){
+        String autor = "";
+        if (np instanceof JSONArray) {
+                    JSONArray npja = (JSONArray) np;
+
+                    Object first = npja.get(0);
+                    if (first instanceof JSONObject) {
+                        if (((JSONObject) first).getString("type").equals("family")) {
+                            autor = npja.getJSONObject(0).getString("content") + " "
+                                    + npja.getJSONObject(1).getString("content");
+                        } else {
+
+                            autor = npja.getJSONObject(1).getString("content") + " "
+                                    + npja.getJSONObject(0).getString("content");
+                        }
+                    } else if (first instanceof String) {
+                        autor = (String) first;
+                    }
+                } else if (np instanceof String) {
+                    autor = (String) np;
+                }
+        return autor;
     }
 
     private void setGenre(SolrInputDocument idoc, JSONObject mods) {

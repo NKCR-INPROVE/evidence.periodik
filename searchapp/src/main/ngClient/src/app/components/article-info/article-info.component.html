@@ -9,10 +9,15 @@
   <span *ngFor="let author of authors; let last = last">
     <label class="app-clean-mg app-font-roboto-cb">{{'Autor' | translate}}:</label> {{author}}<br />
   </span>
+    
+    
+   <span *ngIf="article.keywords && article.keywords.length > 0">
   <label class="app-clean-mg app-font-roboto-cb">{{'Klíčová slova' | translate}}:</label>
   <span *ngFor="let keyword of article.keywords; let last = last">
      {{keyword}}<span *ngIf="!last">, </span>
   </span><br />
+  </span>
+    
   <span *ngIf="article.abstract">
   <label class="app-clean-mg app-font-roboto-cb">{{'Abstrakt' | translate}}:</label> 
   {{article.abstract}}<br />
@@ -27,7 +32,9 @@
     <br />
   </span>
   
-  <label class="app-clean-mg app-font-roboto-cb">{{'Rozsah stran' | translate}}:</label> s. {{rozsah}}<br />
+  <span *ngIf="rozsah">
+  <label class="app-clean-mg app-font-roboto-cb" >{{'Rozsah stran' | translate}}:</label> s. {{rozsah}}<br />
+  </span>
   
   <span *ngIf="doi">
   <label class="app-clean-mg app-font-roboto-cb">{{'DOI' | translate}}:</label> 
@@ -39,5 +46,5 @@
   <span *ngIf="!isPeerReviewed">{{'nerecenzovaný článek' | translate}}</span>
   <br />
 
-  <label class="app-clean-mg app-font-roboto-cb">Licence:</label> CC-BY-SA<br />
+  <label class="app-clean-mg app-font-roboto-cb">{{'Licence' | translate}}:</label> CC-BY-SA<br />
 </p>

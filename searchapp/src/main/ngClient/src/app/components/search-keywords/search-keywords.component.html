@@ -55,4 +55,4 @@
               </div><!--/.row -->
             </div><!--/.app-section -->
             
-            <app-pagination [numPages]="5" [totalPages]="totalPages" (onGotoPage)="setPage($event)"></app-pagination>
+            <app-pagination [numPages]="5" [totalPages]="totalPages" (onGotoPage)="setPage($event)" [current]="page"></app-pagination>

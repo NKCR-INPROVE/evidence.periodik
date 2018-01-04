@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Observable} from 'rxjs/Rx';
 import {Subscription} from 'rxjs/Subscription';
@@ -14,7 +14,7 @@ import {AppService} from '../../services/app.service';
 })
 export class SearchCriteriaComponent implements OnInit, OnDestroy {
 
-    //@Input() criterium: Criterium;
+    @ViewChild('lupa') lupa: ElementRef;
     @Output() onSearch: EventEmitter<Criterium[]> = new EventEmitter<Criterium[]>();
     subscriptions: Subscription[] = [];
 
@@ -116,14 +116,18 @@ export class SearchCriteriaComponent implements OnInit, OnDestroy {
 
     reset() {
         this.criteria = [];
+        this.state.resetDates();
         this.criteria.push(new Criterium());
+        this.search();
     }
 
     search() {
         let p = {};
         Object.assign(p, this.route.snapshot.params);
         p['criteria'] = JSON.stringify(this.criteria);
+        p['date'] = JSON.stringify(this.state.dateRange);
         p['start'] = 0;
+        this.lupa.nativeElement.blur();
         this.router.navigate(['/hledat/cokoliv', p]);
     }
 

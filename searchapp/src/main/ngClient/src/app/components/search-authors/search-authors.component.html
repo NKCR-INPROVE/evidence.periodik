@@ -2,7 +2,7 @@
               <div class="app-item">
                 <div class="app-col-left">
                   <input id="app-search-authors" type="text" class="form-control" [placeholder]="'q_authors_placeholder' | translate" 
-                         [typeahead]="authors" [(ngModel)]="qautor" (typeaheadOnSelect)="searchInput()" />
+                         [typeahead]="authors" [(ngModel)]="qautor" (typeaheadOnSelect)="searchInput()" typeaheadOptionField="val" />
                 </div>
                 <!--/.col -->
                 <div class="app-col-right">

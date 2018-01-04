@@ -51,7 +51,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     ngOnInit() {
 
         this.currentSort = this.state.sorts[0];
-        this.subscriptions.push(this.service.searchSubject.subscribe((criteria: Criterium[]) => this.search(criteria)));
 
         this.getStats();
         this.subscriptions.push(this.router.events.subscribe(val => {
@@ -87,10 +86,11 @@ export class SearchComponent implements OnInit, OnDestroy {
                         let j = JSON.parse(date);
                         this.changeRangeFormValue(j[0], j[1]);
                         if (this.state.config) {
-                            this.search([]);
+                            //this.search([]);
                         } else {
                             let sss = this.state.configSubject.subscribe(() => {
-                                this.search([]);
+                                
+                                //this.search([]);
                                 sss.unsubscribe();
                             });
                         }
@@ -115,6 +115,9 @@ export class SearchComponent implements OnInit, OnDestroy {
                     this.changeRangeFormValue(j[0], j[1]);
                 }
             }));
+        this.subscriptions.push(this.service.searchSubject.subscribe((criteria: Criterium[]) => {
+            this.search(criteria);
+        }));
     }
 
     ngOnDestroy() {

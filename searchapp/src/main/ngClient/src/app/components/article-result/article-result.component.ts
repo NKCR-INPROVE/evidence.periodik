@@ -16,21 +16,14 @@ export class ArticleResultComponent implements OnInit {
     @Input('article') article;
     @Input('active') active: boolean;
     langObserver: Subscription;
-
     rozsah: string;
-
     authors: string[] = [];
-
     titleInfo: any;
     title: string;
     subTitle: string;
     nonSort: string;
-
-
     parentJournal: any;
-
     viewed: number = 0;
-
     lang: string;
 
     langsMap = {
@@ -118,41 +111,45 @@ export class ArticleResultComponent implements OnInit {
             this.nonSort = this.titleInfo["mods:nonSort"];
         }
     }
+    
+    namePart(namePart: any){
+      if (typeof namePart === 'string') {
+          this.authors.push(namePart);
+      } else {
+          if (typeof namePart[0] === 'string') {
+              this.authors.push(namePart[0]);
+          } else {
+              //Chceme nejdriv prijmeni a potom jmeno
+              if (namePart[0]['type'] === 'family') {
+                  this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+              } else {
+                  this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
+              }
+          }
+      }
+    }
 
     setNames(mods) {
         //name/type="personal"	namepart/type="family"
         //name/type="personal"	namePart/type"given"
+      
+      //https://journals.lib.cas.cz/k5journals/article/uuid%3A2aabc1e5-c217-4a71-846f-95bf0ba9d94b
+      
+      //http://localhost:4200/article/uuid%3A2aabc1e5-c217-4a71-846f-95bf0ba9d94b
+      if (this.article.pid === 'uuid:2aabc1e5-c217-4a71-846f-95bf0ba9d94b'){
+        console.log(mods["mods:name"]);
+      }
         if (mods.hasOwnProperty("mods:name")) {
             let name = mods["mods:name"];
             if (name.hasOwnProperty('length')) {
                 for (let i in name) {
                     let namePart = name[i]["mods:namePart"];
-                    if (name[i]["type"] === 'personal' && namePart) {
-                        //Chceme nejdriv prijmeni a potom jmeno
-                        if (namePart[0]['type'] === 'family') {
-                            this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
-                        } else {
-                            this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
-                        }
-                    }
+                    this.namePart(namePart);
                 }
             } else {
                 if (name["type"] === 'personal' && name.hasOwnProperty("mods:namePart")) {
                     let namePart = name["mods:namePart"];
-                    if (typeof namePart === 'string') {
-                        this.authors.push(namePart);
-                    } else {
-                        if (typeof namePart[0] === 'string') {
-                            this.authors.push(namePart[0]);
-                        } else {
-                            //Chceme nejdriv prijmeni a potom jmeno
-                            if (namePart[0]['type'] === 'family') {
-                                this.authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
-                            } else {
-                                this.authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
-                            }
-                        }
-                    }
+                    this.namePart(namePart);
                 }
             }
 

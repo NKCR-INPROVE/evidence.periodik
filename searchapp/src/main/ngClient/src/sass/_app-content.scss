@@ -7,24 +7,25 @@
     margin-bottom: 20px;
     
     .app-flex-wrapper { 
-        display:flex;
-        flex-flow: column wrap;
-        max-height: 100%;
-        align-items: center;
-        overflow: auto;
-        
-        >div {
-          width: 50%;
-        }
+      display:flex;
+      flex-flow: column wrap;
+      max-height: 100%;
+      align-items: center;
+      overflow: auto;
+
+      > div {
+        width: 50%;
+      }
     }
-                        
   }
+  
   .app-logo-wrapper {
     margin-top: 20px;
     img {
       margin: 0 20px 10px 0;
     }
   }
+  
   .app-card {
     display: table;
     margin-bottom: 30px;
@@ -76,7 +77,12 @@
         font-size: 1.4rem;
       }
     }
+    
+    .app-img-cover {
+      width: 220px;  
+    }
   }
+  
   .app-col-right {
     .media {
       margin-top: 0;

@@ -91,9 +91,9 @@ export class AppService {
       });
   }
 
-  getActual(): Observable<Journal> {
-    return this.getJournalByPid(this.state.config['journal'], this.state.config['model']);
-  }
+//  getActual(): Observable<Journal> {
+//    return this.getJournalByPid(this.state.config['journal'], this.state.config['model']);
+//  }
 
   getJournal(pid: string): Observable<Journal> {
 
@@ -151,35 +151,35 @@ export class AppService {
     });
   }
 
-  getJournalByPid(pid: string, model: string): Observable<Journal> {
-    var url = this.state.config['api_point'] + '/item/' + pid + '/children';
-
-    return this.http.get(url).map((response: Response) => {
-      let childs: any[] = response.json();
-      //console.log(pid, childs);
-      let last = childs[childs.length - 1];
-      if (childs.length === 0) {
-        return new Journal();
-      }
-      if (last['model'] === model) {
-        let ret = new Journal();
-        ret.pid = last['pid'];
-        ret.title = last['title'];
-        ret.root_title = last['root_title'];
-        ret.root_pid = last['root_pid'];
-        ret.model = last['model'];
-        ret.details = last['details'];
-        ret.siblings = childs;
-        ret.mods = null;
-        ret.genres = [];
-        ret.genresObject = {};
-
-        return ret;
-      } else {
-        return this.getJournalByPid(last['pid'], model).switch();
-      }
-    });
-  }
+//  getJournalByPid(pid: string, model: string): Observable<Journal> {
+//    var url = this.state.config['api_point'] + '/item/' + pid + '/children';
+//
+//    return this.http.get(url).map((response: Response) => {
+//      let childs: any[] = response.json();
+//      //console.log(pid, childs);
+//      let last = childs[childs.length - 1];
+//      if (childs.length === 0) {
+//        return new Journal();
+//      }
+//      if (last['model'] === model) {
+//        let ret = new Journal();
+//        ret.pid = last['pid'];
+//        ret.title = last['title'];
+//        ret.root_title = last['root_title'];
+//        ret.root_pid = last['root_pid'];
+//        ret.model = last['model'];
+//        ret.details = last['details'];
+//        ret.siblings = childs;
+//        ret.mods = null;
+//        ret.genres = [];
+//        ret.genresObject = {};
+//
+//        return ret;
+//      } else {
+//        return this.getJournalByPid(last['pid'], model).switch();
+//      }
+//    });
+//  }
 
   setArticles1(ret: Journal, res1) {
     let res = res1['response']['docs'];

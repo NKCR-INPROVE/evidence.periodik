@@ -6,6 +6,7 @@ import { URLSearchParams } from '@angular/http';
 import { SearchService } from '../../services/search.service';
 import { AppState } from '../../app.state';
 import { Criterium } from '../../models/criterium';
+import {AppService} from 'app/services/app.service';
 
 @Component({
   selector: 'app-search-authors',
@@ -33,6 +34,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private service: AppService,
     private searchService: SearchService,
     public state: AppState) { }
 
@@ -139,7 +141,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
       this.authors.forEach((el) => {
         //        console.log(el);
         let k: string = el.val;
-        if (k.toLocaleLowerCase().charAt(0) === this.letter.toLocaleLowerCase()) {
+        if (this.service.removeDiacritics(k.toLocaleLowerCase().charAt(0))  === this.letter.toLocaleLowerCase()) {
           this.authorsFiltered.push(el);
         }
       });

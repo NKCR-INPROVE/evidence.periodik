@@ -7,6 +7,7 @@ import { SearchService } from '../../services/search.service';
 import { AppState } from '../../app.state';
 import { Criterium } from '../../models/criterium';
 import {AppService} from 'app/services/app.service';
+import Utils from '../../services/utils';
 
 @Component({
   selector: 'app-search-authors',
@@ -141,7 +142,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
       this.authors.forEach((el) => {
         //        console.log(el);
         let k: string = el.val;
-        if (this.service.removeDiacritics(k.toLocaleLowerCase().charAt(0))  === this.letter.toLocaleLowerCase()) {
+        if (Utils.removeDiacritics(k.toLocaleLowerCase().charAt(0))  === this.letter.toLocaleLowerCase()) {
           this.authorsFiltered.push(el);
         }
       });

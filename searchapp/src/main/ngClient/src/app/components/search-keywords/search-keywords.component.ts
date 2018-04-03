@@ -8,6 +8,8 @@ import { AppService } from '../../services/app.service';
 import { AppState } from '../../app.state';
 import { Criterium } from '../../models/criterium';
 
+import Utils from '../../services/utils';
+
 @Component({
   selector: 'app-search-keywords',
   templateUrl: './search-keywords.component.html',
@@ -154,7 +156,7 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
             this.keywordsFiltered.push(el);
           }
         }else{
-          if (this.service.removeDiacritics(first) === this.letter.toLocaleLowerCase()) {
+          if (Utils.removeDiacritics(first) === this.letter.toLocaleLowerCase()) {
             this.keywordsFiltered.push(el);
           }
         }

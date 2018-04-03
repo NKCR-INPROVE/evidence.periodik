@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {AppService} from '../../services/app.service';
 import {AppState} from '../../app.state';
 import {Criterium} from '../../models/criterium';
+import Utils from 'app/services/utils';
 
 @Component({
     selector: 'app-article-info',
@@ -84,22 +85,7 @@ export class ArticleInfoComponent implements OnInit {
         let mods = JSON.parse(this.article['mods']);
         
         
-        if (mods["mods:relatedItem"] && mods["mods:relatedItem"]["mods:part"]) {
-
-            let part = mods["mods:relatedItem"]["mods:part"];
-            if (part.hasOwnProperty('length')) {
-                for (let i in part) {
-                    if (part[i].hasOwnProperty('mods:extent')) {
-
-                        this.rozsah = part[i]["mods:extent"]["mods:start"] +
-                            ' - ' + part[i]["mods:extent"]["mods:end"];
-                    }
-                }
-            } else if (part["mods:extent"]) {
-                this.rozsah = part["mods:extent"]["mods:start"] +
-                    ' - ' + part["mods:extent"]["mods:end"];
-            }
-        }
+        this.rozsah = Utils.getRozsah(mods);
 
         this.titleInfo = mods["mods:titleInfo"];
         this.setTitleInfo();

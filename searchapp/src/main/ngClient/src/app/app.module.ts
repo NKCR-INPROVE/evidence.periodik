@@ -4,14 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { RouterModule }   from '@angular/router';
 
-//import {Store, StoreModule} from "@ngrx/store";
-//import {SearchReducer} from "./reducers/search.reducer";
-
 import { BsDropdownModule, ModalModule, CollapseModule, TypeaheadModule, TooltipModule, AlertModule } from 'ngx-bootstrap';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { PdfViewerComponent } from 'ng2-pdf-viewer';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NouisliderModule } from 'ng2-nouislider';
 
 import { FileUploadModule } from 'ng2-file-upload';
@@ -48,6 +45,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AuthGuard } from "./services/auth-guard";
 import { SafeHtmlPipe } from './services/safe-html.pipe';
+import { TestComponent } from './components/test/test.component';
 
 
 //const storeManager = StoreModule.provideStore({ currentSearch: SearchReducer });
@@ -76,7 +74,6 @@ export function createTranslateLoader(http: Http) {
     ArticleResultComponent,
     BreadcrumbsComponent,
     ArticleViewerComponent,
-    PdfViewerComponent,
     ArchivItemComponent,
     ArchivItemLeftComponent,
     SearchCriteriaComponent,
@@ -90,7 +87,8 @@ export function createTranslateLoader(http: Http) {
     FreePageComponent,
     LoginComponent,
     AdminComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -99,6 +97,7 @@ export function createTranslateLoader(http: Http) {
     HttpModule,
     JsonpModule,
     NouisliderModule,
+    PdfViewerModule,
     BsDropdownModule.forRoot(), ModalModule.forRoot(), CollapseModule.forRoot(),
     TypeaheadModule.forRoot(),
     TooltipModule.forRoot(),
@@ -115,6 +114,7 @@ export function createTranslateLoader(http: Http) {
     //StoreModule, storeManager,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
+      { path: 'test', component: TestComponent },
       { path: 'actual', component: ActualComponent },
       { path: 'archiv', component: ArchivComponent },
       //{ path: 'archiv/:pid', component: ArchivComponent },
@@ -153,4 +153,5 @@ export function createTranslateLoader(http: Http) {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
 

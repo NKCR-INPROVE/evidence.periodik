@@ -36,9 +36,10 @@
         <!--<div *ngIf="loading" class="img-responsive app-thumb-doc" >loading...</div>-->
         <div *ngIf="isPdf">
           <pdf-viewer [src]="fullSrc" 
-                      [original-size]="true" 
-                      [render-text]="false"
+                      [original-size]="false" 
+                      [render-text]="true"
                       [show-all]="true"
+                      [fit-to-page]="true"
                       [zoom]="zoom"
                       (after-load-complete)="afterLoad($event)"
                       style="display: block;"

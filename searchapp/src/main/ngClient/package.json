@@ -31,7 +31,7 @@
     "core-js": "^2.4.1",
     "ng2-file-upload": "^1.2.1",
     "ng2-nouislider": "^1.6.1",
-    "ng2-pdf-viewer": "^1.0.2",
+    "ng2-pdf-viewer": "^3.0.8",
     "ng2-slim-loading-bar": "^4.0.0",
     "ngx-bootstrap": "^1.9.3",
     "node-sass": "^4.7.2",

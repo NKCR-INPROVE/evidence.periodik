@@ -12,6 +12,7 @@
   <properties>
     <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <context.name>k5journals</context.name>
   </properties>
     
   <dependencies>
@@ -71,7 +72,7 @@
             <phase>generate-sources</phase>
             <configuration>
               <executable>npm</executable>
-              <workingDirectory>${project.basedir}/src/main/ngClient/dist</workingDirectory>  
+              <workingDirectory>${project.basedir}/src/main/ngClient</workingDirectory>  
               <arguments>
                 <argument>run</argument>
                 <argument>build.prod</argument>
@@ -178,7 +179,7 @@
                 </replacement> 
                 <replacement> 
                   <token>base href="/"</token> 
-                  <value>base href="/k5journals/"</value> 
+                  <value>base href="/${context.name}/"</value> 
                 </replacement> 
               </replacements> 
             </configuration> 
@@ -199,7 +200,7 @@
                 </replacement> 
                 <replacement> 
                   <token>"context" : "/",</token> 
-                  <value>"context" : "/k5journals/",</value> 
+                  <value>"context" : "/${context.name}/",</value> 
                 </replacement> 
               </replacements> 
             </configuration> 

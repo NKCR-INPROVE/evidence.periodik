@@ -89,7 +89,8 @@ export class ArticleInfoComponent implements OnInit {
 
         this.titleInfo = mods["mods:titleInfo"];
         this.setTitleInfo();
-        this.setNames(mods);
+        //this.setNames(mods);
+        this.authors = this.article['autor'];
 
         if (mods.hasOwnProperty("mods:identifier")) {
             let ids = mods["mods:identifier"];

@@ -279,8 +279,14 @@ export class AppService {
       return res.json();
     });
   }
+  
+  
+  public modsCache = {};
 
   getMods(pid: string): Observable<any> {
+    if (this.modsCache.hasOwnProperty(pid)){
+      return Observable.of(this.modsCache[pid]);
+    }
     let url = this.state.config['context'] + 'search/journal/select';
     let params = new URLSearchParams();
 
@@ -291,7 +297,8 @@ export class AppService {
 
     return this.http.get(url, { search: params })
       .map((response: Response) => {
-        return JSON.parse(response.json()['response']['docs'][0]['mods']);
+        this.modsCache[pid] = response.json()['response']['docs'][0]['mods'];
+        return this.modsCache[pid];
       });
   }
 

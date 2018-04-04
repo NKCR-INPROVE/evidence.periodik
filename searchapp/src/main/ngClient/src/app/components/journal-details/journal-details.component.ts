@@ -60,6 +60,7 @@ export class JournalDetailsComponent implements OnInit {
 //        }
         
         this.appService.getMods(this.journal.parent).subscribe(parentMods => {
+          console.log('k')
           if(parentMods['mods:originInfo']){
           this.year = parentMods['mods:originInfo']['mods:dateIssued'];
           if (parentMods['mods:titleInfo']) {

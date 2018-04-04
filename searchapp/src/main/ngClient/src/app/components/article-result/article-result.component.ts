@@ -7,6 +7,7 @@ import {AppService} from '../../services/app.service';
 import {AppState} from '../../app.state';
 import {Criterium} from '../../models/criterium';
 import Utils from 'app/services/utils';
+import {Journal} from 'app/models/journal.model';
 
 @Component({
     selector: 'app-article-result',
@@ -16,6 +17,7 @@ import Utils from 'app/services/utils';
 export class ArticleResultComponent implements OnInit {
     @Input('article') article;
     @Input('active') active: boolean;
+    @Input('parentJournal') parentJournal: Journal;
     langObserver: Subscription;
     rozsah: string;
     authors: string[] = [];
@@ -23,7 +25,6 @@ export class ArticleResultComponent implements OnInit {
     title: string;
     subTitle: string;
     nonSort: string;
-    parentJournal: any;
     viewed: number = 0;
     lang: string;
 
@@ -62,8 +63,9 @@ export class ArticleResultComponent implements OnInit {
 
         this.setTitleInfo();
         this.setDetails();
-        this.setNames(mods);
-        //console.log(mods);
+        //this.setNames(mods);
+        //this.authors = Utils.getAutors(mods);
+        this.authors = this.article['autor'];
         if (this.active) {
             setTimeout(() => {
                 this.elementRef.nativeElement.scrollIntoView();
@@ -73,9 +75,11 @@ export class ArticleResultComponent implements OnInit {
     }
 
     setDetails() {
+      if(!this.parentJournal){
         this.service.getJournal(this.article['parents'][0]).subscribe(res => {
             this.parentJournal = res;
         });
+      }
     }
 
 

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Observable} from 'rxjs/Rx';
 
-import { AppService } from '../../services/app.service';
-import { AppState } from '../../app.state';
-import { Journal } from '../../models/journal.model';
+import {AppService} from '../../services/app.service';
+import {AppState} from '../../app.state';
+import {Journal} from '../../models/journal.model';
 
 @Component({
   selector: 'app-article-viewer',
@@ -12,6 +12,8 @@ import { Journal } from '../../models/journal.model';
   styleUrls: ['./article-viewer.component.scss']
 })
 export class ArticleViewerComponent implements OnInit {
+
+  @ViewChild('pdfComponent') private pdfComponent: any;
 
   pid: string;
   article: any;
@@ -87,12 +89,14 @@ export class ArticleViewerComponent implements OnInit {
             if (a.pid) {
 
               this.journal = a;
+              this.service.getMods(a['pid']).subscribe(mods => {
+                this.journal.mods = mods;
 
-              this.service.getArticles(a['pid']).subscribe(res => {
-                //this.service.setArticles(this.journal, res);
-                this.journal.setArticles(res, this.state.config['mergeGenres']);
+                this.service.getArticles(a['pid']).subscribe(res => {
+                  //this.service.setArticles(this.journal, res);
+                  this.journal.setArticles(res, this.state.config['mergeGenres']);
+                });
               });
-              this.service.getMods(a['pid']).subscribe(mods => this.journal.mods = mods);
               //this.service.getSiblings(a['pid']).subscribe(siblings => {
               this.service.getChildren(a['parent'], 'asc').subscribe(siblings => {
                 this.journal.siblings = siblings;
@@ -145,7 +149,7 @@ export class ArticleViewerComponent implements OnInit {
   }
 
   next() {
-    if (this.hasNext()){
+    if (this.hasNext()) {
       let pid = this.journal.siblings[this.siblingIndex + 1]['pid'];
       this.journal = null;
       this.router.navigate(['/article', pid]);
@@ -153,7 +157,7 @@ export class ArticleViewerComponent implements OnInit {
   }
 
   prev() {
-    if (this.hasPrev()){
+    if (this.hasPrev()) {
       let pid = this.journal.siblings[this.siblingIndex - 1]['pid'];
       this.journal = null;
       this.router.navigate(['/article', pid]);

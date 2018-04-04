@@ -27,15 +27,16 @@
           <h4 class="app-clean-mg">{{'genre.' + genre | translate}}</h4>
           <hr />
           <div *ngFor="let art of journal.genresObject[genre].articles" class="app-item" [class.active]="art.pid === pid">
-            <app-article-result [article]="art" [active]="art.pid === pid"></app-article-result>
+            <app-article-result [article]="art" [active]="art.pid === pid" [parentJournal]="journal" ></app-article-result>
           </div></ng-container>
         </div><!--/.app section -->
       </div><!--/.col -->
       
       <div class="col-xs-12 app-col-right" [class.app-col-right-full]="state.isFull">
         <!--<div *ngIf="loading" class="img-responsive app-thumb-doc" >loading...</div>-->
+        
         <div *ngIf="isPdf">
-          <pdf-viewer [src]="fullSrc" 
+          <pdf-viewer #pdfComponent [src]="fullSrc" 
                       [original-size]="false" 
                       [render-text]="true"
                       [show-all]="true"

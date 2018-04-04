@@ -1,5 +1,48 @@
 export default class Utils {
   
+  public static getAutors(mods: any): string[] {
+    let authors : string[] = [];
+    
+    //name/type="personal"	namepart/type="family"
+        //name/type="personal"	namePart/type"given"
+        if (mods.hasOwnProperty("mods:name")) {
+            let name = mods["mods:name"];
+            if (name.hasOwnProperty('length')) {
+                for (let i in name) {
+                    let namePart = name[i]["mods:namePart"];
+                    if (name[i]["type"] === 'personal' && namePart) {
+                        //Chceme nejdriv prijmeni a potom jmeno
+                        if (namePart[0]['type'] === 'family') {
+                            authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+                        } else {
+                            authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
+                        }
+                    }
+                }
+            } else {
+                if (name["type"] === 'personal' && name.hasOwnProperty("mods:namePart")) {
+                    let namePart = name["mods:namePart"];
+                    if (typeof namePart === 'string') {
+                        authors.push(namePart);
+                    } else {
+                        if (typeof namePart[0] === 'string') {
+                            authors.push(namePart[0]);
+                        } else {
+                            //Chceme nejdriv prijmeni a potom jmeno
+                            if (namePart[0]['type'] === 'family') {
+                                authors.push(namePart[0]['content'] + ' ' + namePart[1]['content']);
+                            } else {
+                                authors.push(namePart[1]['content'] + ' ' + namePart[0]['content']);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    return authors;
+  }
+  
   public static getRozsah(mods: any): string {
     let ret : string;
     let part;
@@ -7,6 +50,8 @@ export default class Utils {
         part = mods["mods:relatedItem"]["mods:part"];
     } else if (mods["mods:part"]){
       part = mods["mods:part"];
+    } else {
+      return null;
     }
     
     if (part.hasOwnProperty('length')) {

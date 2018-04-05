@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Rx';
 import {AppService} from '../../services/app.service';
 import {AppState} from '../../app.state';
 import {Journal} from '../../models/journal.model';
+import Utils from 'app/services/utils';
 
 @Component({
   selector: 'app-article-viewer',
@@ -14,6 +15,7 @@ import {Journal} from '../../models/journal.model';
 export class ArticleViewerComponent implements OnInit {
 
   @ViewChild('pdfComponent') private pdfComponent: any;
+  @ViewChild('linkModal') private linkModal: any;
 
   pid: string;
   article: any;
@@ -30,6 +32,8 @@ export class ArticleViewerComponent implements OnInit {
   siblingIndex: number;
   isPrintSupported: boolean = false;
   showShare: boolean = false;
+  
+  doi: string;
 
   constructor(
     private service: AppService,
@@ -81,6 +85,8 @@ export class ArticleViewerComponent implements OnInit {
           this.fullSrc = this.state.config['context'] + 'img?uuid=' + this.pid + '&stream=IMG_FULL&action=GETRAW';
           this.loading = false;
         }
+        
+        this.doi = Utils.getDoi(JSON.parse(this.article['mods']));
         //let ctx = res['context'][0];
         //        let parent = ctx[ctx.length - 2]['pid'];
         let parent = res['parents'][0];
@@ -193,13 +199,20 @@ export class ArticleViewerComponent implements OnInit {
   facebookShare() {
     var share = "https://www.facebook.com/sharer/sharer.php?u=" + this._socialUrl();
     window.open(share, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    this.toggleShare();
     return false;
   }
 
   googlePlusShare() {
     var share = "https://plus.google.com/share?url=" + this._socialUrl();
     window.open(share, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    this.toggleShare();
     return false;
+  }
+  
+  linkShare(){
+    this.linkModal.show();
+    this.toggleShare();
   }
 
 

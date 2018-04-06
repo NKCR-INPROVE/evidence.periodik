@@ -163,6 +163,7 @@
     <field name="mods" type="string" indexed="false" stored="true" multiValued="false"/>
     
     <field name="_text_" type="text_cz" indexed="true" stored="false" multiValued="true"/>
+    <field name="_text_nolemmas" type="text_lowercase" indexed="true" stored="false" multiValued="true"/>
     
     <field name="abstract" type="text_cz" indexed="true" stored="true" multiValued="false"/>
     
@@ -181,6 +182,14 @@
     <copyField source="datum" dest="_text_"/>
     <copyField source="abstract" dest="_text_"/>
     <copyField source="ocr" dest="_text_"/>
+    
+    <copyField source="pid" dest="_text_nolemmas"/>
+    <copyField source="title*" dest="_text_nolemmas"/>
+    <copyField source="autor" dest="_text_nolemmas"/>
+    <copyField source="keywords" dest="_text_nolemmas"/>
+    <copyField source="datum" dest="_text_nolemmas"/>
+    <copyField source="abstract" dest="_text_nolemmas"/>
+    <copyField source="ocr" dest="_text_nolemmas"/>
 
     <!-- uncomment the following to ignore any fields that don't already match an existing 
         field name or dynamic field, rather than reporting them as an error. 
@@ -454,6 +463,7 @@
       <analyzer> 
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.ASCIIFoldingFilterFactory"/>     
         <filter class="solr.StopFilterFactory" ignoreCase="true" words="lang/stopwords_cz.txt" />
         <filter class="solr.CzechStemFilterFactory"/>       
       </analyzer>

@@ -70,6 +70,8 @@ export class AppState {
   
   public route: string;
   
+  public keywords: any[] = [];
+  public genres: any[] = [];
   
   public letters = [
     'A',

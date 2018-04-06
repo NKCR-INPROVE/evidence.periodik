@@ -1,7 +1,7 @@
 <div class="app-section app-font-pt-serif app-brand-text" style="height: 350px;">
   <div class="row" style="height: 100%;">
       <div class="app-flex-wrapper">
-        <div *ngFor="let genre of genres" ><a (click)="search(genre)" title="">{{'genre.'+genre | translate}}</a></div>
+        <div *ngFor="let genre of state.genres" ><a (click)="search(genre)" title="">{{'genre.'+genre | translate}}</a></div>
       </div>
   </div>
 </div>

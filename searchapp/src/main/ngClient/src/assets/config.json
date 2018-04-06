@@ -1,5 +1,6 @@
 {
     "context": "/",
+    "defaultLang": "cs",
     "api_point": "api",
     "journal1": "uuid:46321917-5647-11e1-86bc-005056a60003",
     "model1": "periodicalitem",

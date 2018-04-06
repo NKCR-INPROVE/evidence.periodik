@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
-import { URLSearchParams } from '@angular/http';
 import { SearchService } from '../../services/search.service';
 import { AppService } from '../../services/app.service';
 import { AppState } from '../../app.state';
@@ -20,7 +19,6 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  public keywords: any[] = [];
   public keywordsFiltered: any[] = [];
   public keywords1: any[];
   public keywords2: any[];
@@ -62,39 +60,12 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
 
   getKeywords() {
     if (this.state.config) {
-      var params = new URLSearchParams();
-      params.set('q', '*:*');
-      //    params.set('fq', '-genre:""');
-      params.set('rows', '0');
-      //Rok jako stats
-      params.set('facet', 'true');
-      params.set('facet.field', 'keywords_facet');
-      params.set('facet.mincount', '1');
-      params.set('facet.limit', '-1');
-      params.set('facet.sort', 'index');
-      this.searchService.search(params).subscribe(res => {
-        this.keywords= [];
-        
-        for(let i in res['facet_counts']['facet_fields']['keywords_facet']){
-          let val: string = res['facet_counts']['facet_fields']['keywords_facet'][i][0];
-          if(val && val !== ''){
-            let val_lower: string = val.toLocaleLowerCase(); 
-            this.keywords.push({val: val, val_lower: val_lower});
-          }
-        }
-        
-        this.keywords.sort((a, b) => {
-          return a.val_lower.localeCompare(b.val_lower, 'cs');
-        });
-        //this.keywords = res['facet_counts']['facet_fields']['keywords'];
         this.filter();
-
-      });
     } else {
 
       this.subscriptions.push(this.state.stateChangedSubject.subscribe(
         () => {
-          this.getKeywords();
+          this.filter();
         }
       ));
     }
@@ -115,11 +86,11 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
   }
 
   isEmpty(l: string) {
-    if (this.keywords.length === 0) {
+    if (this.state.keywords.length === 0) {
       return true;
     }
     let has = false;
-    this.keywords.forEach((el) => {
+    this.state.keywords.forEach((el) => {
       let k: string = el.val[0];
       if (k.toLocaleLowerCase().charAt(0) === l.toLocaleLowerCase()) {
         has = true;
@@ -130,11 +101,11 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
   }
 
   isEmptyNumbers() {
-    if (this.keywords.length === 0) {
+    if (this.state.keywords.length === 0) {
       return true;
     }
     let has = false;
-    this.keywords.forEach((el) => {
+    this.state.keywords.forEach((el) => {
       let k: string = el.val[0];
       if (Number.isInteger(parseInt(k.toLocaleLowerCase().charAt(0)))) {
         has = true;
@@ -148,7 +119,7 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
     this.keywordsFiltered = [];
     if (this.letter !== null) {
 
-      this.keywords.forEach((el) => {
+      this.state.keywords.forEach((el) => {
         let k: string = el.val;
         let first: string = k.toLocaleLowerCase().charAt(0);
         if(this.letter === '0-9'){
@@ -162,7 +133,7 @@ export class SearchKeywordsComponent implements OnInit, OnDestroy {
         }
       });
     } else {
-      this.keywordsFiltered = this.keywords;
+      this.keywordsFiltered = this.state.keywords;
     }
     this.totalPages = Math.ceil(this.keywordsFiltered.length / (this.rowsPerCol * 2));
     this.setCols();

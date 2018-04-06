@@ -46,6 +46,10 @@ export class AppService {
     this.translate.use(lang);
     this._langSubject.next(lang);
   }
+  
+  translateKey(key: string): string{
+    return this.translate.instant(key);
+  }
 
   getItem(pid: string): Observable<any> {
     var url = this.state.config['context'] + 'search/journal/select';

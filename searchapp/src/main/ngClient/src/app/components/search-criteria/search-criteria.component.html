@@ -10,8 +10,18 @@
         </li>
       </ul>
     </div><!--/.col -->
-    <div class="app-col-middle">
-      <input type="text" class="form-control" [placeholder]="'q_placeholder' | translate" [(ngModel)]="criterium.value"  (keyup.enter)="search()" />
+    <div class="app-col-middle" [ngSwitch]="criterium.field">
+      <input *ngSwitchCase="'keywords'" type="text" class="form-control" id="app-search-key-words" [placeholder]="'q_keywords_placeholder' | translate" 
+                  [typeahead]="state.keywords" [(ngModel)]="criterium.value" (typeaheadOnSelect)="search()"  (keyup.enter)="search()" typeaheadOptionField="val" />
+                  
+      <ng-template #customItemTemplate let-model="item" let-index="index">
+        {{model.tr}} ({{model.val}})
+      </ng-template>
+      <input *ngSwitchCase="'genre'" type="text" class="form-control" id="app-search-genres" [placeholder]="'q_genre_placeholder' | translate" 
+                  [typeahead]="state.genres" [(ngModel)]="criterium.value" [typeaheadItemTemplate]="customItemTemplate"
+                  (typeaheadOnSelect)="search()"  (keyup.enter)="search()" typeaheadOptionField="val" />
+      <input *ngSwitchDefault type="text" class="form-control" [(ngModel)]="criterium.value" [placeholder]="'q_placeholder' | translate"  (keyup.enter)="search()" />
+                         
     </div><!--/.col -->
     <div class="app-col-right text-right">
       <ul *ngIf="!last" class="list-unstyled app-clean-mg app-select">

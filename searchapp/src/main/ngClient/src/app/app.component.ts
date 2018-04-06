@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http , URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   constructor(
     public state: AppState,
     private service: AppService,
+    private searchService: SearchService,
     private http: Http,
     private route: ActivatedRoute,
     private router: Router) {
@@ -76,11 +77,72 @@ export class AppComponent implements OnInit {
       this.service.changeLang(userLang);
       
       this.findActual();
+      this.getKeywords();
+      this.getGenres();
       //this._configSubject.next(cfg);
       //this.processUrl();
       this.state.stateChanged();
       return this.state.config;
     });
+  }
+  
+  getGenres() {
+      var params = new URLSearchParams();
+      params.set('q', '*:*');
+      params.set('fq', '-genre:""');
+      params.set('fq', 'model:article');
+      params.set('rows', '0');
+      //Rok jako stats
+      params.set('facet', 'true');
+      params.set('facet.field', 'genre');
+      params.set('facet.mincount', '1');
+      params.set('facet.sort', 'index');
+      this.searchService.search(params).subscribe(res => {
+
+        this.state.genres= [];
+        for(let i in res['facet_counts']['facet_fields']['genre']){
+          let genre = res['facet_counts']['facet_fields']['genre'][i][0];
+          if(!this.service.isHiddenByGenre([genre])){
+            //this.state.genres.push(genre);
+            let tr: string = this.service.translateKey('genre.' + genre);
+            this.state.genres.push({val: genre, tr: tr});
+          }
+        }
+        this.state.genres.sort((a, b) => {
+          return a.translated.localeCompare(b.translated, 'cs');
+        });
+
+      });
+    
+  }
+  
+  getKeywords(){
+    var params = new URLSearchParams();
+      params.set('q', '*:*');
+      //    params.set('fq', '-genre:""');
+      params.set('rows', '0');
+      //Rok jako stats
+      params.set('facet', 'true');
+      params.set('facet.field', 'keywords_facet');
+      params.set('facet.mincount', '1');
+      params.set('facet.limit', '-1');
+      params.set('facet.sort', 'index');
+      this.searchService.search(params).subscribe(res => {
+        this.state.keywords= [];
+        
+        for(let i in res['facet_counts']['facet_fields']['keywords_facet']){
+          let val: string = res['facet_counts']['facet_fields']['keywords_facet'][i][0];
+          if(val && val !== ''){
+            let val_lower: string = val.toLocaleLowerCase(); 
+            this.state.keywords.push({val: val, val_lower: val_lower});
+          }
+        }
+        
+        this.state.keywords.sort((a, b) => {
+          return a.val_lower.localeCompare(b.val_lower, 'cs');
+        });
+
+      });
   }
   
   

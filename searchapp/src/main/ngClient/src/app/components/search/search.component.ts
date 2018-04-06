@@ -155,7 +155,12 @@ export class SearchComponent implements OnInit, OnDestroy {
                         fq += criteria[i - 1].operator + ' ';
                     }
                     if (criteria[i].field) {
+                      if(criteria[i].field === 'keywords'){
+                        fq += criteria[i].field + ':"' + criteria[i].value + '" ';
+                      } else {
                         fq += criteria[i].field + ':' + criteria[i].value + ' ';
+                      }
+                        
                     } else {
                         fq += criteria[i].value + ' ';
                     }

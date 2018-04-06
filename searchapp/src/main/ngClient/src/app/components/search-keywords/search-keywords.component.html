@@ -3,7 +3,7 @@
               <div class="app-item">
                 <div class="app-col-left">
                   <input id="app-search-key-words" type="text" class="form-control" [placeholder]="'q_keywords_placeholder' | translate" 
-                         [typeahead]="keywords" [(ngModel)]="qkeyword" (typeaheadOnSelect)="searchInput()" typeaheadOptionField="val" />
+                         [typeahead]="state.keywords" [(ngModel)]="qkeyword" (typeaheadOnSelect)="searchInput()" typeaheadOptionField="val" />
                 </div>
                 <!--/.col -->
                 <div class="app-col-right">
@@ -21,7 +21,7 @@
             
             <div class="app-section">
               <nav class="app-nav-items">
-                <ul *ngIf="keywords.length > 0" class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
+                <ul *ngIf="state.keywords.length > 0" class="list-unstyled app-brand-text app-font-pt-serif app-font-s30">
                   <li [class.active]="'0-9' === letter">
                     <a *ngIf="!isEmptyNumbers()" (click)="setLetter('0-9')" 
                       title="">{{'0-9'}}</a>

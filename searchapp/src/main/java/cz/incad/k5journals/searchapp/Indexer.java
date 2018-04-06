@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class Indexer {
 
   SolrClient client;
   int total;
-  JSONObject response;
+  JSONObject response = new JSONObject();
 
   Map<String, Integer> dates = new HashMap();
 
@@ -82,12 +83,26 @@ public class Indexer {
    * @param index doc index in parent children
    */
   public void indexPid(String pid, int index) {
+    SolrInputDocument idoc = createSolrDoc(pid, index);
+    if (idoc != null) {
+      try {
+        LOGGER.log(Level.INFO, "indexed: {0} with idx {1}", new Object[]{total++, index});
+        client.add(idoc);
+        client.commit();
+      } catch (SolrServerException | IOException ex) {
+        LOGGER.log(Level.FINE, "idoc: {0}", idoc);
+        LOGGER.log(Level.SEVERE, null, ex);
+      }
+    }
+  }
+
+  public SolrInputDocument createSolrDoc(String pid, int index) {
     SolrInputDocument idoc = new SolrInputDocument();
     JSONObject mods = new JSONObject();
     try {
       idoc.addField("pid", pid);
       mods = getModsToJson(pid).getJSONObject("mods:modsCollection").getJSONObject("mods:mods");
-      LOGGER.log(Level.INFO, "mods: {0}", mods);
+      LOGGER.log(Level.FINE, "mods: {0}", mods);
       idoc.addField("mods", mods.toString());
       JSONObject item = getItem(pid);
       idoc.addField("datanode", item.optBoolean("datanode"));
@@ -136,17 +151,15 @@ public class Indexer {
       } else {
         setDatum(idoc, mods, pid);
       }
-      LOGGER.log(Level.INFO, "indexed: {0} with idx {1}", new Object[]{total++, index});
-      client.add(idoc);
-      client.commit();
-    } catch (SolrServerException | IOException | JSONException ex) {
+      return idoc;
+    } catch (JSONException ex) {
       LOGGER.log(Level.SEVERE, "mods: {0}", mods);
       LOGGER.log(Level.FINE, "idoc: {0}", idoc);
       LOGGER.log(Level.SEVERE, null, ex);
     } catch (Exception ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     }
-
+    return null;
   }
 
   /**
@@ -364,8 +377,100 @@ public class Indexer {
 
   }
 
-  private void setKeywords(SolrInputDocument idoc, JSONObject mods) {
+  private void processTopic(SolrInputDocument idoc, String prefix, JSONObject joTopic) {
+    String lang = null;
+    String content = null;
+    if (joTopic.has("lang")) {
+      lang = "_" + joTopic.optString("lang");
+    }
 
+    if (joTopic.has("content")) {
+      content = joTopic.optString("content");
+      if (lang != null) {
+        idoc.addField("keywords" + lang, content);
+        addUniqueToDoc(idoc, "keywords" + lang, content);
+      }
+//      idoc.addField("keywords", content);
+      addUniqueToDoc(idoc, "keywords", content);
+    }
+  }
+
+  private void processSubject(SolrInputDocument idoc, String prefix, JSONObject subject) {
+    if ("Konspekt".equalsIgnoreCase(subject.optString("authority"))) {
+      // Ignore konspekt
+      return;
+    }
+    if (subject.has(prefix + "topic")) {
+      Object oTopic = subject.get(prefix + "topic");
+      if (oTopic instanceof JSONObject) {
+        JSONObject joTopic = (JSONObject) oTopic;
+        processTopic(idoc, prefix, joTopic);
+      } else if (oTopic instanceof JSONArray) {
+        JSONArray jaTopic = (JSONArray) oTopic;
+        for (int i = 0; i < jaTopic.length(); i++) {
+          Object o2 = jaTopic.get(i);
+          if (o2 instanceof JSONObject) {
+            processTopic(idoc, prefix, (JSONObject) o2);
+          } else {
+//            idoc.addField("keywords", o2);
+            addUniqueToDoc(idoc, "keywords", o2);
+
+          }
+        }
+      } else if (oTopic instanceof String) {
+//        idoc.addField("keywords", oTopic);
+        addUniqueToDoc(idoc, "keywords", oTopic);
+      }
+    }
+
+//      {"mods:geographic": "Czechia"},
+    if (subject.has(prefix + "geographic")) {
+      //Test geographic
+      //idoc.addField("keywords", subject.optString(prefix + "geographic"));
+      addUniqueToDoc(idoc, "keywords", subject.optString(prefix + "geographic"));
+    }
+
+//      {"mods:temporal": "1942-2012"},
+//      {
+//        "authority": "czenas",
+//        "mods:temporal": "20.-21. století"
+//      },
+    if (subject.has(prefix + "temporal")) {
+      //Test temporal
+//      idoc.addField("keywords", subject.optString(prefix + "temporal"));
+      addUniqueToDoc(idoc, "keywords", subject.optString(prefix + "temporal"));
+    }
+
+//      {
+//        "mods:name": {
+//          "type": "personal",
+//          "mods:namePart": [
+//            "Nosek, Bedřich",
+//            {
+//              "type": "date",
+//              "content": "1942-"
+//            }
+//          ]
+//        },
+//        "authority": "czenas"
+//      }
+    if (subject.has(prefix + "name")) {
+      //Test name
+//      idoc.addField("keywords", subject.optString(prefix + "name"));
+      JSONObject joName = subject.optJSONObject(prefix + "name");
+      Object np = joName.get(prefix + "namePart");
+      if (np instanceof JSONArray) {
+        JSONArray janp = (JSONArray) np;
+        addUniqueToDoc(idoc, "keywords", janp.getString(0) + ", " + janp.getJSONObject(1).optString("content"));
+      } else {
+        addUniqueToDoc(idoc, "keywords", np);
+      }
+
+    }
+
+  }
+
+  private void setKeywords(SolrInputDocument idoc, JSONObject mods) {
     String prefix = "mods:";
     Object o = mods.opt("mods:subject");
     if (o == null) {
@@ -374,31 +479,21 @@ public class Indexer {
     }
 
     if (o instanceof JSONObject) {
-      JSONObject jo = ((JSONObject) o).optJSONObject(prefix + "topic");
-      if (jo != null && jo.has("lang")) {
-        String lang = jo.optString("lang");
-        idoc.addField("keywords_" + lang, jo.optString("content"));
-      }
-      idoc.addField("keywords", jo.optString("content"));
-
+      processSubject(idoc, prefix, (JSONObject) o);
     } else if (o instanceof JSONArray) {
       JSONArray ja = (JSONArray) o;
       for (int i = 0; i < ja.length(); i++) {
-        JSONObject joTopic = ja.getJSONObject(i);
-
-        if (joTopic.optJSONObject(prefix + "topic") != null) {
-          JSONObject jo = joTopic.optJSONObject(prefix + "topic");
-          if (jo.has("lang") && jo.has("content")) {
-            String lang = jo.optString("lang");
-            idoc.addField("keywords_" + lang, jo.optString("content"));
-          }
-          idoc.addField("keywords", jo.optString("content"));
-        } else if (joTopic.optString(prefix + "topic") != null) {
-          idoc.addField("keywords", joTopic.optString(prefix + "topic"));
-        }
+        processSubject(idoc, prefix, ja.getJSONObject(i));
       }
     }
+  }
 
+  private void addUniqueToDoc(SolrInputDocument idoc, String field, Object value) {
+    if (idoc.getField(field) == null) {
+      idoc.addField(field, value);
+    } else if (!idoc.getFieldValues(field).contains(value)) {
+      idoc.addField(field, value);
+    }
   }
 
   private void setAbstract(SolrInputDocument idoc, JSONObject mods) {

@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.solr.common.SolrInputDocument;
 import org.json.JSONObject;
 
 /**
@@ -143,6 +144,32 @@ public class IndexServlet extends HttpServlet {
 
           Indexer indexer = new Indexer();
           out.println(indexer.getModsToJson(req.getParameter("pid")).toString(2));
+
+        } catch (Exception ex) {
+          out.println(json.put("error", ex).toString(2));
+        }
+      }
+    },
+    CREATE_DOC {
+      @Override
+      void doPerform(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+
+        resp.setContentType("application/json;charset=UTF-8");
+
+        PrintWriter out = resp.getWriter();
+        JSONObject json = new JSONObject();
+        try {
+
+          Indexer indexer = new Indexer();
+          SolrInputDocument idoc = indexer.createSolrDoc(req.getParameter("pid"), 0);
+          if(req.getParameter("field") != null){
+            for(Object o : idoc.getFieldValues(req.getParameter("field"))){
+            out.println(o);
+            }
+          } else {
+            out.println(idoc);
+          }
+          
 
         } catch (Exception ex) {
           out.println(json.put("error", ex).toString(2));

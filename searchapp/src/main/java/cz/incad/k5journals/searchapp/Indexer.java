@@ -110,6 +110,7 @@ public class Indexer {
       idoc.addField("model", model);
       response.increment(item.optString("model"));
       idoc.addField("root_title", item.optString("root_title"));
+      idoc.addField("root_pid", item.optString("root_pid"));
       idoc.addField("idx", index);
 
       JSONArray ctx = item.getJSONArray("context");

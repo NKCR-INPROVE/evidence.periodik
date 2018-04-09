@@ -123,6 +123,7 @@
     
     <field name="pid" type="string" indexed="true" stored="true" required="true" multiValued="false" />
     <field name="root_title" type="string" indexed="false" stored="true" multiValued="false" />
+    <field name="root_pid" type="string" indexed="true" stored="true" multiValued="false" />
     <field name="model" type="string" indexed="true" stored="true" multiValued="false"/>
     <field name="parents" type="string" indexed="true" stored="true" multiValued="true"/>
     <field name="model_paths" type="string" indexed="true" stored="true" multiValued="true"/>

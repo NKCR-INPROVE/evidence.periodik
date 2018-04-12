@@ -61,7 +61,7 @@
     font-style: $style;
   }
 
-  @font-face {
+  /* @font-face {
     font-family: '#{$name}-#{$variant}-#{$type}';
     src: url('#{$name}-#{$font-full-path}-#{$type}.eot');
     src: local('#{$name} #{$variant} #{$type}'),
@@ -72,5 +72,5 @@
          url('#{$font-full-path}-#{$type}.woff') format('woff'),
          url('#{$font-full-path}-#{$type}.ttf') format('truetype'),
          url('#{$font-full-path}-#{$type}.svg##{$variant}') format('svg');
-  }
+  } */
 }

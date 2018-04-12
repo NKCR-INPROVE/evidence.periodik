@@ -36,6 +36,8 @@ export class AppState {
 
   //Holds number of rows per page. Default value from configuration
   rows: number = 10;
+  
+  fultextQuery: string = '';
 
   sorts = [
     { "label": "dle relevance", "field": "score desc" },

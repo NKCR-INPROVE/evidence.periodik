@@ -25,6 +25,8 @@ export class ArticleViewerComponent implements OnInit {
   isPdf: boolean = false;
   downloadFilename: string;
   loading: boolean = true;
+pagesRendered: number = 0;
+numPages: number = -1;
 
   zoom: number = 1.0;
 
@@ -75,6 +77,9 @@ export class ArticleViewerComponent implements OnInit {
     this.service.getItem(this.pid).subscribe(res => {
       if (res['datanode']) {
         this.article = res;
+        
+        this.pagesRendered = 0;
+        this.numPages = -1;
 
         if (this.article.hasOwnProperty("url_pdf")) {
           this.isPdf = true;
@@ -135,15 +140,25 @@ export class ArticleViewerComponent implements OnInit {
     });
   }
   
-  searchInPdf(stringToSearch: string) {
+  searchInPdf() {
+    if (this.state.fultextQuery !== ''){
   this.pdfComponent.pdfFindController.executeCommand('find', {
-    caseSensitive: false, findPrevious: undefined, highlightAll: true, phraseSearch: true, query: stringToSearch
+    caseSensitive: false, findPrevious: undefined, highlightAll: true, phraseSearch: true, query: this.state.fultextQuery
   });
+    }
+}
+
+pageRendered(e: CustomEvent) {
+  //console.log('(page-rendered)', e);
+  this.pagesRendered++;
+  if (this.pagesRendered === this.numPages){
+    this.searchInPdf();
+  }
 }
 
   afterLoad(pdf: any) {
+  this.numPages = pdf.numPages;
     this.loading = false;
-    this.searchInPdf('study')
   }
 
   zoomIn() {

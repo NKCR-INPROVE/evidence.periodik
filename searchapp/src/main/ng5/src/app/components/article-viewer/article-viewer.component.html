@@ -43,6 +43,7 @@
                       [fit-to-page]="true"
                       [zoom]="zoom"
                       (after-load-complete)="afterLoad($event)"
+                      (page-rendered)="pageRendered($event)"
                       style="display: block;"
           ></pdf-viewer>
         <div *ngIf="loading" style="position: absolute;width:100%;height:100%;background:white;left:0;top:0;">loading...</div>

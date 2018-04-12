@@ -51,6 +51,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     ngOnInit() {
 
         this.currentSort = this.state.sorts[0];
+        this.state.fultextQuery = '';
 
         this.getStats();
         this.subscriptions.push(this.router.events.subscribe(val => {
@@ -80,7 +81,7 @@ export class SearchComponent implements OnInit, OnDestroy {
                     let date = this.route.snapshot.firstChild.params['date'];
                     if (date) {
 
-                        this.hasDateFilter =                         true;
+                        this.hasDateFilter = true;
 //      this.dateForm = this.formBuilder.group({ 'range': [[this.dateMin, this.dateMax]] });
 
                         let j = JSON.parse(date);
@@ -160,6 +161,7 @@ export class SearchComponent implements OnInit, OnDestroy {
                       }
                         
                     } else {
+                        this.state.fultextQuery = criteria[i].value;
                         fq += criteria[i].value + ' ';
                     }
                 }

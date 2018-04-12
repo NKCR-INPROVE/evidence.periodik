@@ -1,0 +1,30 @@
+// --- NAV TABS ---
+
+.app-nav-tabs {
+  background-color: $app-brand-l-4;
+  .nav-tabs {
+    >li {
+      &.active {
+        .app-item-keywords,
+        .app-item-authors {
+          @extend .app-cursor-pointer;
+          
+          &:hover {
+            color: $app-brand-l-1;
+          }
+        }
+        >a,
+        a:hover,
+        a:focus {
+          color: $app-brand;
+          @extend .app-font-roboto-cr;
+        }
+      }
+      >span {
+        display: block;
+        padding: 10px 15px;
+        @extend .app-font-roboto-cr;
+      }
+    }
+  }
+}

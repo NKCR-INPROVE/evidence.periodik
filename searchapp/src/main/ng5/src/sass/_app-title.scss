@@ -1,0 +1,32 @@
+// --- TITLE ---
+
+.app-title {
+  color: $app-brand;
+  @include gradient-vertical($body-bg, $app-brand-l-3, 0%, 100%);
+  @include set-vertical-align(50);
+  h1 {
+    line-height: inherit;
+    a {
+      &:hover {
+        text-decoration: none;
+        color: $app-brand;
+      }
+    }
+    span {
+      text-transform: uppercase;
+    }
+  }
+  img {
+    display: inline-block;
+    margin-bottom: 7px;
+  }
+  .app-btn {
+    padding: 2px 5px;
+    border: 1px solid $app-brand;
+    @extend .app-font-roboto-cl;
+    &:hover {
+      background: $app-brand;
+      color: $body-bg;
+    }
+  }
+}

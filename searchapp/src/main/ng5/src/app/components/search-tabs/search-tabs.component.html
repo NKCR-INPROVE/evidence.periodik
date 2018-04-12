@@ -1,0 +1,20 @@
+<div class="app-nav-tabs">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-9 col-md-offset-3">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li role="presentation"><span>{{'Vyhledat' | translate}}:</span></li>
+          <li role="presentation" [routerLink]="['hledat', 'cokoliv']" routerLinkActive="active">
+            <a [routerLink]="['hledat', 'cokoliv']">{{'cokoliv' | translate}}</a></li>
+          <li role="presentation" [routerLink]="['hledat', 'autory']" routerLinkActive="active">
+            <a  [routerLink]="['hledat', 'autory']" class="app-item-authors">{{'rejstřík autorů' | translate}}</a></li>
+          <li role="presentation" [routerLink]="['hledat', 'rubriky']" routerLinkActive="active">
+            <a  [routerLink]="['hledat', 'rubriky']">{{'rubriky' | translate}}</a></li>
+          <li role="presentation" [routerLink]="['hledat', 'keywords']" routerLinkActive="active">
+            <a  [routerLink]="['hledat', 'keywords']" class="app-item-keywords">{{'rejstřík klíčových slov' | translate}}</a></li>
+        </ul>
+      </div><!--/.col -->
+    </div><!--./row -->
+  </div><!--/.container -->
+</div><!--/.app-nav-tabs -->

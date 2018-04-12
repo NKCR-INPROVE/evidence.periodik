@@ -1,0 +1,58 @@
+  // --- ADMIN ---
+
+app-admin {
+  .app-content {
+    margin-top: 0;
+    
+    h3, textarea {
+      margin-bottom: 20px;
+    }
+    
+    .mce-tinymce {
+      margin-bottom: 20px;
+    }
+    
+    .app-admin-nav {
+      > li {
+        &.active {
+          strong {
+            a {
+              background-color: $brand-primary;
+              color: $body-bg;
+              
+              &:hover {
+                background-color: $brand-primary;
+              }
+            }
+          } 
+        }
+        > strong {
+          > a {
+          padding: 0 7px 2px 7px;
+          border-radius: 4px;
+          &:hover {
+            background-color: $app-brand-l-4;
+          }
+        } 
+        }
+      }
+      .nav-pills {
+        > li {
+          &.active {
+            a {
+              &:hover {
+                background-color: $brand-primary;
+              }
+            }
+          }
+          a {
+            padding: 0 7px 2px 7px;
+            &:hover {
+              background-color: $app-brand-l-4;
+            }
+          }
+        }
+      }
+    }
+  }
+}

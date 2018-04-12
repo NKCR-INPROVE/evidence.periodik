@@ -1,0 +1,57 @@
+// --- COLOR PALETE ---
+
+$grey: (
+  "base":       #9e9e9e,
+  "lighten-6":  #fafafa,
+  "lighten-5":  #f5f5f5,
+  "lighten-4":  #eeeeee,
+  "lighten-3":  #e0e0e0,
+  "lighten-2":	$app-gray-85,
+  "lighten-1":  #bdbdbd,
+  "darken-1":   #757575,
+  "darken-2":   #616161,
+  "darken-3":   $app-gray-30,				
+  "darken-4":   #424242,
+  "darken-5":   #212121
+);
+
+$app-brand-color: (
+  "base":       $app-brand,
+  "lighten-6":  $app-brand-l-6,
+  "lighten-5":  $app-brand-l-5,
+  "lighten-4":  $app-brand-l-4,
+  "lighten-3":  $app-brand-l-3,
+  "lighten-2":  $app-brand-l-2,
+  "lighten-1":  $app-brand-l-1,
+  "darken-1":   $app-brand-d-1,
+  "darken-2":   $app-brand-d-2,
+  "darken-3":   $app-brand-d-3
+);
+
+$shades: (
+  "black":        #000000,
+  "white":        #FFFFFF,
+  "transparent":  transparent
+);
+
+$colors: (
+  "grey": $grey,
+  "app-brand": $app-brand-color,
+  "shades": $shades
+);
+
+
+// usage: color("name_of_color", "type_of_color")
+// to avoid to repeating map-get($colors, ...)
+
+@function color($color, $type) {
+  @if map-has-key($colors, $color) {
+    $curr_color: map-get($colors, $color);
+    @if map-has-key($curr_color, $type) {
+      @return map-get($curr_color, $type);
+    }
+  }
+  @warn "Unknown `#{name}` in $colors.";
+  @return null;
+}
+

@@ -1,0 +1,137 @@
+{
+    "context": "/",
+    "defaultLang": "cs",
+    "api_point": "api",
+    "journal1": "uuid:46321917-5647-11e1-86bc-005056a60003",
+    "model1": "periodicalitem",
+    "journal": "uuid:fc144bf1-8d61-4f4b-80f9-e4a772db32dc",
+    "model": "periodicalvolume",
+    "sort_field": "datum_end",
+    "k5": "https://kramerius.lib.cas.cz/client/index.vm?q=&page=doc#pid=",
+    "searchParams": {
+        "rows": 20
+    },
+
+    "sorts": [
+        {
+            "label": "dle relevance",
+            "field": "score desc"
+        },
+        {
+            "label": "od nejnovějšího",
+            "field": "year desc"
+        },
+        {
+            "label": "od nejstaršího",
+            "field": "year asc"
+        },
+        {
+            "label": "podle názvu A-Z",
+            "field": "title_sort asc"
+        }
+    ],
+    "menu": {
+        "o-casopisu": {
+            "visible": true,
+            "submenu": [
+                {
+                    "route": "redakce",
+                    "visible": true
+                },
+                {
+                    "route": "open-access",
+                    "visible": true
+                },
+                {
+                    "route": "zapojeni",
+                    "visible": true
+                },
+                {
+                    "route": "historie",
+                    "visible": false
+                },
+                {
+                    "route": "distribuce",
+                    "visible": false
+                },
+                {
+                    "route": "fotogalerie",
+                    "visible": false
+                },
+                {
+                    "route": "oznameni-sefredaktora",
+                    "visible": false
+                },
+                {
+                    "route": "pripravujeme",
+                    "visible": false
+                }
+            ]
+        },
+        "pro-autory": {
+            "visible": true,
+            "submenu": [
+                {
+                    "route": "recenzni-rizeni",
+                    "visible": true
+                },
+                {
+                    "route": "citacni-pravidla",
+                    "visible": true
+                },
+                {
+                    "route": "publikacni-etika",
+                    "visible": true
+                },
+                {
+                    "route": "recenzenti",
+                    "visible": false
+                },
+                {
+                    "route": "odkazy",
+                    "visible": false
+                },
+                {
+                    "route": "caste-dotazy",
+                    "visible": false
+                }
+            ]
+        },
+        "e-shop": {
+            "visible": true
+        },
+        "kontakt": {
+            "visible": true
+        },
+        "news": {
+            "visible": true
+        }
+    },
+    "hiddenGenres": ["cover", "advertisement", "colophon"],
+    "genres": ["cover", "titulní list", "title page", "colophon",
+        "věnování",
+        "dedication",
+        "table of content",
+        "editorsNote",
+        "introduction",
+        "preface",
+        "main article",
+        "interview",
+        "biographical portrait",
+        "obituary",
+        "review",
+        "news",
+        "bibliography",
+        "annotations",
+        "abstract",
+        "adresář",
+        "directory",
+        "index",
+        "advertisement",
+        "unspecified"],
+    "mergeGenres": {
+            "titulní list": "title page",
+            "věnování": "dedication",
+            "adresář": "directory"
+        }
+}

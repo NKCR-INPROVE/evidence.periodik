@@ -1,0 +1,20 @@
+// --- SLIDER ---
+
+#slider {
+  margin-top: 8px;
+  &.noUi-target {
+    border-color: $app-slider-base-color !important;
+    border-radius: 0 !important;
+  }
+  .noUi-handle {
+    left: -28px;
+    border-color: $app-slider-base-color !important;
+    &:before,
+    &:after {
+      background: $app-slider-base-color;
+    }
+  }
+  .noUi-connect {
+    background: $app-brand-d-2 !important;
+  }
+}

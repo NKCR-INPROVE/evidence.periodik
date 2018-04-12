@@ -1,0 +1,27 @@
+// --- FOOTER ---
+
+footer {
+  padding: 7px 0;
+  .row {
+    >div:first-child {
+      padding-top: 2px;
+      font-size: 1.4rem;
+    }
+    >div+div {
+      padding-top: 2px;
+      font-size: 1.4rem;
+      
+      .app-ico-27-27 {
+        svg {
+          width: 20px;
+          height: 20px;
+          fill: $app-brand-d-1;
+          
+          &:hover {
+            fill: $body-bg;
+          }
+        }
+      }
+    }
+  }
+}

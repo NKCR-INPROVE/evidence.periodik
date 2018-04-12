@@ -1,0 +1,211 @@
+// --- MEDIA QUERIES ---
+
+/*==========  Mobile First Method  ==========*/
+
+/*** Custom, iPhone Retina ***/
+@media only screen and (min-width : 320px) {
+
+}
+
+/*** Extra Small Devices, Phones ***/
+@media only screen and (min-width : 480px) {
+
+}
+
+/*** Small Devices, Tablets ***/
+@media only screen and (min-width : 768px) {
+  h1 {
+    font-size: 2.8rem;
+  }
+  // content
+  .app-page-actual {
+    .app-content {
+      .row {
+        div[class*=col]:first-child {
+          img {
+            margin-top: -175px;
+          }
+        }
+      }
+    }
+  }
+
+  .app-content {
+    .app-col-left {
+      .app-section:first-child {
+        margin-bottom: 50px;
+      }
+    }
+    .app-col-right {
+      .app-thumb-doc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    .app-sort-headline {
+      .row {
+        div[class*=col]:last-child {
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  .app-page-search {
+    .tab-content {
+      .app-section:not(.app-section-search-form),
+      .app-section-search-form-full {
+        margin-right: $app-col-close-width;
+      }
+    }
+  }
+}
+
+/*** Medium Devices, Desktops ***/
+@media only screen and (min-width : 992px) {
+  // navbar
+  .navbar {
+    #navbar {
+      padding: 0;
+    }
+    .navbar-nav {
+      >li {
+        >a {
+          padding-top: 10px;
+          padding-bottom: 7px;
+          margin-top: 9px;
+        }
+      }
+      .dropdown-menu {
+        a {
+          color: $app-brand;
+          &:hover {
+            background-color: $app-brand-l-4;
+          }
+        }
+      }
+    }
+  }
+  
+  // reader
+  .app-page-archiv-reader {
+    display: flex;
+    height: 0px;
+    app-article-viewer {
+      display: flex;
+      flex: 1;
+    }
+    .app-content {
+      display: flex;
+      flex: 1;
+      .container {
+        display: flex;
+        .row {
+          display: flex;
+          flex: 1;
+          .app-col-left {
+            flex: 1;
+            overflow: auto;
+            max-width: 400px; // puvodne 585px, upraveno k testovani
+          }
+          .app-col-right {
+            flex: 1;
+            max-width: 770px; // puvodne 585px, upraveno k testovani
+            margin-right: 0;
+            padding-right: 0;
+            padding-left: 0;
+            margin-left: 15px;
+            overflow: auto;
+            > div {
+              overflow: initial;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*** Large Devices, Wide Screens ***/
+@media only screen and (min-width : 1200px) {
+  
+}
+
+
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/*** Large Devices, Wide Screens ***/
+@media only screen and (max-width : 1200px) {
+
+}
+
+/*** Medium Devices, Desktops ***/
+@media only screen and (max-width : 992px) {
+
+}
+
+/*** Small Devices, Tablets ***/
+@media only screen and (max-width : 768px) {
+
+}
+
+/*** Extra Small Devices, Phones ***/
+@media only screen and (max-width : 480px) {
+
+}
+
+/*** Custom, iPhone Retina ***/
+@media only screen and (max-width : 320px) {
+
+}
+
+/*** Custom ***/
+@media only screen and (min-width : 1430px) {
+  // reader
+  .app-page-archiv-reader {
+    .app-content {
+      .container {
+        .row {
+          .app-col-right {
+            &.app-col-right-full {
+              max-width: 1170px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : 1360px) {
+  // reader
+  .app-page-archiv-reader {
+    .app-content {
+      .container {
+        .row {
+          .app-col-right {
+            margin-right: 80px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : 960px) {
+   // reader
+  .app-page-archiv-reader {
+    .app-content {
+      .container {
+        .row {
+          .app-col-left {
+            padding-right: 95px;
+          }
+        }
+      }
+    }
+  }
+}
+
+

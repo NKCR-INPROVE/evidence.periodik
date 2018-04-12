@@ -1,0 +1,81 @@
+<section class="app-content">
+  <div class="container">
+    <div class="row">
+      <div *ngIf="!isRoot()" class="col-xs-12 col-sm-5 col-md-4 col-lg-3 app-col-left">
+        <div class="app-section">
+          <button type="button" class="btn app-btn-arrow app-btn-arrow-left app-brand lighten-4 app-brand-text" (click)="goToRoot()">
+            {{'Zpět na ročníky' | translate}}
+          </button>
+        </div><!--/.app item -->
+        <div class="app-item-wrapper">
+          <div class="app-item" *ngFor="let item of visibleParentItems" (click)="drillDown(item.pid, currentParent)">
+            <button class="app-btn-arrow app-btn-arrow-right" [class.app-btn-active]="item.pid === currentPid" [id]="'btn_'+item.pid">
+              <app-archiv-item-left [item]="item" ></app-archiv-item-left>
+            </button>
+          </div><!--/.app item -->
+        </div>
+      </div><!--/.col -->
+
+      <div [class]="isRoot() ? 'col-xs-12 col-sm-12 col-md-9 col-md-offset-3 app-col-right' : 'col-xs-12 col-sm-7 col-md-8 col-lg-9 app-col-right'">
+        <!-- First level -->
+        <div *ngIf="isRoot()" class="app-sort-headline">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6" *ngIf="currentItem">
+              <h2 class="app-font-s42 app-clean-mg" [ngSwitch]="currentItem['model']">
+                <span *ngSwitchCase="'periodical'">
+                  {{'Ročníky' | translate}}
+                </span>
+                <span *ngSwitchCase="'periodicalvolume'">
+                  {{currentItem['year']}}, {{'ročník' | translate}} {{volumeNumber}}
+                </span>
+              </h2>
+            </div><!--/.col -->
+            <div *ngIf="isRoot()" class="col-xs-12 col-sm-6">
+              <ul class="list-unstyled app-select">
+                <li>{{'Výsledky řadit' | translate}}:</li>
+                <li class="dropdown" dropdown>
+                  <a dropdownToggle type="button" class="dropdown-toggle" >{{currentSort.label | translate}} <span class="caret"></span></a>
+                  <ul *dropdownMenu class="dropdown-menu app-clean-border"  role="menu">
+                    <li *ngFor="let s of sorts"><a (click)="setSort(s)">{{s.label | translate}}</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!--/.col -->
+          </div><!--/.row -->
+        </div><!--/.first level -->
+        
+        <!-- Second level -->
+        <span *ngIf="!isRoot()">
+          <span *ngIf="currentItem">
+            <h2 class="app-font-s42" [ngSwitch]="currentItem['model']">
+              <span *ngSwitchCase="'periodical'">
+                {{'Ročníky' || translate}}
+              </span>
+              <span *ngSwitchCase="'periodicalvolume'">
+                {{currentItem['year']}}<span *ngIf="volumeNumber">, {{'ročník' | translate}} {{volumeNumber}}</span>
+              </span>
+              <span *ngSwitchCase="'periodicalitem'">
+                {{currentItem['year']}}<span *ngIf="volumeNumber">, {{'ročník' | translate}} {{volumeNumber}}</span><span
+                 *ngIf="issueNumber">, {{'číslo' | translate}} {{issueNumber}}</span><span
+                 *ngIf="partName">, {{partName}}</span>
+              </span>
+            </h2>
+          </span>
+        </span><!--/.second level -->
+        <ng-container *ngIf="!isDataNode">
+          <div *ngFor="let item of items" class="media">
+            <app-archiv-item [item]="item" (drillDown)="drillDown($event)" class="show"></app-archiv-item>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isDataNode">
+          <div *ngFor="let art of items">
+            <app-article-result *ngIf="!isHiddenByGenre(art['genre'])" [article]="art"></app-article-result>
+          </div>
+        </ng-container><!--/.media -->
+        <p>
+          {{'Starší ročníky najdete v' | translate}} <a [href]="state.krameriusUrl" [title]="'k5_title' | translate" target="_blank">{{'Digitální knihovně AV ČR' | translate}}</a>
+        </p>
+      </div><!--/.col -->
+    </div><!--./row -->
+  </div><!--/.container -->
+</section><!--/.app-content -->

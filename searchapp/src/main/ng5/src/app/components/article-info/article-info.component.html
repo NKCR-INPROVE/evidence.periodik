@@ -1,0 +1,50 @@
+<h4 class="app-font-pt-serif" data-toggle="modal" data-target="#app-modal">
+    {{nonSort}} {{title}}
+    <div>{{subTitle}}</div>
+</h4>
+<p *ngIf="journal" class="app-font-s14">
+  <app-journal-details [journal]="journal"></app-journal-details>
+</p>
+<p *ngIf="article" class="app-font-s14">
+  <span *ngFor="let author of authors; let last = last">
+    <label class="app-clean-mg app-font-roboto-cb">{{'Autor' | translate}}:</label> {{author}}<br />
+  </span>
+    
+    
+   <span *ngIf="article.keywords && article.keywords.length > 0">
+  <label class="app-clean-mg app-font-roboto-cb">{{'Klíčová slova' | translate}}:</label>
+  <span *ngFor="let keyword of article.keywords; let last = last">
+     {{keyword}}<span *ngIf="!last">, </span>
+  </span><br />
+  </span>
+    
+  <span *ngIf="article.abstract">
+  <label class="app-clean-mg app-font-roboto-cb">{{'Abstrakt' | translate}}:</label> 
+  {{article.abstract}}<br />
+  </span>
+  <span *ngIf="article.zdroj">
+  <label class="app-clean-mg app-font-roboto-cb">{{'Zdroj' | translate}}:</label> 
+  {{article.zdroj}}<br />
+  </span>
+  <span *ngIf="article.genre">
+    <label class="app-clean-mg app-font-roboto-cb">{{'Rubrika' | translate}}:</label> 
+    <ng-container *ngFor="let g of article.genre"><span *ngIf="g !== 'peer-reviewed'">{{'genre.' +g | translate}}</span></ng-container>
+    <br />
+  </span>
+  
+  <span *ngIf="rozsah">
+  <label class="app-clean-mg app-font-roboto-cb" >{{'Rozsah stran' | translate}}:</label> {{'rozsah_zkratka' | translate}} {{rozsah}}<br />
+  </span>
+  
+  <span *ngIf="doi">
+  <label class="app-clean-mg app-font-roboto-cb">{{'DOI' | translate}}:</label> 
+  {{doi}}<br />
+  </span>
+  
+  <label class="app-clean-mg app-font-roboto-cb">{{'Status recenzování' | translate}}:</label> 
+  <span *ngIf="isPeerReviewed">{{ 'recenzovaný článek' | translate}}</span>
+  <span *ngIf="!isPeerReviewed">{{'nerecenzovaný článek' | translate}}</span>
+  <br />
+
+  <label class="app-clean-mg app-font-roboto-cb">{{'Licence' | translate}}:</label> CC-BY-SA<br />
+</p>

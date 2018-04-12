@@ -1,0 +1,10 @@
+<div>
+  <pdf-viewer [src]="'/img?uuid=uuid:865d0e8c-a4e0-4d34-a850-b01f42e99e5f&stream=IMG_FULL&action=GETRAW'" 
+                      [original-size]="false" 
+                      [render-text]="true"
+                      [show-all]="true"
+                      [fit-to-page]="true"
+                      (after-load-complete)="afterLoad($event)"
+                      style="display: block;"
+          ></pdf-viewer>
+</div>

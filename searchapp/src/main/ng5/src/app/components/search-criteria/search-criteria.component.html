@@ -1,0 +1,90 @@
+<div class="app-section app-section-search-form">  
+  <div class="app-item" *ngFor="let criterium of criteria; let last=last; let idx = index">
+    <div class="app-col-left">
+      <ul class="list-unstyled app-clean-mg app-select">
+        <li class="dropdown" dropdown>
+          <a dropdownToggle class="dropdown-toggle" role="button" >{{getLabel(criterium) | translate}} <span class="caret"></span></a>
+          <ul *dropdownMenu class="dropdown-menu app-clean-border">
+            <li *ngFor="let f of fields"><a (click)="setField(criterium, f.field)">{{f.label | translate}}</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!--/.col -->
+    <div class="app-col-middle" [ngSwitch]="criterium.field">
+      <input *ngSwitchCase="'keywords'" type="text" class="form-control" id="app-search-key-words" [placeholder]="'q_keywords_placeholder' | translate" 
+                  [typeahead]="state.keywords" [(ngModel)]="criterium.value" (typeaheadOnSelect)="search()"  (keyup.enter)="search()" typeaheadOptionField="val" />
+                  
+      <ng-template #customItemTemplate let-model="item" let-index="index">
+        {{model.tr}} ({{model.val}})
+      </ng-template>
+      <input *ngSwitchCase="'genre'" type="text" class="form-control" id="app-search-genres" [placeholder]="'q_genre_placeholder' | translate" 
+                  [typeahead]="state.genres" [(ngModel)]="criterium.value" [typeaheadItemTemplate]="customItemTemplate"
+                  (typeaheadOnSelect)="search()"  (keyup.enter)="search()" typeaheadOptionField="val" />
+      <input *ngSwitchDefault type="text" class="form-control" [(ngModel)]="criterium.value" [placeholder]="'q_placeholder' | translate"  (keyup.enter)="search()" />
+                         
+    </div><!--/.col -->
+    <div class="app-col-right text-right">
+      <ul *ngIf="!last" class="list-unstyled app-clean-mg app-select">
+        <li dropdown class="dropdown">
+          <a dropdownToggle class="dropdown-toggle" role="button" >{{getOperator(criterium)}} <span class="caret"></span></a>
+          <ul *dropdownMenu class="dropdown-menu app-clean-border">
+            <li *ngFor="let op of operators"><a (click)="setOperator(criterium, op.val)">{{op.label}}</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button *ngIf="last" class="btn app-btn app-btn-square app-ico-white app-ico-brand-hover app-ico-36-36 app-clean-radius" (click)="search()" #lupa>
+        <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.1 24.1">
+          <title>lupa</title>
+          <path d="M523.44,392.24l-5.53-5.53a10.64,10.64,0,0,1-3.2,3.2l5.53,5.53a2.26,2.26,0,0,0,3.2-3.2h0Z" transform="translate(-500 -372)"/>
+          <path d="M518.08,381a9,9,0,1,0-9,9,9,9,0,0,0,9-9h0Zm-9,6.78a6.78,6.78,0,1,1,6.78-6.78,6.79,6.79,0,0,1-6.78,6.78h0Z" transform="translate(-500 -372)"/>
+          <path d="M503.77,381h1.51a3.77,3.77,0,0,1,3.77-3.77v-1.51a5.28,5.28,0,0,0-5.27,5.27h0Z" transform="translate(-500 -372)"/>
+        </svg>
+      </button>
+    </div><!--/.col -->
+    <div class="app-col-close">
+      <button  class="btn app-btn app-btn-ico app-ico-20-20 app-ico-pink-hover" (click)="removeCriterium(idx)">
+        <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <title>zavrit</title>
+          <path d="M385,362a10,10,0,1,0,10,10A10,10,0,0,0,385,362Zm6.21,14.79-1.41,1.41-4.54-4.54-4.54,4.54-1.41-1.41,4.54-4.54-4.54-4.54,1.41-1.41,4.54,4.54,4.54-4.54,1.41,1.41-4.54,4.54Z" transform="translate(-375 -362)"/>
+        </svg>
+      </button>
+    </div><!--/.col -->
+  </div><!--/.app-item -->
+</div><!--/.app-section -->
+    
+<div class="app-section">
+  <div class="row">
+    <div class="col-xs-6">
+      <button class="btn app-btn app-btn-transparent app-ico-21-17 app-font-20 app-ico-svg-two" (click)="addCriterium()">
+        <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+          <title>pridat</title>
+          <path d="M339,406h-6v6h-2v-6h-6v-2h6v-6h2v6h6v2Z" transform="translate(-325 -398)"/>
+        </svg>
+        <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+          <title>pridat_over</title>
+          <path d="M323,396v18h18V396H323Zm16,10h-6v6h-2v-6h-6v-2h6v-6h2v6h6v2Z" transform="translate(-323 -396)"/>
+        </svg>
+        {{'přidat kritérium' | translate}}
+      </button>
+    </div><!--/.col -->
+    <div class="col-xs-6 text-right">
+      <button class="btn app-btn app-btn-transparent app-ico-24-25 app-font-20 app-ico-svg-two" (click)="reset()">
+        <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.86 28.53">
+          <title>vymazat</title>
+          <path d="M321.52,413.8H319.7a0.7,0.7,0,1,0,0,1.41h1.82A0.7,0.7,0,1,0,321.52,413.8Z" transform="translate(-319 -390.47)"/>
+          <path d="M323.54,416.51l-1.29,1.29a0.7,0.7,0,1,0,1,1l1.29-1.29A0.7,0.7,0,0,0,323.54,416.51Z" transform="translate(-319 -390.47)"/>
+          <path d="M345.16,414.15H332.82l12.63-12.63a1.41,1.41,0,0,0,0-2l-8.64-8.64a1.41,1.41,0,0,0-2,0L321,404.7a4.22,4.22,0,0,0,0,6l4.16,4.16a2.45,2.45,0,0,0,1.74.72h18.26A0.7,0.7,0,0,0,345.16,414.15Zm-18.26,0a1,1,0,0,1-.75-0.31L322,409.68a2.82,2.82,0,0,1,0-4l2.26-2.26,7.43,7.43a0.7,0.7,0,0,0,1-1l-7.43-7.43,10.56-10.56,8.64,8.64-13.63,13.63H326.9Z" transform="translate(-319 -390.47)"/>
+        </svg>
+        <svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.86 28.53">
+          <title>vymyzat_over</title>
+          <path d="M321.52,414.33H319.7a0.7,0.7,0,0,0,0,1.41h1.82A0.7,0.7,0,1,0,321.52,414.33Z" transform="translate(-319 -391)"/>
+          <path d="M323.54,417l-1.29,1.29a0.7,0.7,0,1,0,1,1l1.29-1.29A0.7,0.7,0,0,0,323.54,417Z" transform="translate(-319 -391)"/>
+          <path d="M345.16,415H332.82l12.63-12.79a1.78,1.78,0,0,0,0-2.28L336.81,391h-2L321,405a4.44,4.44,0,0,0-1.24,3.09,4.32,4.32,0,0,0,1.24,3l4.16,4.15a2.43,2.43,0,0,0,1.74.7h18.26c0.39,0,.7-0.11.7-0.5S345.55,415,345.16,415Zm-13-3.4a0.7,0.7,0,0,1-.5-0.21L324.25,404l1-1,7.43,7.43A0.7,0.7,0,0,1,332.18,411.6Z" transform="translate(-319 -391)"/>
+        </svg>
+        {{'vymazat formulář' | translate}}
+      </button>
+    </div><!--/.col -->
+  </div><!--/.row -->
+</div><!--/.app-section -->
+
+

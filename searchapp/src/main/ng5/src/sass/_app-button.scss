@@ -1,0 +1,224 @@
+// --- BUTTONS ---
+
+// btn basic
+.app-btn {
+  font-size: 16px;
+  padding: 0;
+  background-color: transparent;
+  outline: 0 !important;
+  svg {
+    height: 20px;
+    fill: $app-brand;
+    margin-right: 5px;
+  }
+}
+
+
+// ico size
+.app-ico-21-17 {svg {width: 21px; height: 17px;}} // archiv, knihy
+.app-ico-17-17 {svg {width: 17px; height: 17px;}} // plus
+.app-ico-24-25 {svg {width: 24px; height: 25px;}} // vymazat
+.app-ico-36-36 {svg {width: 36px; height: 36px;}} // lupa big
+.app-ico-23-12 {svg {width: 23px; height: 12px;}} // bryle
+.app-ico-20-20 {svg {width: 20px; height: 20px;}} // smazat radek
+.app-ico-28-28 {svg {width: 28px; height: 28px;}} // socialni site, link
+.app-ico-25-25 {svg {width: 25px; height: 25px;}} // zavrit okno, next, prev, lupa small
+.app-ico-27-27 {svg {width: 27px; height: 27px;}} // maximalizovat, minimalizovat, zmensit, zvetsit, info, citace, tisk
+.app-ico-22-27 {svg {width: 22px; height: 27px;}} // stahnout
+.app-ico-25-27 {svg {width: 25px; height: 27px;}} // sdilet
+
+
+// font size
+.app-font-20 {font-size: 20px}
+
+
+// two svg
+.app-ico-svg-two {
+  svg {
+    &:nth-child(even) {
+      display: none;
+    }
+  }
+  &:hover {
+    color: $app-brand;
+    svg {
+      &:nth-child(odd) {
+        display: none;
+      }
+      &:nth-child(even) {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+// btn right
+.app-btn-right {
+  svg {
+    margin-right: 0;
+    margin-left: 5px;
+  }
+}
+
+// set hover ico color
+.app-ico-white {svg {fill: $body-bg;}}
+.app-ico-black {svg {fill: $gray-base;}}
+
+.app-ico-pink-hover {
+  &:hover {
+    svg {
+      fill: $app-brand-d-1;
+    }
+  }
+}
+
+.app-ico-brand-hover {
+  &:hover,
+  &:focus {
+    svg {
+      fill: $app-brand;
+    }
+  }
+}
+
+// btn default
+.app-btn-default {
+  main & {
+    @extend .app-font-roboto-cb;
+  }
+  padding: 3px 10px 1px 10px;
+  background-color: $app-brand-l-4;
+  color: $app-brand;
+  svg {
+    vertical-align: text-top;
+  }
+  &:hover {
+    background-color: $app-brand;
+    color: $body-bg;
+    svg {
+      fill: $body-bg;
+    }
+  }
+  // btn inverse
+  &.app-btn-inverse {
+    background-color: $app-brand;
+    color: $body-bg;
+    svg {
+      fill: $body-bg;
+    }
+  }
+  &.app-btn-inverse:hover {
+    background-color: $app-brand-l-4;
+    color: $app-brand;
+    svg {
+      fill: $app-brand;
+    }
+  }
+}
+
+// btn transparent
+.app-btn-transparent {
+  @extend .app-font-roboto-cl;
+  color: $app-brand;
+  svg {
+    vertical-align: middle;
+  }
+  &:hover:not(.app-ico-svg-two) {
+    color: $app-brand;
+    svg {
+      fill: $app-brand-d-1;
+    }
+  }
+}
+
+// btn disabled
+.app-btn-disabled,
+.app-btn-disabled:hover {
+  color: $app-gray-50 !important;
+  
+  svg, svg:hover  {
+    fill: $app-gray-50 !important;
+  }
+}
+
+// btn square
+.app-btn-square {
+  width: 60px;
+  height: 60px;
+  background-color: $app-brand;
+  &:hover {
+    background-color: $app-brand-l-4;
+  }
+}
+
+// btn ico
+.app-btn-ico {
+  line-height: 0 !important;
+  svg {
+    margin: 0 !important;
+  }
+}
+
+// btn arrow
+.app-btn-arrow {
+  position: relative;
+  border-radius: 0;
+  border: 0;
+}
+
+.app-btn-arrow:before,
+.app-btn-arrow:after {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+}
+
+// btn arrow left
+.app-btn-arrow-left {
+  @include set-vertical-align(34);
+  @extend .app-font-roboto-cl;
+  padding: 0 12px;
+  margin-left: 11px;
+  font-size: 20px;
+}
+
+.app-btn-arrow-left:before {
+  border-width: 17px 11px 17px 0;
+  border-style: solid;
+  border-color: transparent $app-brand-l-4 transparent transparent;
+  left: -11px;
+}
+
+// btn arrow right
+.app-btn-arrow-right {
+  @extend .app-font-roboto-cl;
+  text-align: left;
+  min-height: 74px;
+  padding: 10px 12px;
+  margin-right: 25px;
+  background-color: transparent;
+  &.app-btn-active {
+    background-color: $app-brand-l-4;
+    &:after {
+      border-width: 37px 0 37px 25px;
+      border-style: solid;
+      border-color: transparent transparent transparent $app-brand-l-4;
+      right: -25px;
+    }
+  }
+  .media {
+    .media-left {
+      .media-object {
+        height: 50px;
+      }
+    }
+    .media-body {
+      h4 {
+        margin-bottom: 0;
+      }
+      width: inherit;
+    }
+  }
+}

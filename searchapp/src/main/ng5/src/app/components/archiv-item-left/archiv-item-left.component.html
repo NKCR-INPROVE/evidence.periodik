@@ -1,0 +1,16 @@
+<div class="media">
+  <div class="media-left">
+    <a>
+      <img class="media-object" [src]="img()" alt="" />
+    </a>
+  </div><!--/.media-left -->
+  <div class="media-body">
+    <h4 class="media-heading app-font-pt-serif">
+      <span *ngIf="year">{{'Rok' | translate}} {{year}}</span>
+      <span *ngIf="volumeNumber">, {{'ročník' | translate}} {{volumeNumber}}</span>
+      <span *ngIf="issueNumber"> {{'číslo' | translate}} {{issueNumber}}</span>
+      <span *ngIf="partName">, {{partName}}</span>
+    </h4><!--/.media-heading -->
+    <span class="shades black-text app-font-s14" *ngIf="isbn">ISBN: {{isbn}}</span>
+  </div><!--/.media-body -->
+</div><!--/.media -->

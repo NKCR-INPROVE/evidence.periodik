@@ -1,0 +1,94 @@
+<section class="app-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="cokoliv">
+            <router-outlet></router-outlet>
+ 
+            <div *ngIf="showResults()">
+              <div  class="app-section app-section-slider app-brand lighten-6">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <input id="onlyPeerReviewed" type="checkbox" [(ngModel)]="onlyPeerReviewed" (ngModelChange)="setPeerReviewed()" />
+                    <label for="onlyPeerReviewed">{{'pouze v recenzovaných článcích' | translate}}</label>
+                  </div><!--/.col -->
+                  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+                    <form class="form-inline">
+                      <div class="form-group">
+                        <label>{{'Datum publikování' | translate}}:</label> 
+                        {{'od roku' | translate}} <input type="text" (keyup.enter)="dateChange()" (blur)="dateChange()" class="form-control" name="dateOd" [(ngModel)]="state.dateOd"> 
+                        {{'do roku' | translate}} <input type="text" (keyup.enter)="dateChange()" class="form-control" name="dateDo" [(ngModel)]="state.dateDo">
+                      </div>
+                    </form>
+                  </div><!--/.col -->
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
+                    <div id="slider">
+                        <nouislider [connect]="true" [min]="state.dateMin" [max]="state.dateMax" [step]="1" [(ngModel)]="state.dateRange"
+                          (end)="onDateChange($event)" [tooltips]="[ true, true ]" #dateSlider ></nouislider>
+                    </div>
+                  </div><!--/.col -->
+                </div><!--/.row -->
+              </div><!--/.app-section -->
+              
+              <div *ngIf="numFound == 0" class="app-section">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <alert type="warning">
+                      <strong>{{'text.warning' | translate}}!</strong> {{'alert.no-results' | translate}}.
+                    </alert>
+                  </div>
+                </div>
+              </div><!--/.app-section -->
+        
+              <div *ngIf="numFound > 0" class="app-section app-sort-headline">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    <h2 class="app-font-s42 app-clean-mg">{{'Výsledky vyhledávání' | translate}}</h2>
+                  </div><!--/.col -->
+                  <div class="col-xs-12 col-sm-6">
+                    <ul class="list-unstyled app-select">
+                      <li>{{'Výsledky řadit' | translate}}:</li>
+                      <li class="dropdown" dropdown>
+                        <a dropdownToggle class="dropdown-toggle" role="button" >{{currentSort.label | translate}}<span class="caret"></span></a>
+                        <ul *dropdownMenu class="dropdown-menu app-clean-border">
+                          <li *ngFor="let s of state.sorts"><a (click)="setSort(s)">{{s.label | translate}}</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div><!--/.col -->
+                </div><!--/.row -->
+                <div></div>
+                <hr />
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    {{'Zobrazeny výsledky' | translate}}: <span class="app-font-roboto-cb">{{start + 1}} – {{lastResult()}}</span> {{'z celkového počtu' | translate}} <span class="app-font-roboto-cb">{{numFound}}</span>
+                  </div><!--/.col -->
+                  <div class="col-xs-12 col-sm-6">
+                    {{'Počet výsledků na stránku' | translate}}:
+                    <nav class="app-nav-items">
+                      <ul class="list-unstyled app-brand-text app-font-roboto-cb">
+                        <li *ngFor="let r of rowsSelect" [class.active]="this.rows === r"><a (click)="setRows(r)">{{r}}</a></li>
+                      </ul>
+                    </nav><!--/.app-nav-items -->
+                  </div><!--/.col -->
+                </div><!--/.row -->
+              </div><!--/.app-section -->
+            
+              <div class="app-section app-section-results" #results>
+                <div class="app-item" *ngFor="let doc of docs">
+                  <app-article-result [article]="doc"></app-article-result>
+                </div>
+                <hr *ngIf="numFound" />
+              </div><!--/.app-section -->
+            
+              <app-pagination [numPages]="5" [totalPages]="totalPages" (onGotoPage)="setPage($event)"></app-pagination>
+            </div>
+            
+          </div><!--/.tab-pane -->
+        </div><!--/.tab-content -->
+      </div><!--/.col -->
+    </div><!--/.row -->
+  </div><!--/.container -->
+</section><!--/.app-content -->

@@ -1,0 +1,14 @@
+<!--
+<span *ngIf="journal.details.year">{{'Rok' | translate}} {{journal.details.year}}</span>
+<span *ngIf="journal.details.volumeNumber">, {{'ročník' | translate}} {{journal.details.volumeNumber}}</span>
+<span *ngIf="journal.details.issueNumber">, {{'číslo' | translate}} {{journal.details.issueNumber}}</span>
+
+<span *ngIf="journal.details.date">{{'Datum' | translate}} {{journal.details.date}}</span>
+<span *ngIf="journal.details.issueNumber">, {{'číslo' | translate}} {{journal.details.issueNumber}}</span>
+<span *ngIf="journal.details.partNumber">, {{'číslo' | translate}} {{journal.details.partNumber}}</span>
+-->
+
+<span *ngIf="journal.year">{{'Rok' | translate}} {{journal.year}}</span><span
+ *ngIf="volumeNumber">, {{'ročník' | translate}} {{volumeNumber}}</span><span
+ *ngIf="issueNumber">, {{'číslo' | translate}} {{issueNumber}} </span><span
+ *ngIf="partName">, {{partName}}</span>

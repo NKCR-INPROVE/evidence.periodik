@@ -3,6 +3,11 @@
 footer {
   padding: 7px 0;
   .row {
+    & > div {
+      a, .app-pipe {
+        color: $app-brand-l-1;
+      }
+    }
     >div:first-child {
       padding-top: 2px;
       font-size: 1.4rem;
@@ -15,7 +20,7 @@ footer {
         svg {
           width: 20px;
           height: 20px;
-          fill: $app-brand-d-1;
+          fill: $app-brand-l-1;
           
           &:hover {
             fill: $body-bg;

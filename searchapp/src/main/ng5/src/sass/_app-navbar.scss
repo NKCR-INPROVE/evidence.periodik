@@ -1,7 +1,7 @@
 // --- NAVBAR ---
 
 .navbar {
-  @include gradient-vertical(#5b1629, $app-brand, 0%, 20%);
+  @include gradient-vertical($app-brand-d-4, $app-brand, 0%, 20%);
   .navbar-header {
     .navbar-toggle {
       .icon-bar {

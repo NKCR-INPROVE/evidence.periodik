@@ -1,0 +1,18 @@
+// --- BRAND CONFIG --- #F9F4F5
+//$brand-primary:         #311b92 !default;
+//$brand-primary:         #827717 !default;
+$brand-primary:         #009688 !default;
+
+
+$app-brand:						  $brand-primary !default;
+$app-brand-l-1:					lighten(desaturate($app-brand, 40% ), 40%) !default;
+$app-brand-l-2:					lighten(desaturate($app-brand, 40% ), 50%) !default;
+$app-brand-l-3:   		  lighten(desaturate($app-brand, 40% ), 60%) !default;
+$app-brand-l-4:					lighten(desaturate($app-brand, 40%) , 62%) !default;
+$app-brand-l-5:					lighten(desaturate($app-brand, 50%) , 65%) !default;
+$app-brand-l-6:         lighten(desaturate($app-brand, 60%) , 68%) !default;
+
+$app-brand-d-1:					darken($app-brand, 2%) !default;
+$app-brand-d-2:					darken($app-brand, 4%) !default;
+$app-brand-d-3:         darken($app-brand, 7%) !default;
+$app-brand-d-4:         darken($app-brand, 10%) !default;

@@ -109,7 +109,7 @@ export class AppComponent implements OnInit {
           }
         }
         this.state.genres.sort((a, b) => {
-          return a.translated.localeCompare(b.translated, 'cs');
+          return a.tr.localeCompare(b.tr, 'cs');
         });
 
       });
@@ -117,16 +117,14 @@ export class AppComponent implements OnInit {
   }
   
   getKeywords(){
-    var params = new HttpParams();
-      params.set('q', '*:*');
-      //    params.set('fq', '-genre:""');
-      params.set('rows', '0');
-      //Rok jako stats
-      params.set('facet', 'true');
-      params.set('facet.field', 'keywords_facet');
-      params.set('facet.mincount', '1');
-      params.set('facet.limit', '-1');
-      params.set('facet.sort', 'index');
+    var params = new HttpParams()
+    .set('q', '*:*')
+    .set('rows', '0')
+    .set('facet', 'true')
+    .set('facet.field', 'keywords_facet')
+    .set('facet.mincount', '1')
+    .set('facet.limit', '-1')
+    .set('facet.sort', 'index');
       this.searchService.search(params).subscribe(res => {
         this.state.keywords= [];
         

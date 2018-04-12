@@ -18,9 +18,9 @@ export class SearchService {
     private http: HttpClient) { }
 
   search(params : HttpParams) {
-    params = params.append('fq', 'root_pid:"' + this.state.config['journal'] + '"')
+    let p = params.append('fq', 'root_pid:"' + this.state.config['journal'] + '"');
     var url = this.state.config['context'] + 'search/journal/select';    
-    return this.http.get(url, { params: params });
+    return this.http.get(url, { params: p });
   }
 
 

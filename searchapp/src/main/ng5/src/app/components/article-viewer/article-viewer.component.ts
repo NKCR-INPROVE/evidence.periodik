@@ -6,6 +6,7 @@ import {AppService} from '../../services/app.service';
 import {AppState} from '../../app.state';
 import {Journal} from '../../models/journal.model';
 import Utils from '../../services/utils';
+import {PdfViewerComponent} from 'ng2-pdf-viewer';
 
 @Component({
   selector: 'app-article-viewer',
@@ -14,7 +15,7 @@ import Utils from '../../services/utils';
 })
 export class ArticleViewerComponent implements OnInit {
 
-  @ViewChild('pdfComponent') private pdfComponent: any;
+  @ViewChild(PdfViewerComponent) private pdfComponent: PdfViewerComponent;
   @ViewChild('linkModal') private linkModal: any;
 
   pid: string;
@@ -133,9 +134,16 @@ export class ArticleViewerComponent implements OnInit {
       }
     });
   }
+  
+  searchInPdf(stringToSearch: string) {
+  this.pdfComponent.pdfFindController.executeCommand('find', {
+    caseSensitive: false, findPrevious: undefined, highlightAll: true, phraseSearch: true, query: stringToSearch
+  });
+}
 
   afterLoad(pdf: any) {
     this.loading = false;
+    this.searchInPdf('study')
   }
 
   zoomIn() {

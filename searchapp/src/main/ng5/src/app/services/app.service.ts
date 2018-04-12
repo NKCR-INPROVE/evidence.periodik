@@ -52,10 +52,9 @@ export class AppService {
 
   getItem(pid: string): Observable<any> {
     var url = this.state.config['context'] + 'search/journal/select';
-    let params = new HttpParams();
-
-    params.set('q', 'pid:"' + pid + '"');
-    params.set('wt', 'json');
+    let params = new HttpParams()
+    .set('q', 'pid:"' + pid + '"')
+    .set('wt', 'json');
 
     return this.http.get(url, { params: params })
       .map((response) => {
@@ -93,11 +92,10 @@ export class AppService {
   getJournal(pid: string): Observable<Journal> {
 
     var url = this.state.config['context'] + 'search/journal/select';
-    let params = new HttpParams();
-
-    params.set('q', 'pid:"' + pid + '"');
-    params.set('wt', 'json');
-    params.set('rows', '1');
+    let params = new HttpParams()
+    .set('q', 'pid:"' + pid + '"')
+    .set('wt', 'json')
+    .set('rows', '1');
 
 
     return this.http.get(url, { params: params }).map((response) => {
@@ -257,7 +255,7 @@ export class AppService {
       }
 
     }).map((res) => {
-      return res.json();
+      return res;
     });
   }
   
@@ -283,10 +281,9 @@ export class AppService {
 
   setViewed(pid: string): Observable<any> {
       let url = this.state.config['context'] + 'index';
-    let params = new HttpParams();
-
-    params.set('action', 'SET_VIEW');
-    params.set('pid',  pid);
+    let params = new HttpParams()
+    .set('action', 'SET_VIEW')
+    .set('pid',  pid);
     return this.http.get(url, { params: params });
       
       
@@ -307,12 +304,10 @@ export class AppService {
 
   getViewed(pid: string): Observable<number> {
     let url = this.state.config['context'] + 'search/views/select';
-    let params = new HttpParams();
-
-    params.set('q', '*:*');
-    params.set('fq', 'pid:"' + pid + '"');
-    params.set('wt', 'json');
-    params.set('fl', 'views');
+    let params = new HttpParams().set('q', '*:*')
+    .set('fq', 'pid:"' + pid + '"')
+    .set('wt', 'json')
+    .set('fl', 'views');
 
     return this.http.get(url, { params: params })
       .map((response) => {
@@ -336,11 +331,10 @@ export class AppService {
 
   getSiblings(pid: string): Observable<any> {
     let url = this.state.config['context'] + 'search/journal/select';
-    let params = new HttpParams();
-
-    params.set('q', 'pid:"' + pid + '"');
-    params.set('wt', 'json');
-    params.set('fl', 'parents');
+    let params = new HttpParams()
+    .set('q', 'pid:"' + pid + '"')
+    .set('wt', 'json')
+    .set('fl', 'parents');
 
     return this.http.get(url, { params: params })
       .map((response) => {
@@ -441,10 +435,10 @@ export class AppService {
 
   doLogin() {
     var url = 'login'
-    var params = new HttpParams();
-    params.set('user', this.state.loginuser);
-    params.set('pwd', this.state.loginpwd);
-    params.set('action', 'LOGIN');
+    var params = new HttpParams()
+    .set('user', this.state.loginuser)
+    .set('pwd', this.state.loginpwd)
+    .set('action', 'LOGIN');
     return this.http.get(url, { params: params }).map(res => {
       return res;
     }, error => {
@@ -467,8 +461,7 @@ export class AppService {
 
     var url = 'login';
     //console.log(this.loginuser, this.loginpwd, url);
-    var params = new HttpParams();
-    params.set('action', 'LOGOUT');
+    var params = new HttpParams().set('action', 'LOGOUT');
     return this.http.get(url, { params: params });
 
   }

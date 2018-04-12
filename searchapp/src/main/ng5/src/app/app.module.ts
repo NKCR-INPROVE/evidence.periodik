@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { RouterModule }   from '@angular/router';
 
 import { BsDropdownModule, ModalModule, CollapseModule, TypeaheadModule, TooltipModule, AlertModule } from 'ngx-bootstrap';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { PdfViewerModule } from 'ng2-pdf-viewer';
@@ -46,8 +47,8 @@ import { AuthGuard } from "./services/auth-guard";
 import { SafeHtmlPipe } from './services/safe-html.pipe';
 import { TestComponent } from './components/test/test.component';
 
-export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http);
+export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -83,7 +84,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
-    //FormsModule,
+    FormsModule,
     HttpClientModule,
     NouisliderModule,
     PdfViewerModule,
@@ -93,13 +94,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlertModule.forRoot(),
   FileUploadModule,
     
-    TranslateModule.forRoot({
-            loader: {
+  TranslateModule.forRoot({
+          loader: {
                 provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        }),
+                useFactory: (createTranslateLoader),
+              deps: [HttpClient]
+          }
+      }),
     //StoreModule, storeManager,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
@@ -138,7 +139,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         canActivate: [AuthGuard],component: AdminComponent },
     ])
   ],
-  providers: [AppState, AppService, SearchService, AuthGuard],
+  providers: [AppState, AppService, SearchService, AuthGuard, TranslateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

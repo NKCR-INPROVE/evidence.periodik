@@ -1,18 +1,29 @@
-// --- BRAND CONFIG --- #F9F4F5
+// --- BRAND CONFIG --- aaa
+$brand-primary:         #7D1B35 !default; //hsl(344, 64%, 30%)
 //$brand-primary:         #311b92 !default;
 //$brand-primary:         #827717 !default;
-$brand-primary:         #009688 !default;
+//$brand-primary:         #009688 !default;
+//$brand-primary:         #2196F3 !default;
+//$brand-primary:         #9c27b0 !default;
+//$brand-primary:         #e91e63 !default;
+
+$app-brand-lihtness:  lightness($brand-primary);
+$app-brand-saturation:  saturation($brand-primary);
 
 
 $app-brand:						  $brand-primary !default;
-$app-brand-l-1:					lighten(desaturate($app-brand, 40% ), 40%) !default;
-$app-brand-l-2:					lighten(desaturate($app-brand, 40% ), 50%) !default;
-$app-brand-l-3:   		  lighten(desaturate($app-brand, 40% ), 60%) !default;
-$app-brand-l-4:					lighten(desaturate($app-brand, 40%) , 62%) !default;
-$app-brand-l-5:					lighten(desaturate($app-brand, 50%) , 65%) !default;
-$app-brand-l-6:         lighten(desaturate($app-brand, 60%) , 68%) !default;
+$app-brand-l-1:					lighten(desaturate($app-brand, 37% ), 42%) !default; // #cba4ae - hsl(345, 27%, 72%)
+$app-brand-l-2:					lighten(desaturate($app-brand, 37% ), 49%) !default; // #d8bbc2 - hsl(346, 27%, 79%)
+$app-brand-l-3:   		  lighten(desaturate($app-brand, 38% ), 56%) !default; // #e5d1d7 - hsl(342, 28%, 86%)
+$app-brand-l-4:					lighten(desaturate($app-brand, 38%) , 63%) !default; // #f2e8eb - hsl(342, 28%, 93%)
+$app-brand-l-5:					lighten(desaturate($app-brand, 38%) , 65%) !default; // #f6eff1 - hsl(343, 28%, 95%)
+$app-brand-l-6:         lighten(desaturate($app-brand, 39%) , 67%) !default; // #f9f4f5 - hsl(348, 29%, 97%)
 
 $app-brand-d-1:					darken($app-brand, 2%) !default;
 $app-brand-d-2:					darken($app-brand, 4%) !default;
 $app-brand-d-3:         darken($app-brand, 7%) !default;
 $app-brand-d-4:         darken($app-brand, 10%) !default;
+
+
+@debug $app-brand-lihtness;
+@debug $app-brand-saturation;

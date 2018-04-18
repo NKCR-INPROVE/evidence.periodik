@@ -1,29 +1,25 @@
-// --- BRAND CONFIG --- aaa
-$brand-primary:         #7D1B35 !default; //hsl(344, 64%, 30%)
-//$brand-primary:         #311b92 !default;
-//$brand-primary:         #827717 !default;
-//$brand-primary:         #009688 !default;
-//$brand-primary:         #2196F3 !default;
-//$brand-primary:         #9c27b0 !default;
-//$brand-primary:         #e91e63 !default;
+// --- BRAND CONFIG ---
+//$brand:         #7D1B35 !default; //hsl(344, 64%, 30%)
+//$brand:         #5CB74E !default;
+//$brand:         #5CB74E !default;
+//$brand:         #722574 !default;
 
-$app-brand-lihtness:  lightness($brand-primary);
-$app-brand-saturation:  saturation($brand-primary);
+$brand:                 #722574 !default;
+$brand-primary:         setPrimaryColor($brand) !default;
 
+$app-brand-l-6:         hsl(setHue($brand), setSaturation($brand, 29), 97) !default; // #f9f4f5 - hsl(348, 29%, 97%)
+$app-brand-l-5:					hsl(setHue($brand), setSaturation($brand, 28), 95) !default; // #f6eff1 - hsl(343, 28%, 95%)
+$app-brand-l-4:         hsl(setHue($brand), setSaturation($brand, 28), 93) !default; // #f2e8eb - hsl(342, 28%, 93%)
+$app-brand-l-3:   		  hsl(setHue($brand), setSaturation($brand, 28), 86) !default; // #e5d1d7 - hsl(342, 28%, 86%)
+$app-brand-l-2:					hsl(setHue($brand), setSaturation($brand, 27), 79) !default; // #d8bbc2 - hsl(346, 27%, 79%)
+$app-brand-l-1:					hsl(setHue($brand), setSaturation($brand, 27), 72) !default; // #cba4ae - hsl(345, 27%, 72%)
 
-$app-brand:						  $brand-primary !default;
-$app-brand-l-1:					lighten(desaturate($app-brand, 37% ), 42%) !default; // #cba4ae - hsl(345, 27%, 72%)
-$app-brand-l-2:					lighten(desaturate($app-brand, 37% ), 49%) !default; // #d8bbc2 - hsl(346, 27%, 79%)
-$app-brand-l-3:   		  lighten(desaturate($app-brand, 38% ), 56%) !default; // #e5d1d7 - hsl(342, 28%, 86%)
-$app-brand-l-4:					lighten(desaturate($app-brand, 38%) , 63%) !default; // #f2e8eb - hsl(342, 28%, 93%)
-$app-brand-l-5:					lighten(desaturate($app-brand, 38%) , 65%) !default; // #f6eff1 - hsl(343, 28%, 95%)
-$app-brand-l-6:         lighten(desaturate($app-brand, 39%) , 67%) !default; // #f9f4f5 - hsl(348, 29%, 97%)
-
-$app-brand-d-1:					darken($app-brand, 2%) !default;
-$app-brand-d-2:					darken($app-brand, 4%) !default;
-$app-brand-d-3:         darken($app-brand, 7%) !default;
-$app-brand-d-4:         darken($app-brand, 10%) !default;
+$app-brand-d-1:					hsl(setHue($brand), setSaturation($brand, 27), 65) !default; // #be8d9a - hsl(344, 27%, 65%)
+$app-brand-d-2:					hsl(setHue($brand), setSaturation($brand, 27), 58) !default; // #b17686 - hsl(344, 27%, 58%)
+$app-brand-d-3:         hsl(setHue($brand), setSaturation($brand, 15), 39) !default; // #73555d - hsl(344, 15%, 39%)
+$app-brand-d-4:         hsl(setHue($brand), setSaturation($brand, 61), setLightness($brand, 22)) !default; // #5b1629 - hsl(343, 61%, 22%)
 
 
-@debug $app-brand-lihtness;
-@debug $app-brand-saturation;
+@debug getHsl($brand);
+
+

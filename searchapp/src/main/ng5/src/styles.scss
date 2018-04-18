@@ -1,12 +1,12 @@
 // --- ROOT STYLE ---
 
+@import "sass/app-function";
 @import "assets/brand-config"; // to config app colors
 
 @import "sass/app-variables";
 @import "sass/app-palette";
 @import "sass/app-color";
 @import "sass/app-mixin";
-@import "sass/app-function";
 
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "../node_modules/nouislider/distribute/nouislider.css";

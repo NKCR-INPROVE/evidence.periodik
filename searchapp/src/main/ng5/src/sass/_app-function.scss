@@ -9,3 +9,53 @@
     @return lighten($color, 40%);
   }
 }
+
+
+// set base palete color
+@function setPrimaryColor($color) {
+  @if(lightness($color) > 40) {
+    $lightness: round(lightness($color)/1%);
+    $lightnessNumber: $lightness - 30;
+    @return darken($color, $lightnessNumber);
+  } @else {
+    @return $color;
+  }
+}
+
+// set hue
+@function setHue($color) {
+  $hue: round(hue($color)/1deg);
+  @return $hue;
+}
+
+// set saturation
+@function setSaturation($color, $val) {
+  $saturation: round(saturation($color)/1%);
+  @if($saturation == 0) {
+    @return 0;
+  } @else {
+    @return $val;
+  }
+}
+
+// set lightness
+@function setLightness($color, $val) {
+  $lightness: round(lightness($color)/1%);
+  @if($lightness <= 15) {
+    @return 0;
+  } @else if($lightness < $val) and ($lightness >= 15) {
+    @return $val - $lightness;
+  } 
+  @else {
+    @return $val;
+  }
+}
+
+// debug color
+@function getHsl($color) {
+  $hue: round(hue($color)/1deg);
+  $saturation: round(saturation($color)/1%);
+  $lightness: round(lightness($color)/1%);
+  
+  @return H - $hue,  S - $saturation, L - $lightness;
+}

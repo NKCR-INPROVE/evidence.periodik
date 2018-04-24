@@ -23,19 +23,21 @@ $brand-danger:          #d9534f !default;
 
 // app colors
 $app-gray-30:					lighten($gray-base, 30%) !default; // #4d4d4d
-$app-gray-50:                   lighten($gray-base, 50%) !default; // #4d4d4d
+$app-gray-50:         lighten($gray-base, 50%) !default; // #4d4d4d
 $app-gray-85:					lighten($gray-base, 85%) !default; // #d9d9d9
 
 $app-brand:						$brand-primary !default;
 $app-brand-l-6:					#f9f4f5 !default;
 $app-brand-l-5:					#f6eff1!default;
 $app-brand-l-4:					#f2e8eb !default;
-$app-brand-l-3:   			    #e5d1d7 !default;
+$app-brand-l-3:   		  #e5d1d7 !default;
 $app-brand-l-2:					#d8bbc2 !default;
 $app-brand-l-1:					#cba4ae !default;
 $app-brand-d-1:					#be8d9a !default;
 $app-brand-d-2:					#b17686 !default;
-$app-brand-d-3:                 #73555d !default;
+$app-brand-d-3:         #73555d !default;
+$app-brand-d-4:         #5b1629 !default;
+
 
 // app var
 $app-col-close-width:		40px; 

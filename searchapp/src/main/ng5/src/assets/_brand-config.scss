@@ -1,0 +1,25 @@
+// --- BRAND CONFIG ---
+//$brand:         #7D1B35 !default; //hsl(344, 64%, 30%)
+//$brand:         #5CB74E !default;
+//$brand:         #5CB74E !default;
+//$brand:         #722574 !default;
+
+$brand:                 #722574 !default;
+$brand-primary:         setPrimaryColor($brand) !default;
+
+$app-brand-l-6:         hsl(setHue($brand), setSaturation($brand, 29), 97) !default; // #f9f4f5 - hsl(348, 29%, 97%)
+$app-brand-l-5:					hsl(setHue($brand), setSaturation($brand, 28), 95) !default; // #f6eff1 - hsl(343, 28%, 95%)
+$app-brand-l-4:         hsl(setHue($brand), setSaturation($brand, 28), 93) !default; // #f2e8eb - hsl(342, 28%, 93%)
+$app-brand-l-3:   		  hsl(setHue($brand), setSaturation($brand, 28), 86) !default; // #e5d1d7 - hsl(342, 28%, 86%)
+$app-brand-l-2:					hsl(setHue($brand), setSaturation($brand, 27), 79) !default; // #d8bbc2 - hsl(346, 27%, 79%)
+$app-brand-l-1:					hsl(setHue($brand), setSaturation($brand, 27), 72) !default; // #cba4ae - hsl(345, 27%, 72%)
+
+$app-brand-d-1:					hsl(setHue($brand), setSaturation($brand, 27), 65) !default; // #be8d9a - hsl(344, 27%, 65%)
+$app-brand-d-2:					hsl(setHue($brand), setSaturation($brand, 27), 58) !default; // #b17686 - hsl(344, 27%, 58%)
+$app-brand-d-3:         hsl(setHue($brand), setSaturation($brand, 15), 39) !default; // #73555d - hsl(344, 15%, 39%)
+$app-brand-d-4:         hsl(setHue($brand), setSaturation($brand, 61), setLightness($brand, 22)) !default; // #5b1629 - hsl(343, 61%, 22%)
+
+
+@debug getHsl($brand);
+
+

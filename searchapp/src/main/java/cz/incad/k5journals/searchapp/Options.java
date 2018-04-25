@@ -51,10 +51,17 @@ public class Options {
     
     
     //Merge options defined in custom dir
-    File f = new File(path);
+    mergeCustom(InitServlet.CONFIG_DIR);
+    
+    
+
+  }
+  
+  private void mergeCustom(String dir) throws IOException{
+    File f = new File(dir + File.separator + "config.json");
     
     if (f.exists() && f.canRead()) {
-      json = FileUtils.readFileToString(f, "UTF-8");
+      String json = FileUtils.readFileToString(f, "UTF-8");
       JSONObject customClientConf = new JSONObject(json).getJSONObject("client");
       Iterator keys = customClientConf.keys();
       while (keys.hasNext()) {
@@ -62,7 +69,7 @@ public class Options {
         LOGGER.log(Level.FINE, "key {0} will be overrided", key);
         client_conf.put(key, customClientConf.get(key));
       }
-      String fnmenu = InitServlet.CONFIG_DIR + File.separator + "menu.json";
+      String fnmenu = dir + "menu.json";
       File fmenu = new File(fnmenu);
       if(fmenu.exists()){
         JSONObject jsonMenu = new JSONObject(FileUtils.readFileToString(fmenu, "UTF-8"));
@@ -78,7 +85,10 @@ public class Options {
         server_conf.put(key, customServerConf.get(key));
       }
     }
+  }
 
+  public JSONObject getClientConf(String ctx) {
+    return client_conf;
   }
 
   public JSONObject getClientConf() {

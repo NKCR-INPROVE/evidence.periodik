@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 alberto
+ * Copyright (C) 2018 alberto
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,10 @@
  */
 package cz.incad.k5journals.searchapp;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -26,6 +28,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -51,20 +54,45 @@ public class ConfigServlet extends HttpServlet {
     try {
 
       response.setContentType("application/json;charset=UTF-8");
-      HttpSession session = request.getSession();
       
       if (request.getParameter("reset") != null){
         Options.resetInstance();
       }
       PrintWriter out = response.getWriter();
+    
       JSONObject js = Options.getInstance().getClientConf();
 
-      out.print(js.toString());
+      out.print(mergeCustom(request.getPathInfo(), js).toString(2));
     } catch (IOException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     } catch (JSONException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     } 
+  }
+  
+    private JSONObject mergeCustom(String ctx, JSONObject conf) throws IOException{
+    JSONObject js = new JSONObject(conf.toString());
+    
+    File f = new File(InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "config.json");
+    
+    if (f.exists() && f.canRead()) {
+      String json = FileUtils.readFileToString(f, "UTF-8");
+      JSONObject customClientConf = new JSONObject(json).getJSONObject("client");
+      Iterator keys = customClientConf.keys();
+      while (keys.hasNext()) {
+        String key = (String) keys.next();
+        LOGGER.log(Level.FINE, "key {0} will be overrided", key);
+        js.put(key, customClientConf.get(key));
+      }
+      String fnmenu = InitServlet.CONFIG_DIR + File.separator +ctx + "menu.json";
+      File fmenu = new File(fnmenu);
+      if(fmenu.exists()){
+        JSONObject jsonMenu = new JSONObject(FileUtils.readFileToString(fmenu, "UTF-8"));
+        js.put("menu", jsonMenu);
+      }    
+      
+    }
+    return js;
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

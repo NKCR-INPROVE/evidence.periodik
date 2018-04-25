@@ -1,10 +1,11 @@
 // --- BRAND CONFIG ---
-//$brand:         #7D1B35 !default; //hsl(344, 64%, 30%)
+$brand:         #7D1B35 !default; //hsl(344, 64%, 30%)
 //$brand:         #5CB74E !default;
 //$brand:         #5CB74E !default;
 //$brand:         #722574 !default;
 
-$brand:                 #722574 !default;
+//$brand:                 #722574 !default;
+
 $brand-primary:         setPrimaryColor($brand) !default;
 
 $app-brand-l-6:         hsl(setHue($brand), setSaturation($brand, 29), 97) !default; // #f9f4f5 - hsl(348, 29%, 97%)

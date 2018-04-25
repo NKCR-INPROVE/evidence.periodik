@@ -2,8 +2,6 @@
     "context": "/",
     "defaultLang": "cs",
     "api_point": "api",
-    "journal1": "uuid:46321917-5647-11e1-86bc-005056a60003",
-    "model1": "periodicalitem",
     "journal": "uuid:fc144bf1-8d61-4f4b-80f9-e4a772db32dc",
     "model": "periodicalvolume",
     "sort_field": "datum_end",

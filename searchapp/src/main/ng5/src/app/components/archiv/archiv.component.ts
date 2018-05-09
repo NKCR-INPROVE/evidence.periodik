@@ -90,7 +90,8 @@ export class ArchivComponent implements OnInit {
 
     let p = {};
     p['pid'] = pid;
-    this.router.navigate(['/archiv', p]);
+    //this.router.navigate(['/archiv', p]);
+    this.router.navigate(['.', p], {relativeTo: this.route });
     //    this.setItems(pid);
   }
 

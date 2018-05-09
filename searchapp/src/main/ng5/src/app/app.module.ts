@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 import {BsDropdownModule, ModalModule, CollapseModule, TypeaheadModule, TooltipModule, AlertModule} from 'ngx-bootstrap';
 import {TranslateModule, TranslateLoader, TranslateService} from '@ngx-translate/core';
@@ -46,10 +46,51 @@ import {AdminComponent} from './components/admin/admin.component';
 import {AuthGuard} from "./services/auth-guard";
 import {SafeHtmlPipe} from './services/safe-html.pipe';
 import {TestComponent} from './components/test/test.component';
+import {ContextsComponent} from './contexts/contexts.component';
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
+
+const k5Routes: Routes = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
+  {path: 'test', component: TestComponent},
+  {path: 'actual', component: ActualComponent},
+  {path: 'archiv', component: ArchivComponent},
+  //{ path: 'archiv/:pid', component: ArchivComponent },
+  {
+    path: 'pro-autory', component: PokynyComponent,
+    children: [
+      {path: '', component: FreePageComponent},
+      {path: '**', component: FreePageComponent}
+
+    ]
+  },
+  {
+    path: 'o-casopisu', component: OCasopisuComponent,
+    children: [
+      {path: '', component: FreePageComponent},
+      {path: '**', component: FreePageComponent}
+
+    ]
+  },
+  {path: 'kontakt', component: FreePageComponent},
+  {path: 'e-shop', component: FreePageComponent},
+  {
+    path: 'hledat', component: SearchComponent,
+    children: [
+      {path: '', redirectTo: 'cokoliv', pathMatch: 'full'},
+      {path: 'cokoliv', component: SearchCriteriaComponent},
+      {path: 'cokoliv/:criteria', component: SearchCriteriaComponent},
+      {path: 'autory', component: SearchAuthorsComponent},
+      {path: 'keywords', component: SearchKeywordsComponent},
+      {path: 'rubriky', component: SearchGenresComponent}
+
+    ]
+  },
+  {path: 'article/:pid', component: ArticleViewerComponent},
+];
 
 @NgModule({
   declarations: [
@@ -80,7 +121,8 @@ export function createTranslateLoader(http: HttpClient) {
     LoginComponent,
     AdminComponent,
     SafeHtmlPipe,
-    TestComponent
+    TestComponent,
+    ContextsComponent
   ],
   imports: [
     BrowserModule,
@@ -103,43 +145,12 @@ export function createTranslateLoader(http: HttpClient) {
     }),
 
     RouterModule.forRoot([
-      {path: 'home', component: HomeComponent},
-      {path: 'test', component: TestComponent},
-      {path: 'actual', component: ActualComponent},
-      {path: 'archiv', component: ArchivComponent},
-      //{ path: 'archiv/:pid', component: ArchivComponent },
+      {path: '', redirectTo: 'k5journals/journal', pathMatch: 'full'},
+      {path: 'k5journals', redirectTo: 'k5journals/journal', pathMatch: 'full'},
       {
-        path: 'pro-autory', component: PokynyComponent,
-        children: [
-          {path: '', component: FreePageComponent},
-          {path: '**', component: FreePageComponent}
-
-        ]
+        path: 'k5journals/:ctx', component: ContextsComponent,
+        children: k5Routes
       },
-      {
-        path: 'o-casopisu', component: OCasopisuComponent,
-        children: [
-          {path: '', component: FreePageComponent},
-          {path: '**', component: FreePageComponent}
-
-        ]
-      },
-      {path: 'kontakt', component: FreePageComponent},
-      {path: 'e-shop', component: FreePageComponent},
-      {
-        path: 'hledat', component: SearchComponent,
-        children: [
-          {path: '', redirectTo: 'cokoliv', pathMatch: 'full'},
-          {path: 'cokoliv', component: SearchCriteriaComponent},
-          {path: 'cokoliv/:criteria', component: SearchCriteriaComponent},
-          {path: 'autory', component: SearchAuthorsComponent},
-          {path: 'keywords', component: SearchKeywordsComponent},
-          {path: 'rubriky', component: SearchGenresComponent}
-
-        ]
-      },
-      {path: 'article/:pid', component: ArticleViewerComponent},
-      {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: 'prihlaseni', component: LoginComponent},
       {
         path: 'admin',

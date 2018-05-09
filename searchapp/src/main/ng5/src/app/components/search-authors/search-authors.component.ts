@@ -171,7 +171,7 @@ export class SearchAuthorsComponent implements OnInit, OnDestroy {
     let c = new Criterium();
     c.field = 'autor';
     c.value = '"' + s + '"~3';
-    this.router.navigate(['/hledat/cokoliv', { criteria: JSON.stringify([c]), start: 0 }])
+    this.router.navigate(['../cokoliv', { criteria: JSON.stringify([c]), start: 0}], {relativeTo: this.route });
   }
 
   searchInput() {

@@ -78,8 +78,8 @@ export class SearchGenresComponent implements OnInit, OnDestroy {
       this.state.resetDates();
     let c = new Criterium();
     c.field = 'genre';
-    c.value = '"' + genre + '"';;
-    this.router.navigate(['/hledat/cokoliv', { criteria: JSON.stringify([c]), start: 0 }])
+    c.value = '"' + genre + '"';
+    this.router.navigate(['../cokoliv', { criteria: JSON.stringify([c]), start: 0}], {relativeTo: this.route });
   }
 
   searchInput() {

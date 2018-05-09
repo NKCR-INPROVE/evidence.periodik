@@ -154,11 +154,11 @@ export class SearchComponent implements OnInit, OnDestroy {
                         fq += criteria[i - 1].operator + ' ';
                     }
                     if (criteria[i].field) {
-                      if(criteria[i].field === 'keywords'){
-                        fq += criteria[i].field + ':"' + criteria[i].value + '" ';
-                      } else {
+                      //if(criteria[i].field === 'keywords'){
+                      //  fq += criteria[i].field + ':"' + criteria[i].value + '" ';
+                      //} else {
                         fq += criteria[i].field + ':' + criteria[i].value + ' ';
-                      }
+                      //}
                         
                     } else {
                         this.state.fultextQuery = criteria[i].value;
@@ -255,7 +255,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         //p['date'] = JSON.stringify(this.dateForm.controls['range'].value);
         p['date'] = JSON.stringify(this.state.dateRange);
         p['start'] = 0;
-        this.router.navigate(['/hledat/cokoliv', p]);
+        this.router.navigate(['cokoliv',p], { relativeTo: this.route });
         return;
     }
 
@@ -264,9 +264,8 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.start = page * this.rows;
         let p = {};
         Object.assign(p, this.route.snapshot.firstChild.params);
-        console.log(p)
         p['start'] = this.start;
-        this.router.navigate(['/hledat/cokoliv', p]);
+        this.router.navigate(['cokoliv', p], { relativeTo: this.route });
     }
 
     setRows(r: number) {
@@ -274,7 +273,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         let p = {};
         Object.assign(p, this.route.snapshot.firstChild.params);
         p['rows'] = this.rows;
-        this.router.navigate(['/hledat/cokoliv', p]);
+        this.router.navigate(['cokoliv', p], { relativeTo: this.route });
     }
 
     setSort(s: any) {
@@ -282,7 +281,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         let p = {};
         Object.assign(p, this.route.snapshot.firstChild.params);
         p['sort'] = this.currentSort.field;
-        this.router.navigate(['/hledat/cokoliv', p]);
+        this.router.navigate(['cokoliv', p], { relativeTo: this.route });
     }
 
     setPeerReviewed() {
@@ -290,7 +289,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         let p = {};
         Object.assign(p, this.route.snapshot.firstChild.params);
         p['onlyPeerReviewed'] = this.onlyPeerReviewed;
-        this.router.navigate(['/hledat/cokoliv', p]);
+        this.router.navigate(['cokoliv', p], { relativeTo: this.route });
     }
 
 

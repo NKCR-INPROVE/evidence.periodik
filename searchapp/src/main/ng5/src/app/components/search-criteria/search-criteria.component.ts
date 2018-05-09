@@ -128,7 +128,7 @@ export class SearchCriteriaComponent implements OnInit, OnDestroy {
         p['date'] = JSON.stringify(this.state.dateRange);
         p['start'] = 0;
         this.lupa.nativeElement.blur();
-        this.router.navigate(['/hledat/cokoliv', p]);
+        this.router.navigate([p], { relativeTo: this.route });
     }
 
 }

@@ -69,7 +69,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
       
     } else if (this.page !== 'search'){
       let parts = this.page.split('/');
-      for (let s = 0; s < parts.length; s++){
+      for (let s = 2; s < parts.length; s++){
         let link = parts.slice(0, s+1);
         this.crumbs.push({link: link.join('/'), label: 'menu.'+link.join('.')+'_'});
       }

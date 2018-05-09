@@ -196,9 +196,11 @@ export class AppComponent implements OnInit {
 
   setMainClass(url: string) {
     let p = url.split('/');
-    this.state.route = p[1].split(';')[0];
-    this.state.mainClass = this.classes[this.state.route];
-    this.mainClass = this.classes[this.state.route];
+    if (p.length > 3){
+      this.state.route = p[3].split(';')[0];
+      this.state.mainClass = this.classes[this.state.route];
+      this.mainClass = this.classes[this.state.route];
+    }
   }
 
   processUrlParams(searchParams) {

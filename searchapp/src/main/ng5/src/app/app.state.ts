@@ -24,6 +24,7 @@ export class AppState {
   
   //Holds client configuration
   config: any;
+  ctx: string;
   
   loginuser: string;
   loginpwd: string;
@@ -63,12 +64,11 @@ export class AppState {
   
   public breadcrumbs = [];
   
-  
-    dateMin: number = 2000;
-    dateMax: number = 2019;
-    dateOd: number = 2000;
-    dateDo: number = 2019;
-    dateRange: number[] = [0, 1];
+  dateMin: number = 2000;
+  dateMax: number = 2019;
+  dateOd: number = 2000;
+  dateDo: number = 2019;
+  dateRange: number[] = [0, 1];
   
   public route: string;
   

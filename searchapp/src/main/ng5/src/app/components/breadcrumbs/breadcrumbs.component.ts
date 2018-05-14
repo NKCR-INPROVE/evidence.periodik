@@ -38,6 +38,8 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
       if (val instanceof NavigationEnd) {
         let url = val.urlAfterRedirects.substring(1);
         this.page = url.split(";")[0];
+        //page is /k5journals/journal/dalsi/veci
+        this.page = this.page.split("/").slice(2).join("/");
         if (url.split(";").length > 1){
           this.params = url.split(";")[1];
         } else {
@@ -58,6 +60,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   setCrumbs(){
     this.crumbs = [];
     this.crumbs.push({link: 'home', label: 'menu.home_'});
+    
     if(this.page === 'home'){
       
     } else if(this.page.indexOf('article') === 0){
@@ -69,7 +72,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
       
     } else if (this.page !== 'search'){
       let parts = this.page.split('/');
-      for (let s = 2; s < parts.length; s++){
+      for (let s = 0; s < parts.length; s++){
         let link = parts.slice(0, s+1);
         this.crumbs.push({link: link.join('/'), label: 'menu.'+link.join('.')+'_'});
       }

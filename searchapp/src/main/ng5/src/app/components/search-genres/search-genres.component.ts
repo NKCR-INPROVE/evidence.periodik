@@ -55,6 +55,7 @@ export class SearchGenresComponent implements OnInit, OnDestroy {
         this.genres= [];
         for(let i in res['facet_counts']['facet_fields']['genre']){
           let genre = res['facet_counts']['facet_fields']['genre'][i][0];
+          console.log(genre);
           if(!this.service.isHiddenByGenre([genre])){
             this.genres.push(genre);
           }

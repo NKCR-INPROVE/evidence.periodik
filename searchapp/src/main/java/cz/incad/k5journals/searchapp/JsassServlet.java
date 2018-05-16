@@ -72,6 +72,8 @@ public class JsassServlet extends HttpServlet {
   ) throws ServletException, IOException {
     try {
       final String scssPath = "_app.scss";
+      
+      System.out.println("############## " + request.getRequestURI());
 
       String brand = "$brand: #AFAB25 !default; ";
 //      jsassOptions.getIncludePaths().add(new File("bower_components/foundation/scss");

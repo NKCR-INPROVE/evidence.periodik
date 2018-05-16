@@ -1,10 +1,11 @@
 package cz.incad.k5journals.searchapp;
 
-
+import static cz.incad.k5journals.searchapp.ConfigServlet.LOGGER;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -116,28 +117,80 @@ public class TextsServlet extends HttpServlet {
                 + File.separator + id;
         File f;
         String text = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        
+
         if (lang != null) {
           f = new File(filename + "_" + lang + ".html");
-          FileUtils.writeStringToFile(f, text,Charset.forName("UTF-8"));
+          FileUtils.writeStringToFile(f, text, Charset.forName("UTF-8"));
         } else {
           f = new File(filename + ".html");
-            FileUtils.writeStringToFile(f, text,Charset.forName("UTF-8"));
+          FileUtils.writeStringToFile(f, text, Charset.forName("UTF-8"));
         }
-        
+
         String menu = request.getParameter("menu");
-        
-        
-          LOGGER.log(Level.INFO, "menu is " + menu);
-        if(menu != null){
+
+        LOGGER.log(Level.INFO, "menu is " + menu);
+        if (menu != null) {
           String fnmenu = InitServlet.CONFIG_DIR + File.separator + "menu.json";
           File fmenu = new File(fnmenu);
           FileUtils.writeStringToFile(fmenu, menu, Charset.forName("UTF-8"));
           Options.resetInstance();
         }
-        
-          LOGGER.log(Level.INFO, json.toString());
+
+        LOGGER.log(Level.INFO, json.toString());
         out.println(json.toString(2));
+      }
+    },
+    SAVE_JOURNALS {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject json = new JSONObject();
+
+        String cfg = request.getParameter("cfg");
+
+        String fnmenu = InitServlet.CONFIG_DIR + File.separator + "journals.json";
+        File fmenu = new File(fnmenu);
+        FileUtils.writeStringToFile(fmenu, cfg, Charset.forName("UTF-8"));
+
+        LOGGER.log(Level.INFO, json.toString());
+        out.println(json.toString(2));
+      }
+    },
+    GET_CONFIG {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        String ctx = request.getParameter("ctx");
+        JSONObject conf = Options.getInstance().getClientConf();
+
+        JSONObject js = new JSONObject(conf.toString());
+
+        File f = new File(InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "config.json");
+
+        if (f.exists() && f.canRead()) {
+          String json = FileUtils.readFileToString(f, "UTF-8");
+          JSONObject customClientConf = new JSONObject(json).getJSONObject("client");
+          Iterator keys = customClientConf.keys();
+          while (keys.hasNext()) {
+            String key = (String) keys.next();
+            LOGGER.log(Level.FINE, "key {0} will be overrided", key);
+            js.put(key, customClientConf.get(key));
+          }
+          String fnmenu = InitServlet.CONFIG_DIR + File.separator + ctx + "menu.json";
+          File fmenu = new File(fnmenu);
+          if (fmenu.exists()) {
+            JSONObject jsonMenu = new JSONObject(FileUtils.readFileToString(fmenu, "UTF-8"));
+            js.put("menu", jsonMenu);
+          }
+
+        }
+
+        out.println(js.toString(2));
       }
     };
 

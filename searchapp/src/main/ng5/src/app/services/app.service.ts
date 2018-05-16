@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -33,8 +33,22 @@ export class AppService {
     private search: SearchService,
     private translate: TranslateService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+     private route: ActivatedRoute
   ) { }
+  
+  getJournalConfig(ctx: string) {
+    return this.http.get("journals").map(res => {
+      this.state.setConfig(res);
+      
+    });
+  }
+  
+  getJournals() {
+    return this.http.get("journals").map(res => {
+      this.state.ctxs = res["journals"];
+    });
+  }
 
   searchFired(criteria: Criterium[]) {
     this._searchSubject.next(criteria);
@@ -427,7 +441,11 @@ export class AppService {
         this.state.loginpwd = '';
         this.state.logged = true;
         if (this.state.redirectUrl) {
-          this.router.navigate([this.state.redirectUrl]);
+          if (this.state.redirectUrl.startsWith('/k5journals')){
+            this.router.navigate([this.state.redirectUrl]);
+          } else {
+            this.router.navigate(['/k5journals', 'journal', this.state.redirectUrl]);
+          }
         }
       }
     });
@@ -453,7 +471,7 @@ export class AppService {
         console.log(res['error']);
       }
       this.state.logged = false;
-      this.router.navigate(['/home']);
+      this.router.navigate(['home']);
     });
   }
 

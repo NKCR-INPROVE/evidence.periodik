@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AppService } from '../../services/app.service';
 import { Journal } from '../../models/journal.model';
@@ -21,6 +21,7 @@ pidActual: string;
   constructor(
     private service: AppService,
     private state: AppState,
+    private route: ActivatedRoute,
     private router: Router
   ) {
 
@@ -84,7 +85,8 @@ pidActual: string;
   findFirstdatanode(pid: string) {
     this.service.getChildren(pid, 'asc').subscribe(res => {
       if (res[0]['datanode']) {
-        this.router.navigate(['/article', res[0]['pid']]);
+        //this.router.navigate(['/article', res[0]['pid']]);
+        this.router.navigate(['../article', res[0]['pid']], {relativeTo: this.route });
       } else {
         this.findFirstdatanode(res[0]['pid']);
       }

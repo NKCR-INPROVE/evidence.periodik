@@ -37,7 +37,7 @@ export class ArticleResultComponent implements OnInit {
         private router: Router,
         private elementRef: ElementRef,
         private service: AppService,
-        private state: AppState) {}
+        public state: AppState) {}
 
     ngOnInit() {
         this.lang = this.state.currentLang;

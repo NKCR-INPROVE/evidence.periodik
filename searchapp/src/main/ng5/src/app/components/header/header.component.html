@@ -10,8 +10,8 @@
           </h1>
         </div><!--/.col -->
         <div class="col-xs-6 col-sm-3 text-right">
-          <a *ngIf="state.logged" routerLink="/admin" title="Admin" class="app-btn">Admin</a>
-          <a *ngIf="!state.logged" routerLink="/prihlaseni" title="login" class="app-btn">{{'Přihlásit' | translate}}</a>
+          <a *ngIf="state.logged" routerLink="admin" title="Admin" class="app-btn">Admin</a>
+          <a *ngIf="!state.logged" routerLink="prihlaseni" title="login" class="app-btn">{{'Přihlásit' | translate}}</a>
           <a *ngIf="state.logged" (click)="appservice.logout()" title="logout" class="app-btn">{{'Odhlásit' | translate}}</a>
           <a *ngIf="currentLang==='cs'" (click)="changeLang('en')" title="English" class="app-btn">English</a>
           <a *ngIf="currentLang==='en'" (click)="changeLang('cs')" title="Český" class="app-btn">Česky</a>
@@ -22,14 +22,6 @@
 
   <nav class="navbar app-brand app-clean-border app-clean-mg">
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div><!--/.navbar-header -->
       <div id="navbar" class="collapse navbar-collapse" [collapse]="isCollapsed" *ngIf="menu">
         <ul class="nav navbar-nav">
           <li routerLink="actual" #aa="routerLinkActive" [attr.active]="aa.isActive" routerLinkActive="active"><a routerLink="actual" title="Aktuální číslo">{{'menu.actual_' | translate}}</a></li>

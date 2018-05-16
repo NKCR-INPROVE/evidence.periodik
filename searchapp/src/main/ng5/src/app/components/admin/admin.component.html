@@ -1,8 +1,15 @@
+
 <section class="app-content">
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
         <h3>Admin page</h3>
+        <hr />
+        <div class="row">
+        <h5>Journals</h5>
+        <span *ngFor="let ctx of state.ctxs" ><a (click)="setCtx(ctx)" [class.active]="ctx.name === state.ctx">{{ctx.name}}</a> <input [(ngModel)]="ctx.color" /> | </span>
+        <button (click)="addJournal()">add</button> <button (click)="saveJournals()">save</button>
+        </div>
         <hr />
         <div class="row">
           <div class="col-xs-3">

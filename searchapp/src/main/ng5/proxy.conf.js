@@ -1,4 +1,4 @@
-{
+const PROXY_CONFIG = {
   "/search/**": {
     "target": "http://localhost:8983/solr/",
     "ignorePath": false,
@@ -31,12 +31,25 @@
     "changeOrigin": true,
     "secure": false
   },
-  "/texts": {
+  "/texts/**": {
     "target": "http://localhost:8082/k5journals/texts",
     "logLevel": "debug",
-    "pathRewrite": {
-      "^/texts":""
+    "bypass": function (req, res, proxyOptions) {
+          //return "/assets/test/news.json";
+          
+          const objectToReturn2 = 	{"api.point":"http:\/\/localhost:8080\/admin-master"};
+			res.end(JSON.stringify(objectToReturn2));
+
+
+          return true;
+//        if (req.headers.accept.indexOf("html") !== -1) {
+//            console.log("Skipping proxy for browser request.");
+//        }
+//        req.headers["X-Custom-Header"] = "yes";
     },
+//    "pathRewrite": {
+//      "^/texts":""
+//    },
     "changeOrigin": false,
     "secure": false
   },
@@ -77,15 +90,6 @@
     },
     "changeOrigin": false,
     "secure": false
-  },
-  "/journals": {
-    "target": "http://localhost:4200/assets/test/journals.json",
-    "ignorePath": false,
-    "logLevel": "debug",
-    "pathRewrite": {
-      "^/journals":""
-    },
-    "changeOrigin": false,
-    "secure": false
   }
-}
+};
+module.exports = PROXY_CONFIG;

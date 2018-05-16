@@ -1,0 +1,6 @@
+{
+  "journals": [
+    {"name": "kad", "color": "#7D1B35", "uuid":"uuid:fc144bf1-8d61-4f4b-80f9-e4a772db32dc"},
+    {"name": "kvety", "color": "#5CB74E", "uuid":"uuid:fc144bf1-8d61-4f4b-80f9-e4a772db32dc"}
+  ]
+}

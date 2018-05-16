@@ -17,7 +17,11 @@ export class ContextsComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .switchMap((params: Params) => Observable.of(params['ctx'])).subscribe(ctx => {
-        this.state.ctx = ctx;
+        if(ctx){
+          this.state.ctx = ctx;
+        } else {
+          this.state.ctx = "journal";
+        }
         if (this.state.config){
           console.log(ctx);
         } else {

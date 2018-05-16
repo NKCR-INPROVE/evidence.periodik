@@ -20,6 +20,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public appservice: AppService) { }
 
   ngOnInit() {
+    if(this.state.config){
+    this.menu = this.state.config['menu'];
+    }
     this.subscriptions.push(this.appservice.langSubject.subscribe(val=> {
       this.currentLang = val;
     }));

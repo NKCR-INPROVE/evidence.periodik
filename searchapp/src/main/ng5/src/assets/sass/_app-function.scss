@@ -57,5 +57,5 @@
   $saturation: round(saturation($color)/1%);
   $lightness: round(lightness($color)/1%);
   
-  @return H - $hue,  S - $saturation, L - $lightness;
+  @return H - $hue + ", " + S - $saturation + ", " + L - $lightness;
 }

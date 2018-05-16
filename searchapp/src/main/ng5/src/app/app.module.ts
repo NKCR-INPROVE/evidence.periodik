@@ -90,6 +90,11 @@ const k5Routes: Routes = [
     ]
   },
   {path: 'article/:pid', component: ArticleViewerComponent},
+  {path: 'prihlaseni', component: LoginComponent},
+  {
+        path: 'admin',
+        canActivate: [AuthGuard], component: AdminComponent
+      },
 ];
 
 @NgModule({
@@ -151,11 +156,7 @@ const k5Routes: Routes = [
         path: 'k5journals/:ctx', component: ContextsComponent,
         children: k5Routes
       },
-      {path: 'prihlaseni', component: LoginComponent},
-      {
-        path: 'admin',
-        canActivate: [AuthGuard], component: AdminComponent
-      },
+  {path: 'prihlaseni', component: LoginComponent},
     ])
   ],
   providers: [AppState, AppService, SearchService, AuthGuard, TranslateService],

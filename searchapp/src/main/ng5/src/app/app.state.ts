@@ -25,12 +25,13 @@ export class AppState {
   //Holds client configuration
   config: any;
   ctx: string;
+  ctxs: {"ctx": string, "color": string, "uuid":string}[];
   
   loginuser: string;
   loginpwd: string;
   loginError: boolean = false;
   logged: boolean = false;
-  redirectUrl: string = '/admin';
+  redirectUrl: string = 'admin';
   
   //Holds start query parameter
   start: number = 0;

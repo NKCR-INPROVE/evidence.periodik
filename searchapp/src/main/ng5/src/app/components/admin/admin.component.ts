@@ -8,6 +8,7 @@ import { FileUploader } from 'ng2-file-upload';
 
 import { AppService } from '../../services/app.service';
 import { AppState } from '../../app.state';
+import { Router} from '@angular/router';
 
 
 declare var tinymce: any;
@@ -57,7 +58,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   constructor(
     public state: AppState,
     private service: AppService,
-    private modalService: BsModalService) { }
+  private router: Router) { }
 
   ngAfterViewInit() {
     if (this.state.config) {
@@ -68,10 +69,24 @@ export class AdminComponent implements OnInit, OnDestroy {
       }));
     }
   }
+  
+  addJournal(){
+    
+  }
+  
+  saveJournals(){
+    
+  }
+  
+  setCtx(ctx){
+    
+            this.router.navigate(['k5journals', ctx['name'], 'home']);
+  }
 
   initData() {
 
     this.fillMenu();
+    this.service.getJournals().subscribe();
     this.subscriptions.push(this.service.langSubject.subscribe(val => {
       this.getText();
     }));

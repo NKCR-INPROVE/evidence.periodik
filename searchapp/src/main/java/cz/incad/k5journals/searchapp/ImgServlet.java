@@ -57,8 +57,12 @@ public class ImgServlet extends HttpServlet {
           throws ServletException, IOException {
     try {
 
+        System.out.println(request.getParameter("ctx"));
       if (request.getParameter("obalka") != null) {
-        String path = InitServlet.CONFIG_DIR + File.separator + "cover.jpeg";
+        
+        String ctx = request.getParameter("ctx");
+        String path = InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "cover.jpeg";
+        System.out.println(path);
         File f = new File(path);
         if (f.exists()) {
           try (OutputStream out = response.getOutputStream()) {

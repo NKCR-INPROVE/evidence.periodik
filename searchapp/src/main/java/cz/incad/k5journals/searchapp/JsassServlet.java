@@ -73,9 +73,13 @@ public class JsassServlet extends HttpServlet {
     try {
       final String scssPath = "_app.scss";
       
-      System.out.println("############## " + request.getRequestURI());
+      
+      String color = request.getParameter("color");
+      if(color == null){
+        color = "AFAB25";
+      }
 
-      String brand = "$brand: #AFAB25 !default; ";
+      String brand = "$brand: #"+color+" !default; ";
 //      jsassOptions.getIncludePaths().add(new File("bower_components/foundation/scss");
 
       final URL scssResource = getServletContext().getResource(scssPath);

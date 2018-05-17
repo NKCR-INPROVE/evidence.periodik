@@ -78,7 +78,8 @@ public class TextsServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         String lang = request.getParameter("lang");
-        String filename = InitServlet.CONFIG_DIR + File.separator + "texts"
+          String ctx = request.getParameter("ctx");
+        String filename = InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "texts"
                 + File.separator + request.getParameter("id");
         File f;
         if (lang != null) {
@@ -113,7 +114,8 @@ public class TextsServlet extends HttpServlet {
 
         String id = request.getParameter("id");
         String lang = request.getParameter("lang");
-        String filename = InitServlet.CONFIG_DIR + File.separator + "texts"
+          String ctx = request.getParameter("ctx");
+        String filename = InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "texts"
                 + File.separator + id;
         File f;
         String text = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
@@ -130,7 +132,7 @@ public class TextsServlet extends HttpServlet {
 
         LOGGER.log(Level.INFO, "menu is " + menu);
         if (menu != null) {
-          String fnmenu = InitServlet.CONFIG_DIR + File.separator + "menu.json";
+          String fnmenu = InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "menu.json";
           File fmenu = new File(fnmenu);
           FileUtils.writeStringToFile(fmenu, menu, Charset.forName("UTF-8"));
           Options.resetInstance();
@@ -171,7 +173,7 @@ public class TextsServlet extends HttpServlet {
         JSONObject js = new JSONObject(conf.toString());
 
         File f = new File(InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "config.json");
-
+        
         if (f.exists() && f.canRead()) {
           String json = FileUtils.readFileToString(f, "UTF-8");
           JSONObject customClientConf = new JSONObject(json).getJSONObject("client");
@@ -181,10 +183,11 @@ public class TextsServlet extends HttpServlet {
             LOGGER.log(Level.FINE, "key {0} will be overrided", key);
             js.put(key, customClientConf.get(key));
           }
-          String fnmenu = InitServlet.CONFIG_DIR + File.separator + ctx + "menu.json";
+          String fnmenu = InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "menu.json";
           File fmenu = new File(fnmenu);
           if (fmenu.exists()) {
             JSONObject jsonMenu = new JSONObject(FileUtils.readFileToString(fmenu, "UTF-8"));
+            
             js.put("menu", jsonMenu);
           }
 

@@ -29,6 +29,11 @@
       <type>jar</type>
     </dependency>
     <dependency>
+      <groupId>io.bit3</groupId>
+      <artifactId>jsass</artifactId>
+      <version>5.7.0</version>
+    </dependency>
+    <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-web-api</artifactId>
       <version>7.0</version>
@@ -72,7 +77,7 @@
             <phase>generate-sources</phase>
             <configuration>
               <executable>npm</executable>
-              <workingDirectory>${project.basedir}/src/main/ngClient</workingDirectory>  
+              <workingDirectory>${project.basedir}/src/main/ng5</workingDirectory>  
               <arguments>
                 <argument>run</argument>
                 <argument>build.prod</argument>
@@ -125,7 +130,7 @@
               <outputDirectory>${project.basedir}/src/main/webapp</outputDirectory>
               <resources>
                 <resource>
-                  <directory>src/main/ngClient/dist</directory>
+                  <directory>src/main/ng5/dist</directory>
                   <includes>
                     <include>*/**</include>
                   </includes>
@@ -133,6 +138,47 @@
               </resources>
             </configuration>
           </execution>
+          
+          <execution>
+            <id>copy-bootstrap-sass</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.basedir}/src/main/webapp/assets/sass</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/ng5/node_modules/bootstrap-sass/assets/stylesheets</directory>
+                  <includes>
+                    <include>*/**</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          
+          <execution>
+            <id>copy-nouislider.css</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.basedir}/src/main/webapp/assets/sass</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/ng5/node_modules/nouislider/distribute</directory>
+                  <includes>
+                    <include>*/**</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          
+          
+          <!--
           <execution>
             <id>copy-app.js</id>
             <phase>generate-resources</phase>
@@ -151,6 +197,7 @@
               </resources>
             </configuration>
           </execution>
+          -->
     
         </executions>
         <configuration>
@@ -233,8 +280,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
           <compilerArguments>
             <endorseddirs>${endorsed.dir}</endorseddirs>
           </compilerArguments>

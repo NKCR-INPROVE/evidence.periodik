@@ -26,7 +26,8 @@ export class AuthGuard implements CanActivate {
     this.state.redirectUrl = url;
 
     // Navigate to the login page with extras
-    this.router.navigate(['prihlaseni'], { relativeTo: this.route });
+    //this.router.navigate(['prihlaseni'], { relativeTo: this.route });
+    this.router.navigate([this.state.ctx ? this.state.ctx : 'journal', 'prihlaseni']);
     return false;
   }
 }

@@ -39,7 +39,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
         let url = val.urlAfterRedirects.substring(1);
         this.page = url.split(";")[0];
         //page is /k5journals/journal/dalsi/veci
-        this.page = this.page.split("/").slice(2).join("/");
+        this.page = this.page.split("/").slice(1).join("/");
         if (url.split(";").length > 1){
           this.params = url.split(";")[1];
         } else {

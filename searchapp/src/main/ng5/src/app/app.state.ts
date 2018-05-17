@@ -113,7 +113,13 @@ export class AppState {
   
   setConfig(cfg){
     this.config = cfg;
+    
+      this.rows = cfg['searchParams']['rows'];
+      this.sorts = cfg['sorts'];
+      this.currentSort = cfg[0];
     this.krameriusUrl = this.config['k5'] + this.config['journal'];
+    
+    this.imgSrc = this.config['context'] + 'img?obalka=true&ctx='+this.ctx+'&uuid=' + this.config['journal'] + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
     this._configSubject.next(cfg);
   }
   
@@ -146,7 +152,6 @@ export class AppState {
   
   setActual(a: Journal){
     this.actualNumber = a;
-    this.imgSrc = this.config['context'] + 'img?obalka=true&uuid=' + this.actualNumber.pid + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
     //this.imgSrc = this.config['context'] + 'img?obalka=true';
     this.stateChanged();
   }

@@ -7,25 +7,17 @@
         <hr />
         <div class="row">
         <h5>Journals</h5>
-        <span *ngFor="let ctx of state.ctxs" ><a (click)="setCtx(ctx)" [class.active]="ctx.name === state.ctx">{{ctx.name}}</a> <input [(ngModel)]="ctx.color" /> | </span>
+        <span *ngFor="let ctx of state.ctxs" ><a (click)="setCtx(ctx)" [class.active]="ctx.name === state.ctx">{{ctx.name}}</a>  | </span>
         <button (click)="addJournal()">add</button> <button (click)="saveJournals()">save</button>
         </div>
         <hr />
         <div class="row">
           <div class="col-xs-3">
-            <ul class="list-unstyled app-admin-nav" *ngIf="menu">
+            <ul class="list-unstyled app-admin-nav" *ngIf="menu?.length >0">
               <li role="app-page-nav"  [class.active]="selected === 'home'" >
                 <strong>
                   <a (click)="select('home', null)">{{'menu.home_' | translate}}</a>
                 </strong>
-                <!--
-                <ul class="nav-pills nav-stacked">
-                  <li role="app-page-nav" [class.active]="selected === 'home/news'">
-                      <a (click)="select('home', 'news')">{{'menu.home.news_' | translate}}</a> 
-                      <input type="checkbox" [(ngModel)]="menu['news'].visible" (change)="changeVisible()" />
-                  </li>
-                </ul>
-                -->
               </li>
               <li role="app-page-nav"  *ngFor="let m of menu" [class.active]="selected === m.label">
                 <strong>
@@ -39,18 +31,6 @@
                   </li>
                 </ul>
               </li>
-              <!--
-              <li role="app-page-nav"  [class.active]="selected === 'e-shop'" >
-                <strong>
-                  <a (click)="select('e-shop', null)">{{'menu.e-shop_' | translate}}</a>
-                </strong>
-              </li>
-              <li role="app-page-nav"  [class.active]="selected === 'kontakt'" >
-                <strong>
-                  <a (click)="select('kontakt', null)">{{'menu.kontakt_' | translate}}</a>
-                </strong>
-              </li>
-              -->
             </ul>
           </div><!--/.col -->
           <div class="col-xs-9">
@@ -73,6 +53,10 @@
                 </div>
                   <button type="button" class="btn app-btn app-btn-default" (click)="uploadCover()">{{'nahrát obrázek' | translate}}</button>
                 {{coverMsg}}
+                
+                <div class="form-group">
+                Color: <input [(ngModel)]="state.config.color" />
+                </div>
               </div>
               <div *ngIf="indexed" class="alert alert-success" role="alert">
                 {{indexUUID}} {{'text.indexed-note' | translate}}!

@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import {Injectable} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import {Router, ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
-import { Journal } from '../models/journal.model';
+import {Journal} from '../models/journal.model';
 
 
-import { AppState } from '../app.state';
-import { SearchService } from './search.service';
-import { Criterium } from '../models/criterium';
+import {AppState} from '../app.state';
+import {SearchService} from './search.service';
+import {Criterium} from '../models/criterium';
 
 
 import Utils from './utils';
@@ -34,16 +34,53 @@ export class AppService {
     private translate: TranslateService,
     private http: HttpClient,
     private router: Router,
-     private route: ActivatedRoute
-  ) { }
-  
+    private route: ActivatedRoute
+  ) {}
+
   getJournalConfig(ctx: string) {
-    return this.http.get("journals").map(res => {
+    return this.http.get("texts?action=GET_CONFIG&ctx=" + ctx).map(res => {
       this.state.setConfig(res);
-      
+      this.switchStyle();
     });
   }
   
+  findStyle(theme) {
+    var links = document.getElementsByTagName('link');
+    for (var i = 0; i < links.length; i++) {
+      if ((links[i].rel.indexOf('stylesheet') != -1) && links[i].title === theme) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  switchStyle() {
+    //let link = this.findStyle(theme);
+    let exists: boolean = false;
+    var links = document.getElementsByTagName('link');
+    for (var i = 0; i < links.length; i++) {
+      var link = links[i];
+      if (link.rel.indexOf('stylesheet') != -1 && link.title) {
+        if (link.title === this.state.ctx) {
+          link.disabled = false;
+          exists = true;
+        } else {
+          link.disabled = true;
+        }
+      }
+    }
+    
+    if (!exists) {
+      let link = document.createElement('link');
+      link.href = 'theme?ctx=' + this.state.ctx + '&color=' + this.state.config['color'] ; // insert url in between quotes
+      link.rel = 'stylesheet';
+      link.id = 'css-theme-' + this.state.ctx;
+      link.title = this.state.ctx;
+      //link.disabled = false;
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+  }
+
   getJournals() {
     return this.http.get("journals").map(res => {
       this.state.ctxs = res["journals"];
@@ -59,18 +96,18 @@ export class AppService {
     this.translate.use(lang);
     this._langSubject.next(lang);
   }
-  
-  translateKey(key: string): string{
+
+  translateKey(key: string): string {
     return this.translate.instant(key);
   }
 
   getItem(pid: string): Observable<any> {
     var url = this.state.config['context'] + 'search/journal/select';
     let params = new HttpParams()
-    .set('q', 'pid:"' + pid + '"')
-    .set('wt', 'json');
+      .set('q', 'pid:"' + pid + '"')
+      .set('wt', 'json');
 
-    return this.http.get(url, { params: params })
+    return this.http.get(url, {params: params})
       .map((response) => {
         return response['response']['docs'][0];
       });
@@ -91,28 +128,28 @@ export class AppService {
   getChildren(pid: string, dir: string = 'desc'): Observable<any> {
     var url = this.state.config['context'] + 'search/journal/select';
     let params = new HttpParams().set('q', '*:*').set('fq', 'parents:"' + pid + '"')
-    .set('wt', 'json').set('sort', 'idx ' + dir).set('rows', '500');
+      .set('wt', 'json').set('sort', 'idx ' + dir).set('rows', '500');
 
-    return this.http.get(url, { params: params })
+    return this.http.get(url, {params: params})
       .map((response) => {
         return response['response']['docs'];
       });
   }
 
-//  getActual(): Observable<Journal> {
-//    return this.getJournalByPid(this.state.config['journal'], this.state.config['model']);
-//  }
+  //  getActual(): Observable<Journal> {
+  //    return this.getJournalByPid(this.state.config['journal'], this.state.config['model']);
+  //  }
 
   getJournal(pid: string): Observable<Journal> {
 
     var url = this.state.config['context'] + 'search/journal/select';
     let params = new HttpParams()
-    .set('q', 'pid:"' + pid + '"')
-    .set('wt', 'json')
-    .set('rows', '1');
+      .set('q', 'pid:"' + pid + '"')
+      .set('wt', 'json')
+      .set('rows', '1');
 
 
-    return this.http.get(url, { params: params }).map((response) => {
+    return this.http.get(url, {params: params}).map((response) => {
       let j = response['response']['docs'][0];
 
       let ret = new Journal();
@@ -158,35 +195,35 @@ export class AppService {
     });
   }
 
-//  getJournalByPid(pid: string, model: string): Observable<Journal> {
-//    var url = this.state.config['api_point'] + '/item/' + pid + '/children';
-//
-//    return this.http.get(url).map((response: Response) => {
-//      let childs: any[] = response.json();
-//      //console.log(pid, childs);
-//      let last = childs[childs.length - 1];
-//      if (childs.length === 0) {
-//        return new Journal();
-//      }
-//      if (last['model'] === model) {
-//        let ret = new Journal();
-//        ret.pid = last['pid'];
-//        ret.title = last['title'];
-//        ret.root_title = last['root_title'];
-//        ret.root_pid = last['root_pid'];
-//        ret.model = last['model'];
-//        ret.details = last['details'];
-//        ret.siblings = childs;
-//        ret.mods = null;
-//        ret.genres = [];
-//        ret.genresObject = {};
-//
-//        return ret;
-//      } else {
-//        return this.getJournalByPid(last['pid'], model).switch();
-//      }
-//    });
-//  }
+  //  getJournalByPid(pid: string, model: string): Observable<Journal> {
+  //    var url = this.state.config['api_point'] + '/item/' + pid + '/children';
+  //
+  //    return this.http.get(url).map((response: Response) => {
+  //      let childs: any[] = response.json();
+  //      //console.log(pid, childs);
+  //      let last = childs[childs.length - 1];
+  //      if (childs.length === 0) {
+  //        return new Journal();
+  //      }
+  //      if (last['model'] === model) {
+  //        let ret = new Journal();
+  //        ret.pid = last['pid'];
+  //        ret.title = last['title'];
+  //        ret.root_title = last['root_title'];
+  //        ret.root_pid = last['root_pid'];
+  //        ret.model = last['model'];
+  //        ret.details = last['details'];
+  //        ret.siblings = childs;
+  //        ret.mods = null;
+  //        ret.genres = [];
+  //        ret.genresObject = {};
+  //
+  //        return ret;
+  //      } else {
+  //        return this.getJournalByPid(last['pid'], model).switch();
+  //      }
+  //    });
+  //  }
 
   setArticles1(ret: Journal, res1) {
     let res = res1['response']['docs'];
@@ -232,13 +269,13 @@ export class AppService {
 
       var url = this.state.config['context'] + 'search/journal/select';
       let params = new HttpParams()
-      .set('q', '*:*')
-      .set('fq', 'parents:"' + pid + '"')
-      .set('wt', 'json')
-      .set('sort', 'idx asc')
-      .set('rows', '500');
+        .set('q', '*:*')
+        .set('fq', 'parents:"' + pid + '"')
+        .set('wt', 'json')
+        .set('sort', 'idx asc')
+        .set('rows', '500');
 
-      return this.http.get(url, { params: params });
+      return this.http.get(url, {params: params});
     };
 
     return getRange(pid).expand((res) => {
@@ -272,21 +309,21 @@ export class AppService {
       return res;
     });
   }
-  
-  
+
+
   public modsCache = {};
 
   getMods(pid: string): Observable<any> {
-    if (this.modsCache.hasOwnProperty(pid)){
+    if (this.modsCache.hasOwnProperty(pid)) {
       return Observable.of(this.modsCache[pid]);
     }
     let url = this.state.config['context'] + 'search/journal/select';
     let params = new HttpParams()
-    .set('q', '*:*')
-    .set('fq', 'pid:"' + pid + '"')
-    .set('wt', 'json').set('fl', 'mods');
+      .set('q', '*:*')
+      .set('fq', 'pid:"' + pid + '"')
+      .set('wt', 'json').set('fl', 'mods');
 
-    return this.http.get(url, { params: params })
+    return this.http.get(url, {params: params})
       .map((response) => {
         this.modsCache[pid] = response['response']['docs'][0]['mods'];
         return this.modsCache[pid];
@@ -294,36 +331,36 @@ export class AppService {
   }
 
   setViewed(pid: string): Observable<any> {
-      let url = this.state.config['context'] + 'index';
+    let url = this.state.config['context'] + 'index';
     let params = new HttpParams()
-    .set('action', 'SET_VIEW')
-    .set('pid',  pid);
-    return this.http.get(url, { params: params });
-      
-      
-//    let url = this.state.config['context'] + 'search/views/update';
-//    let headers = new Headers({ 'Content-Type': 'application/json' });
-//    let options = new RequestOptions({ headers: headers });
-//    let add = { add: { doc: {}, commitWithin: 10 } };
-//    let body = add['add']['doc'];
-//    body['pid'] = pid;
-//    body['views'] = { 'inc': 1 };
+      .set('action', 'SET_VIEW')
+      .set('pid', pid);
+    return this.http.get(url, {params: params});
 
-//    return this.http.post(url, JSON.stringify(add), options)
-//      .map((response: Response) => {
-//        return response.json();
-//
-//      });
+
+    //    let url = this.state.config['context'] + 'search/views/update';
+    //    let headers = new Headers({ 'Content-Type': 'application/json' });
+    //    let options = new RequestOptions({ headers: headers });
+    //    let add = { add: { doc: {}, commitWithin: 10 } };
+    //    let body = add['add']['doc'];
+    //    body['pid'] = pid;
+    //    body['views'] = { 'inc': 1 };
+
+    //    return this.http.post(url, JSON.stringify(add), options)
+    //      .map((response: Response) => {
+    //        return response.json();
+    //
+    //      });
   }
 
   getViewed(pid: string): Observable<number> {
     let url = this.state.config['context'] + 'search/views/select';
     let params = new HttpParams().set('q', '*:*')
-    .set('fq', 'pid:"' + pid + '"')
-    .set('wt', 'json')
-    .set('fl', 'views');
+      .set('fq', 'pid:"' + pid + '"')
+      .set('wt', 'json')
+      .set('fl', 'views');
 
-    return this.http.get(url, { params: params })
+    return this.http.get(url, {params: params})
       .map((response) => {
         if (response['response']['numFound'] > 0) {
           return response['response']['docs'][0]['views'];
@@ -346,11 +383,11 @@ export class AppService {
   getSiblings(pid: string): Observable<any> {
     let url = this.state.config['context'] + 'search/journal/select';
     let params = new HttpParams()
-    .set('q', 'pid:"' + pid + '"')
-    .set('wt', 'json')
-    .set('fl', 'parents');
+      .set('q', 'pid:"' + pid + '"')
+      .set('wt', 'json')
+      .set('fl', 'parents');
 
-    return this.http.get(url, { params: params })
+    return this.http.get(url, {params: params})
       .map((response) => {
         let parent = response['response']['docs'][0]['parents'][0];
         return this.getChildren(parent).subscribe();
@@ -368,83 +405,71 @@ export class AppService {
   getUploadedFiles(): Observable<any> {
     var url = 'lf?action=LIST';
 
-    return this.http.get(url).catch(error => { return Observable.of('error gettting content: ' + error); });
+    return this.http.get(url).catch(error => {return Observable.of('error gettting content: ' + error);});
   }
 
   getText(id: string): Observable<string> {
-    var url = 'texts?action=LOAD&id=' + id + '&lang=' + this.state.currentLang;
+    var url = 'texts?action=LOAD&id=' + id + '&lang=' + this.state.currentLang + '&ctx=' + this.state.ctx;
 
 
     return this.http.get(url, {responseType: 'text'}).map((response) => {
       return response;
-    }).catch(error => { return Observable.of('error gettting content: ' + error); });
+    }).catch(error => {return Observable.of('error gettting content: ' + error);});
   }
 
   saveText(id: string, text: string, menu: string = null): Observable<string> {
-    
+
     //var url = 'texts?action=SAVE&id=' + id + '&lang=' + this.state.currentLang;
     var url = 'texts';
-    
+
     var params = new HttpParams()
-    .set('user', this.state.loginuser)
-    .set('id', id)
-    .set('action', 'SAVE')
-    .set('lang', this.state.currentLang);
-    
-    if(menu){
+      .set('user', this.state.loginuser)
+      .set('id', id)
+      .set('action', 'SAVE')
+      .set('lang', this.state.currentLang)
+      .set('ctx', this.state.ctx);
+
+    if (menu) {
       params = params.set('menu', menu);
       //url += '&menu=' + menu;
     }
-    
-    let headers = new HttpHeaders({ 'Content-Type': 'text/plain;charset=UTF-8' });
-    const options = { headers: headers };
+
+    let headers = new HttpHeaders({'Content-Type': 'text/plain;charset=UTF-8'});
+    const options = {headers: headers, params: params};
 
     return this.http.post<string>(url, text, options);
-    
-    
-    
 
-//    let headers = new Headers({ 'Content-Type': 'text/plain;charset=UTF-8' });
-//    let options = new RequestOptions({ headers: headers, search: params });
-//
-//      
-//    return this.http.post(url, text, options)
-//      .map((response: Response) => {
-//        return response.json();
-//
-//      }).catch(error => { return Observable.of('error saving content: ' + error); });
 
   }
-  
-  index(uuid: string){
+
+  index(uuid: string) {
     var url = 'index?action=INDEX_DEEP&pid=' + uuid;
 
     return this.http.get(url)
       .map((response: Response) => {
         return response.json();
 
-      }).catch(error => { return Observable.of('error indexing uuid: ' + error); });
+      }).catch(error => {return Observable.of('error indexing uuid: ' + error);});
 
   }
 
   login() {
     this.state.loginError = false;
     return this.doLogin().subscribe(res => {
-        console.log(res);
       if (res.hasOwnProperty('error')) {
         this.state.loginError = true;
         this.state.logged = false;
       } else {
-      
+
         this.state.loginError = false;
         this.state.loginuser = '';
         this.state.loginpwd = '';
         this.state.logged = true;
         if (this.state.redirectUrl) {
-          if (this.state.redirectUrl.startsWith('/k5journals')){
+          if (this.state.redirectUrl.startsWith('/')) {
             this.router.navigate([this.state.redirectUrl]);
           } else {
-            this.router.navigate(['/k5journals', 'journal', this.state.redirectUrl]);
+            this.router.navigate([this.state.ctx ? this.state.ctx : '/journal', this.state.redirectUrl]);
           }
         }
       }
@@ -454,10 +479,10 @@ export class AppService {
   doLogin() {
     var url = 'login'
     var params = new HttpParams()
-    .set('user', this.state.loginuser)
-    .set('pwd', this.state.loginpwd)
-    .set('action', 'LOGIN');
-    return this.http.get(url, { params: params }).map(res => {
+      .set('user', this.state.loginuser)
+      .set('pwd', this.state.loginpwd)
+      .set('action', 'LOGIN');
+    return this.http.get(url, {params: params}).map(res => {
       return res;
     }, error => {
       console.log('error : ' + error);
@@ -480,7 +505,7 @@ export class AppService {
     var url = 'login';
     //console.log(this.loginuser, this.loginpwd, url);
     var params = new HttpParams().set('action', 'LOGOUT');
-    return this.http.get(url, { params: params });
+    return this.http.get(url, {params: params});
 
   }
 

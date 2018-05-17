@@ -53,6 +53,12 @@ export class AdminComponent implements OnInit, OnDestroy {
   coverMsg: string;
 
   ngOnInit() {
+    
+    this.service.getJournals().subscribe();
+    this.subscriptions.push(this.state.configSubject.subscribe(val => {
+        this.fillMenu();
+        this.initTiny();
+      }));
   }
 
   constructor(
@@ -62,11 +68,11 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   ngAfterViewInit() {
     if (this.state.config) {
+      setTimeout(()=>{
+        
+      this.fillMenu();
       this.initTiny();
-    } else {
-      this.subscriptions.push(this.state.configSubject.subscribe(val => {
-        this.initTiny();
-      }));
+      }, 100);
     }
   }
   
@@ -79,14 +85,12 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
   
   setCtx(ctx){
-    
-            this.router.navigate(['k5journals', ctx['name'], 'home']);
+    this.service.getJournalConfig(ctx['name']).subscribe();
+    this.router.navigate([ctx['name'], 'admin']);
   }
 
   initData() {
 
-    this.fillMenu();
-    this.service.getJournals().subscribe();
     this.subscriptions.push(this.service.langSubject.subscribe(val => {
       this.getText();
     }));
@@ -212,6 +216,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   fillMenu() {
+    
+    this.menu = [];
     for (let m in this.state.config['menu']) {
       this.menu.push({ label: m, menu: this.state.config['menu'][m]['submenu'], visible: this.state.config['menu'][m]['visible'] })
       //this.menu = this.state.config['menu'];

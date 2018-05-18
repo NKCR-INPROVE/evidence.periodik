@@ -33,14 +33,14 @@ public class I18n {
 
   public synchronized static void resetInstance() {
     _sharedInstance = null;
-    LOGGER.log(Level.INFO, "Options reseted");
+    LOGGER.log(Level.INFO, "I18n reseted");
   }
 
   public I18n() throws IOException, JSONException {
     locales = new HashMap<>();
-    LOGGER.log(Level.INFO, locales.toString());
+    LOGGER.log(Level.FINE, locales.toString());
   }
-  public void load(String locale) throws IOException, JSONException {
+  public void load(String locale, String ctx) throws IOException, JSONException {
     
     String filename = locale+".json";
 
@@ -51,7 +51,7 @@ public class I18n {
     
     String path = InitServlet.CONFIG_DIR + File.separator + "i18n/"+ filename;
     
-    //Merge file defined in custom dir
+    //Merge default file defined in custom dir
     File f = new File(path);
     if (f.exists() && f.canRead()) {
       json = FileUtils.readFileToString(f, "UTF-8");
@@ -62,18 +62,32 @@ public class I18n {
         LOGGER.log(Level.FINE, "key {0} will be overrided", key);
         def.put(key, customClientConf.get(key));
       }
-      
     }
     
-    locales.put(locale, def);
+    //Merge file defined in custom dir for ctx
+    if(ctx != null){
+      File fctx = new File(path);
+      if (fctx.exists() && fctx.canRead()) {
+        json = FileUtils.readFileToString(fctx, "UTF-8");
+        JSONObject customClientConf = new JSONObject(json);
+        Iterator keys = customClientConf.keys();
+        while (keys.hasNext()) {
+          String key = (String) keys.next();
+          LOGGER.log(Level.FINE, "key {0} will be overrided", key);
+          def.put(key, customClientConf.get(key));
+        }
+      }
+    }
+    
+    locales.put(ctx+"_"+locale, def);
 
   }
 
-  public JSONObject getLocale(String locale) throws IOException {
-    if(!locales.containsKey(locale)){
-      load(locale);
+  public JSONObject getLocale(String locale, String ctx) throws IOException {
+    if(!locales.containsKey(ctx+"_"+locale)){
+      load(locale, ctx);
     }
-    return locales.get(locale);
+    return locales.get(ctx+"_"+locale);
   }
 
 }

@@ -78,7 +78,7 @@ public class TextsServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         String lang = request.getParameter("lang");
-          String ctx = request.getParameter("ctx");
+        String ctx = request.getParameter("ctx");
         String filename = InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "texts"
                 + File.separator + request.getParameter("id");
         File f;
@@ -151,13 +151,28 @@ public class TextsServlet extends HttpServlet {
         JSONObject json = new JSONObject();
 
         String cfg = request.getParameter("cfg");
+        String journals = request.getParameter("journals");
+        String ctx = request.getParameter("ctx");
 
         String fnmenu = InitServlet.CONFIG_DIR + File.separator + "journals.json";
-        File fmenu = new File(fnmenu);
-        FileUtils.writeStringToFile(fmenu, cfg, Charset.forName("UTF-8"));
+        File f = new File(fnmenu);
+        FileUtils.writeStringToFile(f, journals, Charset.forName("UTF-8"));
+        
+        File fctx = new File(InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "config.json");
+        FileUtils.writeStringToFile(fctx, cfg, Charset.forName("UTF-8"));
 
-        LOGGER.log(Level.INFO, json.toString());
         out.println(json.toString(2));
+      }
+    },
+    GET_JOURNALS {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("application/json;charset=UTF-8");
+
+        String fnmenu = InitServlet.CONFIG_DIR + File.separator + "journals.json";
+        File f = new File(fnmenu);
+        FileUtils.copyFile(f, response.getOutputStream());
       }
     },
     GET_CONFIG {
@@ -176,7 +191,7 @@ public class TextsServlet extends HttpServlet {
         
         if (f.exists() && f.canRead()) {
           String json = FileUtils.readFileToString(f, "UTF-8");
-          JSONObject customClientConf = new JSONObject(json).getJSONObject("client");
+          JSONObject customClientConf = new JSONObject(json);
           Iterator keys = customClientConf.keys();
           while (keys.hasNext()) {
             String key = (String) keys.next();

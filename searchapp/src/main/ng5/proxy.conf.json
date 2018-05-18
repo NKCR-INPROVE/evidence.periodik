@@ -1,10 +1,10 @@
 {
-  "/search/**": {
+  "/k5journals/search/**": {
     "target": "http://localhost:8983/solr/",
     "ignorePath": false,
     "logLevel": "debug",
     "pathRewrite": {
-      "^/search":""
+      "^/k5journals/search":""
     },
     "changeOrigin": false,
     "secure": false
@@ -19,19 +19,28 @@
     "changeOrigin": false,
     "secure": false
   },
-  "/img": {
+  "/k5journals/img": {
     "target": "http://localhost:8082/k5journals/img",
     "target0": "https://kramerius.lib.cas.cz/search/img",
     "target1": "http://cdk.lib.cas.cz/search/api/v5.0",
     "target2": "http://kramerius.lib.cas.cz/search/api/v5.0",
     "pathRewrite": {
-      "^/img":""
+      "^/k5journals/img":""
     },
     "logLevel": "debug",
     "changeOrigin": true,
     "secure": false
   },
   "/texts": {
+    "target": "http://localhost:8082/k5journals/texts",
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/texts":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  },
+  "/k5journals/texts": {
     "target": "http://localhost:8082/k5journals/texts",
     "logLevel": "debug",
     "pathRewrite": {

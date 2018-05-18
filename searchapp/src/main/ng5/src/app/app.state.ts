@@ -25,7 +25,7 @@ export class AppState {
   //Holds client configuration
   config: any;
   ctx: string;
-  ctxs: {"ctx": string, "color": string, "uuid":string}[];
+  ctxs: string[];
   
   loginuser: string;
   loginpwd: string;
@@ -49,7 +49,7 @@ export class AppState {
     
   ];
   currentSort: any = this.sorts[0];
-  currentLang : string;
+  currentLang : string = 'cs';
   
   public docs;
   
@@ -114,14 +114,17 @@ export class AppState {
   setConfig(cfg){
     this.config = cfg;
     
-      this.rows = cfg['searchParams']['rows'];
-      this.sorts = cfg['sorts'];
-      this.currentSort = cfg[0];
+    this.rows = cfg['searchParams']['rows'];
+    this.sorts = cfg['sorts'];
+    this.currentSort = cfg[0];
     this.krameriusUrl = this.config['k5'] + this.config['journal'];
     
     this.imgSrc = this.config['context'] + 'img?obalka=true&ctx='+this.ctx+'&uuid=' + this.config['journal'] + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
+      
     this._configSubject.next(cfg);
   }
+  
+  
   
   //params
   paramsChanged(){    

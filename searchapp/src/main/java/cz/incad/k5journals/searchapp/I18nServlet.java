@@ -60,7 +60,7 @@ public class I18nServlet extends HttpServlet {
       String locale = url.substring(url.lastIndexOf("/")).substring(1, 3);
       LOGGER.log(Level.INFO, "locale is {0}", locale);
       I18n.resetInstance();
-      JSONObject js = I18n.getInstance().getLocale(locale);
+      JSONObject js = I18n.getInstance().getLocale(locale, request.getParameter("ctx"));
       
       out.print(js.toString());
     } catch (IOException ex) {

@@ -41,6 +41,10 @@ export class AppService {
     return this.http.get("texts?action=GET_CONFIG&ctx=" + ctx).map(res => {
       this.state.setConfig(res);
       this.switchStyle();
+      this.findActual();
+      this.getKeywords();
+      this.getGenres();
+      this.state.stateChanged();
     });
   }
   
@@ -82,9 +86,21 @@ export class AppService {
   }
 
   getJournals() {
-    return this.http.get("journals").map(res => {
+    return this.http.get("journals?action=GET_JOURNALS").map(res => {
       this.state.ctxs = res["journals"];
     });
+  }
+
+  saveJournals() {
+    let cfg = {
+      "journal": this.state.config['journal'],
+      "color":this.state.config['color']
+    }
+    let params = new HttpParams()
+      .set('journals', JSON.stringify(this.state.ctxs))
+      .set('cfg', JSON.stringify(cfg))
+      .set('ctx', this.state.ctx);
+    return this.http.get("journals?action=SAVE_JOURNALS", {params: params});
   }
 
   searchFired(criteria: Criterium[]) {
@@ -518,6 +534,91 @@ export class AppService {
       }
     }
     return false;
+  }
+  
+  
+  pidActual: string;
+  findActual(){
+    this.pidActual = null;
+    this.findActualByPid(this.state.config['journal']);
+  }
+  
+  findActualByPid(pid: string){
+    this.getChildren(pid).subscribe(res => {
+      if(res.length === 0){
+        this.pidActual = null;
+        console.log('ERROR. Cannot find actual number');
+      } else if(res[0]['datanode']){
+        this.pidActual = pid;
+        this.getJournal(pid).subscribe(a => {
+          this.state.setActual(a);
+          this.getArticles(this.state.actualNumber['pid']).subscribe(res => {
+            this.state.actualNumber.setArticles(res, this.state.config['mergeGenres']);
+            //this.service.getMods(this.state.actualNumber['pid']).subscribe(mods => this.state.actualNumber.mods = mods);
+            this.state.stateChanged();
+          });
+        });
+      } else {
+        this.findActualByPid(res[0]['pid']);
+      }
+    });
+  }
+  
+  getKeywords(){
+    var params = new HttpParams()
+    .set('q', '*:*')
+    .set('rows', '0')
+    .set('facet', 'true')
+    .set('facet.field', 'keywords_facet')
+    .set('facet.mincount', '1')
+    .set('facet.limit', '-1')
+    .set('facet.sort', 'index');
+      this.search.search(params).subscribe(res => {
+        this.state.keywords= [];
+        
+        for(let i in res['facet_counts']['facet_fields']['keywords_facet']){
+          let val: string = res['facet_counts']['facet_fields']['keywords_facet'][i][0];
+          if(val && val !== ''){
+            let val_lower: string = val.toLocaleLowerCase(); 
+            this.state.keywords.push({val: val, val_lower: val_lower});
+          }
+        }
+        
+        this.state.keywords.sort((a, b) => {
+          return a.val_lower.localeCompare(b.val_lower, 'cs');
+        });
+
+      });
+  }
+  
+  getGenres() {
+      //Rok jako stats
+      var params = new HttpParams()
+      .set('q', '*:*')
+      .set('fq', '-genre:""')
+      .set('fq', 'model:article')
+      .set('rows', '0')
+      .set('facet', 'true')
+      .set('facet.field', 'genre')
+      .set('facet.mincount', '1')
+      .set('facet.sort', 'index');
+      this.search.search(params).subscribe(res => {
+
+        this.state.genres= [];
+        for(let i in res['facet_counts']['facet_fields']['genre']){
+          let genre = res['facet_counts']['facet_fields']['genre'][i][0];
+          if(!this.isHiddenByGenre([genre])){
+            //this.state.genres.push(genre);
+            let tr: string = this.translateKey('genre.' + genre);
+            this.state.genres.push({val: genre, tr: tr});
+          }
+        }
+        this.state.genres.sort((a, b) => {
+          return a.tr.localeCompare(b.tr, 'cs');
+        });
+
+      });
+    
   }
 
 

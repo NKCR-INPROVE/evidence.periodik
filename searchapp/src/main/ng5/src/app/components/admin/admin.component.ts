@@ -51,6 +51,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   indexUUID: string;
   indexed: boolean = false;
   coverMsg: string;
+  
+  newctx: string = '';
 
   ngOnInit() {
     
@@ -77,7 +79,10 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
   
   addJournal(){
-    
+    if(this.newctx !== ''){
+      this.state.ctxs.push(this.newctx);
+      this.newctx = '';
+    }
   }
   
   saveJournals(){
@@ -85,8 +90,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
   
   setCtx(ctx){
-    this.service.getJournalConfig(ctx['name']).subscribe();
-    this.router.navigate([ctx['name'], 'admin']);
+    this.service.getJournalConfig(ctx).subscribe();
+    this.router.navigate([ctx, 'admin']);
   }
 
   initData() {

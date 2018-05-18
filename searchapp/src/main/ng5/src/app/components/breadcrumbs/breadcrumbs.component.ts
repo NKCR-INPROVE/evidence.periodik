@@ -30,6 +30,8 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.state.stateChangedSubject.subscribe(
       () => {
+        let url = this.router.url.substring(1);
+        this.setPage(url);
         this.setCrumbs();
       }
     ));
@@ -37,14 +39,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
         let url = val.urlAfterRedirects.substring(1);
-        this.page = url.split(";")[0];
-        //page is /k5journals/journal/dalsi/veci
-        this.page = this.page.split("/").slice(1).join("/");
-        if (url.split(";").length > 1){
-          this.params = url.split(";")[1];
-        } else {
-          this.params = '';
-        }
+        this.setPage(url);
         this.setCrumbs();
       }
     }));
@@ -55,6 +50,17 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
       s.unsubscribe();
     });
     this.subscriptions = [];
+  }
+  
+  setPage(url: string){
+    this.page = url.split(";")[0];
+    //page is /k5journals/journal/dalsi/veci
+    this.page = this.page.split("/").slice(1).join("/");
+    if (url.split(";").length > 1){
+      this.params = url.split(";")[1];
+    } else {
+      this.params = '';
+    }
   }
   
   setCrumbs(){

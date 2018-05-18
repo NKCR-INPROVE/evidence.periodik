@@ -3,12 +3,33 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <h3>Admin page</h3>
-        <hr />
         <div class="row">
         <h5>Journals</h5>
-        <span *ngFor="let ctx of state.ctxs" ><a (click)="setCtx(ctx)" [class.active]="ctx.name === state.ctx">{{ctx.name}}</a>  | </span>
-        <button (click)="addJournal()">add</button> <button (click)="saveJournals()">save</button>
+        <span *ngFor="let ctx of state.ctxs" ><a (click)="setCtx(ctx)" [class.active]="ctx === state.ctx">{{ctx}}</a>  | </span>
+        <input [(ngModel)]="newctx"/><button (click)="addJournal()">add</button> <button (click)="saveJournals()">save</button>
+        </div>
+        <hr />
+        <div class="row">
+        <div class="form-inline pull-left">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="indexUUID"  name="indexUUID" placeholder="uuid" [(ngModel)]="indexUUID">
+                </div>
+                  <button type="button" class="btn app-btn app-btn-default" (click)="index()">{{'Pridat uuid' | translate}}</button>
+                  &nbsp;&nbsp;&nbsp;
+                <div class="form-group">
+                  <input type="file"  ng2FileSelect [uploader]="coverUploader">
+                </div>
+                  <button type="button" class="btn app-btn app-btn-default" (click)="uploadCover()">{{'nahrát obrázek' | translate}}</button>
+                {{coverMsg}}
+                
+                <div class="form-group">
+                Color: <input [(ngModel)]="state.config.color" id="color"  name="color" />
+                </div>
+              </div>
+              <div *ngIf="indexed" class="alert alert-success" role="alert">
+                {{indexUUID}} {{'text.indexed-note' | translate}}!
+              </div>
+        
         </div>
         <hr />
         <div class="row">
@@ -42,25 +63,7 @@
             </div>
             <form class="clearfix">
               <textarea class="form-control" rows="28" [id]="elementId"></textarea>
-              <div class="form-inline pull-left">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="indexUUID"  name="indexUUID" placeholder="uuid" [(ngModel)]="indexUUID">
-                </div>
-                  <button type="button" class="btn app-btn app-btn-default" (click)="index()">{{'Pridat uuid' | translate}}</button>
-                  &nbsp;&nbsp;&nbsp;
-                <div class="form-group">
-                  <input type="file"  ng2FileSelect [uploader]="coverUploader">
-                </div>
-                  <button type="button" class="btn app-btn app-btn-default" (click)="uploadCover()">{{'nahrát obrázek' | translate}}</button>
-                {{coverMsg}}
-                
-                <div class="form-group">
-                Color: <input [(ngModel)]="state.config.color" />
-                </div>
-              </div>
-              <div *ngIf="indexed" class="alert alert-success" role="alert">
-                {{indexUUID}} {{'text.indexed-note' | translate}}!
-              </div>
+              
             </form><!--/.clearfix -->
           </div><!--/.col -->
         </div><!--/.row -->

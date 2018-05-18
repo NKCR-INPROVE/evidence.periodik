@@ -5,7 +5,8 @@ html {
 }
 
 body, 
-app-root {
+app-root,
+app-contexts {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -262,4 +263,8 @@ h4+hr {
   .app-wrapper {
     padding: 5px 0;
   }
+}
+
+.ng2-pdf-viewer-container{
+  overflow:initial !important;
 }

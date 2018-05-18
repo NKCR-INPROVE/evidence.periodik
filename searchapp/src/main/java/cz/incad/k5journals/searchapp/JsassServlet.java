@@ -9,6 +9,7 @@ import io.bit3.jsass.CompilationException;
 import io.bit3.jsass.Compiler;
 import io.bit3.jsass.Output;
 import io.bit3.jsass.importer.Import;
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -62,24 +64,35 @@ public class JsassServlet extends HttpServlet {
    */
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    deliverScss(request, response);
+    
+      response.setContentType("text/css;charset=UTF-8");
+      
+    String color = request.getParameter("color");
+    if (color == null || "".equals(color)) {
+      color = "AFAB25";
+    }
+
+    String cachedFilePath = InitServlet.CONFIG_DIR + File.separator + "cached_css" + File.separator + color + ".css";
+    File cachedFile = new File(cachedFilePath);
+    if (cachedFile.exists()) {
+      FileUtils.copyFile(cachedFile, response.getOutputStream());
+    } else {
+      String css = deliverScss(request, response, color);
+      FileUtils.write(cachedFile, css);
+      response.getWriter().write(css);
+    }
   }
 
-  private boolean deliverScss(
+  private String deliverScss(
           final HttpServletRequest request,
-          final HttpServletResponse response
+          final HttpServletResponse response,
+          String color
   ) throws ServletException, IOException {
     try {
-      final String scssPath = "_app.scss";
-      
-      
-      String color = request.getParameter("color");
-      if(color == null){
-        color = "AFAB25";
-      }
 
-      String brand = "$brand: #"+color+" !default; ";
+      final String scssPath = "_app.scss";
+
+      String brand = "$brand: #" + color + " !default; ";
 //      jsassOptions.getIncludePaths().add(new File("bower_components/foundation/scss");
 
       final URL scssResource = getServletContext().getResource(scssPath);
@@ -105,12 +118,11 @@ public class JsassServlet extends HttpServlet {
 //                jsassOptions
 //        );
 
-        response.setContentType("text/css");
-        response.getWriter().write(output.getCss());
-        return true;
+
+        return output.getCss();
       }
 
-      return false;
+      return null;
     } catch (CompilationException | MalformedURLException | URISyntaxException e) {
       throw new ServletException(e);
     }
@@ -126,8 +138,8 @@ public class JsassServlet extends HttpServlet {
    */
   private Collection<Import> doImport(String url, Import previous) {
     try {
-      LOGGER.info("importing " + url);
-      LOGGER.info("previous.getAbsoluteUri() " + previous.getAbsoluteUri().getPath());
+      //LOGGER.info("importing " + url);
+      //LOGGER.info("previous.getAbsoluteUri() " + previous.getAbsoluteUri().getPath());
       //LOGGER.info("previous getImportUri  " + previous.getImportUri());
 
       if (url.startsWith("/")) {
@@ -145,43 +157,26 @@ public class JsassServlet extends HttpServlet {
         return resolveImport(Paths.get("/").resolve(url));
       } else {
         final String previousPath = previous.getAbsoluteUri().getPath().substring(1);
-        LOGGER.info("previousPath " + previousPath.toString());
+        //LOGGER.info("previousPath " + previousPath.toString());
         try {
           LOGGER.info("resolve " + Paths.get(previousPath).toString());
         } catch (InvalidPathException ee) {
           LOGGER.log(Level.SEVERE, null, ee);
         }
         final Path previousParentPath = Paths.get(previousPath).getParent();
-        LOGGER.info("previousParentPath " + previousParentPath);
+        //LOGGER.info("previousParentPath " + previousParentPath);
         final Path resolved = previousParentPath.resolve(url);
-        LOGGER.info("1111 " + resolved);
+        //LOGGER.info("1111 " + resolved);
 
         Path kk = Paths.get("/").resolve(
                 Paths.get(getServletContext().getResource("/").toURI()).relativize(resolved));
 
-        LOGGER.info("3333 " + kk);
-        //LOGGER.info("2222 " + kk.relativize(resolved));
+        //LOGGER.info("3333 " + kk);
         //return resolveImport(previousParentPath.resolve(url));
         return resolveImport(kk);
         //importPaths.add(previousParentPath);
       }
 
-      // (b) within /WEB-INF/assets/foundation
-//      importPaths.add(Paths.get("/WEB-INF/assets/foundation"));
-//
-//      // (c) within /WEB-INF/assets/motion-ui
-//      importPaths.add(Paths.get("/WEB-INF/assets/motion-ui"));
-//      for (Path importPath : importPaths) {
-//        LOGGER.info("importPath " + importPath);
-//        Path target = importPath.resolve(url);
-//
-//        Collection<Import> imports = resolveImport(target);
-//        if (null != imports) {
-//          return imports;
-//        }
-//      }
-      // file not found
-//      throw new FileNotFoundException(url);
     } catch (URISyntaxException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -195,7 +190,7 @@ public class JsassServlet extends HttpServlet {
    */
   private Collection<Import> resolveImport(Path path) throws IOException, URISyntaxException {
     URL resource = resolveResource(path);
-    LOGGER.info("resource: " + resource.toString());
+    //LOGGER.info("resource: " + resource.toString());
     if (null == resource) {
       return null;
     }
@@ -204,10 +199,9 @@ public class JsassServlet extends HttpServlet {
     String kk = Paths.get("/").resolve(
             Paths.get(getServletContext().getResource("/").toURI()).relativize(Paths.get(resource.toURI()))
     ).toString();
-    LOGGER.info("kk: " + kk);
 //    final URI uri = new URI(kk);
     final URI uri = resource.toURI();
-    LOGGER.info("uri: " + uri.toString());
+    //LOGGER.info("uri: " + uri.toString());
     final String source = IOUtils.toString(resource, StandardCharsets.UTF_8);
 
 //LOGGER.info("source: " + source.toString());
@@ -243,11 +237,11 @@ public class JsassServlet extends HttpServlet {
     for (String prefix : new String[]{"_", ""}) {
       for (String suffix : new String[]{".scss", ".css", ""}) {
         final Path target = dir.resolve(prefix + basename + suffix);
-        LOGGER.info("target: " + target);
+        //LOGGER.info("target: " + target);
         try {
           final URL resource = getServletContext().getResource(target.toString());
 
-          LOGGER.info("resource: " + resource.toString());
+          //LOGGER.info("resource: " + resource.toString());
           if (null != resource) {
             return resource;
           }

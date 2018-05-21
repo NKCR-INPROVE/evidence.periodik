@@ -13,6 +13,9 @@
     "Rok": "Rok",
     "ročník": "ročník",
     "číslo": "číslo",
+  "journal_uuid":"Root uuid titulu",
+  "showTitleLabel":"Ukázat slovo 'ČASOPIS'",
+  "Color": "Barva",
     "home": "Hlavní stránka",
     "home_news": "Aktuálně",
     "menu": {

@@ -126,86 +126,7 @@ export class AdminComponent implements OnInit, OnDestroy {
           }
         });
       },
-      /*
-      file_picker_types: 'file image media',
-
-      file_picker_callback: function(cb, value, meta) {
-        console.log(cb, value, meta);
-        that.browseFiles();
-      },
-      file_browser_callback: function(field_name, url, type, win) {
-        that.win = win;
-        that.field_name = field_name;
-        console.log(win);
-        that.browseFiles();
-        //win.document.getElementById(field_name).value = 'my browser value';
-      },
       
-      images_upload_handler: function (blobInfo, success, failure) {
-        console.log(blobInfo);
-        var xhr: XMLHttpRequest;
-        var formData;
-        xhr = new XMLHttpRequest();
-        xhr.withCredentials = false;
-        xhr.open('POST', 'lf?action=UPLOAD&id=' + that.selected);
-        xhr.onload = function() {
-          var json;
-
-          if (xhr.status != 200) {
-            failure('HTTP Error: ' + xhr.status);
-            return;
-          }
-          json = JSON.parse(xhr.responseText);
-
-          if (!json || typeof json.location != 'string') {
-            failure('Invalid JSON: ' + xhr.responseText);
-            return;
-          }
-          success(json.location);
-        };
-        formData = new FormData();
-        console.log(blobInfo.filename(), blobInfo.name());
-        formData.append('file', blobInfo.blob(), blobInfo.filename());
-        xhr.send(formData);
-      },
-
-      file_picker_callback: function(cb, value, meta) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('name', 'file');
-        //input.setAttribute('accept', 'image/*');
-
-        // Note: In modern browsers input[type="file"] is functional without 
-        // even adding it to the DOM, but that might not be the case in some older
-        // or quirky browsers like IE, so you might want to add it to the DOM
-        // just in case, and visually hide it. And do not forget do remove it
-        // once you do not need it anymore.
-
-        input.onchange = function() {
-          var file = this['files'][0];
-
-          var reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = function() {
-            // Note: Now we need to register the blob in TinyMCEs image blob
-            // registry. In the next release this part hopefully won't be
-            // necessary, as we are looking to handle it internally.
-            var id = 'blobid' + (new Date()).getTime();
-            var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-            var base64 = reader.result.split(',')[1];
-            var blobInfo = blobCache.create(id, file, base64);
-            blobCache.add(blobInfo);
-
-            // call the callback and populate the Title field with the file name
-            console.log(cb);
-            cb(blobInfo.blobUri(), { title: file.name });
-          };
-        };
-
-        input.click();
-      },
-
-*/
       save_oncancelcallback: function() { console.log('Save canceled'); },
       save_onsavecallback: () => this.save()
     });
@@ -252,10 +173,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   save() {
 
     const content = this.editor.getContent();
-    //          console.log(content);
-    //          if(1<2){
-    //            return;
-    //          }
     let m = null;
     if (this.visibleChanged) {
       let menuToSave = {};
@@ -266,7 +183,18 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
     this.service.saveText(this.selected, content, m).subscribe(res => {
       console.log(res);
-      this.saved = !res.hasOwnProperty('error');
+      if(res.hasOwnProperty('error')){
+        this.saved = !res.hasOwnProperty('error');
+      } else {
+        this.service.saveJournalConfig().subscribe(res2 => { 
+          console.log(res2);
+          this.saved = !res2.hasOwnProperty('error');
+            if(!res2.hasOwnProperty('error')){
+              this.service.getJournalConfig(this.state.ctx).subscribe();
+              this.service.switchStyle();
+            }
+        });
+      }
     });
   }
 

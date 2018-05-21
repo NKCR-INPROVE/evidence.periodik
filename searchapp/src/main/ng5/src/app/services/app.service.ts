@@ -51,8 +51,11 @@ export class AppService {
   findStyle(theme) {
     var links = document.getElementsByTagName('link');
     for (var i = 0; i < links.length; i++) {
-      if ((links[i].rel.indexOf('stylesheet') != -1) && links[i].title === theme) {
-        return true;
+      var link = links[i];
+      if (link.rel.indexOf('stylesheet') != -1 && link.title) {
+        if (link.title === theme) {
+          return true;
+        } 
       }
     }
     return false;
@@ -60,7 +63,22 @@ export class AppService {
 
   switchStyle() {
     //let link = this.findStyle(theme);
-    let exists: boolean = false;
+    let exists: boolean = this.findStyle(this.state.ctx);
+    if (!exists) {
+      let link = document.createElement('link');
+      link.href = 'theme?ctx=' + this.state.ctx + '&color=' + this.state.config['color'] ; // insert url in between quotes
+      link.rel = 'stylesheet';
+      link.id = 'css-theme-' + this.state.ctx;
+      link.title = this.state.ctx;
+      link.disabled = false;
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+    
+//    let css = document.getElementsByTagName('head')[0].getElementsByTagName('style');
+//    for (var i = 0; i < css.length; i++) {
+//      css[i].disabled = true;
+//    }
+    
     var links = document.getElementsByTagName('link');
     for (var i = 0; i < links.length; i++) {
       var link = links[i];
@@ -73,16 +91,6 @@ export class AppService {
         }
       }
     }
-    
-    if (!exists) {
-      let link = document.createElement('link');
-      link.href = 'theme?ctx=' + this.state.ctx + '&color=' + this.state.config['color'] ; // insert url in between quotes
-      link.rel = 'stylesheet';
-      link.id = 'css-theme-' + this.state.ctx;
-      link.title = this.state.ctx;
-      //link.disabled = false;
-      document.getElementsByTagName('head')[0].appendChild(link);
-    }
   }
 
   getJournals() {
@@ -91,16 +99,12 @@ export class AppService {
     });
   }
 
-  saveJournals() {
-    let cfg = {
-      "journal": this.state.config['journal'],
-      "color":this.state.config['color']
-    }
+  saveJournalConfig() {
     let params = new HttpParams()
-      .set('journals', JSON.stringify(this.state.ctxs))
-      .set('cfg', JSON.stringify(cfg))
+      .set('journals', JSON.stringify({"journals":this.state.ctxs}))
+      .set('cfg', JSON.stringify(this.state.config))
       .set('ctx', this.state.ctx);
-    return this.http.get("journals?action=SAVE_JOURNALS", {params: params});
+    return this.http.get("texts?action=SAVE_JOURNALS", {params: params});
   }
 
   searchFired(criteria: Criterium[]) {

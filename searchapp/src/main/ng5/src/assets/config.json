@@ -6,6 +6,8 @@
     "model": "periodicalvolume",
     "sort_field": "datum_end",
     "k5": "https://kramerius.lib.cas.cz/client/index.vm?q=&page=doc#pid=",
+  "showTitleLabel": true,
+  "color": "CCCCCC",
     "searchParams": {
         "rows": 20
     },

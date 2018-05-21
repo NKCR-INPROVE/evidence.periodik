@@ -6,7 +6,21 @@
         <div class="row">
         <h5>Journals</h5>
         <span *ngFor="let ctx of state.ctxs" ><a (click)="setCtx(ctx)" [class.active]="ctx === state.ctx">{{ctx}}</a>  | </span>
-        <input [(ngModel)]="newctx"/><button (click)="addJournal()">add</button> <button (click)="saveJournals()">save</button>
+        <input [(ngModel)]="newctx"/><button (click)="addJournal()">add</button> <button (click)="save()">save</button>
+        </div>
+        <hr />
+        <div class="row">
+        <div class="form-inline pull-left">
+            <div class="form-group">
+            {{'journal_uuid' | translate}}: <input type="text" [(ngModel)]="state.config.journal" id="journal_uuid"  name="journal_uuid" size="50"/>
+            </div>
+            <div class="form-group">
+            {{'Color' | translate}}: <input type="text" [(ngModel)]="state.config.color" id="color"  name="color" [style.background-color]="'#'+state.config.color" />
+            </div>
+            <div class="form-group">
+            {{'showTitleLabel' | translate}}: <input type="checkbox" [(ngModel)]="state.config.showTitleLabel" id="showTitleLabel"  name="showTitleLabel" />
+            </div>
+        </div>
         </div>
         <hr />
         <div class="row">
@@ -22,9 +36,6 @@
                   <button type="button" class="btn app-btn app-btn-default" (click)="uploadCover()">{{'nahrát obrázek' | translate}}</button>
                 {{coverMsg}}
                 
-                <div class="form-group">
-                Color: <input [(ngModel)]="state.config.color" id="color"  name="color" />
-                </div>
               </div>
               <div *ngIf="indexed" class="alert alert-success" role="alert">
                 {{indexUUID}} {{'text.indexed-note' | translate}}!

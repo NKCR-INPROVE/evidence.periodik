@@ -37,15 +37,45 @@ export class AppService {
     private route: ActivatedRoute
   ) {}
 
-  getJournalConfig(ctx: string) {
-    return this.http.get("texts?action=GET_CONFIG&ctx=" + ctx).map(res => {
+  getJournalConfig(ctx: {ctx:string, color: string, journal: string, showTitleLabel: boolean}) {
+    return this.http.get("texts?action=GET_CONFIG&ctx=" + ctx.ctx).map(res => {
+      this.state.ctx = ctx;
       this.state.setConfig(res);
+      console.log(ctx, res);
+      this.state.config['color'] = ctx.color;
+      this.state.config['journal'] = ctx.journal;
+      this.state.config['showTitleLabel'] = ctx.showTitleLabel;
       this.switchStyle();
       this.findActual();
       this.getKeywords();
       this.getGenres();
       this.state.stateChanged();
     });
+  }
+  
+  
+
+  getCtx(ctx: string) {
+    for (var i = 0; i < this.state.ctxs.length; i++) {
+      if(this.state.ctxs[i].ctx === ctx){
+        return this.state.ctxs[i];
+      }
+    }
+    return null;
+  }
+  setStyles() {
+    
+    for (var i = 0; i < this.state.ctxs.length; i++) {
+      if (!this.findStyle(this.state.ctxs[i].ctx)){
+        let link = document.createElement('link');
+        link.href = 'theme?ctx=' + this.state.ctxs[i].ctx + '&color=' + this.state.ctxs[i]['color'] ;
+        link.rel = 'stylesheet';
+        link.id = 'css-theme-' + this.state.ctxs[i].ctx;
+        link.title = this.state.ctxs[i].ctx;
+        link.disabled = true;
+        document.getElementsByTagName('head')[0].appendChild(link);
+      }
+    }
   }
   
   findStyle(theme) {
@@ -63,13 +93,13 @@ export class AppService {
 
   switchStyle() {
     //let link = this.findStyle(theme);
-    let exists: boolean = this.findStyle(this.state.ctx);
+    let exists: boolean = this.findStyle(this.state.ctx.ctx);
     if (!exists) {
       let link = document.createElement('link');
-      link.href = 'theme?ctx=' + this.state.ctx + '&color=' + this.state.config['color'] ; // insert url in between quotes
+      link.href = 'theme?ctx=' + this.state.ctx.ctx + '&color=' + this.state.config['color'] ; // insert url in between quotes
       link.rel = 'stylesheet';
-      link.id = 'css-theme-' + this.state.ctx;
-      link.title = this.state.ctx;
+      link.id = 'css-theme-' + this.state.ctx.ctx;
+      link.title = this.state.ctx.ctx;
       link.disabled = false;
       document.getElementsByTagName('head')[0].appendChild(link);
     }
@@ -83,7 +113,7 @@ export class AppService {
     for (var i = 0; i < links.length; i++) {
       var link = links[i];
       if (link.rel.indexOf('stylesheet') != -1 && link.title) {
-        if (link.title === this.state.ctx) {
+        if (link.title === this.state.ctx.ctx) {
           link.disabled = false;
           exists = true;
         } else {
@@ -94,16 +124,22 @@ export class AppService {
   }
 
   getJournals() {
-    return this.http.get("journals?action=GET_JOURNALS").map(res => {
+    return this.http.get("texts?action=GET_JOURNALS").map(res => {
       this.state.ctxs = res["journals"];
+      
     });
   }
 
   saveJournalConfig() {
+    
+      this.state.config['color'] = this.state.ctx.color;
+      this.state.config['journal'] = this.state.ctx.journal;
+      this.state.config['showTitleLabel'] = this.state.ctx.showTitleLabel;
+      
     let params = new HttpParams()
       .set('journals', JSON.stringify({"journals":this.state.ctxs}))
       .set('cfg', JSON.stringify(this.state.config))
-      .set('ctx', this.state.ctx);
+      .set('ctx', this.state.ctx.ctx);
     return this.http.get("texts?action=SAVE_JOURNALS", {params: params});
   }
 
@@ -429,7 +465,7 @@ export class AppService {
   }
 
   getText(id: string): Observable<string> {
-    var url = 'texts?action=LOAD&id=' + id + '&lang=' + this.state.currentLang + '&ctx=' + this.state.ctx;
+    var url = 'texts?action=LOAD&id=' + id + '&lang=' + this.state.currentLang + '&ctx=' + this.state.ctx.ctx;
 
 
     return this.http.get(url, {responseType: 'text'}).map((response) => {
@@ -447,7 +483,7 @@ export class AppService {
       .set('id', id)
       .set('action', 'SAVE')
       .set('lang', this.state.currentLang)
-      .set('ctx', this.state.ctx);
+      .set('ctx', this.state.ctx.ctx);
 
     if (menu) {
       params = params.set('menu', menu);
@@ -489,7 +525,7 @@ export class AppService {
           if (this.state.redirectUrl.startsWith('/')) {
             this.router.navigate([this.state.redirectUrl]);
           } else {
-            this.router.navigate([this.state.ctx ? this.state.ctx : '/journal', this.state.redirectUrl]);
+            this.router.navigate([this.state.ctx ? this.state.ctx.ctx : '/journal', this.state.redirectUrl]);
           }
         }
       }
@@ -543,6 +579,7 @@ export class AppService {
   
   pidActual: string;
   findActual(){
+    console.log(3);
     this.pidActual = null;
     this.findActualByPid(this.state.config['journal']);
   }
@@ -551,7 +588,7 @@ export class AppService {
     this.getChildren(pid).subscribe(res => {
       if(res.length === 0){
         this.pidActual = null;
-        console.log('ERROR. Cannot find actual number');
+        console.log('ERROR. Cannot find actual number', pid);
       } else if(res[0]['datanode']){
         this.pidActual = pid;
         this.getJournal(pid).subscribe(a => {

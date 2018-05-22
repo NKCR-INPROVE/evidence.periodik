@@ -150,7 +150,7 @@ const k5Routes: Routes = [
     }),
 
     RouterModule.forRoot([
-      {path: '', redirectTo: '/journal/home', pathMatch: 'full'},
+      {path: '', component: ContextsComponent},
       //{path: 'k5journals', redirectTo: 'k5journals/journal', pathMatch: 'full'},
       {
         path: ':ctx', component: ContextsComponent,

@@ -74,6 +74,7 @@ export class AppComponent implements OnInit {
       return this.http.get("assets/config.json").map(res => {
         let cfg = res;
         if(!this.state.config){
+          this.state.ctx = cfg['defCtx'];
           this.state.setConfig(cfg);
         }
         var userLang = navigator.language.split('-')[0]; // use navigator lang if available

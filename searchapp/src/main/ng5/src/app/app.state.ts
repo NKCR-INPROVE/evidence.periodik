@@ -24,8 +24,9 @@ export class AppState {
   
   //Holds client configuration
   config: any;
-  ctx: string;
-  ctxs: string[];
+  ctx: {ctx:string, color: string, journal: string, showTitleLabel: boolean};
+  
+  ctxs: {ctx:string, color: string, journal: string, showTitleLabel: boolean}[];
   
   loginuser: string;
   loginpwd: string;
@@ -119,7 +120,7 @@ export class AppState {
     this.currentSort = cfg[0];
     this.krameriusUrl = this.config['k5'] + this.config['journal'];
     
-    this.imgSrc = this.config['context'] + 'img?obalka=true&ctx='+this.ctx+'&uuid=' + this.config['journal'] + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
+    this.imgSrc = this.config['context'] + 'img?obalka=true&ctx='+this.ctx.ctx+'&uuid=' + this.config['journal'] + '&stream=IMG_THUMB&action=SCALE&scaledWidth=220';
       
     this._configSubject.next(cfg);
   }

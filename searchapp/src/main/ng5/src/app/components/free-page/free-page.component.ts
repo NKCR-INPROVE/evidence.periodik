@@ -29,7 +29,7 @@ export class FreePageComponent implements OnInit {
   ngOnInit() {
     this.setImg();
     let url = this.router.url.substring(1);
-    this.id = url.substring(url.indexOf(this.state.ctx) + + this.state.ctx.length);
+    this.id = url.substring(url.indexOf(this.state.ctx.ctx) + this.state.ctx.ctx.length);
     this.appService.getText(this.id).subscribe(t => this.text = t);
     this.langObserver = this.appService.langSubject.subscribe(
       () => {

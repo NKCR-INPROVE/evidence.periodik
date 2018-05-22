@@ -1,3 +1,16 @@
 {
-  "journals": ["kad","vav"]
+  "journals": [
+    {
+      "ctx": "kad",
+      "journal": "uuid:fc144bf1-8d61-4f4b-80f9-e4a772db32dc",
+      "color": "7D1B35",
+      "showTitleLabel": false
+    },
+    {
+      "ctx": "vav",
+      "journal": "uuid:694b7069-9b46-46a9-8665-2b1ea226172c",
+      "color": "AFAB25",
+      "showTitleLabel": false
+    }
+  ]
 }

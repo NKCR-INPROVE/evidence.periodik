@@ -41,7 +41,6 @@ export class AppService {
     return this.http.get("texts?action=GET_CONFIG&ctx=" + ctx.ctx).map(res => {
       this.state.ctx = ctx;
       this.state.setConfig(res);
-      console.log(ctx, res);
       this.state.config['color'] = ctx.color;
       this.state.config['journal'] = ctx.journal;
       this.state.config['showTitleLabel'] = ctx.showTitleLabel;
@@ -50,6 +49,7 @@ export class AppService {
       this.getKeywords();
       this.getGenres();
       this.state.stateChanged();
+      return res;
     });
   }
   
@@ -126,6 +126,7 @@ export class AppService {
   getJournals() {
     return this.http.get("texts?action=GET_JOURNALS").map(res => {
       this.state.ctxs = res["journals"];
+      this.state.ctx = res["journals"][0];
       
     });
   }
@@ -579,7 +580,6 @@ export class AppService {
   
   pidActual: string;
   findActual(){
-    console.log(3);
     this.pidActual = null;
     this.findActualByPid(this.state.config['journal']);
   }

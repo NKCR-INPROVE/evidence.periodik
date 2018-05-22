@@ -4,8 +4,10 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="row">
-        <h5>Journals</h5>
-        <span *ngFor="let ctx of state.ctxs" ><a (click)="setCtx(ctx)" [class.active]="ctx.ctx === state.ctx">{{ctx.ctx}}</a>  | </span>
+        <h5>Journals ({{state.ctx.ctx}})</h5>
+        <ul class="list-unstyled nav-pills">
+        <li *ngFor="let ctx of state.ctxs" [class.active]="ctx.ctx === state.ctx.ctx" ><a (click)="setCtx(ctx)">{{ctx.ctx}}</a>  | </li>
+        </ul>
         <input [(ngModel)]="newctx"/><button (click)="addJournal()">add</button> <button (click)="save()">save</button>
         </div>
         <hr />

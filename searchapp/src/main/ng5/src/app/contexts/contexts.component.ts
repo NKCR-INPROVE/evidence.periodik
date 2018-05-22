@@ -10,7 +10,7 @@ import {AppService} from 'app/services/app.service';
   styleUrls: ['./contexts.component.scss']
 })
 export class ContextsComponent implements OnInit {
-  
+
   subscription;
 
   constructor(
@@ -22,43 +22,43 @@ export class ContextsComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .switchMap((params: Params) => Observable.of(params['ctx'])).subscribe(ctx => {
-console.log(this.state.config, ctx);
         if (ctx) {
-          
           this.service.getJournals().subscribe(res => {
             this.service.setStyles();
             if (this.state.config) {
-              this.setCtx(this.service.getCtx(ctx), false);
+              this.state.ctx = this.service.getCtx(ctx);
+              this.setCtx(false);
             } else {
               this.subscription = this.state.stateChangedSubject.subscribe(cf => {
-                
-                this.setCtx(this.service.getCtx(ctx), false);
+
+                this.state.ctx = this.service.getCtx(ctx);
+                this.setCtx(false);
                 this.subscription.unsubscribe();
               });
             }
           });
         } else {
           if (this.state.config) {
-            this.setCtx(this.state.config['defCtx'], true);
+            this.setCtx(true);
+            //this.setCtx(this.state.config['defCtx'], true);
           } else {
             this.subscription = this.state.stateChangedSubject.subscribe(cf => {
-              this.setCtx(this.state.config['defCtx'], true);
-    this.subscription.unsubscribe();
+              this.setCtx(true);
+              //this.setCtx(this.state.config['defCtx'], true);
+              this.subscription.unsubscribe();
             });
           }
         }
       });
   }
 
-  setCtx(ctx, navigate: boolean) {
-    console.log(this.state.ctxs, ctx);
-    this.state.ctx = ctx;
+  setCtx(navigate: boolean) {
     this.service.getJournalConfig(this.state.ctx).subscribe(res => {
-      if(navigate){
+      if (navigate) {
         this.router.navigate([this.state.ctx.ctx, 'home']);
       }
     });
   }
-  
+
 
 }

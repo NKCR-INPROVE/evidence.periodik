@@ -56,7 +56,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     
-    this.service.getJournals().subscribe();
+    //this.service.getJournals().subscribe();
     this.subscriptions.push(this.state.configSubject.subscribe(val => {
         this.fillMenu();
         this.initTiny();

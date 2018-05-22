@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import { Subject } from 'rxjs/Subject';
-import { ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationExtras } from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import {Subject} from 'rxjs/Subject';
+import {ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationExtras} from '@angular/router';
 
-import { AppService } from './services/app.service';
-import { SearchService } from './services/search.service';
-import { AppState } from './app.state';
+import {AppService} from './services/app.service';
+import {SearchService} from './services/search.service';
+import {AppState} from './app.state';
 
 
 @Component({
@@ -43,26 +43,15 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
+    this.service.getJournals().subscribe(r => {
+      this.getConfig();
+    });
 
-    this.getConfig().subscribe(
-      cfg => {
-
-        this.state.stateChangedSubject.subscribe(route => { 
-          this.stateChanged(route) ;
-          });
-          
-        this.state.classChangedSubject.subscribe(() => { 
-          this.classChanged() ;
-          });
-
-        this.processUrl();
-      }
-    );
   }
 
   getConfig() {
-    if(this.state.config){
-      
+    if (this.state.config) {
+
       var userLang = navigator.language.split('-')[0]; // use navigator lang if available
       userLang = /(cs|en)/gi.test(userLang) ? userLang : 'cs';
       if (this.state.config.hasOwnProperty('defaultLang')) {
@@ -70,11 +59,23 @@ export class AppComponent implements OnInit {
       }
       this.service.changeLang(userLang);
       this.state.stateChanged();
+      
+      
+          this.state.stateChangedSubject.subscribe(route => {
+            this.stateChanged(route);
+          });
+
+          this.state.classChangedSubject.subscribe(() => {
+            this.classChanged();
+          });
+
+          this.processUrl();
     } else {
-      return this.http.get("assets/config.json").map(res => {
+      return this.service.getJournalConfig(this.state.ctx).subscribe(res => {
+      //return this.http.get("assets/config.json").map(res => {
         let cfg = res;
-        if(!this.state.config){
-          this.state.ctx = cfg['defCtx'];
+        if (!this.state.config) {
+          //this.state.ctx = cfg['defCtx'];
           this.state.setConfig(cfg);
         }
         var userLang = navigator.language.split('-')[0]; // use navigator lang if available
@@ -84,16 +85,26 @@ export class AppComponent implements OnInit {
         }
         this.service.changeLang(userLang);
 
-  //      this.service.findActual();
-  //      this.service.getKeywords();
-  //      this.service.getGenres();
+        //      this.service.findActual();
+        //      this.service.getKeywords();
+        //      this.service.getGenres();
 
         this.state.stateChanged();
+        
+          this.state.stateChangedSubject.subscribe(route => {
+            this.stateChanged(route);
+          });
+
+          this.state.classChangedSubject.subscribe(() => {
+            this.classChanged();
+          });
+
+          this.processUrl();
         return this.state.config;
       });
     }
   }
-  
+
   processUrl() {
     //this.searchService.getActual();
     this.setMainClass(this.router.url);
@@ -106,10 +117,10 @@ export class AppComponent implements OnInit {
         this.state.clear();
       }
     });
-    
-//    this.route..subscribe(data => {
-//      console.log(this.route.outlet);
-//    });
+
+    //    this.route..subscribe(data => {
+    //      console.log(this.route.outlet);
+    //    });
 
     this.paramsObserver = this.route.queryParams.subscribe(searchParams => {
       this.processUrlParams(searchParams);
@@ -120,7 +131,7 @@ export class AppComponent implements OnInit {
 
   setMainClass(url: string) {
     let p = url.split('/');
-    if (p.length > 2){
+    if (p.length > 2) {
       this.state.route = p[2].split(';')[0];
       this.state.mainClass = this.classes[this.state.route];
       this.mainClass = this.classes[this.state.route];
@@ -137,8 +148,8 @@ export class AppComponent implements OnInit {
   stateChanged(route: string) {
     this.setUrl(route);
   }
-  
-  classChanged(){
+
+  classChanged() {
     this.mainClass = this.state.mainClass;
   }
 

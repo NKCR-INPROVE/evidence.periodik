@@ -80,8 +80,16 @@ export class AdminComponent implements OnInit, OnDestroy {
   
   addJournal(){
     if(this.newctx !== ''){
-      this.state.ctxs.push({ctx: this.newctx, color: "CCCCCC", journal: 'uuid:', showTitleLabel: true});
-      this.newctx = '';
+      
+      this.state.ctxs.push({ctx: this.newctx+'', color: "CCCCCC", journal: 'uuid:', showTitleLabel: true});
+      this.save();
+//      this.service.addJournal({ctx: this.newctx+'', color: "CCCCCC", journal: 'uuid:', showTitleLabel: true}).subscribe(res => {
+//        console.log(this.state.ctxs);
+//        this.newctx = '';
+//      });
+//      this.state.ctxs.push({ctx: this.newctx+'', color: "CCCCCC", journal: 'uuid:', showTitleLabel: true});
+//      console.log(this.state.ctxs);
+//      this.newctx = '';
     }
   }
   
@@ -90,8 +98,11 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
   
   setCtx(ctx: { ctx: string; color: string; journal: string; showTitleLabel: boolean; }){
-    this.service.getJournalConfig(ctx).subscribe();
-    this.router.navigate([ctx['ctx'], 'admin']);
+    this.service.getJournalConfig(ctx).subscribe(res => {
+      this.router.navigate([ctx['ctx'], 'admin']);
+    });
+    
+    
   }
 
   initData() {

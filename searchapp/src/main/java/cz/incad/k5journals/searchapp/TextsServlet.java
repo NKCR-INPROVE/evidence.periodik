@@ -142,6 +142,28 @@ public class TextsServlet extends HttpServlet {
         out.println(json.toString(2));
       }
     },
+    ADD_JOURNAL{
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject json = new JSONObject();
+
+        String cfg = request.getParameter("cfg");
+        String journals = request.getParameter("journals");
+        String ctx = request.getParameter("ctx");
+
+        String fnmenu = InitServlet.CONFIG_DIR + File.separator + "journals.json";
+        File f = new File(fnmenu);
+        FileUtils.writeStringToFile(f, journals, Charset.forName("UTF-8"));
+        
+        File fctx = new File(InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "config.json");
+        FileUtils.writeStringToFile(fctx, cfg, Charset.forName("UTF-8"));
+
+        out.println(json.toString(2));
+      }
+    },
     SAVE_JOURNALS {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {

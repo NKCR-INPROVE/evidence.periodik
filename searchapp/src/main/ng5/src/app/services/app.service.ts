@@ -53,6 +53,22 @@ export class AppService {
     });
   }
   
+  addJournal(ctx: {ctx:string, color: string, journal: string, showTitleLabel: boolean}) {
+    this.state.ctxs.push(ctx);
+    return this.http.get("texts?action=ADD_JOURNAL&ctxs=" + JSON.stringify(this.state.ctxs)).map(res => {
+      this.state.ctx = ctx;
+      this.state.setConfig(res);
+      this.state.config['color'] = ctx.color;
+      this.state.config['journal'] = ctx.journal;
+      this.state.config['showTitleLabel'] = ctx.showTitleLabel;
+      this.switchStyle();
+      this.findActual();
+      this.getKeywords();
+      this.getGenres();
+      this.state.stateChanged();
+      return res;
+    });
+  }
   
 
   getCtx(ctx: string) {

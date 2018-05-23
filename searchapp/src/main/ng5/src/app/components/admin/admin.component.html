@@ -8,7 +8,9 @@
         <ul class="list-unstyled nav-pills">
         <li *ngFor="let ctx of state.ctxs" [class.active]="ctx.ctx === state.ctx.ctx" ><a (click)="setCtx(ctx)">{{ctx.ctx}}</a>  | </li>
         </ul>
-        <input [(ngModel)]="newctx"/><button (click)="addJournal()">add</button> <button (click)="save()">save</button>
+        <input [(ngModel)]="newctx"/> 
+        <button type="button" class="btn app-btn app-btn-default" (click)="addJournal()">add</button> 
+        <button type="button" class="btn app-btn app-btn-default" (click)="save()">save</button>
         </div>
         <hr />
         <div class="row">
@@ -17,7 +19,7 @@
             {{'journal_uuid' | translate}}: <input type="text" [(ngModel)]="state.ctx.journal" id="journal_uuid"  name="journal_uuid" size="50"/>
             </div>
             <div class="form-group">
-            {{'Color' | translate}}: <input type="text" [(ngModel)]="state.ctx.color" id="color"  name="color" [style.background-color]="'#'+state.ctx.color" />
+            {{'Color' | translate}}: <input type="text" [(ngModel)]="state.ctx.color" id="color"  name="color" [style.border-color]="'#'+state.ctx.color" />
             </div>
             <div class="form-group">
             {{'showTitleLabel' | translate}}: <input type="checkbox" [(ngModel)]="state.ctx.showTitleLabel" id="showTitleLabel"  name="showTitleLabel" />

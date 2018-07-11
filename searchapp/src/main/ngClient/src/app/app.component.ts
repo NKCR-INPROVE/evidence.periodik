@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http , URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { Subject } from 'rxjs/Subject';
-import { ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationExtras } from '@angular/router';
+import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
 
 import { AppService } from './services/app.service';
 import { SearchService } from './services/search.service';

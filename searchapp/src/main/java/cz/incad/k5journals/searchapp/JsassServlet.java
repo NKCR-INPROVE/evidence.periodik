@@ -64,9 +64,9 @@ public class JsassServlet extends HttpServlet {
    */
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    
-      response.setContentType("text/css;charset=UTF-8");
-      
+
+    response.setContentType("text/css;charset=UTF-8");
+
     String color = request.getParameter("color");
     if (color == null || "".equals(color)) {
       color = "AFAB25";
@@ -118,7 +118,6 @@ public class JsassServlet extends HttpServlet {
 //                jsassOptions
 //        );
 
-
         return output.getCss();
       }
 
@@ -159,17 +158,17 @@ public class JsassServlet extends HttpServlet {
         final String previousPath = previous.getAbsoluteUri().getPath().substring(1);
         //LOGGER.info("previousPath " + previousPath.toString());
         try {
-          LOGGER.info("resolve " + Paths.get(previousPath).toString());
+          LOGGER.fine("resolve " + Paths.get(previousPath).toString());
         } catch (InvalidPathException ee) {
           LOGGER.log(Level.SEVERE, null, ee);
         }
         final Path previousParentPath = Paths.get(previousPath).getParent();
         //LOGGER.info("previousParentPath " + previousParentPath);
         final Path resolved = previousParentPath.resolve(url);
-        //LOGGER.info("1111 " + resolved);
 
-        Path kk = Paths.get("/").resolve(
-                Paths.get(getServletContext().getResource("/").toURI()).relativize(resolved));
+        Path p1 = Paths.get(getServletContext().getResource("/").toURI()).toAbsolutePath().relativize(resolved.toAbsolutePath());
+        
+        Path kk = Paths.get("/").resolve(p1);
 
         //LOGGER.info("3333 " + kk);
         //return resolveImport(previousParentPath.resolve(url));

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
+        <servlet-name>InitServlet</servlet-name>
+        <servlet-class>cz.incad.k5journals.searchapp.InitServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
         <servlet-name>TextsServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.TextsServlet</servlet-class>
     </servlet>
@@ -15,12 +20,8 @@
     <servlet-mapping>
         <servlet-name>TextsServlet</servlet-name>
         <url-pattern>/texts</url-pattern>
+        <url-pattern>/journals</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>InitServlet</servlet-name>
-        <servlet-class>cz.incad.k5journals.searchapp.InitServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
     <servlet>
         <servlet-name>ImageServlet</servlet-name>
         <servlet-class>cz.incad.k5journals.searchapp.ImgServlet</servlet-class>
@@ -105,31 +106,26 @@
         <servlet-name>LocalFileServlet</servlet-name>
         <url-pattern>/lf</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>/assets/*</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet-mapping>
+        <servlet-name>JsassServlet</servlet-name>
+        <url-pattern>/theme</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>StaticServlet</servlet-name>
         <jsp-file>/index.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>StaticServlet</servlet-name>
-        <url-pattern>/home</url-pattern>
-    </servlet-mapping>
-    <!--
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.js</url-pattern>
-    </servlet-mapping>
-    -->
-    <servlet>
-        <servlet-name>K5journalsServlet</servlet-name>
-        <servlet-class>cz.incad.k5journals.searchapp.K5journalsServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>K5journalsServlet</servlet-name>
-        <url-pattern>/eee</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>JsassServlet</servlet-name>
-        <url-pattern>*.css</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -3,3 +3,5 @@
 /searchapp/src/main/webapp/assets/
 /magazines/src/main/ngClient/nbproject/private/
 /magazines/target/
+/searchapp/src/main/ngClient/package-lock.json
+/searchapp/src/main/ng5/nbproject/private/

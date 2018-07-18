@@ -49,6 +49,14 @@
     "changeOrigin": false,
     "secure": false
   },
+  "/k5journals/assets/**": {
+    "target": "http://localhost:4200/assets",
+    "pathRewrite": {
+      "^/k5journals/assets":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  },
   "/theme": {
     "target": "http://localhost:8080/k5journals/theme",
     "logLevel": "debug",

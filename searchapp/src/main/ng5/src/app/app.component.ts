@@ -43,8 +43,11 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
-    this.service.getJournals().subscribe(r => {
-      this.getConfig();
+    
+    this.service.getJournals().subscribe(res => {
+      this.state.setJournals(res);
+      this.service.setStyles();
+      //this.getConfig();
     });
 
   }

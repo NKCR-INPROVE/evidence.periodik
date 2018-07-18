@@ -1,5 +1,7 @@
+<ng-container *ngIf="hasContext">
 <app-header></app-header>
 <main [class]="state.mainClass" *ngIf="state.config">
   <router-outlet></router-outlet>
 </main><!--/.main -->
 <app-footer></app-footer>
+</ng-container>

@@ -72,7 +72,6 @@ export class AppService {
   
 
   getCtx(ctx: string) {
-    console.log(this.state.ctxs);
     for (var i = 0; i < this.state.ctxs.length; i++) {
       if(this.state.ctxs[i].ctx === ctx){
         return this.state.ctxs[i];
@@ -109,7 +108,6 @@ export class AppService {
   }
 
   switchStyle() {
-    //let link = this.findStyle(theme);
     let exists: boolean = this.findStyle(this.state.ctx.ctx);
     if (!exists) {
       let link = document.createElement('link');
@@ -141,11 +139,7 @@ export class AppService {
   }
 
   getJournals() {
-    return this.http.get("texts?action=GET_JOURNALS").map(res => {
-      this.state.ctxs = res["journals"];
-      this.state.ctx = res["journals"][0];
-      
-    });
+    return this.http.get("texts?action=GET_JOURNALS");
   }
 
   saveJournalConfig() {
@@ -604,6 +598,7 @@ export class AppService {
   findActualByPid(pid: string){
     this.getChildren(pid).subscribe(res => {
       if(res.length === 0){
+        this.state.setActual(null);
         this.pidActual = null;
         console.log('ERROR. Cannot find actual number', pid);
       } else if(res[0]['datanode']){

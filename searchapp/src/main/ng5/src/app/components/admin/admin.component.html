@@ -7,10 +7,10 @@
         <h5>Journals ({{state.ctx.ctx}})</h5>
         <ul class="list-unstyled nav-pills">
         <li *ngFor="let ctx of state.ctxs" [class.active]="ctx.ctx === state.ctx.ctx" ><a (click)="setCtx(ctx)">{{ctx.ctx}}</a>  | </li>
-        </ul>
+        </ul>&#160;&#160;
         <input [(ngModel)]="newctx"/> 
-        <button type="button" class="btn app-btn app-btn-default" (click)="addJournal()">add</button> 
-        <button type="button" class="btn app-btn app-btn-default" (click)="save()">save</button>
+        <button [disabled]="!newctx || newctx === ''" type="button" class="btn app-btn app-btn-default" (click)="addJournal()">add</button> 
+        
         </div>
         <hr />
         <div class="row">
@@ -24,6 +24,7 @@
             <div class="form-group">
             {{'showTitleLabel' | translate}}: <input type="checkbox" [(ngModel)]="state.ctx.showTitleLabel" id="showTitleLabel"  name="showTitleLabel" />
             </div>
+            <button type="button" class="btn app-btn app-btn-default" (click)="save()">save</button>
         </div>
         </div>
         <hr />

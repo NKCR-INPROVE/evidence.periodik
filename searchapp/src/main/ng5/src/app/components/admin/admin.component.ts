@@ -55,8 +55,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   newctx: string = '';
 
   ngOnInit() {
-
-    //this.service.getJournals().subscribe();
     this.subscriptions.push(this.state.configSubject.subscribe(val => {
       this.fillMenu();
       this.initTiny();
@@ -71,7 +69,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   ngAfterViewInit() {
     if (this.state.config) {
       setTimeout(() => {
-
         this.fillMenu();
         this.initTiny();
       }, 100);
@@ -84,28 +81,21 @@ export class AdminComponent implements OnInit, OnDestroy {
       this.state.ctxs.push(newctx);
       this.state.ctx = newctx;
       this.service.saveJournalConfig().subscribe(res => {
-        console.log(this.state.ctxs);
         this.newctx = '';
         this.service.getJournalConfig(newctx).subscribe(res => {
-          this.save();
+          //this.save();
           this.router.navigate([newctx['ctx'], 'admin']);
         });
-            });
-//      console.log(this.state.c      txs);
-//      this.newctx = '';
-
+      });
 
     }
   }
 
-  saveJournals() {
 
-  }
+
 
   setCtx(ctx: {ctx: string; color: string; journal: string; showTitleLabel: boolean;}) {
-    //this.service.getJournalConfig(ctx).subscribe(res => {
-      this.router.navigate([ctx['ctx'], 'admin']);
-    //});
+    this.router.navigate([ctx['ctx'], 'admin']);
   }
 
   initData() {
@@ -201,7 +191,6 @@ export class AdminComponent implements OnInit, OnDestroy {
         this.saved = !res.hasOwnProperty('error');
       } else {
         this.service.saveJournalConfig().subscribe(res2 => {
-          console.log(res2, this.state.ctxs);
           this.saved = !res2.hasOwnProperty('error');
           if (!res2.hasOwnProperty('error')) {
             this.service.getJournalConfig(this.state.ctx).subscribe();

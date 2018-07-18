@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     public service: AppService) { }
 
   ngOnInit() {
+    this.focusu();
   }
 
   focusu(){

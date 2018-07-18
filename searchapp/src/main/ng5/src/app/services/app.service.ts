@@ -72,6 +72,7 @@ export class AppService {
   
 
   getCtx(ctx: string) {
+    console.log(this.state.ctxs);
     for (var i = 0; i < this.state.ctxs.length; i++) {
       if(this.state.ctxs[i].ctx === ctx){
         return this.state.ctxs[i];

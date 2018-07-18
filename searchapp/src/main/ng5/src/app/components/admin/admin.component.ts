@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import {Component, OnInit, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
 
 
-import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import {BsModalService, ModalDirective} from 'ngx-bootstrap/modal';
 //import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-import { FileUploader } from 'ng2-file-upload';
+import {FileUploader} from 'ng2-file-upload';
 
-import { AppService } from '../../services/app.service';
-import { AppState } from '../../app.state';
-import { Router} from '@angular/router';
+import {AppService} from '../../services/app.service';
+import {AppState} from '../../app.state';
+import {Router} from '@angular/router';
 
 
 declare var tinymce: any;
@@ -31,8 +31,8 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  public uploader: FileUploader = new FileUploader({ url: 'lf?action=UPLOAD' });
-  public coverUploader: FileUploader = new FileUploader({ url: 'lf?action=UPLOAD&cover=true' });
+  public uploader: FileUploader = new FileUploader({url: 'lf?action=UPLOAD'});
+  public coverUploader: FileUploader = new FileUploader({url: 'lf?action=UPLOAD&cover=true'});
 
   //public modalRef: BsModalRef;
 
@@ -44,65 +44,68 @@ export class AdminComponent implements OnInit, OnDestroy {
   text: string;
   elementId: string = 'editEl';
   editor;
-  
+
   fileList: string[];
   selectedFile: string;
 
   indexUUID: string;
   indexed: boolean = false;
   coverMsg: string;
-  
+
   newctx: string = '';
 
   ngOnInit() {
-    
+
     //this.service.getJournals().subscribe();
     this.subscriptions.push(this.state.configSubject.subscribe(val => {
-        this.fillMenu();
-        this.initTiny();
-      }));
+      this.fillMenu();
+      this.initTiny();
+    }));
   }
 
   constructor(
     public state: AppState,
     private service: AppService,
-  private router: Router) { }
+    private router: Router) {}
 
   ngAfterViewInit() {
     if (this.state.config) {
-      setTimeout(()=>{
-        
-      this.fillMenu();
-      this.initTiny();
+      setTimeout(() => {
+
+        this.fillMenu();
+        this.initTiny();
       }, 100);
     }
   }
-  
-  addJournal(){
-    if(this.newctx !== ''){
-      
-      this.state.ctxs.push({ctx: this.newctx+'', color: "CCCCCC", journal: 'uuid:', showTitleLabel: true});
-      this.save();
-//      this.service.addJournal({ctx: this.newctx+'', color: "CCCCCC", journal: 'uuid:', showTitleLabel: true}).subscribe(res => {
-//        console.log(this.state.ctxs);
-//        this.newctx = '';
-//      });
-//      this.state.ctxs.push({ctx: this.newctx+'', color: "CCCCCC", journal: 'uuid:', showTitleLabel: true});
-//      console.log(this.state.ctxs);
+
+  addJournal() {
+    if (this.newctx !== '') {
+      let newctx = {ctx: this.newctx + '', color: "CCCCCC", journal: 'uuid:', showTitleLabel: true}
+      this.state.ctxs.push(newctx);
+      this.state.ctx = newctx;
+      this.service.saveJournalConfig().subscribe(res => {
+        console.log(this.state.ctxs);
+        this.newctx = '';
+        this.service.getJournalConfig(newctx).subscribe(res => {
+          this.save();
+          this.router.navigate([newctx['ctx'], 'admin']);
+        });
+            });
+//      console.log(this.state.c      txs);
 //      this.newctx = '';
+
+
     }
   }
-  
-  saveJournals(){
-    
+
+  saveJournals() {
+
   }
-  
-  setCtx(ctx: { ctx: string; color: string; journal: string; showTitleLabel: boolean; }){
-    this.service.getJournalConfig(ctx).subscribe(res => {
+
+  setCtx(ctx: {ctx: string; color: string; journal: string; showTitleLabel: boolean;}) {
+    //this.service.getJournalConfig(ctx).subscribe(res => {
       this.router.navigate([ctx['ctx'], 'admin']);
-    });
-    
-    
+    //});
   }
 
   initData() {
@@ -131,14 +134,14 @@ export class AdminComponent implements OnInit, OnDestroy {
           tooltip: 'Insert link to file',
           icon: 'upload',
           //icon: false,
-          onclick: function() {
+          onclick: function () {
             that.browseFiles();
             //editor.insertContent('&nbsp;<b>It\'s my button!</b>&nbsp;');
           }
         });
       },
-      
-      save_oncancelcallback: function() { console.log('Save canceled'); },
+
+      save_oncancelcallback: function () {console.log('Save canceled');},
       save_onsavecallback: () => this.save()
     });
   }
@@ -153,10 +156,10 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   fillMenu() {
-    
+
     this.menu = [];
     for (let m in this.state.config['menu']) {
-      this.menu.push({ label: m, menu: this.state.config['menu'][m]['submenu'], visible: this.state.config['menu'][m]['visible'] })
+      this.menu.push({label: m, menu: this.state.config['menu'][m]['submenu'], visible: this.state.config['menu'][m]['visible']})
       //this.menu = this.state.config['menu'];
     }
 
@@ -188,22 +191,22 @@ export class AdminComponent implements OnInit, OnDestroy {
     if (this.visibleChanged) {
       let menuToSave = {};
       for (let i = 0; i < this.menu.length; i++) {
-        menuToSave[this.menu[i].label] = {submenu:this.menu[i].menu, visible:this.menu[i].visible};
+        menuToSave[this.menu[i].label] = {submenu: this.menu[i].menu, visible: this.menu[i].visible};
       }
       m = JSON.stringify(menuToSave);
     }
     this.service.saveText(this.selected, content, m).subscribe(res => {
       console.log(res);
-      if(res.hasOwnProperty('error')){
+      if (res.hasOwnProperty('error')) {
         this.saved = !res.hasOwnProperty('error');
       } else {
-        this.service.saveJournalConfig().subscribe(res2 => { 
+        this.service.saveJournalConfig().subscribe(res2 => {
           console.log(res2, this.state.ctxs);
           this.saved = !res2.hasOwnProperty('error');
-            if(!res2.hasOwnProperty('error')){
-              this.service.getJournalConfig(this.state.ctx).subscribe();
-              this.service.switchStyle();
-            }
+          if (!res2.hasOwnProperty('error')) {
+            this.service.getJournalConfig(this.state.ctx).subscribe();
+            this.service.switchStyle();
+          }
         });
       }
     });
@@ -220,38 +223,38 @@ export class AdminComponent implements OnInit, OnDestroy {
       this.indexed = !res.hasOwnProperty('error');
     });
   }
-  
-  uploadFile(){
+
+  uploadFile() {
     this.uploader.uploadAll();
   }
-  
-  uploaded(){
+
+  uploaded() {
     this.service.getUploadedFiles().subscribe(res => {
       this.fileList = res['files'];
     })
   }
 
-  
-  uploadCover(){
+
+  uploadCover() {
     this.coverUploader.uploadAll();
   }
-  
-  coverUploaded(){
+
+  coverUploaded() {
     this.coverMsg = 'ok';
   }
 
-public selectFile(f: string){
+  public selectFile(f: string) {
     this.selectedFile = f;
-  
+
     this.childModal.hide();
     this.editor.insertContent('&nbsp;<a target="_blank" href="lf?action=GET_FILE&filename=' + this.selectedFile + '">' + this.selectedFile + '</a>&nbsp;');
-}
+  }
 
   public browseFiles() {
     this.service.getUploadedFiles().subscribe(res => {
       this.fileList = res['files'];
     })
-    
+
     this.childModal.show();
   }
 

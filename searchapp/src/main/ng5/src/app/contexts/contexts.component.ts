@@ -22,6 +22,7 @@ export class ContextsComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .switchMap((params: Params) => Observable.of(params['ctx'])).subscribe(ctx => {
+        console.log(ctx);
         if (ctx) {
           this.service.getJournals().subscribe(res => {
             this.service.setStyles();
@@ -42,7 +43,7 @@ export class ContextsComponent implements OnInit {
             this.setCtx(true);
             //this.setCtx(this.state.config['defCtx'], true);
           } else {
-            this.subscription = this.state.stateChangedSubject.subscribe(cf => {
+            this.subscription = this.state.configSubject.subscribe(cf => {
               this.setCtx(true);
               //this.setCtx(this.state.config['defCtx'], true);
               this.subscription.unsubscribe();

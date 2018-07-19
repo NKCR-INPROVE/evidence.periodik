@@ -133,7 +133,7 @@ numPages: number = -1;
   findFirstdatanode(pid: string) {
     this.service.getChildren(pid, 'asc').subscribe(res => {
       if (res[0]['datanode']) {
-        this.router.navigate(['/article', res[0]['pid']]);
+        this.router.navigate(['/'+this.state.ctx.ctx+'/article', res[0]['pid']]);
       } else {
         this.findFirstdatanode(res[0]['pid']);
       }
@@ -181,7 +181,7 @@ pageRendered(e: CustomEvent) {
     if (this.hasNext()) {
       let pid = this.journal.siblings[this.siblingIndex + 1]['pid'];
       this.journal = null;
-      this.router.navigate(['/article', pid]);
+      this.router.navigate(['/'+this.state.ctx.ctx+'/article', pid]);
     }
   }
 
@@ -189,7 +189,7 @@ pageRendered(e: CustomEvent) {
     if (this.hasPrev()) {
       let pid = this.journal.siblings[this.siblingIndex - 1]['pid'];
       this.journal = null;
-      this.router.navigate(['/article', pid]);
+      this.router.navigate(['/'+this.state.ctx.ctx+'/article', pid]);
     }
   }
 

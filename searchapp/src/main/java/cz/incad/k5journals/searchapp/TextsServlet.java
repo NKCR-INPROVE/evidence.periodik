@@ -220,6 +220,7 @@ public class TextsServlet extends HttpServlet {
             LOGGER.log(Level.FINE, "key {0} will be overrided", key);
             js.put(key, customClientConf.get(key));
           }
+          
           String fnmenu = InitServlet.CONFIG_DIR + File.separator + ctx + File.separator + "menu.json";
           File fmenu = new File(fnmenu);
           if (fmenu.exists()) {

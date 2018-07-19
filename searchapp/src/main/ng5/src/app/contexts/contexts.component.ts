@@ -27,6 +27,8 @@ export class ContextsComponent implements OnInit {
     'article': 'app-page-archiv-reader',
     'hledat': 'app-page-search'
   };
+  
+  noctx: boolean = false;
 
   constructor(
     public state: AppState,
@@ -38,8 +40,6 @@ export class ContextsComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => Observable.of(params['ctx'])).subscribe(ctx => {
 
-        if (ctx) {
-
           if (this.state.ctxs) {
             this.state.ctx = this.service.getCtx(ctx);
             this.getConfig();
@@ -47,32 +47,18 @@ export class ContextsComponent implements OnInit {
             this.subscription = this.state.journalsInitilized.subscribe(cf => {
               this.state.ctx = this.service.getCtx(ctx);
               this.getConfig();
-              
               this.subscription.unsubscribe();
             });
           }
-
-        } else {
-//          if (this.state.config) {
-//            this.setCtx(true);
-//            //this.setCtx(this.state.config['defCtx'], true);
-//          } else {
-//            this.subscription = this.state.configSubject.subscribe(cf => {
-//              this.setCtx(true);
-//              //this.setCtx(this.state.config['defCtx'], true);
-//              this.subscription.unsubscribe();
-//            });
-//          }
-        }
       });
   }
 
-  setCtx(navigate: boolean) {
-    //this.service.getJournalConfig(this.state.ctx).subscribe(res => {
-      if (navigate) {
+  setCtx(ctx) {
+    this.service.getJournalConfig(ctx).subscribe(res => {
+    
         this.router.navigate([this.state.ctx.ctx, 'home']);
-      }
-    //});
+    
+    });
   }
 
   initApp() {
@@ -82,7 +68,7 @@ export class ContextsComponent implements OnInit {
       userLang = this.state.config['defaultLang'];
     }
     this.service.changeLang(userLang);
-    this.setCtx(false);
+    //this.setCtx(false);
     
     setTimeout(() => {
       this.processUrl();
@@ -93,6 +79,7 @@ export class ContextsComponent implements OnInit {
   }
 
   getConfig() {
+    if (this.state.ctx) {
       return this.service.getJournalConfig(this.state.ctx).subscribe(res => {
         //return this.http.get("assets/config.json").map(res => {
         let cfg = res;
@@ -102,6 +89,9 @@ export class ContextsComponent implements OnInit {
         this.initApp();
         return this.state.config;
       });
+    } else {
+      this.noctx = true;
+    }
     
   }
   

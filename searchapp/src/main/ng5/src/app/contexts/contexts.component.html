@@ -2,6 +2,19 @@
 <app-header></app-header>
 <main [class]="state.mainClass" *ngIf="state.config">
   <router-outlet></router-outlet>
-</main><!--/.main -->
+</main>
+<app-footer></app-footer>
+</ng-container>
+
+<ng-container *ngIf="noctx">
+  
+<main [class]="state.mainClass">
+  <h3>Available journals</h3>
+  <ul>
+  <li *ngFor="let ctx of state.ctxs">
+    <a (click)="setCtx(ctx)">{{ctx.ctx}}</a>
+  </li>
+  </ul>
+</main>
 <app-footer></app-footer>
 </ng-container>

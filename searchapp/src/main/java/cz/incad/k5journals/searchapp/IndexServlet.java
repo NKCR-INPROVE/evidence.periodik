@@ -123,7 +123,8 @@ public class IndexServlet extends HttpServlet {
         try {
 
           Indexer indexer = new Indexer();
-          indexer.indexPid(req.getParameter("pid"), 0);
+          String pid = req.getParameter("pid");
+          indexer.indexPid(pid, indexer.getIdx(pid, false));
           //out.println(indexer.getModsToJson(request.getParameter("pid")).toString(2));
 
         } catch (Exception ex) {

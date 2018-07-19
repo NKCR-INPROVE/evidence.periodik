@@ -77,6 +77,7 @@ public class ConfigServlet extends HttpServlet {
     
     if (f.exists() && f.canRead()) {
       String json = FileUtils.readFileToString(f, "UTF-8");
+      
       JSONObject customClientConf = new JSONObject(json).getJSONObject("client");
       Iterator keys = customClientConf.keys();
       while (keys.hasNext()) {

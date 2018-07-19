@@ -42,10 +42,14 @@
                 {{coverMsg}}
                 
               </div>
-              <div *ngIf="indexed" class="alert alert-success" role="alert">
-                {{indexUUID}} {{'text.indexed-note' | translate}}!
+              <div *ngIf="working" >
+                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Indexing ...
               </div>
-        
+        </div>
+        <div *ngIf="indexed" class="row">
+          <div class="alert alert-success" role="alert">
+            {{indexUUID}} {{'text.indexed-note' | translate}}!
+          </div>
         </div>
         <hr />
         <div class="row">

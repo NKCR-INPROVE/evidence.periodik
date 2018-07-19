@@ -48,6 +48,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   fileList: string[];
   selectedFile: string;
 
+working: boolean = false;
   indexUUID: string;
   indexed: boolean = false;
   coverMsg: string;
@@ -207,9 +208,11 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   index() {
+    this.working = true;
     this.service.index(this.indexUUID).subscribe(res => {
       console.log(res);
       this.indexed = !res.hasOwnProperty('error');
+    this.working = false;
     });
   }
 

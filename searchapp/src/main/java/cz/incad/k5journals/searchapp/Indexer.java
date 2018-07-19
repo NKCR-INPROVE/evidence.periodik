@@ -143,7 +143,7 @@ public class Indexer {
       setGenre(idoc, mods);
       setISSN(idoc, mods);
 
-      if (dates.containsKey(parent)) {
+      if (dates.containsKey(parent) && dates.get(parent) != 0) {
         idoc.addField("year", dates.get(parent));
         dates.put(pid, dates.get(parent));
 
@@ -172,7 +172,7 @@ public class Indexer {
   public JSONObject indexDeep(String pid) {
     response = new JSONObject();
     Date tstart = new Date();
-    int idx = getIdx(pid);
+    int idx = getIdx(pid, true);
     LOGGER.log(Level.INFO, "idx: {0}", idx);
     indexPidAndChildren(pid, idx);
     LOGGER.log(Level.INFO, "index finished. Indexed: {0}", total);
@@ -183,12 +183,36 @@ public class Indexer {
     return response;
   }
 
-  private int getIdx(String pid) {
+  private void indexPathUp(JSONArray ctx){
+    /*
+    [
+      [
+        {"model":"periodical","pid":"uuid:440337bd-5625-11e1-9505-005056a60003"},
+        {"model":"periodicalvolume","pid":"uuid:714c1b42-7b59-4697-9cf0-8fa8c9cc4eae"},
+        {"model":"periodicalitem","pid":"uuid:47476091-fa64-4f0d-b6d8-c3cdb72a75da"}
+      ]
+    ]
+    */
+    for(int i=0; i<ctx.length(); i++){
+      JSONArray ja = ctx.getJSONArray(i);
+      for(int j=0; j<ja.length()-1;j++){
+        String pid = ja.getJSONObject(j).getString("pid");
+        int idx = getIdx(pid, false);
+        indexPid(pid, idx);
+      }
+    }
+  }  
+    
+  public int getIdx(String pid, boolean up) {
     JSONObject item = getItem(pid);
     JSONArray ctx = item.getJSONArray("context");
     if (ctx.length() > 0) {
       JSONArray ja = ctx.getJSONArray(ctx.length() - 1);
       if (ja.length() > 1) {
+        if(up){
+          indexPathUp(ctx);
+        }
+      
         String ppid = ja.getJSONObject(ja.length() - 2).getString("pid");
         JSONArray children = getChildren(ppid);
         for (int i = 0; i < children.length(); i++) {
@@ -627,15 +651,20 @@ public class Indexer {
     JSONObject o = mods.optJSONObject("mods:originInfo");
     if (o != null) {
       int date = o.optInt("mods:dateIssued");
-      dates.put(pid, date);
-      idoc.addField("year", date);
+      if(date > 0){
+        dates.put(pid, date);
+        idoc.addField("year", date);
+      }
     } else {
       //Pokus starych zaznamu
       o = mods.optJSONObject("mods:part");
       if (o != null) {
         int date = o.optInt("mods:date");
-        dates.put(pid, date);
-        idoc.addField("year", date);
+        if(date > 0){
+          dates.put(pid, date);
+          idoc.addField("year", date);
+        }
+      
       }
     }
   }

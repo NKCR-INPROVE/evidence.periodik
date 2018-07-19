@@ -1,0 +1,34 @@
+// --- ROOT STYLE ---
+
+//$brand:         #7D1B35 !default; //hsl(344, 64%, 30%)
+//$brand:         #7D1BAA !default; //hsl(344, 64%, 30%)
+
+@import "assets/sass/app-function";
+@import "assets/sass/brand-config"; // to config app colors
+
+@import "assets/sass/app-variables";
+@import "assets/sass/app-palette";
+@import "assets/sass/app-color";
+@import "assets/sass/app-mixin";
+
+@import "assets/sass/bootstrap";
+@import "assets/sass/nouislider.css";
+
+@import "assets/sass/fontface/roboto-condensed/roboto-condensed-fontface";
+@import "assets/sass/fontface/pt-serif/pt-serif";
+
+@import "assets/sass/app-global";
+@import "assets/sass/app-button";
+@import "assets/sass/app-slider";
+@import "assets/sass/app-title";
+@import "assets/sass/app-navbar";
+@import "assets/sass/app-navtabs";
+@import "assets/sass/app-jumbotron";
+@import "assets/sass/app-content";
+@import "assets/sass/app-sidebar";
+@import "assets/sass/app-footer";
+@import "assets/sass/app-typeahead";
+@import "assets/sass/app-modal";
+@import "assets/sass/app-login";
+@import "assets/sass/app-admin";
+@import "assets/sass/app-mq";

@@ -98,15 +98,19 @@
             <fileset>
               <directory>${project.basedir}/src/main/webapp</directory>
               <includes>
+              <!--
                 <include>*.bundle.css</include>
-                <include>*.bundle.js</include>
+                <include>*.js</include>
                 <include>*.bundle.js.gz</include>
                 <include>*.bundle.map</include>
                 <include>index.html</include>
+              -->
                 <include>assets/*/**</include>
+                <include>*.*</include>
               </includes>
               <excludes>
                 <exclude>index.jsp</exclude>
+                <exclude>_app.scss</exclude>
               </excludes>
               <followSymlinks>false</followSymlinks>
             </fileset>

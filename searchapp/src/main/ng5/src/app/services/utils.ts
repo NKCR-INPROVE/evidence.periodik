@@ -64,14 +64,14 @@ export default class Utils {
   public static getRozsah(mods: any): string {
     let ret: string;
     let part;
-    if (mods["mods:relatedItem"] && mods["mods:relatedItem"]["mods:part"]) {
-      part = mods["mods:relatedItem"]["mods:part"];
-    } else if (mods["mods:part"]) {
+    if (mods["mods:part"] && mods["mods:part"]["mods:extent"]) {
       part = mods["mods:part"];
+    } else if (mods["mods:relatedItem"] && mods["mods:relatedItem"]["mods:part"]) {
+      part = mods["mods:relatedItem"]["mods:part"];
     } else {
       return null;
     }
-
+    
     if (part.hasOwnProperty('length')) {
       for (let i in part) {
         if (part[i].hasOwnProperty('mods:extent')) {

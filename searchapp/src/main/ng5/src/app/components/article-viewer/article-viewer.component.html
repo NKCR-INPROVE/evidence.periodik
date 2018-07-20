@@ -2,6 +2,7 @@
   <div *ngIf="journal" class="container">
     <div class="row">
       <div *ngIf="!state.isFull" class="col-xs-12 app-col-left">
+        <div style="position: sticky; top:0px; background:white;">
         <h2>
           <app-journal-details [journal]="journal"></app-journal-details>
         </h2>
@@ -18,8 +19,9 @@
               <path d="M332.43,392A12.57,12.57,0,1,0,345,404.57,12.58,12.58,0,0,0,332.43,392Zm6.26,13.37-3.53,3.53a1.13,1.13,0,0,1-1.6,0,1,1,0,0,1,0-1.44l1.61-1.46H327a1.56,1.56,0,0,1,0-3h8.2l-1.61-1.39a0.88,0.88,0,0,1-.33-0.69,1,1,0,0,1,.33-0.74,1.13,1.13,0,0,1,1.59,0l3.53,3.55A1.14,1.14,0,0,1,338.69,405.37Z" transform="translate(-319.87 -392)"/>
             </svg>
           </button>
-        </div><!--/.app section -->
-
+        </div>
+          <hr />
+        </div>
         <div class="app-section" *ngFor="let genre of journal.genres">
            <ng-container *ngIf="genre !== 'peer-reviewed'">
           <h4 class="app-clean-mg">{{'genre.' + genre | translate}}</h4>

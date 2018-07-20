@@ -626,6 +626,8 @@ public class Indexer {
         if (g != null) {
           idoc.addField("genre", g);
         }
+      } else  if (o instanceof String){
+        idoc.addField("genre", o);
       }
     }
   }
